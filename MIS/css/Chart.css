@@ -1,0 +1,29 @@
+
+
+.card{
+margin-top: 30%;
+ text-align: center;
+
+}
+.text-center {
+    margin-bottom: 35px;
+    font-size: 40px;
+}
+
+.chart {
+  text-align: center;
+  color: black;
+  font-weight: 800;
+  font-size: 50px;
+}
+.card-text{
+    font-weight: 800;
+}
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .card {
+        width: 100%; /* Make the card occupy full width */
+        max-width: 300px; /* Set a maximum width for the card */
+
+    }
+}

@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+.body1{
+    font-family: 'Poppins', sans-serif;
+    background-color:  #e2e3dc;
+}
+/*------------ Login container ------------*/
+.box-area{
+    width: 930px;
+}
+/*------------ Right box ------------*/
+.right-box{
+    padding: 40px 30px 40px 40px;
+}
+/*------------ Custom Placeholder ------------*/
+::placeholder{
+    font-size: 16px;
+}
+.rounded-4{
+    border-radius: 20px;
+}
+.rounded-5{
+    border-radius: 30px;
+}
+h2{
+    text-align: center;
+}
+.btn-primary{
+    margin-top:30px ;
+}
+.text-black{
+    margin-top: -20px;
+}
+
+/*------------ For small screens------------*/
+@media only screen and (max-width: 768px){
+     .box-area{
+        margin: 0 10px;
+     }
+     .left-box{
+        height: 180px;
+        overflow: hidden;
+     }
+     .right-box{
+        padding: 15px;
+     }
+
+     .featured-image{
+        width: 100px;
+        margin-top: 50px;
+     }
+     .text-black{
+        margin-top:-20px;
+     }
+
+}
+
+   /* Loading animation */
+   .login.loading button:after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border: 2px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    animation: spin 0.8s linear infinite;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Ok state */
+.login.ok button {
+    background-color: #28a745;
+}
