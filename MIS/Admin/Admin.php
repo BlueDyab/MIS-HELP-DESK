@@ -1,143 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="stylesheet" href="./css/admin.css">
-    <!-- Bootstrap CSS v5.2.1 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-     <!-- Bootstrap Icons CSS -->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Sidebar in Header</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* Custom CSS for sidebar */
+        .sidebar {
+            background-color: #333;
+            color: white;
+            transition: 0.3s;
+        }
 
-<style>
-    body{
-  background-color: #e2e3dc;
-        
-    }
-      /* Main Content CSS */
-      .main-content {
-            margin-top: 10%;
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            transition: 0.3s;
         }
-        .main-box {
-            padding: 20px;
-            border: 2px solid black;
-            margin-bottom: 20px;
-            border-radius: 30px;
-            background-color: white;
 
-    
+        .sidebar a:hover {
+            background-color: #555;
         }
-        .main-box h3 {
-            margin-bottom: 10px;
-        }
-        .small-box {
-            width: 120px;
-            height: 70px;
-            border: 2px solid black;
-            text-align: center;
-            padding-top: 10px;
-            display: inline-block;
-            border-radius: 30px;
-        }
-        .icon {
-            background-color: #f1c232; /* New background color */ 
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                z-index: 1000;
+                width: 250px;
+                height: 100%;
+                top: 0;
+                left: -250px;
+                overflow-y: auto;
+            }
+
+            .sidebar.show {
+                left: 0;
+            }
+
+            .content {
+                margin-left: 250px;
+            }
         }
     </style>
 </head>
+
 <body>
-  
-<div class="container-fluid">
-    <div class="row">
-        <!-- Sidebar -->
-        <div class="col-md-3">
-            <div class="side-navbar">
-                <img src="./image/macaraeg.png" alt="Profile Image">
-                <h1 class="text">Christopher Co</h1>
-                <ul>
-                    <li><a href="#">Dashboard</a></li>
-                    <li>
-                        <a href="#" data-bs-toggle="collapse" data-bs-target="#requestsMenu" aria-expanded="false" aria-controls="requestsMenu">Request</a>
-                        <div class="collapse" id="requestsMenu">
-                            <ul>
-                                <li><a href="#">Service</a></li>
-                                <li><a href="#">Equipment</a></li>
-                                <li><a href="#">Feedback</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><a href="#">Inquiry</a></li>
-                    <li><a href="#">Record</a></li>
-                    <li><a href="#">User Account</a></li>
-                </ul>
-                <div class="login-btn">
-                    <button type="button" class="btn bg-light"><a href="../Login.php" style="text-decoration: none; color: black;">Log Out</a></button>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarNav" aria-controls="sidebarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">Your Logo</a>
+            <div class="collapse navbar-collapse" id="sidebarNav">
+                <div class="sidebar">
+                    <h2>My Sidebar</h2>
+                    <a href="#"><i class="bi bi-house-door"></i> Home</a>
+                    <a href="#"><i class="bi bi-person"></i> Profile</a>
+                    <a href="#"><i class="bi bi-gear"></i> Settings</a>
+                    <a href="#"><i class="bi bi-envelope"></i> Contact</a>
+                    <a href="#" class="btn btn-danger mt-3"><i class="bi bi-box-arrow-right"></i> Logout</a>
                 </div>
             </div>
         </div>
-        <!-- Main Content -->
-        <div class="col-md-9 main-content">
-            <div class="container">
-                <div class="row">
-                    <!-- First row -->
-                    <div class="row">
-                        <!-- Main box 1 -->
-                        <div class="col-md-6">
-                            <div class="main-box text-center ">
-                                <h3>Main Box 1</h3>
-                                <div class="small-box">Pending<br><span id="pendingCount">10</span></div>
-                                <div class="small-box">On-going<br><span id="ongoingCount">5</span></div>
-                                <div class="small-box">Done<br><span id="doneCount">15</span></div>
-                            </div>
-                        </div>
-                        <!-- Main box 2 -->
-                        <div class="col-md-6">
-                            <div class="main-box text-center ">
-                                <h3>Main Box 2</h3>
-                                <div class="small-box">Pending<br><span id="pendingCount2">8</span></div>
-                                <div class="small-box">On-going<br><span id="ongoingCount2">3</span></div>
-                                <div class="small-box">Done<br><span id="doneCount2">20</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Second row -->
-                    <div class="row">
-                        <!-- Main box 3 -->
-                        <div class="col-md-6">
-                            <div class="main-box text-center">
-                                <h3>Main Box 3</h3>
-                                <div class="small-box">Pending<br><span id="pendingCount3">12</span></div>
-                                <div class="small-box">On-going<br><span id="ongoingCount3">7</span></div>
-                                <div class="small-box">Done<br><span id="doneCount3">18</span></div>
-                            </div>
-                        </div>
-                        <!-- Main box 4 -->
-                        <div class="col-md-6">
-                            <div class="main-box text-center">
-                                <h3>Main Box 4</h3>
-                                
-                                <div class="small-box">
-                                <i class="bi bi-circle icon"></i> Pending<br><span id="pendingCount">10</span>
-                                </div>
-                                <div class="small-box">On-going<br><span id="ongoingCount4">9</span></div>
-                                <div class="small-box">Done<br><span id="doneCount4">22</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </nav>
+
+    <!-- Page content -->
+    <div class="content">
+        <h2>Page Content</h2>
+        <p>This is the main content of the page.</p>
     </div>
-</div>
 
-    
-    <!-- Bootstrap JavaScript Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
