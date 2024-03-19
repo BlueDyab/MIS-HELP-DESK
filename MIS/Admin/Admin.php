@@ -168,7 +168,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="main-box text-center ">
-                                <h3><i class="lni lni-support"></i>Feedback</h3>
+                                <h3><i class="fa-solid fa-comments"></i>Feedback</h3>
                                 <div class="small-box"></i>Pending<br><span id="pendingCount">0</span></div>
                                 <div class="small-box">On-going<br><span id="ongoingCount">0</span></div>
                                 <div class="small-box">Done<br><span id="doneCount">0</span></div>
