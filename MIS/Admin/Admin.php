@@ -83,15 +83,15 @@
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
-                <img src="../image/uccLogo.png" alt="Company Logo" class="logo-imig">
+                <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
                 </button>
                 <div class="sidebar-logo">
-                    <a href="#">MIS</a>
+                    <a href="Admin.php">MIS</a>
                 </div>
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="#"  id="profile" class="sidebar-link">
+                    <a href="Profile.php"  id="profile" class="sidebar-link">
                     <i class="fa-solid fa-user"></i></i>
                         <span>Profile</span>
                     </a>
@@ -103,13 +103,13 @@
                     </a>
                     <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="#" id="service" class="sidebar-link">Service</a>
+                            <a href="#" id="service" class="sidebar-link"><i class="fa-solid fa-user"></i>Service</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#"  id="equipment" class="sidebar-link">Equipment</a>
+                            <a href="#"  id="equipment" class="sidebar-link"><i class="fa-solid fa-wrench"></i>Equipment</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#"  id="feedback"class="sidebar-link">Feedback</a>
+                            <a href="#"  id="feedback"class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
                         </li>
                     </ul>
                 </li>

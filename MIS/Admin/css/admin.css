@@ -78,7 +78,7 @@
     }
 
     a.sidebar-link {
-        padding: .625rem 1.625rem;
+        padding: .625rem 1.3rem;
         color: #FFF;
         display: block;
         font-size: 0.9rem;
@@ -136,8 +136,11 @@
     }
 
     .toggle-btn img {
-        width: 35px; /* Adjust the width of the logo */
+        width: 50px; /* Adjust the width of the logo */
         height: auto; /* Maintain aspect ratio */
-        margin-left: -5px;
+        margin-left: -15px;
+        background-color: white;
+        border-radius: 50%;
+    border: 2px solid white;
       }
       
