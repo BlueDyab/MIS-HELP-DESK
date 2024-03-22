@@ -119,10 +119,10 @@
                     <div class="form-container">
                         <button class="close-icon" id="closeFormBtnService"><span>&#10006;</span> </button><!-- Close icon -->
                         <div class="form-logo">
-                            <img src="./uccLogo.png" alt="Company Logo" class="logo-imig">
+                            <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
                             <h2> MIS Service Request Form</h2>
                         </div>
-                        <form>
+                        <form action="./Database/Service Request.php" method="post">
                             <div class="mb-1 form-group">
                                 <label for="dateTime">Date and Time:</label>
                                 <input type="datetime-local" class="form-control" id="dateTime" name="dateTime" required>
@@ -136,18 +136,18 @@
                                 <input type="text" class="form-control" id="name" name="name" required>
                             </div>
                             <div class="mb-1 form-group">
-                                <label for="name">Details:</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
+                                <label for="details">Details:</label>
+                                <input type="text" class="form-control" id="details" name="details" required>
                             </div>
                             <div class="mb-1 form-group">
-                                <label for="requestedItem">Action Taken:</label>
-                                <input type="text" class="form-control" id="requestedItem" name="requestedItem" required>
+                                <label for="service">Action Taken:</label>
+                                <input type="text" class="form-control" id="service" name="service" required>
                             </div>
                             <div class="mb-1 form-group">
-                                <label for="purpose">Recomendation</label>
-                                <textarea class="form-control" id="purpose" name="purpose" rows="3" required></textarea>
+                                <label for="recomm">Recomendation</label>
+                                <textarea class="form-control" id="recomm" name="recomm" rows="3" required></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" name="service-btn">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -167,10 +167,10 @@
                     <div class="form-container">
                         <button class="close-icon" id="closeFormBtnProfessor"><span>&#10006;</span> </button><!-- Close icon -->
                         <div class="form-logo">
-                            <img src="./uccLogo.png" alt="Company Logo" class="logo-imig">
+                            <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
                             <h2> MIS Equiment Request Form</h2>
                         </div>
-                        <form>
+                        <form action="./Database/Equipment Request.php" method="post">
                             <div class="mb-2 form-group">
                                 <label for="department">Department:</label>
                                 <input type="text" class="form-control" id="department" name="department" required>
@@ -202,7 +202,7 @@
                     <div class="form-container">
                         <button class="close-icon" id="closeFormBtnStudent"><span>&#10006;</span> </button><!-- Close icon -->
                         <div class="form-logo">
-                            <img src="./uccLogo.png" alt="Company Logo" class="logo-imig">
+                            <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
                             <h2> MIS Equiment Request Form</h2>
                         </div>
                         <form>
@@ -254,7 +254,7 @@
                     <div class="form-container">
                         <button class="close-icon" id="closeFormBtnFeedback"><span>&#10006;</span> </button><!-- Close icon -->
                         <div class="form-logo">
-                            <img src="./uccLogo.png" alt="Company Logo" class="logo-imig">
+                            <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
                             <h2> MIS Feedback Form</h2>
                         </div>
                         <form>
@@ -298,7 +298,7 @@
             <div class="row">
                 <div class="col-lg-6 col-sm-12">
                     <div class="img-area animate-on-scroll">
-                        <img src="./nature.jpg" alt="">
+                        <img src="./image/nature.jpg" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12">

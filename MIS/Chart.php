@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ff7601;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <img src="./uccLogo.png" alt="Company Logo" class="logo-img">
+                    <img src="./image/uccLogo.png" alt="Company Logo" class="logo-img">
                     M<span>IS</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,15 +30,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="./index.php">Home</a>
+                            <a class="nav-link" href="./index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./index.php#service">Our Service</a>
+                            <a class="nav-link" href="./index.html#service">Our Service</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
                             <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-                                <li><a class="dropdown-item" href="./index.php#about">MIS</a></li>
+                                <li><a class="dropdown-item" href="./index.html#about">MIS</a></li>
                                 <li><a class="dropdown-item" href="./Chart.php">Chart</a></li>
                             </ul>
                         </li>
@@ -57,7 +57,7 @@
     <div class="row justify-content-center">
             <div class="col-sm-3 animate-on-scroll">
                 <div class="card">
-                    <img src="./macaraeg.png" class="card-img-top" alt="">
+                    <img src="./image/macaraeg.png" class="card-img-top" alt="">
                     <div class="card-body">
                         <h6 class="card-text">Dr. Teodoro Macaraeg Jr.</h6>
                         <span>Director, Management Information System</span>
@@ -70,7 +70,7 @@
     <div class="row justify-content-center">
             <div class="col-sm-3 animate-on-scroll">
                 <div class="card">
-                    <img src="./efren.png" class="card-img-top" alt="">
+                    <img src="./image/efren.png" class="card-img-top" alt="">
                     <div class="card-body">
                         <h6 class="card-text">Another.</h6>
                         <span>City of Another<br>House of Another</span>
@@ -83,7 +83,7 @@
     <div class="row justify-content-center">
         <div class="col-sm-3 animate-on-scroll">
             <div class="card">
-                <img src="./csdblack2.png" class="card-img-top" alt="">
+                <img src="./image/csddsds.png" class="card-img-top" alt="">
                 <div class="card-body">
                     <h6 class="card-text">Some.</h6>
                     <span>City of Caloocan<br>House of Caloocan</span>
@@ -92,7 +92,7 @@
         </div>
         <div class="col-sm-3 animate-on-scroll">
             <div class="card">
-                <img src="./csdblack2.png" class="card-img-top" alt="">
+                <img src="./image/csddsds.png" class="card-img-top" alt="">
                 <div class="card-body">
                     <h6 class="card-text">Some.</h6>
                     <span>City of Caloocan<br>House of Caloocan</span>
@@ -101,7 +101,7 @@
         </div>
         <div class="col-sm-3 animate-on-scroll">
             <div class="card">
-                <img src="./csdblack2.png" class="card-img-top" alt="">
+                <img src="./image/csddsds.png" class="card-img-top" alt="">
                 <div class="card-body">
                     <h6 class="card-text">Some.</h6>
                     <span>City of Caloocan<br>House of Caloocan</span>
@@ -110,7 +110,7 @@
         </div> 
         <div class="col-sm-3 animate-on-scroll">
             <div class="card">
-                <img src="./von.jpg" class="card-img-top" alt="">
+                <img src="./image/von.jpg" class="card-img-top" alt="">
                 <div class="card-body">
                     <h6 class="card-text">Some.</h6>
                     <span>City of Caloocan<br>House of Caloocan</span>
