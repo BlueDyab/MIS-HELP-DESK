@@ -192,7 +192,7 @@
                                 <label for="dateTime">Date and Time:</label>
                                 <input type="datetime-local" class="form-control" id="dateTime" name="dateTime" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" name="prof_btn">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -205,7 +205,7 @@
                             <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
                             <h2> MIS Equiment Request Form</h2>
                         </div>
-                        <form>
+                        <form action="./Database/Equipment Request.php" method="post">
                             <div class="mb-1 form-group">
                                 <label for="department">Department:</label>
                                 <input type="text" class="form-control" id="department" name="department" required>
@@ -233,7 +233,7 @@
                                 <label for="dateTime">Date/Time:</label>
                                 <input type="datetime-local" class="form-control" id="dateTime" name="dateTime" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" name="stud_btn">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -257,7 +257,7 @@
                             <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
                             <h2> MIS Feedback Form</h2>
                         </div>
-                        <form>
+                        <form action="./Database/Feedback_Form.php" method="post">
                             <div class="mb-1 form-group">
                                 <label for="dateTime">Date and Time:</label>
                                 <input type="datetime-local" class="form-control" id="dateTime" name="dateTime" required>
@@ -272,17 +272,17 @@
                             </div>
                             <div class="mb-1 form-group">
                                 <label for="name"> FeedBack Details:</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
+                                <input type="text" class="form-control" id="feedback" name="feedback" required>
                             </div>
                             <div class="mb-1 form-group">
-                                <label for="requestedItem">Action Taken:</label>
-                                <input type="text" class="form-control" id="requestedItem" name="requestedItem" required>
+                                <label for="action">Action Taken:</label>
+                                <input type="text" class="form-control" id="action" name="action" required>
                             </div>
                             <div class="mb-1 form-group">
                                 <label for="purpose">Recomendation</label>
-                                <textarea class="form-control" id="purpose" name="purpose" rows="3" required></textarea>
+                                <textarea class="form-control" id="recomm" name="recomm" rows="3" required></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" name="feedback_btn">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -322,20 +322,20 @@
                     <div class="card">
                         <div class="card-body">
                             <h3 class="text-center">Message <span>Us</span></h3>
-                            <form>
+                            <form action="./Database/Message Us.php" method="post">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Your Name</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Your Email</label>
-                                    <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
                                 </div>
                                 <div class="mb-3">
                                     <label for="message" class="form-label">Message</label>
-                                    <textarea class="form-control" id="message" rows="5" placeholder="Enter your message"></textarea>
+                                    <textarea class="form-control" id="message" name="message" rows="5" placeholder="Enter your message"></textarea>
                                 </div>
-                                <button type="submit" class="btn1">Send</button>
+                                <button type="submit" class="btn1" name="Send_btn">Send</button>
                             </form>
                         </div>
                     </div>
