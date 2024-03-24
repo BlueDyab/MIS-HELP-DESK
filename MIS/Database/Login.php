@@ -16,13 +16,16 @@
             
             // Insert a row
             $stmt->execute();
-            $stmt->fetch();
-            if(!$stmt == 0){
-                echo "<alert='successful'>";
+            $acc = $stmt->fetch();
+            if($acc){
+                header("location: ./Admin/Admin.php");
+                exit();
+            }else{
+                echo "alert=('Failed')";
             }
             // Redirect to index.html#Service
-            header("Location: /MIS-HELP-DESK/MIS/index.html#contact");
-            exit(); // Ensure that no other code is executed after the redirect
+            /*header("Location: /MIS-HELP-DESK/MIS/index.html#contact");
+            exit(); // Ensure that no other code is executed after the redirect*/
         } catch(PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
