@@ -63,7 +63,7 @@
 
     .sidebar-logo a {
         color: #FFF;
-        font-size: 30px;
+        font-size: 15px;
         font-weight: 600;
     }
 
@@ -136,11 +136,14 @@
     }
 
     .toggle-btn img {
-        width: 50px; /* Adjust the width of the logo */
+        width: 45px; /* Adjust the width of the logo */
         height: auto; /* Maintain aspect ratio */
         margin-left: -15px;
         background-color: white;
         border-radius: 50%;
     border: 2px solid white;
+      }
+      .fa-pen-to-square{
+        margin-left: 5px;
       }
       

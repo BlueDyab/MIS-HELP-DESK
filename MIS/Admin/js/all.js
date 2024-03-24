@@ -27,3 +27,6 @@ togglePasswordVisibility('newPassword', 'toggleNewPassword');
 
 // Toggle visibility of confirm password
 togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword');
+
+
+

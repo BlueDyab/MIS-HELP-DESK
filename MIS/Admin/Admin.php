@@ -15,7 +15,7 @@
 
 
 .main {
-        min-height: 100vh;
+        min-height:100vh;
         width: 100%;
         overflow: hidden;
         transition: all 0.35s ease-in-out;
@@ -86,14 +86,14 @@
                 <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
                 </button>
                 <div class="sidebar-logo">
-                    <a href="Admin.php">MIS</a>
+                    <a href="Profile.php">User Account<i class="fa-solid fa-pen-to-square"></i></a>
                 </div>
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="Profile.php"  id="profile" class="sidebar-link">
-                    <i class="fa-solid fa-user"></i></i>
-                        <span>Profile</span>
+                    <a href="Admin.php"  id="profile" class="sidebar-link">
+                    <i class="fa-solid fa-chart-line"></i>
+                        <span>DashBoard</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -150,7 +150,7 @@
                 <div class="container">
                     <h2>Dashboard</h2>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-lg-6">
                             <div class="main-box text-center ">
                                 <h3><i class="fa-solid fa-user"></i></i>Service</h3>
                                 <div class="small-box">Pending<br><span id="pendingCount">0</span></div>
@@ -158,7 +158,7 @@
                                 <div class="small-box">Done<br><span id="doneCount">0</span></div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-lg-6">
                             <div class="main-box text-center ">
                                 <h3><i class="fa-solid fa-wrench"></i>Equipment</h3>
                                 <div class="small-box">Pending<br><span id="pendingCount">0</span></div>
@@ -166,7 +166,7 @@
                                 <div class="small-box">Done<br><span id="doneCount">0</span></div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-lg-6">
                             <div class="main-box text-center ">
                                 <h3><i class="fa-solid fa-comments"></i>Feedback</h3>
                                 <div class="small-box"></i>Pending<br><span id="pendingCount">0</span></div>
@@ -174,7 +174,7 @@
                                 <div class="small-box">Done<br><span id="doneCount">0</span></div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-lg-6">
                             <div class="main-box text-center ">
                                 <h3><i class="fa-solid fa-user"></i></i>User</h3>
                                 <div class="small-box">Pending<br><span id="pendingCount">0</span></div>
