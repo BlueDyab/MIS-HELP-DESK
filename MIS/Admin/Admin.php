@@ -15,12 +15,7 @@
 
 
 .main {
-<<<<<<< HEAD
         min-height:100vh;
-=======
-        
-        height: 100vh;
->>>>>>> e5912104da9c7e54fd494cc5a1d6568e16283b83
         width: 100%;
         overflow: hidden;
         transition: all 0.35s ease-in-out;
