@@ -110,7 +110,7 @@ i{
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="Profile.php"  id="profile" class="sidebar-link">
+                    <a href="Admin.php"  id="profile" class="sidebar-link">
                     <i class="fa-solid fa-chart-line"></i>
                         <span>DashBoard</span>
                     </a>
@@ -122,38 +122,38 @@ i{
                     </a>
                     <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="#" id="service" class="sidebar-link"><i class="fa-solid fa-user"></i>Service</a>
+                            <a href="Service.php" id="service" class="sidebar-link"><i class="fa-solid fa-user"></i>Service</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#"  id="equipment" class="sidebar-link"><i class="fa-solid fa-wrench"></i>Equipment</a>
+                            <a href="Equipment.php"  id="equipment" class="sidebar-link"><i class="fa-solid fa-wrench"></i>Equipment</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#"  id="feedback"class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
+                            <a href="Feedback.php"  id="feedback"class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
                         </li>
                     </ul>
                 </li>
            
                 <li class="sidebar-item">
-                    <a href="#" id="inquiry" class="sidebar-link">
+                    <a href="Inquiry.php" id="inquiry" class="sidebar-link">
                     <i class="fa-solid fa-message"></i>
                         <span>Inquiry</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" id="record" class="sidebar-link">
+                    <a href="Record.php" id="record" class="sidebar-link">
                     <i class="fa-solid fa-folder"></i>
                         <span>Record</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" id="account" class="sidebar-link">
+                    <a href="User.php" id="account" class="sidebar-link">
                         <i class="fa-solid fa-gear"></i>
                         <span>User Account  </span>
                     </a>
                 </li>
             </ul>
             <div class="sidebar-footer">
-                <a href="#" id="logout" class="sidebar-link">
+                <a href="../login.html" id="logout" class="sidebar-link">
                 <i class="fa-solid fa-right-from-bracket"></i>
                     <span>Logout</span>
                 </a>
