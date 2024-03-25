@@ -7,6 +7,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link rel="stylesheet" href="./css/login.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-YQp1wFdsy1Z3dCU5ym8nfcfJWIPSK1rYBprYO8r00ELIOknvRr4aRKeqWSS6I6Zh" crossorigin="anonymous">
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
 </head>
@@ -31,12 +33,15 @@
                 <div class="header-text mb-4">
                      <h2>ADMIN STAFF</h2>
                 </div>
-                <form action="./Database/Login.php" method="post">
+                <form action="./Database/Login.php" method="post" onsubmit="return validateForm()">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control form-control-lg bg-light fs-6" name="username" placeholder="Email or Username">
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" name="username" placeholder="Email or Username" required autocomplete="off">
                     </div>
                     <div class="input-group mb-1">
-                        <input type="password" class="form-control form-control-lg bg-light fs-6" name="password" placeholder="Password">
+                        <input type="password" class="form-control form-control-lg bg-light fs-6" id="password" name="password" placeholder="Password" required autocomplete="off"> 
+                        <button class="btn btn-outline-secondary" type="button" id="togglepassword">
+                            <i class="fas fa-eye-slash"></i>
+                        </button>
                     </div>
                     <div class="input-group mb-5 login">
                         <button class="btn btn-lg btn-primary w-100 fs-6" name="login_btn">Login</button>
@@ -46,33 +51,39 @@
        </div> 
       </div>
     </div>
-
-    <!--<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelector('.login button').addEventListener('click', function() {
-            var loginForm = document.querySelector('.login');
-            loginForm.classList.add('loading');
-            
-            // Simulate authentication (replace this with your actual authentication logic)
-            setTimeout(function() {
-                // Check if authentication is successful (replace this condition with your actual authentication logic)
-                var authenticationSuccessful = true;
-                
-                if (authenticationSuccessful) {
-                    // Redirect to admin.php
-                    window.location.href = './Admin/Admin.php';
-                } else {
-                    // If authentication fails, remove loading state and add error state (you can handle error state as per your design)
-                    loginForm.classList.remove('loading');
-                    loginForm.classList.add('error');
-                }
-            }, 2000);
-        });
-    });
-</script>-->
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+    <script>
+        // Toggle visibility of password
+        function togglePasswordVisibility(inputId, buttonId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleButton = document.getElementById(buttonId);
+
+            toggleButton.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                toggleButton.querySelector('i').classList.toggle('fa-eye-slash');
+                toggleButton.querySelector('i').classList.toggle('fa-eye');
+            });
+        }
+        // Toggle visibility of current password
+        togglePasswordVisibility('password', 'togglepassword');
+
+           // Validate form before submitting
+           function validateForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (username.trim() === '' || password.trim() === '') {
+                alert("Please enter both username and password");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </body>
 </html>
