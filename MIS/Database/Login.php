@@ -30,7 +30,7 @@
             echo "Error: " . $e->getMessage();
         }
             
-            // Close the database connection
+            // Close the database connectionaaaa
             $conn = null;
     }
 ?>
