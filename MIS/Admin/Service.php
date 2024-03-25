@@ -36,7 +36,7 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="Admin.php"  id="profile" class="sidebar-link">
+                    <a href="Admin.html"  id="profile" class="sidebar-link">
                     <i class="fa-solid fa-chart-line"></i>
                         <span>DashBoard</span>
                     </a>

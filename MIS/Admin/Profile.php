@@ -22,33 +22,6 @@
         background-color:  #e2e3dc;
     }
 
-        .card {
-            margin-bottom: 20px;
-        }
-
-        .card-header {
-            background-color: #007bff;
-            color: #fff;
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-        .form-label {
-            font-weight: bold;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-
     /*profile*/
     .card-header {
     background-color: #007bff;
@@ -98,19 +71,19 @@ i{
 </style>
 
 <body>
-    <div class="wrapper">
+<div class="wrapper">
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
                 <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
                 </button>
                 <div class="sidebar-logo">
-                    <a href="Admin.php">User Name</a><i class="fa-solid fa-pen-to-square"></i>
+                    <a href="Profile.php">User Account<i class="fa-solid fa-pen-to-square"></i></a>
                 </div>
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="Admin.php"  id="profile" class="sidebar-link">
+                    <a href="Admin.html"  id="profile" class="sidebar-link">
                     <i class="fa-solid fa-chart-line"></i>
                         <span>DashBoard</span>
                     </a>
@@ -175,7 +148,12 @@ i{
                     <!-- Profile picture help block -->
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                     <!-- Profile picture upload button -->
-                    <button class="btn btn-primary" type="button">Upload New image</button>
+                   
+                     <form action="Profile.php" method="post" enctype="multipart/form-data">
+                <input type="file" name="profile_picture" id="profile-picture-input" style="display: none;">
+                <label for="profile-picture-input" class="btn btn-primary">Upload New image</label>
+                <button type="submit" name="submit" class="btn btn-success">Save</button>
+            </form>
                 </div>
             </div>
         </div>
@@ -189,7 +167,7 @@ i{
         <div class="card-body">
             <form>
             <div class="mb-3">
-                    <label for="User" class="form-label">User</label>
+                    <label for="User" class="form-label">Username</label>
                     <div class="input-group">
                         <input type="text" class="form-control" id="user">
                         <button class="btn btn-outline-secondary" type="button">
