@@ -1,6 +1,6 @@
 <?php
     require 'connection.php';
-    if(isset($_POST['Login_btn'])){
+    if(isset($_POST['login_btn'])){
         $username = $_POST['username'];
         $password = $_POST['password'];
         try {        
@@ -8,20 +8,20 @@
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
             // Prepare the SQL INSERT statement
-            $stmt = $conn->prepare("SELECT `ID`, `Name`, `Username`, `Password` FROM `user_account_db` WHERE `Username` = :username AND 'Password' = :password");
+            $stmt = $conn->prepare("SELECT `ID`, `Name`, `Username`, `Password` FROM `user_account_db` WHERE `Username` = :username AND `Password` = :password");
             
             // Bind parameters to placeholders
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':password', $password);
             
-            // Insert a row
+            // select a row
             $stmt->execute();
             $acc = $stmt->fetch();
             if($acc){
-                header("location: ./Admin/Admin.php");
+                header("location: ../Admin/Admin.html");
                 exit();
             }else{
-                echo "alert=('Failed')";
+                echo "window.alert=('Failed')";
             }
             // Redirect to index.html#Service
             /*header("Location: /MIS-HELP-DESK/MIS/index.html#contact");
