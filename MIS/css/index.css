@@ -128,16 +128,15 @@ img{
 /* ---------------------------------------------------------------------------------- Our Services -------------------------------------------------------------------------------*/
 
 .single-services{
-  background-color: #529f37;
+  background-color: #ff8600;
   color: #fff;
-  padding: 30px 15px;
   margin-bottom: 30px;
   border-radius: 10%;
-  
 }
+
 .single-services i{
-  font-size: 45px;
-  margin-bottom: 30px;
+  font-size: 30px;
+  margin-bottom: 10px;
 }
 .container1 {
   margin-top: -50px; /* Adjust the top margin as needed */
@@ -154,6 +153,29 @@ h3 span{
   text-align: center;
   color: red;
 }
+.single-services h2{
+  font-size: 25px;
+  font-weight: 800;
+}
+
+p{
+  font-size: 16px;
+}
+.btn2{
+  margin-bottom:20px;
+  padding: 5px  ;
+  border-radius: 10px;
+  background-color:white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+}
+.btn2:hover{
+  color: white;
+}
+
+/* ----------------------------------------------------------------------------------- message us  ------------------------------------------------------------------------------------*/
 
 .form-label {
   font-weight: bold; /* Make form labels bold */

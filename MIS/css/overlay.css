@@ -31,13 +31,15 @@
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 40%; /* Adjust the maximum width as needed */
+    max-width: 60%; /* Adjust the maximum width as needed */
     width: 100%;
+   
   }
   
   .form-container h2 {
     margin-top: 15px;
-    font-size: 25px;
+    font-size: 30px;
+    font-weight: 700;
   }
   
   .form-group {
@@ -90,8 +92,19 @@
 .form-row{
     display: flex;
     align-items: center;
-    gap:1px;
+    gap: 3px;
+    margin-top: 20px;
 }
+input#duetime {
+  width: 97.5%;
+}
+select#action2{
+  width: 97%;
+}
+select#department1 {
+  width: 97%;
+}
+
 
   .overlay-form .form-container button[type="submit"] {
     display: block;

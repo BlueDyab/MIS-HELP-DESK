@@ -60,7 +60,7 @@
                     <img src="./image/macaraeg.png" class="card-img-top" alt="">
                     <div class="card-body">
                         <h6 class="card-text">Dr. Teodoro Macaraeg Jr.</h6>
-                        <span>Director, Management Information System</span>
+                        <span>Head Computer Studies Dept, MIS Director<br> South Campus</span>
                     </div>
                 </div>
             </div>
@@ -72,8 +72,8 @@
                 <div class="card">
                     <img src="./image/efren.png" class="card-img-top" alt="">
                     <div class="card-body">
-                        <h6 class="card-text">Another.</h6>
-                        <span>City of Another<br>House of Another</span>
+                        <h6 class="card-text">Prof. Efren P. Victoria</h6>
+                        <span>Program Head, BS Computer Science<br>South Campus</span>
                     </div>
                 </div>
             </div>
@@ -85,8 +85,8 @@
             <div class="card">
                 <img src="./image/csddsds.png" class="card-img-top" alt="">
                 <div class="card-body">
-                    <h6 class="card-text">Some.</h6>
-                    <span>City of Caloocan<br>House of Caloocan</span>
+                    <h6 class="card-text">Prof, Catherine P, Llena, MIT</h6>
+                    <span>Coodinator, BS Information System<br>South Campus</span>
                 </div>
             </div>
         </div>
@@ -94,8 +94,8 @@
             <div class="card">
                 <img src="./image/csddsds.png" class="card-img-top" alt="">
                 <div class="card-body">
-                    <h6 class="card-text">Some.</h6>
-                    <span>City of Caloocan<br>House of Caloocan</span>
+                    <h6 class="card-text">Prof, Ryan B. Mateo</h6>
+                    <span>Coodinator, BS Information Technology<br>South Campus</span>
                 </div>
             </div>
         </div>
@@ -103,8 +103,8 @@
             <div class="card">
                 <img src="./image/csddsds.png" class="card-img-top" alt="">
                 <div class="card-body">
-                    <h6 class="card-text">Some.</h6>
-                    <span>City of Caloocan<br>House of Caloocan</span>
+                    <h6 class="card-text">Prof, Jessie C. Alamil</h6>
+                    <span>Coordinator, BS Computer Science<br>South Campus</span>
                 </div>
             </div>
         </div> 
@@ -112,8 +112,8 @@
             <div class="card">
                 <img src="./image/von.jpg" class="card-img-top" alt="">
                 <div class="card-body">
-                    <h6 class="card-text">Some.</h6>
-                    <span>City of Caloocan<br>House of Caloocan</span>
+                    <h6 class="card-text">Prof, Von Erick M. Magbitang</h6>
+                    <span>Coodinator, BS Entertainment & Multimedia Computing<br>South Campus</span>
                 </div>
             </div>
         </div>
