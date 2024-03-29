@@ -21,9 +21,9 @@
         
         // Fetch the result
         $acc = $stmt->fetch();
-        var_dump($acc);
         // Check if a matching user account is found
-        if($acc && $password === $acc['Password']){
+        $hashpasswordfromDb = password_hash($acc['Password'], PASSWORD_DEFAULT);
+        if($acc && password_verify($password, $hashpasswordfromDb)){
             // Redirect to the admin page
             header("location: ../Admin/Admin.html");
             exit();
@@ -41,5 +41,3 @@
     // Close the database connection
     $conn = null;
 ?>
-
-dasdasdsad

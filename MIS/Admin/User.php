@@ -1,3 +1,6 @@
+<?php
+    require '../Database/connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,8 +22,41 @@
         overflow: hidden;
         transition: all 0.35s ease-in-out;
         background-color:  #e2e3dc;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: start;
     }
-
+    .header{
+        background-color: gray;
+    }
+    tr{
+        border: 1px solid gray;
+    }
+    .password{
+        background: transparent;
+        border: none;
+        outline: none;
+    }
+    .Adding{
+        background-color: green;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .data{
+        overflow: auto;
+        min-height:500px;
+        width: 100%;
+    }
+    .table{
+        width:60%;
+    }
+    .header{
+        position: sticky;
+    }
 </style>
 <body>
 
@@ -87,7 +123,62 @@
     </aside>
 
         <div class="main">
-
+        <div style="max-height: 90vh; overflow-y: auto; overflow-x: auto;">
+            <table class="table table-hover">
+                <thead class="header">
+                  <tr class="header">
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Section</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody class="data">
+                <?php
+                    try {
+                        // Set the PDO error mode to exception
+                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        
+                        // Prepare the SQL SELECT statement
+                        $stmt = $conn->prepare("SELECT * FROM `user_account_db`");
+                        $stmt->execute();
+                        
+                        // Fetch all the results
+                        $accounts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        
+                        if($accounts){
+                            // Iterate over each row
+                            foreach($accounts as $acc){
+                                echo "<tr>";
+                                // Output each column value of the row
+                                echo "<th scope='col'>" . htmlspecialchars($acc['ID']) . "</th>"; // Assuming ID is your primary key and thus unique
+                                echo "<td>" . htmlspecialchars($acc['Name']) . "</td>";
+                                echo "<td>" . htmlspecialchars($acc['Course']) . "</td>";
+                                echo "<td>" . htmlspecialchars($acc['Year']) . "</td>";
+                                echo "<td>" . htmlspecialchars($acc['Section']) . "</td>";
+                                echo "<td>" . htmlspecialchars($acc['Username']) . "</td>";
+                                // Be careful displaying passwords, even if hashed. Generally, this should not be done.
+                                echo "<td>" . htmlspecialchars($acc['Password']) . "</td>";
+                                echo "<td>" . htmlspecialchars($acc['Position']) . "</td>";
+                                echo "<td><button>Edit</button> <button>Delete</button></td>";
+                                echo "</tr>";
+                            }
+                        }
+                    } catch(PDOException $e) {
+                        echo "Error: " . $e->getMessage();
+                    }
+                ?>
+                </tbody>
+            </table>
+                </div>
+            <div class="Adding">
+                <button>ADD</button>
+            </div>
         </div>
     
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
