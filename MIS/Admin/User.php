@@ -8,7 +8,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sidebar With Bootstrap</title>
+        <title>User Account</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-YQp1wFdsy1Z3dCU5ym8nfcfJWIPSK1rYBprYO8r00ELIOknvRr4aRKeqWSS6I6Zh" crossorigin="anonymous">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -135,13 +135,13 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="Record.html" id="record" class="sidebar-link">
+                        <a href="Record.php" id="record" class="sidebar-link">
                             <i class="fa-solid fa-folder"></i>
                             <span>Record</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="User.html" id="account" class="sidebar-link">
+                        <a href="User.php" id="account" class="sidebar-link">
                             <i class="fa-solid fa-gear"></i>
                             <span>User Account </span>
                         </a>
@@ -165,10 +165,10 @@
                             <tr>
                                 <th class="th" scope="col">Id</th>
                                 <th scope="col">Name</th>
-                                <th class="th" scope="col">Course</th>
-                                <th class="th" scope="col">Year</th>
-                                <th class="th" scope="col">Section</th>
-                                <th class="th" scope="col">Username</th>
+                                <th class="th" scope="col">Date</th>
+                                <th class="th" scope="col">Time</th>
+                                <th class="th" scope="col">DueTime</th>
+                                <th class="th" scope="col">Department</th>
                                 <th class="th" scope="col">Password</th>
                                 <th class="th" scope="col">Position</th>
                                 <th class="th" scope="col">Action</th>

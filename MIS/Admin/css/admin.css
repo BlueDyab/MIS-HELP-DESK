@@ -33,7 +33,7 @@
     #sidebar {
         width: 70px;
         min-width: 70px;
-        z-index: 1000;
+        z-index: 9999;
         transition: all .25s ease-in-out;
         background-color:#ff4d00;
         display: flex;
