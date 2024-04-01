@@ -106,3 +106,22 @@ document.getElementById('openFormBtnFeedback').addEventListener('click', functio
     e.stopPropagation();
     });
     
+
+
+    // Open the overlay form when the button is clicked
+document.getElementById('openFormBtnEdit').addEventListener('click', function() {
+    document.getElementById('overlayFormuser').style.display = 'flex';
+    document.body.classList.add('overlay-open');
+    });
+    
+    // Close the overlay form when the close button is clicked
+    document.getElementById('closeFormBtnEdit').addEventListener('click', function() {
+    document.getElementById('overlayFormuser').style.display = 'none';
+    document.body.classList.remove('overlay-open');
+    });
+    
+    // Prevent scroll event from bubbling up to parent elements
+    document.getElementById('overlayFormuserk').addEventListener('scroll', function(e) {
+    e.stopPropagation();
+    });
+    
