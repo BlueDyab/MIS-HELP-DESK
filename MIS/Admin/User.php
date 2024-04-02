@@ -156,19 +156,21 @@
             </aside>
 
             <div class="main">
+                
                 <div class="Adding m-2">
                     <button class="btn btn-primary  openFormBtnAdd">ADD</button>
                 </div>
+
                 <div class="table table-responsive m-2">
                     <table class="table table-bordered">
                         <thead class="header fixed-top">
                             <tr>
                                 <th class="th" scope="col">Id</th>
                                 <th scope="col">Name</th>
-                                <th class="th" scope="col">Date</th>
-                                <th class="th" scope="col">Time</th>
-                                <th class="th" scope="col">DueTime</th>
-                                <th class="th" scope="col">Department</th>
+                                <th class="th" scope="col">Course</th>
+                                <th class="th" scope="col">Year</th>
+                                <th class="th" scope="col">Section</th>
+                                <th class="th" scope="col">Username</th>
                                 <th class="th" scope="col">Password</th>
                                 <th class="th" scope="col">Position</th>
                                 <th class="th" scope="col">Action</th>
@@ -345,6 +347,36 @@
                         </form>
                     </div>
                 </div>
+                <?php
+                    if (isset($_POST['Add_btn'])) {
+                        $name = $_POST['name'];
+                        $course = $_POST['course'];
+                        $year = $_POST['year'];
+                        $section = $_POST['section'];
+                        $username = $_POST['username'];
+                        $password = $_POST['password'];
+                        $position = $_POST['position'];
+
+                        try {
+                            // Set the PDO error mode to exception
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                            // Prepare the SQL INSERT statement
+                            $stmt = $conn->prepare("INSERT INTO `user_account_db` (Name, Course, Year, Section, Username, Password, Position) VALUES (:name, :course, :year, :section, :username, :password, :position)");
+                            $stmt->bindParam(':name', $name);
+                            $stmt->bindParam(':course', $course);
+                            $stmt->bindParam(':year', $year);
+                            $stmt->bindParam(':section', $section);
+                            $stmt->bindParam(':username', $username);
+                            $stmt->bindParam(':password', $password);
+                            $stmt->bindParam(':position', $position);
+                            $stmt->execute();
+                            echo "<script>alert('Successfully Added')</script>";
+                        } catch (PDOException $e) {
+                            echo "Error: " . $e->getMessage();
+                        }
+                    }
+                ?>
             </div>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
