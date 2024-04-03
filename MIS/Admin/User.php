@@ -18,7 +18,7 @@
 
     <style>
         .main {
-            min-height: 100vh;
+            max-height: 100vh;
             width: 100%;
             overflow: hidden;
             transition: all 0.35s ease-in-out;
@@ -88,6 +88,7 @@
 
         .header {
             position: sticky;
+            top: -2px;
         }
     </style>
 
@@ -203,8 +204,12 @@
                                         // Be careful displaying passwords, even if hashed. Generally, this should not be done.
                                         echo "<td class='td'>" . htmlspecialchars($acc['Password']) . "</td>";
                                         echo "<td class='td'>" . htmlspecialchars($acc['Position']) . "</td>";
-                                        echo "<td class='text-center'><button class='btn btn-danger openFormBtnEdit' m-1'>Edit</button> <button class='btn btn-danger'>Delete</button></td>";
+                                        echo "<td class='text-center'><button class='btn btn-danger openFormBtnEdit' m-1' name='editing'>Edit</button> <button class='btn btn-danger'>Delete</button></td>";
                                         echo "</tr>";
+
+                                        if(isset($_POST['editing'])){
+                                            echo "<script>alert('Successfully ka bai')</script>";
+                                        }
                                     }
                                 }
                             } catch (PDOException $e) {
@@ -220,9 +225,11 @@
                     <div class="form-container">
                         <button class="close-icon" id="closeFormBtnEdit"><span>&#10006;</span>
                         </button><!-- Close icon -->
+
                         <div class="form-logo">
                             <h2> Account Form</h2>
                         </div>
+
                         <form action="" method="post">
                             <div class=" mb-1 form-group">
                                 <label for="name">Name:</label>
@@ -381,35 +388,35 @@
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
             <script>
-  const hamBurger = document.querySelector(".toggle-btn");
-const overlayFormEdit = document.getElementById("overlayFormuser");
-const closeFormBtnEdit = document.getElementById("closeFormBtnEdit");
-const openFormBtnEdit = document.querySelectorAll(".openFormBtnEdit");
-const overlayFormAdd = document.getElementById("overlayFormAdd");
-const closeFormBtnAdd = document.getElementById("closeFormBtnAdd");
-const openFormBtnAdd = document.getElementById("openFormBtnAdd");
+                const hamBurger = document.querySelector(".toggle-btn");
+                const overlayFormEdit = document.getElementById("overlayFormuser");
+                const closeFormBtnEdit = document.getElementById("closeFormBtnEdit");
+                const openFormBtnEdit = document.querySelectorAll(".openFormBtnEdit");
+                const overlayFormAdd = document.getElementById("overlayFormAdd");
+                const closeFormBtnAdd = document.getElementById("closeFormBtnAdd");
+                const openFormBtnAdd = document.getElementById("openFormBtnAdd");
 
-hamBurger.addEventListener("click", function() {
-    document.querySelector("#sidebar").classList.toggle("expand");
-});
+                hamBurger.addEventListener("click", function() {
+                    document.querySelector("#sidebar").classList.toggle("expand");
+                });
 
-openFormBtnEdit.forEach(function(button) {
-    button.addEventListener("click", function() {
-        overlayFormEdit.style.display = "flex";
-    });
-});
+                openFormBtnEdit.forEach(function(button) {
+                    button.addEventListener("click", function() {
+                        overlayFormEdit.style.display = "flex";
+                    });
+                });
 
-closeFormBtnEdit.addEventListener("click", function() {
-    overlayFormEdit.style.display = "none";
-});
+                closeFormBtnEdit.addEventListener("click", function() {
+                    overlayFormEdit.style.display = "none";
+                });
 
-openFormBtnAdd.addEventListener("click", function() {
-    overlayFormAdd.style.display = "flex";
-});
+                openFormBtnAdd.addEventListener("click", function() {
+                    overlayFormAdd.style.display = "flex";
+                });
 
-closeFormBtnAdd.addEventListener("click", function() {
-    overlayFormAdd.style.display = "none";
-});
+                closeFormBtnAdd.addEventListener("click", function() {
+                    overlayFormAdd.style.display = "none";
+                });
             </script>
     </body>
 
