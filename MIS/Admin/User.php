@@ -158,7 +158,7 @@
             <div class="main">
                 
                 <div class="Adding m-2">
-                    <button class="btn btn-primary  openFormBtnAdd">ADD</button>
+                    <button class="btn btn-primary " id="openFormBtnAdd">ADD</button>
                 </div>
 
                 <div class="table table-responsive m-2">
@@ -381,36 +381,35 @@
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
             <script>
-   const hamBurger = document.querySelector(".toggle-btn");
-    const overlayForm = document.getElementById("overlayFormuser");
-    const closeFormBtns= document.getElementById("closeFormBtnEdit");
-    const openFormBtns = document.querySelectorAll(".openFormBtnEdit");
-    const overlayForms= document.getElementById("overlayFormAdd");
-    const closeFormBtn = document.getElementById("closeFormBtnAdd");
-    const openFormBtn = document.querySelectorAll(".openFormBtnAdd");
+  const hamBurger = document.querySelector(".toggle-btn");
+const overlayFormEdit = document.getElementById("overlayFormuser");
+const closeFormBtnEdit = document.getElementById("closeFormBtnEdit");
+const openFormBtnEdit = document.querySelectorAll(".openFormBtnEdit");
+const overlayFormAdd = document.getElementById("overlayFormAdd");
+const closeFormBtnAdd = document.getElementById("closeFormBtnAdd");
+const openFormBtnAdd = document.getElementById("openFormBtnAdd");
 
-    hamBurger.addEventListener("click", function() {
-        document.querySelector("#sidebar").classList.toggle("expand");
-    });
-    
-    openFormBtns.forEach(function(button) {
-        button.addEventListener("click", function() {
-            overlayForm.style.display = "flex";
-        });
-    });
+hamBurger.addEventListener("click", function() {
+    document.querySelector("#sidebar").classList.toggle("expand");
+});
 
-    closeFormBtns.addEventListener("click", function() {
-        overlayForm.style.display = "none";
+openFormBtnEdit.forEach(function(button) {
+    button.addEventListener("click", function() {
+        overlayFormEdit.style.display = "flex";
     });
-    openFormBtn.forEach(function(button) {
-        button.addEventListener("click", function() {
-            overlayForm.style.display = "flex";
-        });
-    });
+});
 
-    closeFormBtn.addEventListener("click", function() {
-        overlayForm.style.display = "none";
-    });
+closeFormBtnEdit.addEventListener("click", function() {
+    overlayFormEdit.style.display = "none";
+});
+
+openFormBtnAdd.addEventListener("click", function() {
+    overlayFormAdd.style.display = "flex";
+});
+
+closeFormBtnAdd.addEventListener("click", function() {
+    overlayFormAdd.style.display = "none";
+});
             </script>
     </body>
 
