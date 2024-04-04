@@ -1,5 +1,28 @@
     <?php
+    session_start();
     require '../Database/connection.php';
+    //include './set_session.php';
+    // Check if the session variable is set, otherwise initialize it
+    if (!isset($_SESSION['editButtonClickedId'])) {
+        $_SESSION['editButtonClickedId'] = ''; // You can set it to a default value, for example, an empty string
+    }
+
+    // Check if it's an AJAX request to clear the session variable
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['clear_session'])) {
+        // Unset or remove the session variable
+        unset($_SESSION['editButtonClickedId']);
+        // Send response
+        exit('Session variable cleared');
+    }
+
+    
+    // Check if it's an AJAX request to clear the session variable
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['clear_session'])) {
+        // Unset or remove the session variable
+        unset($_SESSION['editButtonClickedId']);
+        // Send response
+        exit('Session variable cleared');
+    }
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -206,14 +229,10 @@
                                         echo "<td class='td'>" . htmlspecialchars($acc['Section']) . "</td>";
                                         echo "<td class='td'>" . htmlspecialchars($acc['Username']) . "</td>";
                                         // Be careful displaying passwords, even if hashed. Generally, this should not be done.
-                                        echo "<td class='td'>" . htmlspecialchars($acc['Password']) . "</td>";
+                                        echo "<td class='td password'>" . htmlspecialchars($acc['Password']) . "</td>";
                                         echo "<td class='td'>" . htmlspecialchars($acc['Position']) . "</td>";
-                                        echo "<td class='text-center'><button class='btn btn-danger openFormBtnEdit' m-1' name='editing'>Edit</button> <button class='btn btn-danger'>Delete</button></td>";
+                                        echo "<td class='text-center'><button class='btn btn-danger openFormBtnEdit' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'>Edit</button> <button class='btn btn-danger'>Delete</button></td>";
                                         echo "</tr>";
-
-                                        if(isset($_POST['editing'])){
-                                            echo "<script>alert('Successfully ka bai')</script>";
-                                        }
                                     }
                                 }
                             } catch (PDOException $e) {
@@ -227,6 +246,10 @@
                 <!-- Edit form-->
                 <div class="overlay-form" id="overlayFormuser">
                     <div class="form-container">
+                        <?php
+                            $editButtonClickedId = $_SESSION['editButtonClickedId'];
+                            echo $editButtonClickedId;
+                        ?>
                         <button class="close-icon" id="closeFormBtnEdit"><span>&#10006;</span>
                         </button><!-- Close icon -->
 
@@ -407,11 +430,43 @@
                 openFormBtnEdit.forEach(function(button) {
                     button.addEventListener("click", function() {
                         overlayFormEdit.style.display = "flex";
+                        const id = this.getAttribute('data-id');
+
+                        // Send the id to a PHP script to set session variable
+                        const xhr = new XMLHttpRequest();
+                        xhr.open('POST', './set_session.php'); // Assuming the PHP script is named set_session.php
+                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        xhr.onload = function() {
+                            if (xhr.status === 200) {
+                                // Request was successful
+                                console.log('ID sent to PHP and stored in session');
+                            } else {
+                                // Error handling
+                                console.error('Error sending ID to PHP');
+                            }
+                        };
+                        xhr.send('id=' + id);
+
                     });
                 });
 
                 closeFormBtnEdit.addEventListener("click", function() {
                     overlayFormEdit.style.display = "none";
+                    
+                    // Send an AJAX request to clear the session variable
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', './clear_session.php'); // Assuming the PHP script is named clear_session.php
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            // Session variable cleared successfully
+                            console.log('Session variable cleared');
+                        } else {
+                            // Error handling
+                            console.error('Error clearing session variable');
+                        }
+                    };
+                    xhr.send(); // Send the request without any data
                 });
 
                 openFormBtnAdd.addEventListener("click", function() {
