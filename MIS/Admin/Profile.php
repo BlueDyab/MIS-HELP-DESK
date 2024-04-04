@@ -72,7 +72,7 @@ i{
 
 <body>
 <div class="wrapper">
-        <aside id="sidebar">
+<aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
                 <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
@@ -83,7 +83,7 @@ i{
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="Admin.html"  id="profile" class="sidebar-link">
+                    <a href="Admin.php"  id="profile" class="sidebar-link">
                     <i class="fa-solid fa-chart-line"></i>
                         <span>DashBoard</span>
                     </a>
@@ -103,11 +103,14 @@ i{
                         <li class="sidebar-item">
                             <a href="Feedback.php"  id="feedback"class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="Room.php"  id="feedback"class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
+                        </li>
                     </ul>
                 </li>
            
                 <li class="sidebar-item">
-                    <a href="Inquiry.php" id="inquiry" class="sidebar-link">
+                    <a href="Inquiry.html" id="inquiry" class="sidebar-link">
                     <i class="fa-solid fa-message"></i>
                         <span>Inquiry</span>
                     </a>

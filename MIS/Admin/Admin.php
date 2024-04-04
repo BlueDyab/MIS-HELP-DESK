@@ -86,12 +86,12 @@
                 <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
                 </button>
                 <div class="sidebar-logo">
-                    <a href="Profile.html">User Account<i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="Profile.php">User Account<i class="fa-solid fa-pen-to-square"></i></a>
                 </div>
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="Admin.html"  id="profile" class="sidebar-link">
+                    <a href="Admin.php"  id="profile" class="sidebar-link">
                     <i class="fa-solid fa-chart-line"></i>
                         <span>DashBoard</span>
                     </a>
@@ -103,13 +103,16 @@
                     </a>
                     <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="Service.html" id="service" class="sidebar-link"><i class="fa-solid fa-user"></i>Service</a>
+                            <a href="Service.php" id="service" class="sidebar-link"><i class="fa-solid fa-user"></i>Service</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="Equipment.html"  id="equipment" class="sidebar-link"><i class="fa-solid fa-wrench"></i>Equipment</a>
+                            <a href="Equipment.php"  id="equipment" class="sidebar-link"><i class="fa-solid fa-wrench"></i>Equipment</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="Feedback.html"  id="feedback"class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
+                            <a href="Feedback.php"  id="feedback"class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="Room.php"  id="feedback"class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
                         </li>
                     </ul>
                 </li>

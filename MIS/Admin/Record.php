@@ -148,66 +148,70 @@
 <body>
 
     <div class="wrapper">
-        <aside id="sidebar">
+    <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
-                    <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
+                <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
                 </button>
                 <div class="sidebar-logo">
-                    <a href="Profile.html">User Account<i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="Profile.php">User Account<i class="fa-solid fa-pen-to-square"></i></a>
                 </div>
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="Admin.html" id="profile" class="sidebar-link">
-                        <i class="fa-solid fa-chart-line"></i>
+                    <a href="Admin.php"  id="profile" class="sidebar-link">
+                    <i class="fa-solid fa-chart-line"></i>
                         <span>DashBoard</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                        <i class="fa-solid fa-code-pull-request"></i>
+                    <i class="fa-solid fa-code-pull-request"></i>
                         <span>Request</span>
                     </a>
                     <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="Service.html" id="service" class="sidebar-link"><i class="fa-solid fa-user"></i>Service</a>
+                            <a href="Service.php" id="service" class="sidebar-link"><i class="fa-solid fa-user"></i>Service</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="Equipment.html" id="equipment" class="sidebar-link"><i class="fa-solid fa-wrench"></i>Equipment</a>
+                            <a href="Equipment.php"  id="equipment" class="sidebar-link"><i class="fa-solid fa-wrench"></i>Equipment</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="Feedback.html" id="feedback" class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
+                            <a href="Feedback.php"  id="feedback"class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="Room.php"  id="feedback"class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
                         </li>
                     </ul>
                 </li>
-
+           
                 <li class="sidebar-item">
                     <a href="Inquiry.html" id="inquiry" class="sidebar-link">
-                        <i class="fa-solid fa-message"></i>
+                    <i class="fa-solid fa-message"></i>
                         <span>Inquiry</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="Record.html" id="record" class="sidebar-link">
-                        <i class="fa-solid fa-folder"></i>
+                    <a href="Record.php" id="record" class="sidebar-link">
+                    <i class="fa-solid fa-folder"></i>
                         <span>Record</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="User.php" id="account" class="sidebar-link">
                         <i class="fa-solid fa-gear"></i>
-                        <span>User Account </span>
+                        <span>User Account  </span>
                     </a>
                 </li>
             </ul>
             <div class="sidebar-footer">
                 <a href="../login.html" id="logout" class="sidebar-link">
-                    <i class="fa-solid fa-right-from-bracket"></i>
+                <i class="fa-solid fa-right-from-bracket"></i>
                     <span>Logout</span>
                 </a>
             </div>
         </aside>
+
 
         <div class="main">
             <div class="table table-responsive m-2">
