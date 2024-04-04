@@ -108,20 +108,38 @@ document.getElementById('openFormBtnFeedback').addEventListener('click', functio
     
 
 
-    // Open the overlay form when the button is clicked
-document.getElementById('openFormBtnEdit').addEventListener('click', function() {
-    document.getElementById('overlayFormuser').style.display = 'flex';
+       // Open the overlay form when the button is clicked
+document.getElementById('openFormBtnProfessorRoom').addEventListener('click', function() {
+    document.getElementById('overlayFormProfessorRoom').style.display = 'flex';
     document.body.classList.add('overlay-open');
     });
     
     // Close the overlay form when the close button is clicked
-    document.getElementById('closeFormBtnEdit').addEventListener('click', function() {
-    document.getElementById('overlayFormuser').style.display = 'none';
+    document.getElementById('closeFormBtnProfessorRoom').addEventListener('click', function() {
+    document.getElementById('overlayFormProfessorRoom').style.display = 'none';
     document.body.classList.remove('overlay-open');
     });
     
     // Prevent scroll event from bubbling up to parent elements
-    document.getElementById('overlayFormuserk').addEventListener('scroll', function(e) {
+    document.getElementById('overlayFormProfessorRoom').addEventListener('scroll', function(e) {
+    e.stopPropagation();
+    });
+    
+
+       // Open the overlay form when the button is clicked
+document.getElementById('openFormBtnStudentRoom').addEventListener('click', function() {
+    document.getElementById('overlayFormStudentRoom').style.display = 'flex';
+    document.body.classList.add('overlay-open');
+    });
+    
+    // Close the overlay form when the close button is clicked
+    document.getElementById('closeFormBtnStudentRoom').addEventListener('click', function() {
+    document.getElementById('overlayFormStudentRoom').style.display = 'none';
+    document.body.classList.remove('overlay-open');
+    });
+    
+    // Prevent scroll event from bubbling up to parent elements
+    document.getElementById('overlayFormStudentRoom').addEventListener('scroll', function(e) {
     e.stopPropagation();
     });
     
