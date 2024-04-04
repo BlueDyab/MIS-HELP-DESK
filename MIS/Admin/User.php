@@ -6,23 +6,6 @@
     if (!isset($_SESSION['editButtonClickedId'])) {
         $_SESSION['editButtonClickedId'] = ''; // You can set it to a default value, for example, an empty string
     }
-
-    // Check if it's an AJAX request to clear the session variable
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['clear_session'])) {
-        // Unset or remove the session variable
-        unset($_SESSION['editButtonClickedId']);
-        // Send response
-        exit('Session variable cleared');
-    }
-
-    
-    // Check if it's an AJAX request to clear the session variable
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['clear_session'])) {
-        // Unset or remove the session variable
-        unset($_SESSION['editButtonClickedId']);
-        // Send response
-        exit('Session variable cleared');
-    }
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -427,28 +410,90 @@
                     document.querySelector("#sidebar").classList.toggle("expand");
                 });
 
-                openFormBtnEdit.forEach(function(button) {
-                    button.addEventListener("click", function() {
-                        overlayFormEdit.style.display = "flex";
-                        const id = this.getAttribute('data-id');
-
-                        // Send the id to a PHP script to set session variable
-                        const xhr = new XMLHttpRequest();
-                        xhr.open('POST', './set_session.php'); // Assuming the PHP script is named set_session.php
-                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                        xhr.onload = function() {
-                            if (xhr.status === 200) {
-                                // Request was successful
-                                console.log('ID sent to PHP and stored in session');
-                            } else {
-                                // Error handling
-                                console.error('Error sending ID to PHP');
-                            }
-                        };
-                        xhr.send('id=' + id);
-
+                document.addEventListener("DOMContentLoaded", function() {
+                    const editButtons = document.querySelectorAll(".openFormBtnEdit");
+                    const editOverlay = document.getElementById("overlayFormuser");
+                    const editForm = editOverlay.querySelector("form");
+                    
+                    editButtons.forEach(function(button) {
+                        button.addEventListener("click", function() {
+                            // Get the row values
+                            const row = button.closest("tr");
+                            const id = row.querySelector(".td").textContent.trim();
+                            const name = row.querySelectorAll("td")[1].textContent.trim();
+                            const course = row.querySelectorAll("td")[2].textContent.trim();
+                            const year = row.querySelectorAll("td")[3].textContent.trim();
+                            const section = row.querySelectorAll("td")[4].textContent.trim();
+                            const username = row.querySelectorAll("td")[5].textContent.trim();
+                            const password = row.querySelectorAll("td")[6].textContent.trim();
+                            const position = row.querySelectorAll("td")[7].textContent.trim();
+                            
+                            // Populate the edit form with the fetched values
+                            editForm.querySelector("#name").value = name;
+                            editForm.querySelector("#course").value = course;
+                            editForm.querySelector("#year").value = year;
+                            editForm.querySelector("#section").value = section;
+                            editForm.querySelector("#username").value = username;
+                            editForm.querySelector("#password").value = password;
+                            editForm.querySelector("#position1").value = position;
+                            
+                            // Show the edit overlay
+                            editOverlay.style.display = "flex";
+                            
+                            // When update button is clicked
+                            editForm.addEventListener("submit", function(event) {
+                                event.preventDefault();
+                                
+                                // Get the modified values
+                                const newName = editForm.querySelector("#name").value;
+                                const newCourse = editForm.querySelector("#course").value;
+                                const newYear = editForm.querySelector("#year").value;
+                                const newSection = editForm.querySelector("#section").value;
+                                const newUsername = editForm.querySelector("#username").value;
+                                const newPassword = editForm.querySelector("#password").value;
+                                const newPosition = editForm.querySelector("#position1").value;
+                                
+                                // Send an AJAX request to update the database
+                                const xhr = new XMLHttpRequest();
+                                xhr.open("POST", "update_data.php");
+                                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                xhr.onload = function() {
+                                    if (xhr.status === 200) {
+                                        // Database updated successfully
+                                        console.log("Data updated successfully");
+                                        // Close the edit overlay
+                                        editOverlay.style.display = "none";
+                                    } else {
+                                        // Error handling
+                                        console.error("Error updating data");
+                                    }
+                                };
+                                xhr.send(`id=${id}&name=${newName}&course=${newCourse}&year=${newYear}&section=${newSection}&username=${newUsername}&password=${newPassword}&position=${newPosition}`);
+                            });
+                        });
                     });
                 });
+                // openFormBtnEdit.forEach(function(button) {
+                //     button.addEventListener("click", function() {
+                //         overlayFormEdit.style.display = "flex";
+                //         const id = this.getAttribute('data-id');
+
+                //         // Send the id to set_session.php to set session variable
+                //         const xhr = new XMLHttpRequest();
+                //         xhr.open('POST', './set_session.php');
+                //         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                //         xhr.onload = function() {
+                //             if (xhr.status === 200) {
+                //                 // Request was successful
+                //                 console.log('ID sent to PHP and stored in session');
+                //             } else {
+                //                 // Error handling
+                //                 console.error('Error sending ID to PHP');
+                //             }
+                //         };
+                //         xhr.send('id=' + id);
+                //     });
+                // });
 
                 closeFormBtnEdit.addEventListener("click", function() {
                     overlayFormEdit.style.display = "none";
