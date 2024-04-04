@@ -105,7 +105,7 @@
 
         .table {
             width: 99.3%;
-            height: 100%;
+            height: 100vh;
 
         }
 
