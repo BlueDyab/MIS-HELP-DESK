@@ -420,13 +420,13 @@
                             // Get the row values
                             const row = button.closest("tr");
                             const id = row.querySelector(".td").textContent.trim();
-                            const name = row.querySelectorAll("td")[1].textContent.trim();
-                            const course = row.querySelectorAll("td")[2].textContent.trim();
-                            const year = row.querySelectorAll("td")[3].textContent.trim();
-                            const section = row.querySelectorAll("td")[4].textContent.trim();
-                            const username = row.querySelectorAll("td")[5].textContent.trim();
-                            const password = row.querySelectorAll("td")[6].textContent.trim();
-                            const position = row.querySelectorAll("td")[7].textContent.trim();
+                            const name = row.querySelectorAll("td")[0].textContent.trim();
+                            const course = row.querySelectorAll("td")[1].textContent.trim();
+                            const year = row.querySelectorAll("td")[2].textContent.trim();
+                            const section = row.querySelectorAll("td")[3].textContent.trim();
+                            const username = row.querySelectorAll("td")[4].textContent.trim();
+                            const password = row.querySelectorAll("td")[5].textContent.trim();
+                            const position = row.querySelectorAll("td")[6].textContent.trim();
                             
                             // Populate the edit form with the fetched values
                             editForm.querySelector("#name").value = name;
