@@ -180,7 +180,7 @@
                     <table class="table table-bordered">
                         <thead class="header fixed-top">
                             <tr>
-                                <th class="th col-1" scope="col">Id</th>
+                                <th class="th" scope="col">Id</th>
                                 <th class="col-2" scope="col">Name</th>
                                 <th class="th col-1" scope="col">Course</th>
                                 <th class="th col-1" scope="col">Year</th>
