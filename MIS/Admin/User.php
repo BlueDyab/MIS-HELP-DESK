@@ -86,8 +86,8 @@
         }
 
 
-        .table {
-            width: 99.3%;
+        .table-responsive.m-2 {
+        width: 99.3%;
             height: 100vh;
 
         }
@@ -96,95 +96,100 @@
             position: sticky;
             top: -2px;
         }
+        .btn-danger{
+            width: 60px;
+            
+        }
     </style>
 
     <body>
 
         <div class="wrapper">
-        <aside id="sidebar">
-            <div class="d-flex">
-                <button class="toggle-btn" type="button">
-                <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
-                </button>
-                <div class="sidebar-logo">
-                    <a href="Profile.php">User Account<i class="fa-solid fa-pen-to-square"></i></a>
+            <aside id="sidebar">
+                <div class="d-flex">
+                    <button class="toggle-btn" type="button">
+                        <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
+                    </button>
+                    <div class="sidebar-logo">
+                        <a href="Profile.php">User Account<i class="fa-solid fa-pen-to-square"></i></a>
+                    </div>
                 </div>
-            </div>
-            <ul class="sidebar-nav">
-                <li class="sidebar-item">
-                    <a href="Admin.php"  id="profile" class="sidebar-link">
-                    <i class="fa-solid fa-chart-line"></i>
-                        <span>DashBoard</span>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-item">
+                        <a href="Admin.php" id="profile" class="sidebar-link">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span>DashBoard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+                            <i class="fa-solid fa-code-pull-request"></i>
+                            <span>Request</span>
+                        </a>
+                        <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="Service.php" id="service" class="sidebar-link"><i class="fa-solid fa-user"></i>Service</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="Equipment.php" id="equipment" class="sidebar-link"><i class="fa-solid fa-wrench"></i>Equipment</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="Feedback.php" id="feedback" class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="Room.php" id="feedback" class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="Inquiry.html" id="inquiry" class="sidebar-link">
+                            <i class="fa-solid fa-message"></i>
+                            <span>Inquiry</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="Record.php" id="record" class="sidebar-link">
+                            <i class="fa-solid fa-folder"></i>
+                            <span>Record</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="User.php" id="account" class="sidebar-link">
+                            <i class="fa-solid fa-gear"></i>
+                            <span>User Account </span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="sidebar-footer">
+                    <a href="../login.html" id="logout" class="sidebar-link">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
                     </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                    <i class="fa-solid fa-code-pull-request"></i>
-                        <span>Request</span>
-                    </a>
-                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
-                            <a href="Service.php" id="service" class="sidebar-link"><i class="fa-solid fa-user"></i>Service</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="Equipment.php"  id="equipment" class="sidebar-link"><i class="fa-solid fa-wrench"></i>Equipment</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="Feedback.php"  id="feedback"class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="Room.php"  id="feedback"class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
-                        </li>
-                    </ul>
-                </li>
-           
-                <li class="sidebar-item">
-                    <a href="Inquiry.html" id="inquiry" class="sidebar-link">
-                    <i class="fa-solid fa-message"></i>
-                        <span>Inquiry</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="Record.php" id="record" class="sidebar-link">
-                    <i class="fa-solid fa-folder"></i>
-                        <span>Record</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="User.php" id="account" class="sidebar-link">
-                        <i class="fa-solid fa-gear"></i>
-                        <span>User Account  </span>
-                    </a>
-                </li>
-            </ul>
-            <div class="sidebar-footer">
-                <a href="../login.html" id="logout" class="sidebar-link">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Logout</span>
-                </a>
-            </div>
-        </aside>
+                </div>
+            </aside>
 
 
             <div class="main">
-                
+
                 <div class="Adding m-2">
                     <button class="btn btn-primary " id="openFormBtnAdd">ADD</button>
                 </div>
 
-                <div class="table table-responsive m-2">
+                <div class="table-responsive m-2">
                     <table class="table table-bordered">
                         <thead class="header fixed-top">
                             <tr>
-                                <th class="th" scope="col">Id</th>
-                                <th scope="col">Name</th>
-                                <th class="th" scope="col">Course</th>
-                                <th class="th" scope="col">Year</th>
-                                <th class="th" scope="col">Section</th>
-                                <th class="th" scope="col">Username</th>
-                                <th class="th" scope="col">Password</th>
-                                <th class="th" scope="col">Position</th>
-                                <th class="th" scope="col">Action</th>
+                                <th class="th col-1" scope="col">Id</th>
+                                <th class="col-2" scope="col">Name</th>
+                                <th class="th col-1" scope="col">Course</th>
+                                <th class="th col-1" scope="col">Year</th>
+                                <th class="th col-1" scope="col">Section</th>
+                                <th class="th col-2" scope="col">Username</th>
+                                <th class="th col-2" scope="col">Password</th>
+                                <th class="th col-1" scope="col">Position</th>
+                                <th class="th col-2" scope="col">Action</th>
+
                             </tr>
                         </thead>
                         <tbody class="data">
@@ -214,7 +219,8 @@
                                         // Be careful displaying passwords, even if hashed. Generally, this should not be done.
                                         echo "<td class='td password'>" . htmlspecialchars($acc['Password']) . "</td>";
                                         echo "<td class='td'>" . htmlspecialchars($acc['Position']) . "</td>";
-                                        echo "<td class='text-center'><button class='btn btn-danger openFormBtnEdit' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'>Edit</button> <button class='btn btn-danger'>Delete</button></td>";
+                                        echo "<td class='text-center'><button class='btn btn-danger openFormBtnEdit' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'><i class='fas fa-edit'></i></button> 
+                                        <button class='btn btn-danger'><i class='fas fa-trash'></button></td>";
                                         echo "</tr>";
                                     }
                                 }
@@ -230,8 +236,8 @@
                 <div class="overlay-form" id="overlayFormuser">
                     <div class="form-container">
                         <?php
-                            $editButtonClickedId = $_SESSION['editButtonClickedId'];
-                            echo $editButtonClickedId;
+                        $editButtonClickedId = $_SESSION['editButtonClickedId'];
+                        echo $editButtonClickedId;
                         ?>
                         <button class="close-icon" id="closeFormBtnEdit"><span>&#10006;</span>
                         </button><!-- Close icon -->
@@ -246,7 +252,7 @@
                                 <input type="name" class="form-control" id="name" name="name" required>
                             </div>
                             <div class="form-row">
-                            <div class="col-md-3 mb-1 form-group">
+                                <div class="col-md-3 mb-1 form-group">
                                     <label for="course">Course:</label>
                                     <select class="form-select" id="course" name="course" required>
                                         <option value="">Select Year</option>
@@ -283,7 +289,7 @@
                                         <option value="member">Member</option>
                                     </select>
                                 </div>
-                        </div>
+                            </div>
                             <div class=" mb-1 form-group">
                                 <label for="username">Username</label>
                                 <input type="username" class="form-control" id="username" name="username" required>
@@ -293,7 +299,7 @@
                                 <input type="password" class="form-control" id="password" name="password" required>
                             </div>
 
-                            <button type="submit" class="btn btn-primary"  id="openFormBtnEdit" name="Edit_btn">update</button>
+                            <button type="submit" class="btn btn-primary" id="openFormBtnEdit" name="Edit_btn">update</button>
                         </form>
                     </div>
                 </div>
@@ -313,7 +319,7 @@
                                 <input type="name" class="form-control" id="name" name="name" required>
                             </div>
                             <div class="form-row">
-                            <div class="col-md-3 mb-1 form-group">
+                                <div class="col-md-3 mb-1 form-group">
                                     <label for="course">Course:</label>
                                     <select class="form-select" id="course" name="course" required>
                                         <option value="">Select Year</option>
@@ -350,7 +356,7 @@
                                         <option value="member">Member</option>
                                     </select>
                                 </div>
-                        </div>
+                            </div>
                             <div class=" mb-1 form-group">
                                 <label for="username">Username</label>
                                 <input type="username" class="form-control" id="username" name="username" required>
@@ -360,39 +366,39 @@
                                 <input type="password" class="form-control" id="password" name="password" required>
                             </div>
 
-                            <button type="submit" class="btn btn-primary"  id="openFormBtnAdd" name="Add_btn">Add</button>
+                            <button type="submit" class="btn btn-primary" id="openFormBtnAdd" name="Add_btn">Add</button>
                         </form>
                     </div>
                 </div>
                 <?php
-                    if (isset($_POST['Add_btn'])) {
-                        $name = $_POST['name'];
-                        $course = $_POST['course'];
-                        $year = $_POST['year'];
-                        $section = $_POST['section'];
-                        $username = $_POST['username'];
-                        $password = $_POST['password'];
-                        $position = $_POST['position'];
+                if (isset($_POST['Add_btn'])) {
+                    $name = $_POST['name'];
+                    $course = $_POST['course'];
+                    $year = $_POST['year'];
+                    $section = $_POST['section'];
+                    $username = $_POST['username'];
+                    $password = $_POST['password'];
+                    $position = $_POST['position'];
 
-                        try {
-                            // Set the PDO error mode to exception
-                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    try {
+                        // Set the PDO error mode to exception
+                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                            // Prepare the SQL INSERT statement
-                            $stmt = $conn->prepare("INSERT INTO `user_account_db` (Name, Course, Year, Section, Username, Password, Position) VALUES (:name, :course, :year, :section, :username, :password, :position)");
-                            $stmt->bindParam(':name', $name);
-                            $stmt->bindParam(':course', $course);
-                            $stmt->bindParam(':year', $year);
-                            $stmt->bindParam(':section', $section);
-                            $stmt->bindParam(':username', $username);
-                            $stmt->bindParam(':password', $password);
-                            $stmt->bindParam(':position', $position);
-                            $stmt->execute();
-                            echo "<script>alert('Successfully Added')</script>";
-                        } catch (PDOException $e) {
-                            echo "Error: " . $e->getMessage();
-                        }
+                        // Prepare the SQL INSERT statement
+                        $stmt = $conn->prepare("INSERT INTO `user_account_db` (Name, Course, Year, Section, Username, Password, Position) VALUES (:name, :course, :year, :section, :username, :password, :position)");
+                        $stmt->bindParam(':name', $name);
+                        $stmt->bindParam(':course', $course);
+                        $stmt->bindParam(':year', $year);
+                        $stmt->bindParam(':section', $section);
+                        $stmt->bindParam(':username', $username);
+                        $stmt->bindParam(':password', $password);
+                        $stmt->bindParam(':position', $position);
+                        $stmt->execute();
+                        echo "<script>alert('Successfully Added')</script>";
+                    } catch (PDOException $e) {
+                        echo "Error: " . $e->getMessage();
                     }
+                }
                 ?>
             </div>
 
@@ -414,7 +420,7 @@
                     const editButtons = document.querySelectorAll(".openFormBtnEdit");
                     const editOverlay = document.getElementById("overlayFormuser");
                     const editForm = editOverlay.querySelector("form");
-                    
+
                     editButtons.forEach(function(button) {
                         button.addEventListener("click", function() {
                             // Get the row values
@@ -427,7 +433,7 @@
                             const username = row.querySelectorAll("td")[4].textContent.trim();
                             const password = row.querySelectorAll("td")[5].textContent.trim();
                             const position = row.querySelectorAll("td")[6].textContent.trim();
-                            
+
                             // Populate the edit form with the fetched values
                             editForm.querySelector("#name").value = name;
                             editForm.querySelector("#course").value = course;
@@ -436,14 +442,14 @@
                             editForm.querySelector("#username").value = username;
                             editForm.querySelector("#password").value = password;
                             editForm.querySelector("#position1").value = position;
-                            
+
                             // Show the edit overlay
                             editOverlay.style.display = "flex";
-                            
+
                             // When update button is clicked
                             editForm.addEventListener("submit", function(event) {
                                 event.preventDefault();
-                                
+
                                 // Get the modified values
                                 const newName = editForm.querySelector("#name").value;
                                 const newCourse = editForm.querySelector("#course").value;
@@ -452,7 +458,7 @@
                                 const newUsername = editForm.querySelector("#username").value;
                                 const newPassword = editForm.querySelector("#password").value;
                                 const newPosition = editForm.querySelector("#position1").value;
-                                
+
                                 // Send an AJAX request to update the database
                                 const xhr = new XMLHttpRequest();
                                 xhr.open("POST", "update_data.php");
@@ -497,7 +503,7 @@
 
                 closeFormBtnEdit.addEventListener("click", function() {
                     overlayFormEdit.style.display = "none";
-                    
+
                     // Send an AJAX request to clear the session variable
                     const xhr = new XMLHttpRequest();
                     xhr.open('POST', './clear_session.php'); // Assuming the PHP script is named clear_session.php
@@ -525,4 +531,3 @@
     </body>
 
     </html>
-    fasfasfasf
