@@ -219,8 +219,7 @@
                                         // Be careful displaying passwords, even if hashed. Generally, this should not be done.
                                         echo "<td class='td password'>" . htmlspecialchars($acc['Password']) . "</td>";
                                         echo "<td class='td'>" . htmlspecialchars($acc['Position']) . "</td>";
-                                        echo "<td class='text-center'><button class='btn btn-danger openFormBtnEdit' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'><i class='fas fa-edit'></i></button> 
-                                        <button class='btn btn-danger'><i class='fas fa-trash'></button></td>";
+                                        echo "<td class='text-center'><button class='btn btn-danger openFormBtnEdit' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'><i class='fas fa-edit'></i></button><button class='btn btn-danger deleteButton' data-id='" . htmlspecialchars($acc['ID']) . "'><i class='fas fa-trash'></button></td>";
                                         echo "</tr>";
                                     }
                                 }
@@ -379,22 +378,37 @@
                     $username = $_POST['username'];
                     $password = $_POST['password'];
                     $position = $_POST['position'];
-
+                
                     try {
                         // Set the PDO error mode to exception
                         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                        // Prepare the SQL INSERT statement
-                        $stmt = $conn->prepare("INSERT INTO `user_account_db` (Name, Course, Year, Section, Username, Password, Position) VALUES (:name, :course, :year, :section, :username, :password, :position)");
-                        $stmt->bindParam(':name', $name);
-                        $stmt->bindParam(':course', $course);
-                        $stmt->bindParam(':year', $year);
-                        $stmt->bindParam(':section', $section);
-                        $stmt->bindParam(':username', $username);
-                        $stmt->bindParam(':password', $password);
-                        $stmt->bindParam(':position', $position);
-                        $stmt->execute();
-                        echo "<script>alert('Successfully Added')</script>";
+                        
+                        // Check if the name already exists in the database
+                        $data = $conn->prepare("SELECT * FROM `user_account_db` WHERE Name = :names");
+                        $data->bindParam(':names', $name);
+                        $data->execute();
+                        $existingData = $data->fetch(PDO::FETCH_ASSOC);
+                        
+                        if ($existingData) {
+                            // Name already exists, do not add
+                            echo "<script>alert('Name already exists in the database.')</script>";
+                        } else {
+                            // Name does not exist, proceed with insertion
+                            $stmt = $conn->prepare("INSERT INTO `user_account_db` (Name, Course, Year, Section, Username, Password, Position) VALUES (:name, :course, :year, :section, :username, :password, :position)");
+                            $stmt->bindParam(':name', $name);
+                            $stmt->bindParam(':course', $course);
+                            $stmt->bindParam(':year', $year);
+                            $stmt->bindParam(':section', $section);
+                            $stmt->bindParam(':username', $username);
+                            $stmt->bindParam(':password', $password);
+                            $stmt->bindParam(':position', $position);
+                            $stmt->execute();
+                            echo "<script>alert('Successfully Added')</script>";
+                        }
+                        
+                        // Reload the page using JavaScript
+                        echo "<script>window.location.reload();</script>";
+                        exit;
                     } catch (PDOException $e) {
                         echo "Error: " . $e->getMessage();
                     }
@@ -479,27 +493,6 @@
                         });
                     });
                 });
-                // openFormBtnEdit.forEach(function(button) {
-                //     button.addEventListener("click", function() {
-                //         overlayFormEdit.style.display = "flex";
-                //         const id = this.getAttribute('data-id');
-
-                //         // Send the id to set_session.php to set session variable
-                //         const xhr = new XMLHttpRequest();
-                //         xhr.open('POST', './set_session.php');
-                //         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                //         xhr.onload = function() {
-                //             if (xhr.status === 200) {
-                //                 // Request was successful
-                //                 console.log('ID sent to PHP and stored in session');
-                //             } else {
-                //                 // Error handling
-                //                 console.error('Error sending ID to PHP');
-                //             }
-                //         };
-                //         xhr.send('id=' + id);
-                //     });
-                // });
 
                 closeFormBtnEdit.addEventListener("click", function() {
                     overlayFormEdit.style.display = "none";
@@ -527,6 +520,34 @@
                 closeFormBtnAdd.addEventListener("click", function() {
                     overlayFormAdd.style.display = "none";
                 });
+
+                document.addEventListener("DOMContentLoaded", function() {
+                    const deleteButtons = document.querySelectorAll(".deleteButton");
+
+                    deleteButtons.forEach(function(button) {
+                        button.addEventListener("click", function() {
+                            const id = this.getAttribute('data-id');
+
+                            // Send an AJAX request to delete_data.php
+                            const xhr = new XMLHttpRequest();
+                            xhr.open("POST", "delete_data.php");
+                            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                            xhr.onload = function() {
+                                if (xhr.status === 200) {
+                                    // Row deleted successfully
+                                    console.log("Row deleted successfully");
+                                    // Reload the page or update the UI as needed
+                                    location.reload(); // Reload the page to reflect the changes
+                                } else {
+                                    // Error handling
+                                    console.error("Error deleting row");
+                                }
+                            };
+                            xhr.send(`id=${id}`);
+                        });
+                    });
+                });
+
             </script>
     </body>
 
