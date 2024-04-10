@@ -369,7 +369,7 @@
                         </form>
                     </div>
                 </div>
-                <?php
+                <!-- <?php
                 if (isset($_POST['Add_btn'])) {
                     $name = $_POST['name'];
                     $course = $_POST['course'];
@@ -391,7 +391,9 @@
                         
                         if ($existingData) {
                             // Name already exists, do not add
-                            echo "<script>alert('Name already exists in the database.')</script>";
+                            echo "<script>alert('Name already exists in the database.');
+                            </script>";
+                            exit();
                         } else {
                             // Name does not exist, proceed with insertion
                             $stmt = $conn->prepare("INSERT INTO `user_account_db` (Name, Course, Year, Section, Username, Password, Position) VALUES (:name, :course, :year, :section, :username, :password, :position)");
@@ -403,17 +405,17 @@
                             $stmt->bindParam(':password', $password);
                             $stmt->bindParam(':position', $position);
                             $stmt->execute();
-                            echo "<script>alert('Successfully Added')</script>";
+                            echo "<script>alert('Successfully Added');
+                                 </script>";
+                                 exit();
+
                         }
                         
-                        // Reload the page using JavaScript
-                        echo "<script>window.location.reload();</script>";
-                        exit;
                     } catch (PDOException $e) {
                         echo "Error: " . $e->getMessage();
                     }
                 }
-                ?>
+                ?> -->
             </div>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
