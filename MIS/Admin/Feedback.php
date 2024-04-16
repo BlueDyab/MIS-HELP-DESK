@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar With Bootstrap</title>
+    <title>Feedback</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-YQp1wFdsy1Z3dCU5ym8nfcfJWIPSK1rYBprYO8r00ELIOknvRr4aRKeqWSS6I6Zh" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -75,20 +75,47 @@
                         <li class="sidebar-item">
                             <a href="Service.php" id="service" class="sidebar-link"><i class="fa-solid fa-user"></i>Service</a>
                         </li>
-                        <li class="sidebar-item">
-                            <a href="Equipment.php"  id="equipment" class="sidebar-link"><i class="fa-solid fa-wrench"></i>Equipment</a>
-</li>
+                        
                         <li class="sidebar-item">
                             <a href="Feedback.php"  id="feedback" class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
                         </li>
+                        
                         <li class="sidebar-item">
-                            <a href="Room.php"  id="room" class="sidebar-link"><i class="fa-solid fa-desktop"></i>Room</a>
-                        </li>
+    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#equipmentDropdown" aria-expanded="false" aria-controls="equipmentDropdown">
+        <i class="fa-solid fa-wrench"></i>
+        <span>Equipment</span>
+    </a>
+    <ul id="equipmentDropdown" class="sidebar-dropdown list-unstyled collapse">
+        <li class="sidebar-item">
+            <a href="ProfessorEquipment.php" id="equipment" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i>Professor</a>
+        </li>
+        <li class="sidebar-item">
+            <a href="StudentEquipment.php" id="room" class="sidebar-link"><i class="fa-solid fa-user"></i>Student</a>
+        </li>
+     
+    </ul>
+</li>
+
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#roomDropdown" aria-expanded="false" aria-controls="roomDropdown">
+        <i class="fa-solid fa-desktop"></i>
+        <span>Room</span>
+    </a>
+    <ul id="roomDropdown" class="sidebar-dropdown list-unstyled collapse">
+        <li class="sidebar-item">
+            <a href="ProfessorRoom.php" id="room" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i>Professor</a>
+        </li>
+        <li class="sidebar-item">
+            <a href="StudentRoom.php" id="room" class="sidebar-link"><i class="fa-solid fa-user"></i>Student</a>
+        </li>
+      
+    </ul>
+</li>
                     </ul>
                 </li>
            
                 <li class="sidebar-item">
-                    <a href="Inquiry.html" id="inquiry" class="sidebar-link">
+                    <a href="Inquiry.php" id="inquiry" class="sidebar-link">
                     <i class="fa-solid fa-message"></i>
                         <span>Inquiry</span>
                     </a>
@@ -113,7 +140,6 @@
                 </a>
             </div>
         </aside>
-
         <div class="main">
 
 
@@ -124,14 +150,11 @@
                             <tr>
                                 <th class="th" scope="col">Id</th>
                                 <th class="col-2" scope="col">Name</th>
-                                <th class="th col-1" scope="col">Course</th>
-                                <th class="th col-1" scope="col">Year</th>
-                                <th class="th col-1" scope="col">Section</th>
-                                <th class="th col-2" scope="col">Username</th>
-                                <th class="th col-2" scope="col">Password</th>
-                                <th class="th col-1" scope="col">Position</th>
-                                <th class="th col-2" scope="col">Action</th>
-
+                                <th class="th col-1" scope="col">Department</th>
+                                <th class="th col-2" scope="col">Date</th>
+                                <th class="th col-2" scope="col">Time</th>
+                                <th class="th col-2" scope="col">Feedback Deatils</th>
+                                <th class="th col-2" scope="col">Recommendation</th>
                             </tr>
                         </thead>
     </table>

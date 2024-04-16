@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inquiry</title>
+    <title>Equipment</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-YQp1wFdsy1Z3dCU5ym8nfcfJWIPSK1rYBprYO8r00ELIOknvRr4aRKeqWSS6I6Zh" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -143,21 +143,22 @@
 
         <div class="main">
 
-
         
         <div class="table-responsive m-2">
                     <table class="table table-bordered">
                         <thead class="header fixed-top">
                             <tr>
                                 <th class="th" scope="col">Id</th>
-                                <th class="col-2" scope="col">Name</th>
+                                <th class="col-2" scope="col"> Professor Name</th>
                                 <th class="th col-1" scope="col">Course</th>
                                 <th class="th col-1" scope="col">Year</th>
                                 <th class="th col-1" scope="col">Section</th>
-                                <th class="th col-2" scope="col">Username</th>
-                                <th class="th col-2" scope="col">Password</th>
-                                <th class="th col-1" scope="col">Position</th>
-                                <th class="th col-2" scope="col">Action</th>
+                                <th class="th col-1" scope="col">Deparment</th>
+                                <th class="th col-1" scope="col">Date</th>
+                                <th class="th col-1" scope="col">Time</th>
+                                <th class="th col-1" scope="col">Due Time</th>
+                                <th class="th col-2" scope="col">Requested Item</th>
+                                <th class="th col-2" scope="col">Purpose</th>
 
                             </tr>
                         </thead>

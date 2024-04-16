@@ -104,7 +104,18 @@ select#action2{
 select#department1 {
   width: 97%;
 }
-
+input#total {
+  width: 94.3%;
+}
+select#section {
+  width: 97.3%;
+}
+input#timeOut {
+  width: 97.3%;
+}
+input#Professor {
+  width: 97.3%;
+}
 
   .overlay-form .form-container button[type="submit"] {
     display: block;

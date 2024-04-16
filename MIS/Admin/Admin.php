@@ -79,8 +79,8 @@
 </style>
 
 <body>
-    <div class="wrapper">
-        <aside id="sidebar">
+<div class="wrapper">
+<aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
                 <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
@@ -105,15 +105,42 @@
                         <li class="sidebar-item">
                             <a href="Service.php" id="service" class="sidebar-link"><i class="fa-solid fa-user"></i>Service</a>
                         </li>
+                        
                         <li class="sidebar-item">
-                            <a href="Equipment.php"  id="equipment" class="sidebar-link"><i class="fa-solid fa-wrench"></i>Equipment</a>
+                            <a href="Feedback.php"  id="feedback" class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
                         </li>
+                        
                         <li class="sidebar-item">
-                            <a href="Feedback.php"  id="feedback"class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="Room.php"  id="feedback"class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
-                        </li>
+    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#equipmentDropdown" aria-expanded="false" aria-controls="equipmentDropdown">
+        <i class="fa-solid fa-wrench"></i>
+        <span>Equipment</span>
+    </a>
+    <ul id="equipmentDropdown" class="sidebar-dropdown list-unstyled collapse">
+        <li class="sidebar-item">
+            <a href="ProfessorEquipment.php" id="equipment" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i>Professor</a>
+        </li>
+        <li class="sidebar-item">
+            <a href="StudentEquipment.php" id="room" class="sidebar-link"><i class="fa-solid fa-user"></i>Student</a>
+        </li>
+     
+    </ul>
+</li>
+
+<li class="sidebar-item">
+    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#roomDropdown" aria-expanded="false" aria-controls="roomDropdown">
+        <i class="fa-solid fa-desktop"></i>
+        <span>Room</span>
+    </a>
+    <ul id="roomDropdown" class="sidebar-dropdown list-unstyled collapse">
+        <li class="sidebar-item">
+            <a href="ProfessorRoom.php" id="room" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i>Professor</a>
+        </li>
+        <li class="sidebar-item">
+            <a href="StudentRoom.php" id="room" class="sidebar-link"><i class="fa-solid fa-user"></i>Student</a>
+        </li>
+      
+    </ul>
+</li>
                     </ul>
                 </li>
            
@@ -143,8 +170,6 @@
                 </a>
             </div>
         </aside>
-
-
 
 
 
