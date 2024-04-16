@@ -118,7 +118,7 @@
                 </li>
            
                 <li class="sidebar-item">
-                    <a href="Inquiry.html" id="inquiry" class="sidebar-link">
+                    <a href="Inquiry.php" id="inquiry" class="sidebar-link">
                     <i class="fa-solid fa-message"></i>
                         <span>Inquiry</span>
                     </a>

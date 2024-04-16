@@ -13,13 +13,38 @@
 </head>
 
 <style>
-    .main {
-        min-height:100vh;
-        width: 100%;
-        overflow: hidden;
-        transition: all 0.35s ease-in-out;
-        background-color:  #e2e3dc;
-    }
+      .main {
+            max-height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            transition: all 0.35s ease-in-out;
+            background-color: #e2e3dc;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: start;
+        }
+    .header {
+            background-color: gray;
+        }
+
+        tr {
+            border: 1px solid gray;
+        }
+
+        .th {
+            text-align: center;
+        }
+        .table-responsive.m-2 {
+        width: 99.3%;
+            height: 100vh;
+
+        }
+
+        .header {
+            position: sticky;
+            top: -2px;
+        }
 
 </style>
 <body>
@@ -52,12 +77,12 @@
                         </li>
                         <li class="sidebar-item">
                             <a href="Equipment.php"  id="equipment" class="sidebar-link"><i class="fa-solid fa-wrench"></i>Equipment</a>
+</li>
+                        <li class="sidebar-item">
+                            <a href="Feedback.php"  id="feedback" class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="Feedback.php"  id="feedback"class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="Room.php"  id="feedback"class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
+                            <a href="Room.php"  id="room" class="sidebar-link"><i class="fa-solid fa-desktop"></i>Room</a>
                         </li>
                     </ul>
                 </li>
@@ -91,6 +116,25 @@
 
         <div class="main">
 
+
+        
+        <div class="table-responsive m-2">
+                    <table class="table table-bordered">
+                        <thead class="header fixed-top">
+                            <tr>
+                                <th class="th" scope="col">Id</th>
+                                <th class="col-2" scope="col">Name</th>
+                                <th class="th col-1" scope="col">Course</th>
+                                <th class="th col-1" scope="col">Year</th>
+                                <th class="th col-1" scope="col">Section</th>
+                                <th class="th col-2" scope="col">Username</th>
+                                <th class="th col-2" scope="col">Password</th>
+                                <th class="th col-1" scope="col">Position</th>
+                                <th class="th col-2" scope="col">Action</th>
+
+                            </tr>
+                        </thead>
+    </table>
         </div>
     
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

@@ -36,11 +36,11 @@
         }
 
         .header {
-            background-color: gray;
+            background-color: #ff4d00;
         }
 
         tr {
-            border: 1px solid gray;
+            border: 1px solid black;
         }
 
         .th {
@@ -57,7 +57,7 @@
             width: 99.3%;
             height: 50px;
             display: flex;
-            justify-content: flex-end;
+            justify-content: flex-start;
             align-items: center;
         }
 
@@ -76,7 +76,6 @@
         }
 
         .data {
-            overflow: auto;
             min-height: 500px;
             width: 100%;
         }
@@ -85,20 +84,36 @@
             text-align: center;
         }
 
+        td.text-center {
+            padding: 0;
+        }
+
+        td.td {
+            padding: 11px;
+        }
+
+        th.td {
+            padding: 11px;
+        }
+
+        td.tf {
+            padding: 11px;
+        }
 
         .table-responsive.m-2 {
-        width: 99.3%;
+            width: 99%;
             height: 100vh;
 
         }
 
         .header {
             position: sticky;
-            top: -2px;
         }
-        .btn-danger{
+
+        .btn-danger {
             width: 60px;
-            
+            height: 35px;
+            padding: 0;
         }
     </style>
 
@@ -137,7 +152,7 @@
                                 <a href="Feedback.php" id="feedback" class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="Room.php" id="feedback" class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
+                                <a href="Room.php" id="room" class="sidebar-link"><i class="fa-solid fa-desktop"></i>Room</a>
                             </li>
                         </ul>
                     </li>
@@ -177,7 +192,7 @@
                 </div>
 
                 <div class="table-responsive m-2">
-                    <table class="table table-bordered">
+                    <table class="table table-striped">
                         <thead class="header fixed-top">
                             <tr>
                                 <th class="th" scope="col">Id</th>
@@ -192,7 +207,7 @@
 
                             </tr>
                         </thead>
-                        <tbody class="data">
+                        <tbody class="data table-group-divider">
                             <?php
                             try {
                                 // Set the PDO error mode to exception
@@ -211,7 +226,7 @@
                                         echo "<tr>";
                                         // Output each column value of the row
                                         echo "<th class='td' scope='col'>" . htmlspecialchars($acc['ID']) . "</th>"; // Assuming ID is your primary key and thus unique
-                                        echo "<td>" . htmlspecialchars($acc['Name']) . "</td>";
+                                        echo "<td class='tf'>" . htmlspecialchars($acc['Name']) . "</td>";
                                         echo "<td class='td'>" . htmlspecialchars($acc['Course']) . "</td>";
                                         echo "<td class='td'>" . htmlspecialchars($acc['Year']) . "</td>";
                                         echo "<td class='td'>" . htmlspecialchars($acc['Section']) . "</td>";
@@ -219,7 +234,7 @@
                                         // Be careful displaying passwords, even if hashed. Generally, this should not be done.
                                         echo "<td class='td password'>" . htmlspecialchars($acc['Password']) . "</td>";
                                         echo "<td class='td'>" . htmlspecialchars($acc['Position']) . "</td>";
-                                        echo "<td class='text-center'><button class='btn btn-danger openFormBtnEdit' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'><i class='fas fa-edit'></i></button><button class='btn btn-danger deleteButton' data-id='" . htmlspecialchars($acc['ID']) . "'><i class='fas fa-trash'></button></td>";
+                                        echo "<td class='text-center'><button class='btn btn-danger m-2 openFormBtnEdit' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'><i class='fas fa-edit'></i></button><button class='btn btn-danger deleteButton' data-id='" . htmlspecialchars($acc['ID']) . "'><i class='fas fa-trash'></button></td>";
                                         echo "</tr>";
                                     }
                                 }
@@ -230,6 +245,9 @@
                         </tbody>
                     </table>
                 </div>
+
+
+
 
                 <!-- Edit form-->
                 <div class="overlay-form" id="overlayFormuser">
@@ -298,8 +316,47 @@
                                 <input type="password" class="form-control" id="password" name="password" required>
                             </div>
 
-                            <button type="submit" class="btn btn-primary" id="openFormBtnEdit" name="Edit_btn">update</button>
+                            <button type="submit" class="btn btn-primary" id="openFormBtnEdit" name="Edit_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">update</button>
                         </form>
+                    </div>
+                </div>
+
+                <!-- Modal Confirmation -->
+                <div class="modal fade" id="exampleModal" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure want to change?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="confirmUpdateBtn">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Modal Confirmation detelet -->
+                <div class="modal fade" id="exampleModal1" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation Delete </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure want to Delete?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="confirmUpdateDeleteBtn">Okay</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -370,52 +427,50 @@
                     </div>
                 </div>
                 <!-- <?php
-                if (isset($_POST['Add_btn'])) {
-                    $name = $_POST['name'];
-                    $course = $_POST['course'];
-                    $year = $_POST['year'];
-                    $section = $_POST['section'];
-                    $username = $_POST['username'];
-                    $password = $_POST['password'];
-                    $position = $_POST['position'];
-                
-                    try {
-                        // Set the PDO error mode to exception
-                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                        
-                        // Check if the name already exists in the database
-                        $data = $conn->prepare("SELECT * FROM `user_account_db` WHERE Name = :names");
-                        $data->bindParam(':names', $name);
-                        $data->execute();
-                        $existingData = $data->fetch(PDO::FETCH_ASSOC);
-                        
-                        if ($existingData) {
-                            // Name already exists, do not add
-                            echo "<script>alert('Name already exists in the database.');
-                            </script>";
-                            exit();
-                        } else {
-                            // Name does not exist, proceed with insertion
-                            $stmt = $conn->prepare("INSERT INTO `user_account_db` (Name, Course, Year, Section, Username, Password, Position) VALUES (:name, :course, :year, :section, :username, :password, :position)");
-                            $stmt->bindParam(':name', $name);
-                            $stmt->bindParam(':course', $course);
-                            $stmt->bindParam(':year', $year);
-                            $stmt->bindParam(':section', $section);
-                            $stmt->bindParam(':username', $username);
-                            $stmt->bindParam(':password', $password);
-                            $stmt->bindParam(':position', $position);
-                            $stmt->execute();
-                            echo "<script>alert('Successfully Added');
-                                 </script>";
-                                 exit();
+                        if (isset($_POST['Add_btn'])) {
+                            $name = $_POST['name'];
+                            $course = $_POST['course'];
+                            $year = $_POST['year'];
+                            $section = $_POST['section'];
+                            $username = $_POST['username'];
+                            $password = $_POST['password'];
+                            $position = $_POST['position'];
 
+                            try {
+                                // Set the PDO error mode to exception
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                                // Check if the name already exists in the database
+                                $data = $conn->prepare("SELECT * FROM `user_account_db` WHERE Name = :names");
+                                $data->bindParam(':names', $name);
+                                $data->execute();
+                                $existingData = $data->fetch(PDO::FETCH_ASSOC);
+
+                                if ($existingData) {
+                                    // Name already exists, do not add
+                                    echo "<script>alert('Name already exists in the database.');
+                            </script>";
+                                    exit();
+                                } else {
+                                    // Name does not exist, proceed with insertion
+                                    $stmt = $conn->prepare("INSERT INTO `user_account_db` (Name, Course, Year, Section, Username, Password, Position) VALUES (:name, :course, :year, :section, :username, :password, :position)");
+                                    $stmt->bindParam(':name', $name);
+                                    $stmt->bindParam(':course', $course);
+                                    $stmt->bindParam(':year', $year);
+                                    $stmt->bindParam(':section', $section);
+                                    $stmt->bindParam(':username', $username);
+                                    $stmt->bindParam(':password', $password);
+                                    $stmt->bindParam(':position', $position);
+                                    $stmt->execute();
+                                    echo "<script>alert('Successfully Added');
+                                 </script>";
+                                    exit();
+                                }
+                            } catch (PDOException $e) {
+                                echo "Error: " . $e->getMessage();
+                            }
                         }
-                        
-                    } catch (PDOException $e) {
-                        echo "Error: " . $e->getMessage();
-                    }
-                }
-                ?> -->
+                        ?> -->
             </div>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
@@ -465,36 +520,48 @@
                             // When update button is clicked
                             editForm.addEventListener("submit", function(event) {
                                 event.preventDefault();
+                                // Show the confirmation modal
+                                const exampleModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                                exampleModal.show();
 
-                                // Get the modified values
-                                const newName = editForm.querySelector("#name").value;
-                                const newCourse = editForm.querySelector("#course").value;
-                                const newYear = editForm.querySelector("#year").value;
-                                const newSection = editForm.querySelector("#section").value;
-                                const newUsername = editForm.querySelector("#username").value;
-                                const newPassword = editForm.querySelector("#password").value;
-                                const newPosition = editForm.querySelector("#position1").value;
+                                // Handle confirm update button click
+                                const confirmUpdateBtn = document.getElementById("confirmUpdateBtn");
+                                confirmUpdateBtn.addEventListener("click", function() {
+                                    // Get the modified values
+                                    const newName = editForm.querySelector("#name").value;
+                                    const newCourse = editForm.querySelector("#course").value;
+                                    const newYear = editForm.querySelector("#year").value;
+                                    const newSection = editForm.querySelector("#section").value;
+                                    const newUsername = editForm.querySelector("#username").value;
+                                    const newPassword = editForm.querySelector("#password").value;
+                                    const newPosition = editForm.querySelector("#position1").value;
 
-                                // Send an AJAX request to update the database
-                                const xhr = new XMLHttpRequest();
-                                xhr.open("POST", "update_data.php");
-                                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                                xhr.onload = function() {
-                                    if (xhr.status === 200) {
-                                        // Database updated successfully
-                                        console.log("Data updated successfully");
-                                        // Close the edit overlay
-                                        editOverlay.style.display = "none";
-                                    } else {
-                                        // Error handling
-                                        console.error("Error updating data");
-                                    }
-                                };
-                                xhr.send(`id=${id}&name=${newName}&course=${newCourse}&year=${newYear}&section=${newSection}&username=${newUsername}&password=${newPassword}&position=${newPosition}`);
+                                    // Send an AJAX request to update the database
+                                    const xhr = new XMLHttpRequest();
+                                    xhr.open("POST", "update_data.php");
+                                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                    xhr.onload = function() {
+                                        if (xhr.status === 200) {
+                                            // Database updated successfully
+                                            console.log("Data updated successfully");
+                                            // Close the edit overlay
+                                            editOverlay.style.display = "none";
+                                            // Close the modal
+                                            exampleModal.hide();
+                                            // Refresh the page
+                                            location.reload();
+                                        } else {
+                                            // Error handling
+                                            console.error("Error updating data");
+                                        }
+                                    };
+                                    xhr.send(`id=${id}&name=${newName}&course=${newCourse}&year=${newYear}&section=${newSection}&username=${newUsername}&password=${newPassword}&position=${newPosition}`);
+                                });
                             });
                         });
                     });
                 });
+
 
                 closeFormBtnEdit.addEventListener("click", function() {
                     overlayFormEdit.style.display = "none";
@@ -530,26 +597,36 @@
                         button.addEventListener("click", function() {
                             const id = this.getAttribute('data-id');
 
-                            // Send an AJAX request to delete_data.php
-                            const xhr = new XMLHttpRequest();
-                            xhr.open("POST", "delete_data.php");
-                            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                            xhr.onload = function() {
-                                if (xhr.status === 200) {
-                                    // Row deleted successfully
-                                    console.log("Row deleted successfully");
-                                    // Reload the page or update the UI as needed
-                                    location.reload(); // Reload the page to reflect the changes
-                                } else {
-                                    // Error handling
-                                    console.error("Error deleting row");
-                                }
-                            };
-                            xhr.send(`id=${id}`);
+                            // Show the confirmation modal
+                            const exampleModal1 = new bootstrap.Modal(document.getElementById('exampleModal1'));
+                            exampleModal1.show();
+
+                            // Handle confirm delete button click
+                            const confirmDeleteBtn = document.getElementById("confirmUpdateDeleteBtn");
+                            confirmDeleteBtn.addEventListener("click", function() {
+                                // Send an AJAX request to delete_data.php
+                                const xhr = new XMLHttpRequest();
+                                xhr.open("POST", "delete_data.php");
+                                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                xhr.onload = function() {
+                                    if (xhr.status === 200) {
+                                        // Row deleted successfully
+                                        console.log("Row deleted successfully");
+                                        // Reload the page or update the UI as needed
+                                        location.reload(); // Reload the page to reflect the changes
+                                    } else {
+                                        // Error handling
+                                        console.error("Error deleting row");
+                                    }
+                                };
+                                xhr.send(`id=${id}`);
+
+                                // Close the modal after deletion
+                                exampleModal1.hide();
+                            });
                         });
                     });
                 });
-
             </script>
     </body>
 
