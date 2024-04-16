@@ -1,3 +1,4 @@
+
     <?php
     session_start();
     require '../Database/connection.php';
@@ -7,7 +8,7 @@
         $_SESSION['editButtonClickedId'] = ''; // You can set it to a default value, for example, an empty string
     }
     ?>
-    <!DOCTYPE html>
+      <!DOCTYPE html>
     <html lang="en">
 
     <head>
@@ -398,12 +399,12 @@
                         <form action="" method="post">
                             <div class=" mb-1 form-group">
                                 <label for="name">Name:</label>
-                                <input type="name" class="form-control" id="name" name="name" required>
+                                <input type="name" class="form-control" id="nameA" name="name" required>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-3 mb-1 form-group">
-                                    <label for="course">Course:</label>
-                                    <select class="form-select" id="course" name="course" required>
+                                    <label for="ccourse">Course:</label>
+                                    <select class="form-select" id="courseA" name="course" required>
                                         <option value="">Select Year</option>
                                         <option value="BSIS">BSIS</option>
                                         <option value="BSEMC">BSEMC</option>
@@ -413,7 +414,7 @@
                                 </div>
                                 <div class="col-md-3 mb-1 form-group">
                                     <label for="year">Year:</label>
-                                    <select class="form-select" id="year" name="year" required>
+                                    <select class="form-select" id="yearA" name="year" required>
                                         <option value="">Select Year</option>
                                         <option value="1st">1st</option>
                                         <option value="2nd">2nd</option>
@@ -423,7 +424,7 @@
                                 </div>
                                 <div class="col-md-3  mb-1 form-group">
                                     <label for="section">Section:</label>
-                                    <select class="form-select" id="section" name="section" required>
+                                    <select class="form-select" id="sectionA" name="section" required>
                                         <option value="">Select Section</option>
                                         <option value="A">A</option>
                                         <option value="B">B</option>
@@ -431,7 +432,7 @@
                                 </div>
                                 <div class="col-md-3 mb-1 form-group">
                                     <label for="position">Position:</label>
-                                    <select class="form-select" id="position1" name="position" required>
+                                    <select class="form-select" id="positionA1" name="position" required>
                                         <option value="">Select Position</option>
                                         <option value="owner">Owner</option>
                                         <option value="senior">Senior</option>
@@ -441,64 +442,99 @@
                             </div>
                             <div class=" mb-1 form-group">
                                 <label for="username">Username</label>
-                                <input type="username" class="form-control" id="username" name="username" required>
+                                <input type="username" class="form-control" id="usernameA" name="username" required>
                             </div>
                             <div class=" mb-1 form-group">
                                 <label for="password">Password:</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
+                                <input type="password" class="form-control" id="passwordA" name="password" required>
                             </div>
 
-                            <button type="submit" class="btn btn-primary" id="openFormBtnAdd" name="Add_btn">Add</button>
+                            <button type="button " class="btn btn-primary" id="openFormBtnAdd" name="Add_btn">Add</button>
                         </form>
                     </div>
                 </div>
-                <!-- <?php
-                        if (isset($_POST['Add_btn'])) {
-                            $name = $_POST['name'];
-                            $course = $_POST['course'];
-                            $year = $_POST['year'];
-                            $section = $_POST['section'];
-                            $username = $_POST['username'];
-                            $password = $_POST['password'];
-                            $position = $_POST['position'];
-
-                            try {
-                                // Set the PDO error mode to exception
-                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                                // Check if the name already exists in the database
-                                $data = $conn->prepare("SELECT * FROM `user_account_db` WHERE Name = :names");
-                                $data->bindParam(':names', $name);
-                                $data->execute();
-                                $existingData = $data->fetch(PDO::FETCH_ASSOC);
-
-                                if ($existingData) {
-                                    // Name already exists, do not add
-                                    echo "<script>alert('Name already exists in the database.');
-                            </script>";
-                                    exit();
-                                } else {
-                                    // Name does not exist, proceed with insertion
-                                    $stmt = $conn->prepare("INSERT INTO `user_account_db` (Name, Course, Year, Section, Username, Password, Position) VALUES (:name, :course, :year, :section, :username, :password, :position)");
-                                    $stmt->bindParam(':name', $name);
-                                    $stmt->bindParam(':course', $course);
-                                    $stmt->bindParam(':year', $year);
-                                    $stmt->bindParam(':section', $section);
-                                    $stmt->bindParam(':username', $username);
-                                    $stmt->bindParam(':password', $password);
-                                    $stmt->bindParam(':position', $position);
-                                    $stmt->execute();
-                                    echo "<script>alert('Successfully Added');
-                                 </script>";
-                                    exit();
+                <script>
+                    $(document).ready(function(){
+                        $('#openFormBtnAdd').click(function(){
+                            // Gather form data
+                            var formData = {
+                                name: $('#nameA').val(),
+                                course: $('#courseA').val(),
+                                year: $('#yearA').val(),
+                                section: $('#sectionA').val(),
+                                position: $('#positionA1').val(),
+                                username: $('#usernameA').val(),
+                                password: $('#passwordA').val()
+                            };
+                            
+                            // Send AJAX request
+                            $.ajax({
+                                url: './adding.php',
+                                type: 'POST',
+                                data: formData,
+                                success: function(response){
+                                    // Handle success response
+                                    console.log(response); // Log response from server
+                                    // You can add further actions here, like displaying a success message
+                                    window.alert('Data Successfully inserted!');
+                                },
+                                error: function(xhr, status, error){
+                                    // Handle error
+                                    console.error(error); // Log error message
+                                    // You can add further actions here, like displaying an error message
+                                    window.alert('Data Successfully inserted!');
                                 }
-                            } catch (PDOException $e) {
-                                echo "Error: " . $e->getMessage();
-                            }
-                        }
+                            });
+                        });     
+                    });
+                </script>
+                <!-- <?php
+                        // if (isset($_POST['Add_btn'])) {
+                        //     $name = $_POST['name'];
+                        //     $course = $_POST['course'];
+                        //     $year = $_POST['year'];
+                        //     $section = $_POST['section'];
+                        //     $username = $_POST['username'];
+                        //     $password = $_POST['password'];
+                        //     $position = $_POST['position'];
+
+                        //     try {
+                        //         // Set the PDO error mode to exception
+                        //         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                        //         // Check if the name already exists in the database
+                        //         $data = $conn->prepare("SELECT * FROM `user_account_db` WHERE Name = :names");
+                        //         $data->bindParam(':names', $name);
+                        //         $data->execute();
+                        //         $existingData = $data->fetch(PDO::FETCH_ASSOC);
+
+                        //         if ($existingData) {
+                        //             // Name already exists, do not add
+                        //             echo "<script>alert('Name already exists in the database.');
+                        //     </script>";
+                        //             exit();
+                        //         } else {
+                        //             // Name does not exist, proceed with insertion
+                        //             $stmt = $conn->prepare("INSERT INTO `user_account_db` (Name, Course, Year, Section, Username, Password, Position) VALUES (:name, :course, :year, :section, :username, :password, :position)");
+                        //             $stmt->bindParam(':name', $name);
+                        //             $stmt->bindParam(':course', $course);
+                        //             $stmt->bindParam(':year', $year);
+                        //             $stmt->bindParam(':section', $section);
+                        //             $stmt->bindParam(':username', $username);
+                        //             $stmt->bindParam(':password', $password);
+                        //             $stmt->bindParam(':position', $position);
+                        //             $stmt->execute();
+                        //             echo "<script>alert('Successfully Added');
+                        //          </script>";
+                        //             exit();
+                        //         }
+                        //     } catch (PDOException $e) {
+                        //         echo "Error: " . $e->getMessage();
+                        //     }
+                        // }
                         ?> -->
             </div>
-
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
             <script>
                 const hamBurger = document.querySelector(".toggle-btn");
