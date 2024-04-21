@@ -1,8 +1,7 @@
 <?php
     require 'connection.php';
     if(isset($_POST["service-btn"])){
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         try{
             // Sanitize input data
             $date = htmlspecialchars($_POST['date']);
@@ -15,11 +14,19 @@
             $recomm = htmlspecialchars($_POST['recomm']);
 
             // Prepare SQL query
-            $sql = "INSERT INTO service_requests (date, time, due_time, department, action_taken, staff_name, details, recommendation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$date, $time, $duetime, $department, $action, $name, $details, $recomm]);
-
-            echo "Data inserted successfully";
+            $sql = "INSERT INTO service_request_db (Staff_Name, Dept, Date, Details, Action_Taken, Recommendation, Time, Due_Time) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$name, $department, $date, $details, $action, $recomm, $time, $duetime]);
+            if($stmt){
+                echo "<script>
+                window.location.href='../index.html#service';
+                </script>";
+            }
+            else{
+                echo "<script>
+                        window.location.href='./index.html#service';
+                        </script>";
+            }
 
         } catch(PDOException $e) {
             die("ERROR: Could not connect. " . $e->getMessage());
@@ -27,5 +34,3 @@
 }
 
     // Close the database connection
-    $conn = null;
-?>

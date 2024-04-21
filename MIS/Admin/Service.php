@@ -187,27 +187,27 @@
                                 $stmt->execute();
 
                                 // Fetch all the results
-                                $accounts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                $client_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                                if ($accounts) {
+                                if ($client_count) {
                                     // Initialize counter
                                     $counter = 1;
 
                                     // Iterate over each row
-                                    foreach ($accounts as $acc) {
+                                    foreach ($client_count as $acc) {
                                         echo "<tr>";
                                         // Output each column value of the row
                                         echo "<th class='td' scope='col'>" . $counter . "</th>"; // Display the counter
-                                        echo "<td class='td'>" . $acc['Staff_name'] . "</td>";
-                                        echo "<td class='td'>" . $acc['Department'] . "</td>";
-                                        echo "<td class='td'>" . $acc['Detail'] . "</td>";
-                                        echo "<td class='td'>" . $acc['Action'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Staff_Name'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Dept'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Details'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Action_Taken'] . "</td>";
                                         echo "<td class='td'>" . $acc['Date'] . "</td>";
                                         echo "<td class='td'>" . $acc['Time'] . "</td>";
                                         echo "<td class='td'>" . $acc['Due_Time'] . "</td>";
                                         echo "<td class='td'>" . $acc['Recommendation'] . "</td>";
                                         echo "<td class='td'>" . $acc['Status'] . "</td>";
-                                        echo "<td class='text-center'><button class='btn btn-danger m-2 openFormBtnEdit' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'><i class='fas fa-edit'></i></button><button class='btn btn-danger deleteButton' data-id='" . htmlspecialchars($acc['ID']) . "'><i class='fas fa-trash'></button></td>";
+                                        // echo "<td class='text-center'><button class='btn btn-danger m-2 openFormBtnEdit' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'><i class='fas fa-edit'></i></button><button class='btn btn-danger deleteButton' data-id='" . htmlspecialchars($acc['ID']) . "'><i class='fas fa-trash'></button></td>";
                                         echo "</tr>";
 
                                         // Increment the counter

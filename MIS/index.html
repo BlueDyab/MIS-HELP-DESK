@@ -146,7 +146,7 @@
                             <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
                             <h2> MIS Service Request Form</h2>
                         </div>
-                        <form action="" method="post">
+                        <form action="./Database/Service Request.php" method="post">
                             <div class="form-row">
                                 <div class=" col-md-4 mb-1 form-group">
                                     <label for="date">Date:</label>
@@ -687,37 +687,8 @@
     <script src="./js/json.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#overlayFormService form').submit(function(event) {
-                event.preventDefault(); // Prevent the form from submitting through the HTTP POST method
-                
-                // Create an object to hold form data
-                var formData = {
-                    date: $('#date').val(),
-                    time: $('#time').val(),
-                    duetime: $('#duetime').val(),
-                    department: $('#department').val(),
-                    action2: $('#action2').val(),
-                    name: $('#name').val(),
-                    details: $('#details').val(),
-                    recomm: $('#recomm').val()
-                };
-
-                $.ajax({
-                    type: 'POST',
-                    url: './Database/Service Request.php',
-                    data: formData,
-                    success: function(response) {
-                        alert('Request Submitted Successfully');
-                        console.log(response); // Log response from the server
-                    },
-                    error: function() {
-                        alert('Error in sending request');
-                    }
-                });
-            });
-        });
-        </script>
+        
+    </script>
 
 
 </body>

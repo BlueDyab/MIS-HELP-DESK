@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    require '../Database/connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -145,19 +149,59 @@
 
         
         <div class="table-responsive m-2">
-                    <table class="table table-bordered">
-                        <thead class="header fixed-top">
-                            <tr>
-                                <th class="th" scope="col">Id</th>
-                                <th class="col-2" scope="col">Name</th>
-                                <th class="th col-1" scope="col">Department</th>
-                                <th class="th col-2" scope="col">Date</th>
-                                <th class="th col-2" scope="col">Time</th>
-                                <th class="th col-2" scope="col">Feedback Deatils</th>
-                                <th class="th col-2" scope="col">Recommendation</th>
-                            </tr>
-                        </thead>
-    </table>
+            <table class="table table-bordered">
+                <thead class="header fixed-top">
+                    <tr>
+                        <th class="th" scope="col">No.</th>
+                        <th class="col-2" scope="col">Name</th>
+                        <th class="th col-1" scope="col">Department</th>
+                        <th class="th col-2" scope="col">Date</th>
+                        <th class="th col-2" scope="col">Time</th>
+                        <th class="th col-2" scope="col">Feedback Deatils</th>
+                        <th class="th col-2" scope="col">Recommendation</th>
+                    </tr>
+                </thead>
+                <tbody class="data table-group-divider">
+                    <?php
+                        try {
+                            // Set the PDO error mode to exception
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                            // Prepare the SQL SELECT statement
+                            $stmt = $conn->prepare("SELECT * FROM `feedback_form_db`");
+                            $stmt->execute();
+
+                            // Fetch all the results
+                            $client_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                            if ($client_count) {
+                                // Initialize counter
+                                $counter = 1;
+
+                                // Iterate over each row
+                                foreach ($client_count as $acc) {
+                                    echo "<tr>";
+                                    // Output each column value of the row
+                                    echo "<th class='td' scope='col'>" . $counter . "</th>"; // Display the counter
+                                    echo "<td class='td'>" . $acc['Name'] . "</td>";
+                                    echo "<td class='td'>" . $acc['Dept'] . "</td>";
+                                    echo "<td class='td'>" . $acc['Date'] . "</td>";
+                                    echo "<td class='td'>" . $acc['Time'] . "</td>";
+                                    echo "<td class='td'>" . $acc['Feedback'] . "</td>";
+                                    echo "<td class='td'>" . $acc['Recomm'] . "</td>";
+                                    // echo "<td class='text-center'><button class='btn btn-danger m-2 openFormBtnEdit' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'><i class='fas fa-edit'></i></button><button class='btn btn-danger deleteButton' data-id='" . htmlspecialchars($acc['ID']) . "'><i class='fas fa-trash'></button></td>";
+                                    echo "</tr>";
+
+                                    // Increment the counter
+                                    $counter++;
+                                }
+                            }
+                        } catch (PDOException $e) {
+                            echo "Error: " . $e->getMessage();
+                        }
+                    ?>
+                </tbody>
+            </table>
         </div>
     
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
