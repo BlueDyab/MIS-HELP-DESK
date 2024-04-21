@@ -128,9 +128,7 @@
                     <div class="single-services text-center animate-on-scroll">
                         <i class="bi bi-person-fill"></i>
                         <h2>Service Staff</h2>
-                        <p>This service allows UCC faculty, Admin staff and students to request for various ICT
-                            Services.</p>
-                        <br>
+                        <p>This service allows UCC faculty, Admin staff and students to request for various ICT Services.</p>
                         <div class="col">
                             <button type="button" id="openFormBtnService" class="btn2">ADMIN STAFF</button>
                         </div>
@@ -148,7 +146,7 @@
                             <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
                             <h2> MIS Service Request Form</h2>
                         </div>
-                        <form action="./Database/Service Request.php" method="post">
+                        <form action="" method="post">
                             <div class="form-row">
                                 <div class=" col-md-4 mb-1 form-group">
                                     <label for="date">Date:</label>
@@ -192,7 +190,7 @@
                             </div>
                             <div class="mb-1 form-group">
                                 <label for="details">Details:</label>
-                                <textarea class="form-control" id="details" name="deatils" rows="2"
+                                <textarea class="form-control" id="details" name="details" rows="2"
                                     placeholder="What is the problem?" required></textarea>
                             </div>
                             <div class="mb-2 form-group">
@@ -203,6 +201,7 @@
                         </form>
                     </div>
                 </div>
+
                 <div class="col-lg-3 col-md-6">
                     <div class="single-services text-center animate-on-scroll">
                         <i class="bi bi-person-fill-gear"></i>
@@ -214,6 +213,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Overlay form MIS Equiment  for Professor-->
                 <div class="overlay-form" id="overlayFormProfessor">
                     <div class="form-container">
@@ -685,6 +685,39 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
     <script src="./js/json.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#overlayFormService form').submit(function(event) {
+                event.preventDefault(); // Prevent the form from submitting through the HTTP POST method
+                
+                // Create an object to hold form data
+                var formData = {
+                    date: $('#date').val(),
+                    time: $('#time').val(),
+                    duetime: $('#duetime').val(),
+                    department: $('#department').val(),
+                    action2: $('#action2').val(),
+                    name: $('#name').val(),
+                    details: $('#details').val(),
+                    recomm: $('#recomm').val()
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: './Database/Service Request.php',
+                    data: formData,
+                    success: function(response) {
+                        alert('Request Submitted Successfully');
+                        console.log(response); // Log response from the server
+                    },
+                    error: function() {
+                        alert('Error in sending request');
+                    }
+                });
+            });
+        });
+        </script>
 
 
 </body>

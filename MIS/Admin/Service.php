@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    require '../Database/connection.php';
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -156,21 +160,66 @@
 
     <div class="main">
         <div class="table-responsive m-2">
-        <table class="table table-striped"> 
-                <thead class="header fixed-top">
-                <tr>
-                    <th class="th" scope="col">Id</th>
-                    <th class="col-2" scope="col"> Staff Name</th>
-                    <th class="th col-1" scope="col">Date</th>
-                    <th class="th col-1" scope="col">Time</th>
-                    <th class="th col-1" scope="col">Due Time</th>
-                    <th class="th col-2" scope="col">Deparment</th>
-                    <th class="th col-2" scope="col">Action Taken</th>
-                    <th class="th col-1" scope="col">Deatails</th>
-                    <th class="th col-3" scope="col">Recommendation</th>
-                </tr>
-                </thead>
-            </table>
+        <table class="table table-striped">
+                        <thead class="header fixed-top">
+                            <tr>
+                                <th class="th" scope="col">No</th>
+                                <th class="col-2" scope="col">Staff Name</th>
+                                <th class="th col-1" scope="col">Department</th>
+                                <th class="th col-1" scope="col">Detail</th>
+                                <th class="th col-1" scope="col">Action</th>
+                                <th class="th col-2" scope="col">Date</th>
+                                <th class="th col-2" scope="col">Time</th>
+                                <th class="th col-1" scope="col">Due Time</th>
+                                <th class="th col-2" scope="col">recommendation</th>
+                                <th class="th col-1" scope="col">Status</th>
+                                <th class="th col-1" scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="data table-group-divider">
+                            <?php
+                            try {
+                                // Set the PDO error mode to exception
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                                // Prepare the SQL SELECT statement
+                                $stmt = $conn->prepare("SELECT * FROM `service_request_db`");
+                                $stmt->execute();
+
+                                // Fetch all the results
+                                $accounts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                if ($accounts) {
+                                    // Initialize counter
+                                    $counter = 1;
+
+                                    // Iterate over each row
+                                    foreach ($accounts as $acc) {
+                                        echo "<tr>";
+                                        // Output each column value of the row
+                                        echo "<th class='td' scope='col'>" . $counter . "</th>"; // Display the counter
+                                        echo "<td class='td'>" . $acc['Staff_name'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Department'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Detail'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Action'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Date'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Time'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Due_Time'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Recommendation'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Status'] . "</td>";
+                                        echo "<td class='text-center'><button class='btn btn-danger m-2 openFormBtnEdit' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'><i class='fas fa-edit'></i></button><button class='btn btn-danger deleteButton' data-id='" . htmlspecialchars($acc['ID']) . "'><i class='fas fa-trash'></button></td>";
+                                        echo "</tr>";
+
+                                        // Increment the counter
+                                        $counter++;
+                                    }
+                                }
+                            } catch (PDOException $e) {
+                                echo "Error: " . $e->getMessage();
+                            }
+                            ?>
+                        </tbody>
+                    </table>
         </div>
         <!-- Add Print Button -->
         <button id="printBtn" class="btn btn-primary">Print Table</button>
