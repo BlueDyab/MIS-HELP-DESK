@@ -68,95 +68,96 @@
 
 <div class="wrapper">
 <aside id="sidebar">
-            <div class="d-flex">
-                <button class="toggle-btn" type="button">
-                <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
-                </button>
-                <div class="sidebar-logo">
-                    <a href="Profile.php">User Account<i class="fa-solid fa-pen-to-square"></i></a>
+                <div class="d-flex">
+                    <button class="toggle-btn" type="button">
+                    <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
+                    </button>
+                    <div class="sidebar-logo">
+                        <a href="Profile.php">User Account<i class="fa-solid fa-pen-to-square"></i></a>
+                    </div>
                 </div>
-            </div>
-            <ul class="sidebar-nav">
-                <li class="sidebar-item">
-                    <a href="Admin.php"  id="profile" class="sidebar-link">
-                    <i class="fa-solid fa-chart-line"></i>
-                        <span>DashBoard</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                    <i class="fa-solid fa-code-pull-request"></i>
-                        <span>Request</span>
-                    </a>
-                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
-                            <a href="Service.php" id="service" class="sidebar-link"><i class="fa-solid fa-user"></i>Service</a>
-                        </li>
-                        
-                        <li class="sidebar-item">
-                            <a href="Feedback.php"  id="feedback" class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
-                        </li>
-                        
-                        <li class="sidebar-item">
-    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#equipmentDropdown" aria-expanded="false" aria-controls="equipmentDropdown">
-        <i class="fa-solid fa-wrench"></i>
-        <span>Equipment</span>
-    </a>
-    <ul id="equipmentDropdown" class="sidebar-dropdown list-unstyled collapse">
-        <li class="sidebar-item">
-            <a href="ProfessorEquipment.php" id="equipment" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i>Professor</a>
-        </li>
-        <li class="sidebar-item">
-            <a href="StudentEquipment.php" id="room" class="sidebar-link"><i class="fa-solid fa-user"></i>Student</a>
-        </li>
-     
-    </ul>
-</li>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-item">
+                        <a href="Admin.php"  id="profile" class="sidebar-link">
+                        <i class="fa-solid fa-chart-line"></i>
+                            <span>DashBoard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+                        <i class="fa-solid fa-code-pull-request"></i>
+                            <span>Request</span>
+                        </a>
+                        <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="Service.php" id="service" class="sidebar-link"><i class="fa-solid fa-user"></i>Service</a>
+                            </li>
+                            
+                            <li class="sidebar-item">
+                                <a href="Feedback.php"  id="feedback" class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
+                            </li>
+                            
+                            <li class="sidebar-item">
+        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#equipmentDropdown" aria-expanded="false" aria-controls="equipmentDropdown">
+            <i class="fa-solid fa-wrench"></i>
+            <span>Equipment</span>
+        </a>
+        <ul id="equipmentDropdown" class="sidebar-dropdown list-unstyled collapse">
+            <li class="sidebar-item">
+                <a href="ProfessorEquipment.php" id="equipment" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i>Professor</a>
+            </li>
+            <li class="sidebar-item">
+                <a href="StudentEquipment.php" id="room" class="sidebar-link"><i class="fa-solid fa-user"></i>Student</a>
+            </li>
+        
+        </ul>
+    </li>
 
-<li class="sidebar-item">
-    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#roomDropdown" aria-expanded="false" aria-controls="roomDropdown">
-        <i class="fa-solid fa-desktop"></i>
-        <span>Room</span>
-    </a>
-    <ul id="roomDropdown" class="sidebar-dropdown list-unstyled collapse">
-        <li class="sidebar-item">
-            <a href="ProfessorRoom.php" id="room" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i>Professor</a>
-        </li>
-        <li class="sidebar-item">
-            <a href="StudentRoom.php" id="room" class="sidebar-link"><i class="fa-solid fa-user"></i>Student</a>
-        </li>
-      
-    </ul>
-</li>
-                    </ul>
-                </li>
-           
-                <li class="sidebar-item">
-                    <a href="Inquiry.php" id="inquiry" class="sidebar-link">
-                    <i class="fa-solid fa-message"></i>
-                        <span>Inquiry</span>
+    <li class="sidebar-item">
+        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#roomDropdown" aria-expanded="false" aria-controls="roomDropdown">
+            <i class="fa-solid fa-desktop"></i>
+            <span>Room</span>
+        </a>
+        <ul id="roomDropdown" class="sidebar-dropdown list-unstyled collapse">
+            <li class="sidebar-item">
+                <a href="ProfessorRoom.php" id="room" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i>Professor</a>
+            </li>
+            <li class="sidebar-item">
+                <a href="StudentRoom.php" id="room" class="sidebar-link"><i class="fa-solid fa-user"></i>Student</a>
+            </li>
+        
+        </ul>
+    </li>
+                        </ul>
+                    </li>
+            
+                    <li class="sidebar-item">
+                        <a href="Inquiry.php" id="inquiry" class="sidebar-link">
+                        <i class="fa-solid fa-message"></i>
+                            <span>Inquiry</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="Record.php" id="record" class="sidebar-link">
+                        <i class="fa-solid fa-folder"></i>
+                            <span>Record</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="User.php" id="account" class="sidebar-link">
+                            <i class="fa-solid fa-gear"></i>
+                            <span>User Account  </span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="sidebar-footer">
+                    <a href="../login.html" id="logout" class="sidebar-link">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
                     </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="Record.php" id="record" class="sidebar-link">
-                    <i class="fa-solid fa-folder"></i>
-                        <span>Record</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="User.php" id="account" class="sidebar-link">
-                        <i class="fa-solid fa-gear"></i>
-                        <span>User Account  </span>
-                    </a>
-                </li>
-            </ul>
-            <div class="sidebar-footer">
-                <a href="../login.html" id="logout" class="sidebar-link">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Logout</span>
-                </a>
-            </div>
-        </aside>
+                </div>
+            </aside>
+
 
     <div class="main">
         <div class="table-responsive m-2">
@@ -232,9 +233,23 @@
 <script>
     const hamBurger = document.querySelector(".toggle-btn");
 
-    hamBurger.addEventListener("click", function() {
+    hamBurger.addEventListener("click", function () {
         document.querySelector("#sidebar").classList.toggle("expand");
     });
+
+    // Add event listener to handle clicks on the sidebar links
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+            // Check if the clicked element is the icon
+            if (e.target.classList.contains('fa-solid')) {
+                // Prevent the default behavior (expanding/collapsing the dropdown)
+                e.preventDefault();
+                // Toggle the expand class on the sidebar
+                document.querySelector("#sidebar").classList.toggle("expand");
+            }
+        });
+    });
+
 
     // Adding the printPageBuilder function
     $.extend($.fn.bootstrapTable.defaults, {

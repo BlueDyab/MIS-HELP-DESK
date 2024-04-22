@@ -73,8 +73,9 @@
     }
 
     .sidebar-nav {
-        padding: 20px 0;
+        padding: 0px 0;
         flex: 1 1 auto;
+        overflow-y: none;
     }
 
     a.sidebar-link {
