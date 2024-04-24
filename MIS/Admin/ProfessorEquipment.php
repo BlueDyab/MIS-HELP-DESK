@@ -1,3 +1,6 @@
+<?php
+    include '../Database/connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -162,6 +165,45 @@
 
                             </tr>
                         </thead>
+                        <tbody>
+                            <?php
+                                try {
+                                    // Set the PDO error mode to exception
+                                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                                    // Prepare the SQL SELECT statement
+                                    $stmt = $conn->prepare("SELECT * FROM `equipment_request_prof`"); // Adjusted table name
+                                    $stmt->execute();
+
+                                    // Fetch all the results
+                                    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                    if ($results) {
+                                        // Iterate over each row
+                                        foreach ($results as $row) {
+                                            echo "<tr>";
+                                            // Output each column value of the row
+                                            echo "<th scope='row'>" . htmlspecialchars($row['Id']) . "</th>";
+                                            echo "<td>" . htmlspecialchars($row['Professor_Name']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['Course']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['Year']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['Section']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['Department']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['Date']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['Time']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['Due_Time']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['Requested_Item']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['Purpose']) . "</td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='11'>No data found</td></tr>";
+                                    }
+                                } catch (PDOException $e) {
+                                    echo "Error: " . $e->getMessage();
+                                }
+                            ?>
+                        </tbody>
     </table>
         </div>
     
