@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>Chart</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -92,7 +92,7 @@
         </div>
         <div class="col-sm-3 animate-on-scroll">
             <div class="card">
-                <img src="./image/csddsds.png" class="card-img-top" alt="">
+                <img src="./image/matt.jpg" class="card-img-top" alt="">
                 <div class="card-body">
                     <h6 class="card-text">Prof, Ryan B. Mateo</h6>
                     <span>Coodinator, BS Information Technology<br>South Campus</span>
