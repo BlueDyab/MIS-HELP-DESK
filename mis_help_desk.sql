@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2024 at 09:18 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: May 02, 2024 at 05:42 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,20 +28,27 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `equipment_request_prof` (
-  `ID` int(255) NOT NULL,
-  `Name` varchar(50) NOT NULL,
-  `Request Item` varchar(255) NOT NULL,
-  `Dept` varchar(50) NOT NULL,
+  `Id` int(255) NOT NULL,
+  `Professor_Name` varchar(50) NOT NULL,
+  `Department` varchar(50) NOT NULL,
+  `Date` date NOT NULL,
+  `Time` time NOT NULL,
+  `Due_Time` time NOT NULL,
+  `Requested_Item` varchar(255) NOT NULL,
   `Purpose` varchar(255) NOT NULL,
-  `Date&Time` datetime(6) NOT NULL
+  `Remark` varchar(20) NOT NULL,
+  `Action` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `equipment_request_prof`
 --
 
-INSERT INTO `equipment_request_prof` (`ID`, `Name`, `Request Item`, `Dept`, `Purpose`, `Date&Time`) VALUES
-(1, 'ruen', 'paper', 'CSD', 'for lesson', '2024-03-23 13:59:00.000000');
+INSERT INTO `equipment_request_prof` (`Id`, `Professor_Name`, `Department`, `Date`, `Time`, `Due_Time`, `Requested_Item`, `Purpose`, `Remark`, `Action`) VALUES
+(2, 'dasdasdas', 'BSIS', '2024-05-02', '07:42:00', '07:41:00', 'dasdasd', 'asdad', '', ''),
+(3, 'dsadasdas', 'BSEMC', '2024-05-02', '07:43:00', '07:43:00', 'dasdasd', 'asdasd', '', ''),
+(4, 'dasdasda', 'MATH', '2024-05-16', '07:50:00', '07:50:00', 'dasdasd', 'asdasd', '', ''),
+(5, 'dasda', 'BSCS', '2024-05-02', '07:51:00', '09:49:00', 'dasdas', 'dasdas', '', '');
 
 -- --------------------------------------------------------
 
@@ -52,19 +59,26 @@ INSERT INTO `equipment_request_prof` (`ID`, `Name`, `Request Item`, `Dept`, `Pur
 CREATE TABLE `equipment_request_stud` (
   `ID` int(11) NOT NULL,
   `Name` varchar(50) NOT NULL,
-  `Student_Number` varchar(11) NOT NULL,
-  `Requested_Item` varchar(255) NOT NULL,
+  `Student_No` varchar(11) NOT NULL,
+  `Course` varchar(5) NOT NULL,
+  `Year` varchar(10) NOT NULL,
+  `Section` varchar(1) NOT NULL,
+  `Department` varchar(50) NOT NULL,
+  `Request Item` varchar(255) NOT NULL,
   `Purpose` varchar(255) NOT NULL,
-  `Date&Time` datetime(6) NOT NULL,
-  `Dept` varchar(255) NOT NULL
+  `Date` date NOT NULL,
+  `Time` time NOT NULL,
+  `Due_Time` time NOT NULL,
+  `Status` varchar(11) NOT NULL,
+  `Action` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `equipment_request_stud`
 --
 
-INSERT INTO `equipment_request_stud` (`ID`, `Name`, `Student_Number`, `Requested_Item`, `Purpose`, `Date&Time`, `Dept`) VALUES
-(1, 'ruen', '20210098-S', 'extension', 'secret', '2024-03-23 15:19:00.000000', 'CSD');
+INSERT INTO `equipment_request_stud` (`ID`, `Name`, `Student_No`, `Course`, `Year`, `Section`, `Department`, `Request Item`, `Purpose`, `Date`, `Time`, `Due_Time`, `Status`, `Action`) VALUES
+(1, 'Ruen Malvar', '20210098-S', 'BSIS', '3rd', 'A', 'BSIS', 'projector', 'lecture\r\n', '2024-05-02', '10:18:00', '15:00:00', '', '');
 
 -- --------------------------------------------------------
 
@@ -75,9 +89,8 @@ INSERT INTO `equipment_request_stud` (`ID`, `Name`, `Student_Number`, `Requested
 CREATE TABLE `feedback_form_db` (
   `ID` int(255) NOT NULL,
   `Name` varchar(50) NOT NULL,
-  `Dept` varchar(100) NOT NULL,
+  `Dept` varchar(255) NOT NULL,
   `Feedback` varchar(255) NOT NULL,
-  `Action_Taken` varchar(255) NOT NULL,
   `Recomm` varchar(255) NOT NULL,
   `Date` date NOT NULL,
   `Time` time NOT NULL
@@ -87,8 +100,10 @@ CREATE TABLE `feedback_form_db` (
 -- Dumping data for table `feedback_form_db`
 --
 
-INSERT INTO `feedback_form_db` (`ID`, `Name`, `Dept`, `Feedback`, `Action_Taken`, `Recomm`, `Date`, `Time`) VALUES
-(1, 'ruen', 'CSD', 'nc', 'kill', 'be faster', '2024-03-23', '00:00:00');
+INSERT INTO `feedback_form_db` (`ID`, `Name`, `Dept`, `Feedback`, `Recomm`, `Date`, `Time`) VALUES
+(1, 'ruen', 'CSD', 'nc', 'be faster', '2024-03-23', '00:00:00'),
+(2, 'Ruen Malvar', 'BSIS', 'dasdasd', 'adasdas', '2024-05-02', '11:10:00'),
+(3, 'dasda', 'BSIS', 'asdasd', 'asdasd', '2024-05-02', '11:13:00');
 
 -- --------------------------------------------------------
 
@@ -109,6 +124,25 @@ CREATE TABLE `message_us_db` (
 
 INSERT INTO `message_us_db` (`ID`, `Name`, `Email`, `Message`) VALUES
 (1, 'ruen', 'malvarruenm213@gmail.com', 'hahhahahahahahha');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prof_room_request_form_db`
+--
+
+CREATE TABLE `prof_room_request_form_db` (
+  `Id` int(255) NOT NULL,
+  `Name` varchar(50) NOT NULL,
+  `Dept` varchar(255) NOT NULL,
+  `Time_In` time NOT NULL,
+  `Time_Out` time NOT NULL,
+  `Date` date NOT NULL,
+  `Total_Students` varchar(50) NOT NULL,
+  `Purpose` varchar(255) NOT NULL,
+  `Status` varchar(20) NOT NULL,
+  `Action` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -138,7 +172,9 @@ INSERT INTO `service_request_db` (`Id`, `Staff_Name`, `Dept`, `Date`, `Details`,
 (2, 'ruen malvar', 'registrar', '2024-04-21', 'sdasdas', 'urgent', 'asdasd', '20:49:00', '14:56:00', ''),
 (3, 'ruen malvar', 'registrar', '2024-04-21', 'sdasdas', 'urgent', 'asdasd', '20:49:00', '14:56:00', ''),
 (4, 'ruen malvar', 'registrar', '2024-04-21', 'sdasdas', 'urgent', 'asdasd', '20:49:00', '14:56:00', ''),
-(5, 'aylah', 'registrar', '2024-05-01', 'sdasdsad', 'urgent', 'sdasda', '13:58:00', '14:58:00', '');
+(5, 'aylah', 'registrar', '2024-05-01', 'sdasdsad', 'urgent', 'sdasda', '13:58:00', '14:58:00', ''),
+(6, 'admin', 'registrar', '2024-04-05', 'internet problem', 'urgent', 'bring your tools', '12:11:00', '12:15:00', ''),
+(7, 'dasdasda', 'administration', '2024-04-30', 'dsadasdas', 'urgent', 'dasdasd', '11:50:00', '11:50:00', '');
 
 -- --------------------------------------------------------
 
@@ -164,8 +200,8 @@ CREATE TABLE `user_account_db` (
 --
 
 INSERT INTO `user_account_db` (`ID`, `Name`, `Course`, `Year`, `Section`, `Username`, `Password`, `Position`, `Avatar`, `Editing`) VALUES
-(2, 'gggggggggggggggggggggggggg', 'BSEMC', 1, 'B', 'xvsdv', 'vsdvs', 'senior', '', 0),
-(5, 'jv,advvkb', 'BSEMC', 1, 'B', 'xvsdv', 'vsdvs', 'senior', '', 0);
+(6, 'Ruen Malvar', 'BSIS', 3, 'A', 'admin', 'admion', 'owner', '', 0),
+(7, 'Al christoper S.J CO', 'BSIS', 3, 'A', 'admin2', 'admin2', 'owner', '', 0);
 
 --
 -- Indexes for dumped tables
@@ -175,7 +211,7 @@ INSERT INTO `user_account_db` (`ID`, `Name`, `Course`, `Year`, `Section`, `Usern
 -- Indexes for table `equipment_request_prof`
 --
 ALTER TABLE `equipment_request_prof`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `equipment_request_stud`
@@ -194,6 +230,12 @@ ALTER TABLE `feedback_form_db`
 --
 ALTER TABLE `message_us_db`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `prof_room_request_form_db`
+--
+ALTER TABLE `prof_room_request_form_db`
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `service_request_db`
@@ -215,7 +257,7 @@ ALTER TABLE `user_account_db`
 -- AUTO_INCREMENT for table `equipment_request_prof`
 --
 ALTER TABLE `equipment_request_prof`
-  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `equipment_request_stud`
@@ -227,7 +269,7 @@ ALTER TABLE `equipment_request_stud`
 -- AUTO_INCREMENT for table `feedback_form_db`
 --
 ALTER TABLE `feedback_form_db`
-  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `message_us_db`
@@ -236,16 +278,22 @@ ALTER TABLE `message_us_db`
   MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `prof_room_request_form_db`
+--
+ALTER TABLE `prof_room_request_form_db`
+  MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `service_request_db`
 --
 ALTER TABLE `service_request_db`
-  MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user_account_db`
 --
 ALTER TABLE `user_account_db`
-  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
