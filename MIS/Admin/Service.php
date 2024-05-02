@@ -30,14 +30,18 @@
     }
     .header {
         background-color: gray;
+        position: sticky;
+        top: -2px;
     }
 
     tr {
-        border: 1px solid gray;
+        font-size: 15px;
     }
 
     .th {
         text-align: center;
+        color: white;
+
     }
     .table-responsive.m-2 {
         width: 99.3%;
@@ -45,10 +49,7 @@
 
     }
 
-    .header {
-        position: sticky;
-        top: -2px;
-    }
+  
 
     /* Hide sidebar when printing */
     @media print {

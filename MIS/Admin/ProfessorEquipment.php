@@ -152,10 +152,7 @@
                         <thead class="header fixed-top">
                             <tr>
                                 <th class="th" scope="col">Id</th>
-                                <th class="col-2" scope="col"> Professor Name</th>
-                                <th class="th col-1" scope="col">Course</th>
-                                <th class="th col-1" scope="col">Year</th>
-                                <th class="th col-1" scope="col">Section</th>
+                                <th class="col-1" scope="col"> Professor Name</th>
                                 <th class="th col-1" scope="col">Deparment</th>
                                 <th class="th col-1" scope="col">Date</th>
                                 <th class="th col-1" scope="col">Time</th>
@@ -185,9 +182,6 @@
                                             // Output each column value of the row
                                             echo "<th scope='row'>" . htmlspecialchars($row['Id']) . "</th>";
                                             echo "<td>" . htmlspecialchars($row['Professor_Name']) . "</td>";
-                                            echo "<td>" . htmlspecialchars($row['Course']) . "</td>";
-                                            echo "<td>" . htmlspecialchars($row['Year']) . "</td>";
-                                            echo "<td>" . htmlspecialchars($row['Section']) . "</td>";
                                             echo "<td>" . htmlspecialchars($row['Department']) . "</td>";
                                             echo "<td>" . htmlspecialchars($row['Date']) . "</td>";
                                             echo "<td>" . htmlspecialchars($row['Time']) . "</td>";

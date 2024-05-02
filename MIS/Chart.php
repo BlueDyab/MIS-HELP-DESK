@@ -83,7 +83,7 @@
     <div class="row justify-content-center">
         <div class="col-sm-3 animate-on-scroll">
             <div class="card">
-                <img src="./image/csddsds.png" class="card-img-top" alt="">
+                <img src="./image/cath5.jpg" class="card-img-top" alt="">
                 <div class="card-body">
                     <h6 class="card-text">Prof, Catherine P, Llena, MIT</h6>
                     <span>Coodinator, BS Information System<br>South Campus</span>

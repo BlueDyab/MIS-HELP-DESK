@@ -23,17 +23,19 @@
 
     .header {
         background-color: gray;
+        position: sticky;
+        top: -2px;
     }
 
     tr {
-        border: 2px solid gray;
+        font-size: 15px;
     }
 
     .th {
         text-align: center;
-        font-size: 15px;
-    }
+        color: white;
 
+    }
     .password {
         background: transparent;
         border: none;

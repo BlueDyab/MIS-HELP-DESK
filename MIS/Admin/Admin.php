@@ -1,6 +1,8 @@
+    <?php
+        require 'connection.php';
+    ?>
     <!DOCTYPE html>
     <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -183,9 +185,36 @@
                             <div class="col-lg-6">
                                 <div class="main-box text-center ">
                                     <h3><i class="fa-solid fa-user"></i></i>Service</h3>
-                                    <div class="small-box">Pending<br><span id="pendingCount">0</span></div>
+                                    <div class="small-box">Pending<br><span id="pendingCount">
+                                        <?php
+                                            $sql = "SELECT COUNT(*) FROM service WHERE Status = 'Pending'";
+                                            $result = $conn->query($sql);
+                                            $row = $result->fetch();
+                                            echo $row[0];
+                                        ?>
+                                    </span></div>
                                     <div class="small-box">On-going<br><span id="ongoingCount">0</span></div>
                                     <div class="small-box">Done<br><span id="doneCount">0</span></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="main-box text-center ">
+                                    <h3><i class="fa-solid fa-user"></i></i>User</h3>
+                                    <div class="small-box">Owner<br><span id="pendingCount">0</span></div>
+                                    <div class="small-box">Senior<br><span id="ongoingCount">0</span></div>
+                                    <div class="small-box">Member<br><span id="doneCount">0</span></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="main-box text-center ">
+                                    <h3><i class="fa-solid fa-user"></i></i>Room</h3>
+                                    <div class="small-box">Owner<br><span id="pendingCount">0</span></div>
+                                    <div class="small-box">Senior<br><span id="ongoingCount">0</span></div>
+                                    <div class="small-box">Member<br><span id="doneCount">0</span></div>
+                                    <br>
+                                    <div class="small-box">Owner<br><span id="pendingCount">0</span></div>
+                                    <div class="small-box">Senior<br><span id="ongoingCount">0</span></div>
+                                    <div class="small-box">Member<br><span id="doneCount">0</span></div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -194,24 +223,19 @@
                                     <div class="small-box">Pending<br><span id="pendingCount">0</span></div>
                                     <div class="small-box">On-going<br><span id="ongoingCount">0</span></div>
                                     <div class="small-box">Done<br><span id="doneCount">0</span></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="main-box text-center ">
-                                    <h3><i class="fa-solid fa-comments"></i>Feedback</h3>
-                                    <div class="small-box"></i>Pending<br><span id="pendingCount">0</span></div>
-                                    <div class="small-box">On-going<br><span id="ongoingCount">0</span></div>
-                                    <div class="small-box">Done<br><span id="doneCount">0</span></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="main-box text-center ">
-                                    <h3><i class="fa-solid fa-user"></i></i>User</h3>
+                                    <br>
                                     <div class="small-box">Pending<br><span id="pendingCount">0</span></div>
                                     <div class="small-box">On-going<br><span id="ongoingCount">0</span></div>
                                     <div class="small-box">Done<br><span id="doneCount">0</span></div>
                                 </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="main-box text-center ">
+                                <h3><i class="fa-solid fa-comments"></i>Feedback</h3>
+                                    <div class="small-box"></i>Pending<br><span id="pendingCount">0</span></div>
+                                    <!-- <div class="small-box">On-going<br><span id="ongoingCount">0</span></div>
+                                    <div class="small-box">Done<br><span id="doneCount">0</span></div> -->
+                                </div>
                         </div>
                     </div>
                 </div>
