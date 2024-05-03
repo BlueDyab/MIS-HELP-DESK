@@ -40,13 +40,12 @@
 
     .th {
         text-align: center;
-        color: white;
+        color: black;
 
     }
         .table-responsive.m-2 {
         width: 99.3%;
             height: 100vh;
-
         }
 
 
@@ -108,7 +107,7 @@
     <ul id="roomDropdown" class="sidebar-dropdown list-unstyled collapse">
         <li class="sidebar-item">
             <a href="ProfessorRoom.php" id="room" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i>Professor</a>
-        </li>
+        </li> 
         <li class="sidebar-item">
             <a href="StudentRoom.php" id="room" class="sidebar-link"><i class="fa-solid fa-user"></i>Student</a>
         </li>
@@ -145,64 +144,81 @@
             </div>
         </aside>
         <div class="main">
-
-
-        
-        <div class="table-responsive m-2">
-            <table class="table table-bordered">
-                <thead class="header fixed-top">
-                    <tr>
-                        <th class="th" scope="col">No.</th>
-                        <th class="col-2" scope="col">Name</th>
-                        <th class="th col-1" scope="col">Department</th>
-                        <th class="th col-2" scope="col">Date</th>
-                        <th class="th col-2" scope="col">Time</th>
-                        <th class="th col-2" scope="col">Feedback Deatils</th>
-                        <th class="th col-2" scope="col">Recommendation</th>
-                    </tr>
-                </thead>
-                <tbody class="data table-group-divider">
-                    <?php
-                        try {
-                            // Set the PDO error mode to exception
-                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                            // Prepare the SQL SELECT statement
-                            $stmt = $conn->prepare("SELECT * FROM `feedback_form_db`");
-                            $stmt->execute();
-
-                            // Fetch all the results
-                            $client_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                            if ($client_count) {
-                                // Initialize counter
-                                $counter = 1;
-
-                                // Iterate over each row
-                                foreach ($client_count as $acc) {
-                                    echo "<tr>";
-                                    // Output each column value of the row
-                                    echo "<th class='td' scope='col'>" . $counter . "</th>"; // Display the counter
-                                    echo "<td class='td'>" . $acc['Name'] . "</td>";
-                                    echo "<td class='td'>" . $acc['Dept'] . "</td>";
-                                    echo "<td class='td'>" . $acc['Date'] . "</td>";
-                                    echo "<td class='td'>" . $acc['Time'] . "</td>";
-                                    echo "<td class='td'>" . $acc['Feedback'] . "</td>";
-                                    echo "<td class='td'>" . $acc['Recomm'] . "</td>";
-                                    // echo "<td class='text-center'><button class='btn btn-danger m-2 openFormBtnEdit' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'><i class='fas fa-edit'></i></button><button class='btn btn-danger deleteButton' data-id='" . htmlspecialchars($acc['ID']) . "'><i class='fas fa-trash'></button></td>";
-                                    echo "</tr>";
-
-                                    // Increment the counter
-                                    $counter++;
-                                }
-                            }
-                        } catch (PDOException $e) {
-                            echo "Error: " . $e->getMessage();
-                        }
-                    ?>
-                </tbody>
-            </table>
+        <div class="container-fluid">
+    <div class="row justify-content-end mt-2">
+        <div class="col-md-6 col-lg-4 col-xl-3">
+            <form action="" method="GET"> <!-- Added form tag -->
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" placeholder="Search..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : 'ID'; ?>">
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button> <!-- Changed button type to submit -->
+                </div>
+            </form>
         </div>
+    </div>
+</div>
+
+            <div class="table-responsive m-2">
+    <table class="table table-bordered table-striped text-center">
+        <!-- Table header -->
+        <thead class="header fixed-top">
+            <tr>
+                <th class="th" scope="col">No.</th>
+                <th class="col-2" scope="col">Name</th>
+                <th class="th col-1" scope="col">Department</th>
+                <th class="th col-2" scope="col">Date</th>
+                <th class="th col-2" scope="col">Time</th>
+                <th class="th col-2" scope="col">Feedback Details</th>
+                <th class="th col-2" scope="col">Recommendation</th>
+            </tr>
+        </thead>
+                    <tbody class="data table-group-divider">
+                        <?php
+                            try {
+                                // Set the PDO error mode to exception
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                                // Initialize the search query
+                                $search = isset($_GET['search']) ? '%' . $_GET['search'] . '%' : '%';
+
+                                // Prepare the SQL SELECT statement with the search condition
+                                $stmt = $conn->prepare("SELECT * FROM `feedback_form_db` WHERE `Name` LIKE ? OR `Dept` LIKE ? OR `Date` LIKE ?");
+                                $stmt->execute([$search, $search, $search]);
+
+                                // Fetch all the results
+                                $client_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                if ($client_count) {
+                                    // Initialize counter
+                                    $counter = 1;
+
+                                    // Iterate over each row
+                                    foreach ($client_count as $acc) {
+                                        // Output each column value of the row
+                                        echo "<tr>";
+                                        echo "<th class='td' scope='col'>" . $counter . "</th>"; // Display the counter
+                                        echo "<td class='td'>" . $acc['Name'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Dept'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Date'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Time'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Feedback'] . "</td>";
+                                        echo "<td class='td'>" . $acc['Recomm'] . "</td>";
+                                        echo "</tr>";
+
+                                        // Increment the counter
+                                        $counter++;
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='7'>No feedback found.</td></tr>";
+                                }
+                            } catch (PDOException $e) {
+                                echo "Error: " . $e->getMessage();
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script>
@@ -225,6 +241,7 @@
         });
     });
 </script>
+
 
 </body>
 </html>

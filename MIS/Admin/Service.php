@@ -160,77 +160,107 @@
             </aside>
 
 
-    <div class="main">
-        <div class="table-responsive m-2">
-        <table class="table table-striped">
-                        <thead class="header fixed-top">
-                            <tr>
-                                <th class="th" scope="col">No</th>
-                                <th class="col-2" scope="col">Staff Name</th>
-                                <th class="th col-1" scope="col">Department</th>
-                                <th class="th col-1" scope="col">Detail</th>
-                                <th class="th col-1" scope="col">Action</th>
-                                <th class="th col-2" scope="col">Date</th>
-                                <th class="th col-2" scope="col">Time</th>
-                                <th class="th col-1" scope="col">Due Time</th>
-                                <th class="th col-2" scope="col">recommendation</th>
-                                <th class="th col-1" scope="col">Status</th>
-                                <th class="th col-1" scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody class="data table-group-divider">
-                            <?php
-                            try {
-                                // Set the PDO error mode to exception
-                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                                // Prepare the SQL SELECT statement
-                                $stmt = $conn->prepare("SELECT * FROM `service_request_db`");
-                                $stmt->execute();
-
-                                // Fetch all the results
-                                $client_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                                if ($client_count) {
-                                    // Initialize counter
-                                    $counter = 1;
-
-                                    // Iterate over each row
-                                    foreach ($client_count as $acc) {
-                                        echo "<tr>";
-                                        // Output each column value of the row
-                                        echo "<th class='td' scope='col'>" . $counter . "</th>"; // Display the counter
-                                        echo "<td class='td'>" . $acc['Staff_Name'] . "</td>";
-                                        echo "<td class='td'>" . $acc['Dept'] . "</td>";
-                                        echo "<td class='td'>" . $acc['Details'] . "</td>";
-                                        echo "<td class='td'>" . $acc['Action_Taken'] . "</td>";
-                                        echo "<td class='td'>" . $acc['Date'] . "</td>";
-                                        echo "<td class='td'>" . $acc['Time'] . "</td>";
-                                        echo "<td class='td'>" . $acc['Due_Time'] . "</td>";
-                                        echo "<td class='td'>" . $acc['Recommendation'] . "</td>";
-                                        echo "<td class='td'>" . $acc['Status'] . "</td>";
-                                        // echo "<td class='text-center'><button class='btn btn-danger m-2 openFormBtnEdit' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'><i class='fas fa-edit'></i></button><button class='btn btn-danger deleteButton' data-id='" . htmlspecialchars($acc['ID']) . "'><i class='fas fa-trash'></button></td>";
-                                        echo "</tr>";
-
-                                        // Increment the counter
-                                        $counter++;
-                                    }
-                                }
-                            } catch (PDOException $e) {
-                                echo "Error: " . $e->getMessage();
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-        </div>
-        <!-- Add Print Button -->
-        <button id="printBtn" class="btn btn-primary">Print Table</button>
+            <div class="main">
+                <!-- Search input field -->
+                <div class="container-fluid">
+<div class="row justify-content-end mt-2">
+    <div class="col-md-6 col-lg-4 col-xl-3">
+        <form method="GET" action="Service.php">
+            <div class="input-group">
+                <input type="text" class="form-control" id="searchInput" name="search" placeholder="Search...">
+                <button class="btn btn-primary" id="searchButton" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
     </div>
+</div>
+                </div>
+
+    
+    
+    <!-- Table -->
+    <div class="table-responsive m-2">
+    <table class="table table-bordered table-striped text-center">
+        <!-- Table header -->
+        <thead class="header fixed-top">
+                <tr>
+                    <th class="th" scope="col">No</th>
+                    <th class="col-2" scope="col">Staff Name</th>
+                    <th class="th col-1" scope="col">Department</th>
+                    <th class="th col-1" scope="col">Detail</th>
+                    <th class="th col-1" scope="col">Action</th>
+                    <th class="th col-2" scope="col">Date</th>
+                    <th class="th col-2" scope="col">Time</th>
+                    <th class="th col-1" scope="col">Due Time</th>
+                    <th class="th col-2" scope="col">Recommendation</th>
+                    <th class="th col-1" scope="col">Status</th>
+                    <th class="th col-1" scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody class="data table-group-divider" id="searchResults"> 
+    <?php
+    try {
+        // Set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Initialize the search query
+        $search = isset($_GET['search']) ? '%' . $_GET['search'] . '%' : '%';
+
+        // Prepare the SQL SELECT statement with the search condition
+        $stmt = $conn->prepare("SELECT * FROM `service_request_db` WHERE `Staff_Name` LIKE ? OR `Date` LIKE ? OR `Action_Taken` LIKE ? OR `Dept` LIKE ?");
+        $stmt->execute([$search, $search, $search, $search]);
+
+        // Fetch all the results
+        $client_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($client_count) {
+            // Initialize counter
+            $counter = 1;
+// Iterate over each row
+foreach ($client_count as $acc) {
+    echo "<tr>";
+    // Output each column value of the row
+    echo "<th class='td' scope='col'>" . $counter . "</th>"; // Display the counter
+    echo "<td class='td' style='display:none;'>" . $acc['Id'] . "</td>";
+    echo "<td class='td'>" . $acc['Staff_Name'] . "</td>";
+    echo "<td class='td'>" . $acc['Dept'] . "</td>";
+    echo "<td class='td'>" . $acc['Details'] . "</td>";
+    echo "<td class='td'>" . $acc['Action_Taken'] . "</td>";
+    echo "<td class='td'>" . $acc['Date'] . "</td>";
+    echo "<td class='td'>" . $acc['Time'] . "</td>";
+    echo "<td class='td'>" . $acc['Due_Time'] . "</td>";
+    echo "<td class='td'>" . $acc['Recommendation'] . "</td>";
+    echo "<td class='td'>" . $acc['Status'] . "</td>";
+    echo "<td class='text-center'>";
+    // Check if 'ID' key exists in the $acc array
+    if (array_key_exists('I', $acc)) {
+        // Output the button with 'ID' data attribute
+        echo "<button class='btn btn-danger m-2 openFormBtnEdit' data-id='" . htmlspecialchars($acc['Id']) . "' name='editing'><i class='fas fa-edit'></i></button>";
+        echo "<button class='btn btn-danger deleteButton' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='fas fa-trash'></button>";
+    } else {
+        // Output a message or placeholder if 'ID' key is not found
+        echo "ID not available";
+    }
+    echo "</td>";
+    echo "</tr>";
+
+    // Increment the counter
+    $counter++;
+}
+
+        } else {
+            echo "<tr><td colspan='11'>No service request found.</td></tr>";
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+    ?>
+</tbody>
+
+      
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-<script src="extensions/print/bootstrap-table-print.js"></script>
 <script>
     const hamBurger = document.querySelector(".toggle-btn");
 
@@ -252,59 +282,8 @@
     });
 
 
-    // Adding the printPageBuilder function
-    $.extend($.fn.bootstrapTable.defaults, {
-        printPageBuilder: function(table, styles) {
-            return `
-                <html>
-                <head>
-                ${styles}
-                <style type="text/css" media="print">
-                @page {
-                size: auto;
-                margin: 25px 0 25px 0;
-                }
-                </style>
-                <style type="text/css" media="all">
-                table {
-                border-collapse: collapse;
-                font-size: 12px;
-                }
-                table, th, td {
-                border: 1px solid grey;
-                }
-                th, td {
-                text-align: center;
-                vertical-align: middle;
-                }
-                p {
-                font-weight: bold;
-                margin-left:20px;
-                }
-                table {
-                width: 94%;
-                margin-left: 3%;
-                margin-right: 3%;
-                }
-                div.bs-table-print {
-                text-align: center;
-                }
-                </style>
-                </head>
-                <title>Print Table</title>
-                <body>
-                <p>Printed on: ${new Date()} </p>
-                <div class="bs-table-print">${table}</div>
-                </body>
-                </html>
-            `;
-        }
-    });
-
-    // Function to print the table
-    document.getElementById('printBtn').addEventListener('click', function() {
-        $('.table').bootstrapTable('print');
-    });
+   
 </script>
+
 </body>
 </html>
