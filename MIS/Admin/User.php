@@ -373,25 +373,6 @@ if (!isset($_SESSION['editButtonClickedId'])) {
             </div>
 
 
-            <!-- Modal Confirmation detelet -->
-            <div class="modal fade" id="exampleModal1" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation Delete </h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Are you sure want to Delete?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="confirmUpdateDeleteBtn">Okay</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Add form -->
 
             <div class="overlay-form" id="overlayFormAdd">
@@ -461,6 +442,7 @@ if (!isset($_SESSION['editButtonClickedId'])) {
         </div>
 
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
@@ -600,38 +582,42 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                 const deleteButtons = document.querySelectorAll(".deleteButton");
 
                 deleteButtons.forEach(function(button) {
-                    button.addEventListener("click", function() {
-                        const id = this.getAttribute('data-id');
+    button.addEventListener("click", function() {
+        const id = this.getAttribute('data-id');
 
-                        // Show the confirmation modal
-                        const exampleModal1 = new bootstrap.Modal(document.getElementById('exampleModal1'));
-                        exampleModal1.show();
+        // Show the confirmation modal
+        Swal.fire({
+            title: "Are you sure you want to delete this row?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it",
+            denyButtonText: `Cancel`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Send an AJAX request to delete_data.php
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "delete_data.php");
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        // Row deleted successfully
+                        console.log("Row deleted successfully");
+                        // Reload the page or update the UI as needed
+                        location.reload(); // Reload the page to reflect the changes
+                    } else {
+                        // Error handling
+                        console.error("Error deleting row");
+                    }
+                };
+                xhr.send(`id=${id}`);
+            } else if (result.isDenied) {
+                // Do nothing or provide feedback to the user
+                console.log("Deletion canceled");
+            }
+        });
+    });
+});
 
-                        // Handle confirm delete button click
-                        const confirmDeleteBtn = document.getElementById("confirmUpdateDeleteBtn");
-                        confirmDeleteBtn.addEventListener("click", function() {
-                            // Send an AJAX request to delete_data.php
-                            const xhr = new XMLHttpRequest();
-                            xhr.open("POST", "delete_data.php");
-                            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                            xhr.onload = function() {
-                                if (xhr.status === 200) {
-                                    // Row deleted successfully
-                                    console.log("Row deleted successfully");
-                                    // Reload the page or update the UI as needed
-                                    location.reload(); // Reload the page to reflect the changes
-                                } else {
-                                    // Error handling
-                                    console.error("Error deleting row");
-                                }
-                            };
-                            xhr.send(`id=${id}`);
-
-                            // Close the modal after deletion
-                            exampleModal1.hide();
-                        });
-                    });
-                });
             });
         </script>
 </body>
