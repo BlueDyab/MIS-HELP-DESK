@@ -149,7 +149,7 @@
         <div class="col-md-6 col-lg-4 col-xl-3">
             <form action="" method="GET"> <!-- Added form tag -->
                 <div class="input-group">
-                    <input type="text" class="form-control" name="search" placeholder="Search..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : 'ID'; ?>">
+                    <input type="text" class="form-control" name="search" placeholder="Search..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
                     <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button> <!-- Changed button type to submit -->
                 </div>
             </form>

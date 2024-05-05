@@ -146,57 +146,80 @@
 
         <div class="main">
 
-        
-        <div class="table-responsive m-2">
-                    <table class="table table-bordered">
+        <div class="container-fluid">
+    <div class="row justify-content-end mt-2">
+        <div class="col-md-6 col-lg-4 col-xl-3">
+            <form action="" method="GET"> <!-- Added form tag -->
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" placeholder="Search..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button> <!-- Changed button type to submit -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="table-responsive m-2">
+    <table class="table table-bordered table-striped text-center">
+        <!-- Table header -->
                         <thead class="header fixed-top">
                             <tr>
-                                <th class="th" scope="col">Id</th>
-                                <th class="col-1" scope="col"> Professor Name</th>
+                                <th class="th col-1" scope="col">No</th>
+                                <th class="col-2" scope="col"> Professor Name</th>
                                 <th class="th col-1" scope="col">Deparment</th>
                                 <th class="th col-1" scope="col">Date</th>
                                 <th class="th col-1" scope="col">Time</th>
                                 <th class="th col-1" scope="col">Due Time</th>
                                 <th class="th col-2" scope="col">Requested Item</th>
                                 <th class="th col-2" scope="col">Purpose</th>
+                                <th class="th col-2" scope="col">Remark</th>
+                <th class="th col-2" scope="col">Action</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                                try {
-                                    // Set the PDO error mode to exception
-                                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        <?php
+                        try {
+                            // Set the PDO error mode to exception
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                                    // Prepare the SQL SELECT statement
-                                    $stmt = $conn->prepare("SELECT * FROM `equipment_request_prof`"); // Adjusted table name
-                                    $stmt->execute();
+                            // Initialize the search query
+                            $search = isset($_GET['search']) ? '%' . $_GET['search'] . '%' : '%';
 
-                                    // Fetch all the results
-                                    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            // Prepare the SQL SELECT statement with the search condition
+                            $stmt = $conn->prepare("SELECT * FROM `equipment_request_prof` WHERE `Professor_Name` LIKE ? OR `Department` LIKE ? OR `Date` LIKE ? ");
+                            $stmt->execute([$search, $search, $search]);
 
-                                    if ($results) {
-                                        // Iterate over each row
-                                        foreach ($results as $row) {
-                                            echo "<tr>";
-                                            // Output each column value of the row
-                                            echo "<th scope='row'>" . htmlspecialchars($row['Id']) . "</th>";
-                                            echo "<td>" . htmlspecialchars($row['Professor_Name']) . "</td>";
-                                            echo "<td>" . htmlspecialchars($row['Department']) . "</td>";
-                                            echo "<td>" . htmlspecialchars($row['Date']) . "</td>";
-                                            echo "<td>" . htmlspecialchars($row['Time']) . "</td>";
-                                            echo "<td>" . htmlspecialchars($row['Due_Time']) . "</td>";
-                                            echo "<td>" . htmlspecialchars($row['Requested_Item']) . "</td>";
-                                            echo "<td>" . htmlspecialchars($row['Purpose']) . "</td>";
-                                            echo "</tr>";
-                                        }
-                                    } else {
-                                        echo "<tr><td colspan='11'>No data found</td></tr>";
-                                    }
-                                } catch (PDOException $e) {
-                                    echo "Error: " . $e->getMessage();
+                            // Fetch all the results
+                            $client_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                            $counter = 1;
+                            if ($client_count) {
+                                // Iterate over each row
+                                foreach ($client_count as $acc) {
+                                    echo "<tr>";
+                                    // Output each column value of the row
+                                    
+                                    echo "<th scope='row'>" . htmlspecialchars($acc['Id']) . "</th>";
+                                    echo "<td>" . htmlspecialchars($acc['Professor_Name']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($acc['Department']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($acc['Date']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($acc['Time']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($acc['Due_Time']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($acc['Requested_Item']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($acc['Purpose']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($acc['Remark']) . "</td>";    
+                                    echo "<td>" . htmlspecialchars($acc['Action']) . "</td>"; 
+                                    echo "</tr>";
                                 }
-                            ?>
+                            } else {
+                                echo "<tr><td colspan='8'>No data found</td></tr>";
+                            }
+                        } catch (PDOException $e) {
+                            echo "Error: " . $e->getMessage();
+                        }
+                    ?>
                         </tbody>
     </table>
         </div>

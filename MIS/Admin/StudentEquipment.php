@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    require '../Database/connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,6 +50,8 @@
         height: 100vh;
 
     }
+   
+
 
 </style>
 
@@ -144,29 +150,94 @@
         </aside>
 
         <div class="main">
+        <div class="container-fluid">
+    <div class="row justify-content-end mt-2">
+        <div class="col-md-6 col-lg-4 col-xl-3">
+            <form action="" method="GET"> <!-- Added form tag -->
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" placeholder="Search..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button> <!-- Changed button type to submit -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive m-2">
+    <table class="table table-bordered table-striped text-center">
+        <!-- Table header -->
+        <thead class="header fixed-top">
+            <tr>
+                <th class="th col-1" scope="col">No</th>
+                <th class="th col-2" scope="col">StudentName</th>
+                <th class="th col-2" scope="col">StudentNum</th>
+                <th class="th col-1" scope="col">Course</th>
+                <th class="th col-1" scope="col">Year</th>
+                <th class="th col-1" scope="col">Section</th>
+                <th class="th col-1" scope="col">Deparment</th>
+                <th class="th col-2" scope="col">Date</th>
+                <th class="th col-2" scope="col">Status</th>
+                <th class="th col-2" scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+            try {
+                // Set the PDO error mode to exception
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                // Initialize the search query
+                $search = isset($_GET['search']) ? '%' . $_GET['search'] . '%' : '%';
+
+                // Prepare the SQL SELECT statement with the search condition
+                $stmt = $conn->prepare("SELECT * FROM `equipment_request_stud` WHERE `Name` LIKE ? OR `Department` LIKE ? OR `Date` LIKE ?  OR `Course` LIKE ?  OR `Student_No` LIKE ? ");
+                $stmt->execute([$search, $search, $search, $search, $search]);
+
+                // Fetch all the results
+                $client_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                if ($client_count) {
+                    $counter = 1;
+                    // Iterate over each row
+                    foreach ($client_count as $acc) {
+                        echo "<tr>";
+                        // Output each column value of the row, including the arrow icon
+                        
+                        echo "<th scope='row'>" . htmlspecialchars($acc['ID']) . " <span class='arrow' onclick='toggleRow(this)'>▼</span></th>";
+                        echo "<td>" . htmlspecialchars($acc['Name']) . "</td>";
+                        echo "<td>" . htmlspecialchars($acc['Student_No']) . "</td>";
+                        echo "<td>" . htmlspecialchars($acc['Course']) . "</td>";
+                        echo "<td>" . htmlspecialchars($acc['Year']) . "</td>";
+                        echo "<td>" . htmlspecialchars($acc['Section']) . "</td>";
+                        echo "<td>" . htmlspecialchars($acc['Department']) . "</td>";
+                        echo "<td>" . htmlspecialchars($acc['Date']) . "</td>";     
+                        echo "<td>" . htmlspecialchars($acc['Status']) . "</td>";    
+                        echo "<td>" . htmlspecialchars($acc['Action']) . "</td>";    
+                        echo "</tr>";
+                        // Hidden row for requested item, purpose, and time details
+                        echo "<tr class='hidden-row' style='display: none;'>";
+                        echo "<td colspan='10'>";
+                        echo "<strong>Requested Item:</strong> " . htmlspecialchars($acc['Request Item']) . "<br>";
+                        echo "<strong>Purpose:</strong> " . htmlspecialchars($acc['Purpose']) . "<br>";
+                        echo "<strong>Time:</strong> " . htmlspecialchars($acc['Time']) . "<br>";
+                        echo "<strong>Due Time:</strong> " . htmlspecialchars($acc['Due_Time']);
+                        echo "</td>";
+                        echo "</tr>";
+
+                        $counter++;
+                    }
+                } else {
+                    echo "<tr><td colspan='10'>No data found</td></tr>";
+                }
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+            ?>
+        </tbody>
+    </table>
+</div>
 
 
-            <div class="table-responsive m-2">
-                <table class="table table-bordered">
-                    <thead class="header fixed-top">
-                        <tr>
-                            <th class="th" scope="col">Id</th>
-                            <th class="th col-2" scope="col">Student Name</th>
-                            <th class="th col-1" scope="col">Student Num</th>
-                            <th class="th col-1" scope="col">Course</th>
-                            <th class="th col-1" scope="col">Year</th>
-                            <th class="th col-1" scope="col">Section</th>
-                            <th class="th col-1" scope="col">Deparment</th>
-                            <th class="th col-1" scope="col">Date</th>
-                            <th class="th col-1" scope="col">Time</th>
-                            <th class="th col-1" scope="col">Due Time</th>
-                            <th class="th col-2" scope="col">Requested Item</th>
-                            <th class="th col-2" scope="col">Purpose</th>
-
-                        </tr>
-                    </thead>
-                </table>
-            </div>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
             <script>
@@ -189,6 +260,13 @@
                     });
                 });
             </script>
+  <script>
+    function toggleRow(arrow) {
+        const row = arrow.closest('tr').nextElementSibling;
+        row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
+        arrow.textContent = arrow.textContent === '▼' ? '▲' : '▼';
+    }
+</script>
 
 </body>
 

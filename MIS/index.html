@@ -46,7 +46,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contact</a>
+                            <a class="nav-link" href="#contact">Message Us</a>
                         </li>
                     </ul>
                 </div>
@@ -55,6 +55,7 @@
     </header>
 
 
+    <!-- Carousel -->
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -71,7 +72,7 @@
                     <p class="animated fadeInUp"> &emsp;MIS staff positions, it's crucial to possess a blend of
                         technical prowess, problem-solving acumen, and effective
                         communication skills. Equipped with a solid foundation in database management, data analysis.
-</p>
+                    </p>
                 </div>
             </div>
             <div class="carousel-item">
@@ -90,7 +91,7 @@
                         technological s
                         upport, maintain systems, and troubleshoot issues to optimize organizational processes. With a
                         customer-centric
-                        approach and proactive problem-solving, 
+                        approach and proactive problem-solving,
                     </p>
                 </div>
             </div>
@@ -125,321 +126,46 @@
                     <div class="single-services text-center animate-on-scroll">
                         <i class="bi bi-person-fill"></i>
                         <h2>Service Staff</h2>
-                        <p>This service allows UCC faculty, Admin staff and students to request for various ICT Services of MIS.</p>
-                     
+                        <p>This service allows UCC faculty, Admin staff and students to request for various ICT Services
+                            of MIS.</p>
+
                         <div class="col">
                             <button type="button" id="openFormBtnService" class="btn2">ADMIN STAFF</button>
                         </div>
                     </div>
                 </div>
-
-
-
-                <!-- Overlay form Request for Professor -->
-                <div class="overlay-form" id="overlayFormService">
-                    <div class="form-container">
-                        <button class="close-icon" id="closeFormBtnService"><span>&#10006;</span>
-                        </button><!-- Close icon -->
-                        <div class="form-logo">
-                            <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
-                            <h2> MIS Service Request Form</h2>
-                        </div>
-                        <form action="./Database/Service Request.php" method="post">
-                            <div class="form-row">
-                                <div class=" col-md-4 mb-1 form-group">
-                                    <label for="date">Date:</label>
-                                    <input type="date" class="form-control" id="date" name="date" required>
-                                </div>
-                                <div class=" col-md-4 mb-1 form-group">
-                                    <label for="time">Time:</label>
-                                    <input type="time" class="form-control" id="time" name="time" required>
-                                </div>
-                                <div class=" col-md-4 mb-1 form-group">
-                                    <label for="duetime">Due Time:</label>
-                                    <input type="time" class="form-control" id="duetime" name="duetime" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class=" col-md-6 mb-1 form-group">
-                                    <label for="department">Department:</label>
-                                    <select class="form-select" id="department" name="department" required>
-                                        <option value="">Select Department</option>
-                                        <option value="registrar">Registrar</option>
-                                        <option value="administration">Administration</option>
-                                        <option value="law">Law</option>
-                                        <option value="gradschool">Grad School</option>
-                                        <option value="accounting">Accounting</option>
-                                        <option value="deans">Deans</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-1 form-group">
-                                    <label for="action">Action Taken:</label>
-                                    <select class="form-select" id="action2" name="action2" required>
-                                        <option value="">Select Action</option>
-                                        <option value="urgent">Urgent</option>
-                                        <option value="non-urgent">Non-Urgent</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="mb-1 form-group">
-                                <label for="name">Staff Name:</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Name"
-                                    required>
-                            </div>
-                            <div class="mb-1 form-group">
-                                <label for="details">Details:</label>
-                                <textarea class="form-control" id="details" name="details" rows="2"
-                                    placeholder="What is the problem?" required></textarea>
-                            </div>
-                            <div class="mb-2 form-group">
-                                <label for="recomm">Recomendation</label>
-                                <textarea class="form-control" id="recomm" name="recomm" rows="3" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-2" name="service-btn">Submit</button>
-                        </form>
-                    </div>
-                </div>
-
                 <div class="col-lg-3 col-md-6">
                     <div class="single-services text-center animate-on-scroll">
                         <i class="bi bi-person-fill-gear"></i>
                         <h2>Equipment</h2>
-                        <p>This service allows UCC faculty,Staff and student to BARROW ICT Equipment</p><br>
+                        <p>This service allows UCC faculty, Admin Staff and student to BARROW ICT Equipment</p>
                         <div class="column">
-                            <button type="button" id="openFormBtnProfessor" class="btn2  me-4">PROFESSOR</button>
+                            <button type="button" id="openFormBtnProfessor" class="btn2 me-4">PROFESSOR</button>
                             <button type="button" id="openFormBtnStudent" class="btn2">STUDENT</button>
                         </div>
                     </div>
                 </div>
-
-                <!-- Overlay form MIS Equiment  for Professor-->
-                <div class="overlay-form" id="overlayFormProfessor">
-                    <div class="form-container">
-                        <button class="close-icon" id="closeFormBtnProfessor"><span>&#10006;</span>
-                        </button><!-- Close icon -->
-                        <div class="form-logo">
-                            <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
-                            <h2> MIS Equiment Request Form</h2>
-                        </div>
-                        <form action="./Database/Equipment Request.php" method="post">
-
-
-                            <div class="form-row">
-                                <div class=" col-md-4 mb-1 form-group">
-                                    <label for="date">Date:</label>
-                                    <input type="date" class="form-control" id="date" name="date" required>
-                                </div>
-                                <div class=" col-md-4 mb-1 form-group">
-                                    <label for="time">Time:</label>
-                                    <input type="time" class="form-control" id="time" name="time" required>
-                                </div>
-                                <div class=" col-md-4 mb-1 form-group">
-                                    <label for="duetime">Due Time:</label>
-                                    <input type="time" class="form-control" id="duetime" name="duetime" required>
-                                </div>
-                            </div>
-                            <div class="mb-1 form-group">
-                                <label for="department">Department:</label>
-                                <select class="form-select" id="department" name="department" required>
-                                    <option value="">Select Department</option>
-                                    <option value="BSIS">Information System (BSIS)</option>
-                                    <option value="BSIS">Information Technology (BSIT)</option>
-                                    <option value="BSEMC">Entertainment & Multimedia Computing (BSEMC)</option>
-                                    <option value="BSCS">Computer Science (BSCS)</option>
-                                    <option value="BSOAD">Office of Administration (BSOAD)</option>
-                                    <option value="MATH">BS Mathermatics (BSMATH)</option>
-                                    <option value="MATH">BS Psychology (BSPsyc)</option>
-                                    <option value="COMM">BA Communication (BACOMM)</option>
-                                    <option value="PolSci">Political Science (BAPOLSCIE)</option>
-                                </select>
-                            </div>
-                            <div class="mb-2 form-group">
-                                <label for="name">Professor Name:</label>
-                                <input type="text" class="form-control" id="name" name="name"  placeholder="Professor Name" required>
-                            </div>
-                            <div class="mb-2 form-group">
-                                <label for="requestedItem">Requested Item:</label>
-                                <textarea class="form-control" id="requestedItem" name="requestedItem" rows="2"
-                                    required></textarea>
-                            </div>
-                            <div class="mb-2 form-group">
-                                <label for="purpose">Purpose:</label>
-                                <textarea class="form-control" id="purpose" name="purpose" rows="3" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-2" name="prof_btn">Submit</button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Overlay form Equipment for student-->
-                <div class="overlay-form" id="overlayFormStudent">
-                    <div class="form-container">
-                        <button class="close-icon" id="closeFormBtnStudent"><span>&#10006;</span>
-                        </button><!-- Close icon -->
-                        <div class="form-logo">
-                            <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
-                            <h2> MIS Equiment Request Form</h2>
-                        </div>
-                        <form action="./Database/Equipment Request.php" method="post">
-                            <div class="form-row">
-                                <div class=" col-md-4 mb-1 form-group">
-                                    <label for="date">Date:</label>
-                                    <input type="date" class="form-control" id="date" name="date" required>
-                                </div>
-                                <div class=" col-md-4 mb-1 form-group">
-                                    <label for="time">Time:</label>
-                                    <input type="time" class="form-control" id="time" name="time" required>
-                                </div>
-                                <div class=" col-md-4 mb-1 form-group">
-                                    <label for="duetime">Due Time:</label>
-                                    <input type="time" class="form-control" id="duetime" name="duetime" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-4 mb-1 form-group">
-                                    <label for="course">Course:</label>
-                                    <select class="form-select" id="course" name="course" required>
-                                        <option value="">Select Year</option>
-                                        <option value="BSIS">BSIS</option>
-                                        <option value="BSEMC">BSEMC</option>
-                                        <option value="BSIT">BSIT</option>
-                                        <option value="BSCS">BSCS</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4 mb-1 form-group">
-                                    <label for="year">Year:</label>
-                                    <select class="form-select" id="year" name="year" required>
-                                        <option value="">Select Year</option>
-                                        <option value="1st">1st</option>
-                                        <option value="2nd">2nd</option>
-                                        <option value="3rd">3rd</option>
-                                        <option value="4th">4th</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4  mb-1 form-group">
-                                    <label for="section">Section:</label>
-                                    <select class="form-select" id="section" name="section" required>
-                                        <option value="">Select Section</option>
-                                        <option value="A">A</option>
-                                        <option value="B">B</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-4 mb-1 form-group">
-                                    <label for="name">Student Name:</label>
-                                    <input type="text" class="form-control" id="name" name="name"
-                                        placeholder="StudentName" required>
-                                </div>
-                                <div class="col-md-4 mb-1 form-group">
-                                    <label for="studentID">Student Number:</label>
-                                    <input type="text" class="form-control" id="studentID" name="studentID"
-                                        placeholder="StudentNumber" required>
-                                </div>
-                                <div class=" col-md-4 mb-1 form-group">
-                                    <label for="department">Department:</label>
-                                    <select class="form-select" id="department1" name="department" required>
-                                        <option value="">Select Department</option>
-                                        <option value="BSIS">Information System (BSIS)</option>
-                                        <option value="BSIS">Information Technology (BSIT)</option>
-                                        <option value="BSEMC">Entertainment & Multimedia Computing (BSEMC)</option>
-                                        <option value="BSCS">Computer Science (BSCS)</option>
-                                        <option value="BSOAD">Office of Administration (BSOAD)</option>
-                                        <option value="MATH">BS Mathermatics (BSMATH)</option>
-                                        <option value="MATH">BS Psychology (BSPsych)</option>
-                                        <option value="COMM">BA Communication (BACOMM)</option>
-                                        <option value="PolSci">Political Science (BAPOLSCIE)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="mb-1 form-group">
-                                <label for="requestedItem">Requested Item:</label>
-                                <textarea class="form-control" id="requestedItem" name="requestedItem" rows="2"
-                                    required></textarea>
-                            </div>
-                            <div class="mb-1 form-group">
-                                <label for="purpose">Purpose:</label>
-                                <textarea class="form-control" id="purpose" name="purpose" rows="3" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-2" name="stud_btn">Submit</button>
-                        </form>
-                    </div>
-                </div>
-
 
 
                 <div class="col-lg-3 col-md-6">
                     <div class="single-services text-center animate-on-scroll">
                         <i class="bi bi-person-hearts"></i>
                         <h2>Feedback</h2>
-                        <p>This service allows UCC faculty, Admin staff and Students to give feedback on various ICT
+                        <p>This service allows Admin staff and Students to give feedback on various ICT
                             Services
-                            offered by the MIS</p>
+                            by the MIS</p>
                         <div class="column">
                             <button type="button" id="openFormBtnFeedback" class="btn2">FEEDBACK</button>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Overlay form Request for feedback -->
-                <div class="overlay-form" id="overlayFormFeedback">
-                    <div class="form-container">
-                        <button class="close-icon" id="closeFormBtnFeedback"><span>&#10006;</span>
-                        </button><!-- Close icon -->
-                        <div class="form-logo">
-                            <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
-                            <h2> MIS Feedback Form</h2>
-                        </div>
-                        <form action="./Database/Feedback_Form.php" method="post">
-                            <div class="form-row">
-                                <div class=" col-md-4 mb-1 form-group">
-                                    <label for="date">Date:</label>
-                                    <input type="date" class="form-control" id="date" name="date" required>
-                                </div>
-                                <div class=" col-md-3 mb-1 form-group">
-                                    <label for="time">Time:</label>
-                                    <input type="time" class="form-control" id="time" name="time" required>
-                                </div>
-                                <div class="col-md-5 mb-1 form-group">
-                                    <label for="department">Department:</label>
-                                    <select class="form-select" id="department1" name="department" required>
-                                        <option value="">Select Department</option>
-                                        <option value="BSIS">Information System (BSIS)</option>
-                                        <option value="BSIS">Information Technology (BSIT)</option>
-                                        <option value="BSEMC">Entertainment & Multimedia Computing (BSEMC)</option>
-                                        <option value="BSCS">Computer Science (BSCS)</option>
-                                        <option value="BSOAD">Office of Administration (BSOAD)</option>
-                                        <option value="MATH">BS Mathermatics (BSMATH)</option>
-                                        <option value="MATH">BS Psychology (BSPsyc)</option>
-                                        <option value="COMM">BA Communication (BACOMM)</option>
-                                        <option value="PolSci">Political Science (BAPOLSCIE)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="mb-1 form-group">
-                                <label for="name">Name:</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Optional"
-                                    required>
-                            </div>
-                            <div class="mb-1 form-group">
-                                <label for="Feedback"> FeedBack Details:</label>
-                                <textarea class="form-control" id="Feedback" name="Feedback" rows="2"
-                                    required></textarea>
-                            </div>
-                            <div class="mb-1 form-group">
-                                <label for="purpose">Recomendation</label>
-                                <textarea class="form-control" id="recomm" name="recomm" rows="3" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-2" name="feedback_btn">Submit</button>
-                        </form>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="single-services text-center animate-on-scroll">
                         <i class="bi bi-person-hearts"></i>
                         <h2>Request Room</h2>
-                        <p> involves booking a space for meetings, events, or any activity supported by Management
-                            Information Systems (MIS).</p>
+                        <p> Room request for MIS typically refers to the process of reservation for activities, events
+                            and Meetings</p>
+                        </p>
                         <div class="column">
                             <button type="button" id="openFormBtnProfessorRoom" class="btn2 me-4">PROFESSOR</button>
                             <button type="button" id="openFormBtnStudentRoom" class="btn2">STUDENT</button>
@@ -449,6 +175,292 @@
             </div>
         </div>
     </div>
+
+    <!-- ALL Overlay for Serice -->
+
+
+    <!-- Overlay for Service Request -->
+    <!-- Overlay form Request for Admin Staff-->
+    <div class="overlay-form" id="overlayFormService">
+        <div class="form-container">
+            <button class="close-icon" id="closeFormBtnService"><span>&#10006;</span>
+            </button><!-- Close icon -->
+            <div class="form-logo">
+                <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
+                <h2> MIS Service Request Form</h2>
+            </div>
+            <form action="./Database/Service Request.php" method="post">
+                <div class="form-row">
+                    <div class=" col-md-4 mb-1 form-group">
+                        <label for="date">Date:</label>
+                        <input type="date" class="form-control" id="date" name="date" required>
+                    </div>
+                    <div class=" col-md-4 mb-1 form-group">
+                        <label for="time">Time:</label>
+                        <input type="time" class="form-control" id="time" name="time" required>
+                    </div>
+                    <div class=" col-md-4 mb-1 form-group">
+                        <label for="duetime">Due Time:</label>
+                        <input type="time" class="form-control" id="duetime" name="duetime" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class=" col-md-6 mb-1 form-group">
+                        <label for="department">Department:</label>
+                        <select class="form-select" id="department" name="department" required>
+                            <option value="">Select Department</option>
+                            <option value="registrar">Registrar</option>
+                            <option value="administration">Administration</option>
+                            <option value="law">Law</option>
+                            <option value="gradschool">Grad School</option>
+                            <option value="accounting">Accounting</option>
+                            <option value="deans">Deans</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-1 form-group">
+                        <label for="action">Action Taken:</label>
+                        <select class="form-select" id="action2" name="action2" required>
+                            <option value="">Select Action</option>
+                            <option value="urgent">Urgent</option>
+                            <option value="non-urgent">Non-Urgent</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-1 form-group">
+                    <label for="name">Staff Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                </div>
+                <div class="mb-1 form-group">
+                    <label for="details">Details:</label>
+                    <textarea class="form-control" id="details" name="details" rows="2"
+                        placeholder="What is the problem?" required></textarea>
+                </div>
+                <div class="mb-2 form-group">
+                    <label for="recomm">Recomendation</label>
+                    <textarea class="form-control" id="recomm" name="recomm" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn1" name="service-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
+    <!-- Overlay for Equipment Request -->
+
+    <!-- Overlay form MIS Equiment  for Professor-->
+    <div class="overlay-form" id="overlayFormProfessor">
+        <div class="form-container">
+            <button class="close-icon" id="closeFormBtnProfessor"><span>&#10006;</span>
+            </button><!-- Close icon -->
+            <div class="form-logo">
+                <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
+                <h2> MIS Equiment Request Form</h2>
+            </div>
+            <form action="./Database/Equipment Request.php" method="post">
+
+
+                <div class="form-row">
+                    <div class=" col-md-4 mb-1 form-group">
+                        <label for="date">Date:</label>
+                        <input type="date" class="form-control" id="date" name="date" required>
+                    </div>
+                    <div class=" col-md-4 mb-1 form-group">
+                        <label for="time">Time:</label>
+                        <input type="time" class="form-control" id="time" name="time" required>
+                    </div>
+                    <div class=" col-md-4 mb-1 form-group">
+                        <label for="duetime">Due Time:</label>
+                        <input type="time" class="form-control" id="duetime" name="duetime" required>
+                    </div>
+                </div>
+                <div class="mb-1 form-group">
+                    <label for="department">Department:</label>
+                    <select class="form-select" id="department" name="department" required>
+                        <option value="">Select Department</option>
+                        <option value="BSIS">Information System (BSIS)</option>
+                        <option value="BSIS">Information Technology (BSIT)</option>
+                        <option value="BSEMC">Entertainment & Multimedia Computing (BSEMC)</option>
+                        <option value="BSCS">Computer Science (BSCS)</option>
+                        <option value="BSOAD">Office of Administration (BSOAD)</option>
+                        <option value="MATH">BS Mathermatics (BSMATH)</option>
+                        <option value="MATH">BS Psychology (BSPsyc)</option>
+                        <option value="COMM">BA Communication (BACOMM)</option>
+                        <option value="PolSci">Political Science (BAPOLSCIE)</option>
+                    </select>
+                </div>
+                <div class="mb-2 form-group">
+                    <label for="name">Professor Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Professor Name" required>
+                </div>
+                <div class="mb-2 form-group">
+                    <label for="requestedItem">Requested Item:</label>
+                    <textarea class="form-control" id="requestedItem" name="requestedItem" rows="2" required></textarea>
+                </div>
+                <div class="mb-2 form-group">
+                    <label for="purpose">Purpose:</label>
+                    <textarea class="form-control" id="purpose" name="purpose" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn1" name="prof_btn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Overlay form Equipment for student-->
+    <div class="overlay-form" id="overlayFormStudent">
+        <div class="form-container">
+            <button class="close-icon" id="closeFormBtnStudent"><span>&#10006;</span>
+            </button><!-- Close icon -->
+            <div class="form-logo">
+                <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
+                <h2> MIS Equiment Request Form</h2>
+            </div>
+            <form action="./Database/Equipment Request.php" method="post">
+                <div class="form-row">
+                    <div class=" col-md-4 mb-1 form-group">
+                        <label for="date">Date:</label>
+                        <input type="date" class="form-control" id="date" name="date" required>
+                    </div>
+                    <div class=" col-md-4 mb-1 form-group">
+                        <label for="time">Time:</label>
+                        <input type="time" class="form-control" id="time" name="time" required>
+                    </div>
+                    <div class=" col-md-4 mb-1 form-group">
+                        <label for="duetime">Due Time:</label>
+                        <input type="time" class="form-control" id="duetime" name="duetime" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-1 form-group">
+                        <label for="course">Course:</label>
+                        <select class="form-select" id="course" name="course" required>
+                            <option value="">Select Year</option>
+                            <option value="BSIS">BSIS</option>
+                            <option value="BSEMC">BSEMC</option>
+                            <option value="BSIT">BSIT</option>
+                            <option value="BSCS">BSCS</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-1 form-group">
+                        <label for="year">Year:</label>
+                        <select class="form-select" id="year" name="year" required>
+                            <option value="">Select Year</option>
+                            <option value="1st">1st</option>
+                            <option value="2nd">2nd</option>
+                            <option value="3rd">3rd</option>
+                            <option value="4th">4th</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4  mb-1 form-group">
+                        <label for="section">Section:</label>
+                        <select class="form-select" id="section" name="section" required>
+                            <option value="">Select Section</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-1 form-group">
+                        <label for="name">Student Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="StudentName"
+                            required>
+                    </div>
+                    <div class="col-md-4 mb-1 form-group">
+                        <label for="studentID">Student Number:</label>
+                        <input type="text" class="form-control" id="studentID" name="studentID"
+                            placeholder="StudentNumber" required>
+                    </div>
+                    <div class=" col-md-4 mb-1 form-group">
+                        <label for="department">Department:</label>
+                        <select class="form-select" id="department1" name="department" required>
+                            <option value="">Select Department</option>
+                            <option value="BSIS">Information System (BSIS)</option>
+                            <option value="BSIS">Information Technology (BSIT)</option>
+                            <option value="BSEMC">Entertainment & Multimedia Computing (BSEMC)</option>
+                            <option value="BSCS">Computer Science (BSCS)</option>
+                            <option value="BSOAD">Office of Administration (BSOAD)</option>
+                            <option value="MATH">BS Mathermatics (BSMATH)</option>
+                            <option value="MATH">BS Psychology (BSPsych)</option>
+                            <option value="COMM">BA Communication (BACOMM)</option>
+                            <option value="PolSci">Political Science (BAPOLSCIE)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-1 form-group">
+                    <label for="requestedItem">Requested Item:</label>
+                    <textarea class="form-control" id="requestedItem" name="requestedItem" rows="2" required></textarea>
+                </div>
+                <div class="mb-1 form-group">
+                    <label for="purpose">Purpose:</label>
+                    <textarea class="form-control" id="purpose" name="purpose" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn1" name="stud_btn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <!-- Overlay for Feedback -->
+
+    <!-- Overlay form Request for feedback -->
+    <div class="overlay-form" id="overlayFormFeedback">
+        <div class="form-container">
+            <button class="close-icon" id="closeFormBtnFeedback"><span>&#10006;</span>
+            </button><!-- Close icon -->
+            <div class="form-logo">
+                <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
+                <h2> MIS Feedback Form</h2>
+            </div>
+            <form action="./Database/Feedback_Form.php" method="post">
+                <div class="form-row">
+                    <div class=" col-md-4 mb-1 form-group">
+                        <label for="date">Date:</label>
+                        <input type="date" class="form-control" id="date" name="date" required>
+                    </div>
+                    <div class=" col-md-3 mb-1 form-group">
+                        <label for="time">Time:</label>
+                        <input type="time" class="form-control" id="time" name="time" required>
+                    </div>
+                    <div class="col-md-5 mb-1 form-group">
+                        <label for="department">Department:</label>
+                        <select class="form-select" id="department1" name="department" required>
+                            <option value="">Select Department</option>
+                            <option value="BSIS">Information System (BSIS)</option>
+                            <option value="BSIS">Information Technology (BSIT)</option>
+                            <option value="BSEMC">Entertainment & Multimedia Computing (BSEMC)</option>
+                            <option value="BSCS">Computer Science (BSCS)</option>
+                            <option value="BSOAD">Office of Administration (BSOAD)</option>
+                            <option value="MATH">BS Mathermatics (BSMATH)</option>
+                            <option value="MATH">BS Psychology (BSPsyc)</option>
+                            <option value="COMM">BA Communication (BACOMM)</option>
+                            <option value="PolSci">Political Science (BAPOLSCIE)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-1 form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Optional" required>
+                </div>
+                <div class="mb-1 form-group">
+                    <label for="Feedback"> FeedBack Details:</label>
+                    <textarea class="form-control" id="Feedback" name="Feedback" rows="2" required></textarea>
+                </div>
+                <div class="mb-1 form-group">
+                    <label for="purpose">Recomendation</label>
+                    <textarea class="form-control" id="recomm" name="recomm" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn1" name="feedback_btn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
+    <!-- Overlay for Room Request -->
     <!-- Overlay form Room for student-->
     <div class="overlay-form" id="overlayFormStudentRoom">
         <div class="form-container">
@@ -525,7 +537,7 @@
                     <label for="purpose">Purpose:</label>
                     <textarea class="form-control" id="purpose" name="purpose" rows="5" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary mt-2" name="room_btn_stud">Submit</button>
+                <button type="submit" class="btn1" name="room_btn_stud">Submit</button>
             </form>
         </div>
     </div>
@@ -557,7 +569,8 @@
                     </div>
                     <div class=" col-md-3 mb-1 form-group">
                         <label for="total">Total Student:</label>
-                        <input type="text" class="form-control" id="total" name="total" placeholder="Total Student" required>
+                        <input type="text" class="form-control" id="total" name="total" placeholder="Total Student"
+                            required>
                     </div>
                 </div>
                 <div class="mb-1 form-group">
@@ -577,19 +590,17 @@
                 </div>
                 <div class="mb-2 form-group">
                     <label for="name">Professor Name:</label>
-                    <input type="text" class="form-control" id="name" name="name"  placeholder="Professor Name" required>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Professor Name" required>
                 </div>
-              
+
                 <div class="mb-2 form-group">
                     <label for="purpose">Purpose:</label>
                     <textarea class="form-control" id="purpose" name="purpose" rows="5" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary mt-2" name="Room_btn_prof">Submit</button>
+                <button type="submit" class="btn1" name="Room_btn_prof">Submit</button>
             </form>
         </div>
     </div>
-
-
     </div>
 
 
@@ -631,19 +642,19 @@
                             <h3 class="text-center">Message <span>Us</span></h3>
                             <form action="./Database/Message Us.php" method="post">
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Your Name</label>
+                                    <label for="name" class="form-label" required>Your Name</label>
                                     <input type="text" class="form-control" id="name" name="name"
-                                        placeholder="Enter your name">
+                                        placeholder="Enter your name" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Your Email</label>
                                     <input type="email" class="form-control" id="email" name="email"
-                                        placeholder="Enter your email">
+                                        placeholder="Enter your email" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="message" class="form-label">Message</label>
                                     <textarea class="form-control" id="message" name="message" rows="5"
-                                        placeholder="Enter your message"></textarea>
+                                        placeholder="Enter your message" required></textarea>
                                 </div>
                                 <button type="submit" class="btn1" name="Send_btn">Send</button>
                             </form>
@@ -685,12 +696,7 @@
         crossorigin="anonymous"></script>
     <script src="./js/json.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        
-    </script>
-
 
 </body>
-
 
 </html>

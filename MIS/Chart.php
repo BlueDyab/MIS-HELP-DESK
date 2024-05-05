@@ -43,7 +43,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./index.html#contact">Contact</a>
+                            <a class="nav-link" href="./index.html#contact">Message Us</a>
                         </li>
                     </ul>
                 </div>

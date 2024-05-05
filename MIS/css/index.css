@@ -2,6 +2,19 @@
 
 *{font-family: 'Alegreya Sans', sans-serif;}
 
+
+     /* Custom styles */
+     .hero-section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f8f9fa; /* Change this to your desired background color */
+  }
+  .carousel-caption h5,
+  .carousel-caption p {
+      color: #fff; /* Text color for captions */
+  }
 .section-header{
     margin-bottom: 40px;
 }
@@ -159,11 +172,13 @@ h3 span{
 }
 
 p{
-  font-size: 17px;
+  font-size: 18px;
+  
 }
+
 .btn2{
-  margin-bottom:20px;
-  padding: 5px  ;
+  margin-bottom: 10px;
+  padding: 5px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
   border: none;

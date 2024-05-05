@@ -193,7 +193,6 @@
                     <th class="th col-1" scope="col">Due Time</th>
                     <th class="th col-2" scope="col">Recommendation</th>
                     <th class="th col-1" scope="col">Status</th>
-                    <th class="th col-1" scope="col">Action</th>
                 </tr>
             </thead>
             <tbody class="data table-group-divider" id="searchResults"> 
@@ -230,18 +229,15 @@ foreach ($client_count as $acc) {
     echo "<td class='td'>" . $acc['Due_Time'] . "</td>";
     echo "<td class='td'>" . $acc['Recommendation'] . "</td>";
     echo "<td class='td'>" . $acc['Status'] . "</td>";
-    echo "<td class='text-center'>";
     // Check if 'ID' key exists in the $acc array
-    if (array_key_exists('I', $acc)) {
-        // Output the button with 'ID' data attribute
-        echo "<button class='btn btn-danger m-2 openFormBtnEdit' data-id='" . htmlspecialchars($acc['Id']) . "' name='editing'><i class='fas fa-edit'></i></button>";
-        echo "<button class='btn btn-danger deleteButton' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='fas fa-trash'></button>";
-    } else {
-        // Output a message or placeholder if 'ID' key is not found
-        echo "ID not available";
-    }
-    echo "</td>";
-    echo "</tr>";
+    // if (array_key_exists('Id', $acc)) {
+    //     // Output the button with 'ID' data attribute
+    //     echo "<button class='btn btn-danger m-2 openFormBtnEdit' data-id='" . htmlspecialchars($acc['Id']) . "' name='editing'><i class='fas fa-edit'></i></button>";
+    //     echo "<button class='btn btn-danger deleteButton' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='fas fa-trash'></button>";
+    // } else {
+    //     // Output a message or placeholder if 'ID' key is not found
+    //     echo "ID not available";
+
 
     // Increment the counter
     $counter++;
