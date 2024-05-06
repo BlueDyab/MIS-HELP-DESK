@@ -56,7 +56,7 @@
 
         try{
             // Prepare the SQL statement
-            $stmt = $conn->prepare("INSERT INTO `stud_room_request_form`(`Date`, `Time`, `TimeOut`, `Course`, `Year`, `Section`, `Name`, `Student_Number`, `Prof_Name`, `Purpose`) VALUES (:date, :time, :timeout, :course, :year, :section, :name, :student_number, :prof_name, :purpose)");
+            $stmt = $conn->prepare("INSERT INTO `stud_room_request_form_db`(`Student_Name`, `Student_Number`, `Year`, `Section`, `Course`, `Time_In`, `Time_Out`, `Date`, `Purpose`,`Prof_name`) VALUES (:name, :student_number, :year, :section, :course, :time, :timeout, :date, :purpose ,:prof_name)");
 
             // Bind parameters
             $stmt->bindParam(':date', $Date);
