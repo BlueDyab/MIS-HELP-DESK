@@ -29,7 +29,7 @@ include '../Database/connection.php';
     }
 
     .header {
-        background-color: gray;
+        background-color: #ff4d00;
         position: sticky;
         top: -2px;
     }
@@ -40,7 +40,7 @@ include '../Database/connection.php';
 
     .th {
         text-align: center;
-        color: white;
+        color: black;
 
     }
 
@@ -186,7 +186,7 @@ include '../Database/connection.php';
                         $search = isset($_GET['search']) ? '%' . $_GET['search'] . '%' : '%';
 
                         // Prepare the SQL SELECT statement with the search condition
-                        $stmt = $conn->prepare("SELECT * FROM `stud_room_request_form_db` WHERE `Student_Name` LIKE ? OR `Date` LIKE ? OR `Course` LIKE ? OR `Prof_name` LIKE ? OR `Student_Number` LIKE ?");
+                        $stmt = $conn->prepare("SELECT * FROM `stud_room_request_form` WHERE `Name` LIKE ? OR `Date` LIKE ? OR `Course` LIKE ? OR `Prof_name` LIKE ? OR `Student_Number` LIKE ?");
                         $stmt->execute([$search, $search, $search, $search, $search]);
 
                         // Fetch all the results
@@ -198,10 +198,10 @@ include '../Database/connection.php';
                             foreach ($client_count as $acc) {
                                 echo "<tr>";
                                 // Output each column value of the row, including the arrow icon
-                                echo "<th scope='row'>" . htmlspecialchars($acc['Id']) . " <span class='arrow' onclick='toggleRow(this)'>▼</span></th>";
-                                echo "<td>" . htmlspecialchars($acc['Student_Name']) . "</td>";
+                                echo "<th scope='row'>" . htmlspecialchars($acc['ID']) . " <span class='arrow' onclick='toggleRow(this)'>▼</span></th>";
+                                echo "<td>" . htmlspecialchars($acc['Name']) . "</td>";
                                 echo "<td>" . htmlspecialchars($acc['Student_Number']) . "</td>";
-                                echo "<td>" . htmlspecialchars($acc['Prof_name']) . "</td>";
+                                echo "<td>" . htmlspecialchars($acc['Prof_Name']) . "</td>";
                                 echo "<td>" . htmlspecialchars($acc['Course']) . "</td>";
                                 echo "<td>" . htmlspecialchars($acc['Year']) . "</td>";
                                 echo "<td>" . htmlspecialchars($acc['Section']) . "</td>";

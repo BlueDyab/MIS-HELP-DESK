@@ -29,7 +29,7 @@
             align-items: start;
         }
         .header {
-        background-color: gray;
+            background-color: #ff4d00;
         position: sticky;
         top: -2px;
     }

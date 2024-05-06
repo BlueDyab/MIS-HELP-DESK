@@ -30,7 +30,7 @@
     }
 
     .header {
-        background-color: gray;
+        background-color: #ff4d00;
         position: sticky;
         top: -2px;
     }
@@ -41,7 +41,7 @@
 
     .th {
         text-align: center;
-        color: white;
+        color:black;
 
     }
 

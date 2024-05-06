@@ -30,7 +30,7 @@ require '../Database/connection.php';
     }
 
     .header {
-        background-color: gray;
+        background-color: #ff4d00;
         position: sticky;
         top: -2px;
     }
@@ -41,7 +41,7 @@ require '../Database/connection.php';
 
     .th {
         text-align: center;
-        color: white;
+        color: black;
 
     }
 
@@ -50,7 +50,9 @@ require '../Database/connection.php';
         height: 100vh;
 
     }
-
+.col-2{
+    color: black;
+}
 
 
     /* Hide sidebar when printing */
@@ -186,9 +188,7 @@ require '../Database/connection.php';
                             <th class="th col-1" scope="col">Department</th>
                             <th class="th col-1" scope="col">Detail</th>
                             <th class="th col-1" scope="col">Action</th>
-                            <th class="th col-1" scope="col">Date</th>
-                            <th class="th col-1" scope="col">Time</th>
-                            <th class="th col-1" scope="col">Due Time</th>
+                            <th class="th col-2" scope="col">Date</th>
                             <th class="th col-3" scope="col">Recommendation</th>
                             <th class="th col-1" scope="col">Status</th>
                             <th class="th col-1" scope="col">Action</th>
@@ -217,28 +217,24 @@ require '../Database/connection.php';
                                 foreach ($client_count as $acc) {
                                     echo "<tr>";
                                     // Output each column value of the row
-                                    echo "<th class='td' scope='col'>" . $counter . "</th>"; // Display the counter
+                                    echo "<th class='td' scope='col'>" . $counter ." <span class='arrow' onclick='toggleRow(this)'>▼</span></th>";// Display the counter
                                     echo "<td class='td' style='display:none;'>" . $acc['Id'] . "</td>";
                                     echo "<td class='td'>" . $acc['Staff_Name'] . "</td>";
                                     echo "<td class='td'>" . $acc['Dept'] . "</td>";
                                     echo "<td class='td'>" . $acc['Details'] . "</td>";
                                     echo "<td class='td'>" . $acc['Action_Taken'] . "</td>";
                                     echo "<td class='td'>" . $acc['Date'] . "</td>";
-                                    echo "<td class='td'>" . $acc['Time'] . "</td>";
-                                    echo "<td class='td'>" . $acc['Due_Time'] . "</td>";
                                     echo "<td class='td'>" . $acc['Recommendation'] . "</td>";
                                     echo "<td class='td'>" . $acc['Status'] . "</td>";
                                     echo "<td class='td'>" . "<button class='btn btn-danger m-2 openFormBtnEdit' data-id='" . htmlspecialchars($acc['Id']) . "' name='AcceptDenied'><i class='fas fa-edit'>Accept</i></button>" . "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='fas fa-trash'>Denied</button>" . "</td>";
-                                    // Check if 'ID' key exists in the $acc array
-                                    // if (array_key_exists('Id', $acc)) {
-                                    //     // Output the button with 'ID' data attribute
-                                    //     echo "<button class='btn btn-danger m-2 openFormBtnEdit' data-id='" . htmlspecialchars($acc['Id']) . "' name='editing'><i class='fas fa-edit'></i></button>";
-                                    //     echo "<button class='btn btn-danger deleteButton' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='fas fa-trash'></button>";
-                                    // } else {
-                                    //     // Output a message or placeholder if 'ID' key is not found
-                                    //     echo "ID not available";
-
-
+                                    echo "</tr>";
+                                      // Hidden row for requested item, purpose, and time details
+                                      echo "<tr class='hidden-row' style='display: none;'>";
+                                      echo "<td colspan='10'>";
+                                      echo "<strong>Time:</strong> " . htmlspecialchars($acc['Time']) . "<br>";
+                                      echo "<strong>DueTime:</strong> " . htmlspecialchars($acc['Due_Time']);
+                                      echo "</td>";
+                                      echo "</tr>";
                                     // Increment the counter
                                     $counter++;
                                 }
@@ -276,6 +272,14 @@ require '../Database/connection.php';
                     });
                 });
             </script>
+            <script>
+    function toggleRow(arrow) {
+        const row = arrow.closest('tr').nextElementSibling;
+        row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
+        arrow.textContent = arrow.textContent === '▼' ? '▲' : '▼';
+    }
+</script>
+
 
 </body>
 

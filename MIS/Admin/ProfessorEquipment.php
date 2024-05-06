@@ -28,7 +28,7 @@
             align-items: start;
         }
     .header {
-            background-color: gray;
+        background-color: #ff4d00;
         }
 
         tr {
@@ -48,6 +48,7 @@
             position: sticky;
             top: -2px;
         }
+            
 
 </style>
 <body>
@@ -168,13 +169,11 @@
                                 <th class="th col-1" scope="col">No</th>
                                 <th class="col-2" scope="col"> Professor Name</th>
                                 <th class="th col-1" scope="col">Deparment</th>
-                                <th class="th col-1" scope="col">Date</th>
-                                <th class="th col-1" scope="col">Time</th>
-                                <th class="th col-1" scope="col">Due Time</th>
+                                <th class="th col-2" scope="col">Date</th>
                                 <th class="th col-2" scope="col">Requested Item</th>
                                 <th class="th col-2" scope="col">Purpose</th>
-                                <th class="th col-2" scope="col">Remark</th>
-                <th class="th col-2" scope="col">Action</th>
+                                <th class="th col-1" scope="col">Remark</th>
+                <th class="th col-1" scope="col">Action</th>
 
                             </tr>
                         </thead>
@@ -201,17 +200,22 @@
                                     echo "<tr>";
                                     // Output each column value of the row
                                     
-                                    echo "<th scope='row'>" . htmlspecialchars($acc['Id']) . "</th>";
+                                    echo "<th scope='row'>" . htmlspecialchars($acc['Id']) . " <span class='arrow' onclick='toggleRow(this)'>▼</span></th>";
                                     echo "<td>" . htmlspecialchars($acc['Professor_Name']) . "</td>";
                                     echo "<td>" . htmlspecialchars($acc['Department']) . "</td>";
                                     echo "<td>" . htmlspecialchars($acc['Date']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($acc['Time']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($acc['Due_Time']) . "</td>";
                                     echo "<td>" . htmlspecialchars($acc['Requested_Item']) . "</td>";
                                     echo "<td>" . htmlspecialchars($acc['Purpose']) . "</td>";
                                     echo "<td>" . htmlspecialchars($acc['Remark']) . "</td>";    
                                     echo "<td>" . htmlspecialchars($acc['Action']) . "</td>"; 
                                     echo "</tr>";
+                                       // Hidden row for requested item, purpose, and time details
+                                       echo "<tr class='hidden-row' style='display: none;'>";
+                                       echo "<td colspan='10'>";
+                                       echo "<strong>Time:</strong> " . htmlspecialchars($acc['Time']) . "<br>";
+                                       echo "<strong>DueTime:</strong> " . htmlspecialchars($acc['Due_Time']);
+                                       echo "</td>";
+                                       echo "</tr>";
                                 }
                             } else {
                                 echo "<tr><td colspan='8'>No data found</td></tr>";
@@ -244,6 +248,13 @@
             }
         });
     });
+</script>
+<script>
+    function toggleRow(arrow) {
+        const row = arrow.closest('tr').nextElementSibling;
+        row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
+        arrow.textContent = arrow.textContent === '▼' ? '▲' : '▼';
+    }
 </script>
 
 </body>
