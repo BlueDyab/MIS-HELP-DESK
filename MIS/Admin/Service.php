@@ -186,10 +186,10 @@ require '../Database/connection.php';
                             <th class="th col-1" scope="col">Department</th>
                             <th class="th col-1" scope="col">Detail</th>
                             <th class="th col-1" scope="col">Action</th>
-                            <th class="th col-2" scope="col">Date</th>
-                            <th class="th col-2" scope="col">Time</th>
+                            <th class="th col-1" scope="col">Date</th>
+                            <th class="th col-1" scope="col">Time</th>
                             <th class="th col-1" scope="col">Due Time</th>
-                            <th class="th col-2" scope="col">Recommendation</th>
+                            <th class="th col-3" scope="col">Recommendation</th>
                             <th class="th col-1" scope="col">Status</th>
                             <th class="th col-1" scope="col">Action</th>
                         </tr>
