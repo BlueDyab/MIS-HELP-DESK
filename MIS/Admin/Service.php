@@ -214,29 +214,46 @@ require '../Database/connection.php';
                                 // Initialize counter
                                 $counter = 1;
                                 // Iterate over each row
-                                foreach ($client_count as $acc) {
-                                    echo "<tr>";
-                                    // Output each column value of the row
-                                    echo "<th class='td' scope='col'>" . $counter ." <span class='arrow' onclick='toggleRow(this)'>▼</span></th>";// Display the counter
-                                    echo "<td class='td' style='display:none;'>" . $acc['Id'] . "</td>";
-                                    echo "<td class='td'>" . $acc['Staff_Name'] . "</td>";
-                                    echo "<td class='td'>" . $acc['Dept'] . "</td>";
-                                    echo "<td class='td'>" . $acc['Details'] . "</td>";
-                                    echo "<td class='td'>" . $acc['Action_Taken'] . "</td>";
-                                    echo "<td class='td'>" . $acc['Date'] . "</td>";
-                                    echo "<td class='td'>" . $acc['Recommendation'] . "</td>";
-                                    echo "<td class='td'>" . $acc['Status'] . "</td>";
-                                    echo "<td class='td'>" . "<button class='btn btn-danger m-2 openFormBtnEdit' data-id='" . htmlspecialchars($acc['Id']) . "' name='AcceptDenied'><i class='fas fa-edit'>Accept</i></button>" . "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='fas fa-trash'>Denied</button>" . "</td>";
-                                    echo "</tr>";
-                                      // Hidden row for requested item, purpose, and time details
-                                      echo "<tr class='hidden-row' style='display: none;'>";
-                                      echo "<td colspan='10'>";
-                                      echo "<strong>Time:</strong> " . htmlspecialchars($acc['Time']) . "<br>";
-                                      echo "<strong>DueTime:</strong> " . htmlspecialchars($acc['Due_Time']);
-                                      echo "</td>";
-                                      echo "</tr>";
-                                    // Increment the counter
-                                    $counter++;
+                                foreach ($client_count as $data) {
+                                    if ($data['Status'] !== "Done") {
+                                        echo "<tr>";
+                                        // Output each column value of the row
+                                        echo "<th class='td' scope='col'>" . $counter ." <span class='arrow' onclick='toggleRow(this)'>▼</span></th>";// Display the counter
+                                        echo "<td class='td' style='display:none;'>" . $data['Id'] . "</td>";
+                                        echo "<td class='td'>" . $data['Staff_Name'] . "</td>";
+                                        echo "<td class='td'>" . $data['Dept'] . "</td>";
+                                        echo "<td class='td'>" . $data['Details'] . "</td>";
+                                        echo "<td class='td'>" . $data['Action_Taken'] . "</td>";
+                                        echo "<td class='td'>" . $data['Date'] . "</td>";
+                                        echo "<td class='td'>" . $data['Recommendation'] . "</td>";
+                                        echo "<td class='td'>" . $data['Status'] . "</td>";
+                                        if ($data['Status'] === "On-going") {
+                                            echo "<td class='td'>" . 
+                                                 "<button class='btn btn-warning m-2' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-pause-fill'>Pending</i></button>" .
+                                                 "<button class='btn btn-success m-2' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
+                                                 "</td>";
+                                        } else if ($data['Status'] === "Pending") {
+                                            echo "<td class='td'>" . 
+                                                 "<button class='btn btn-info m-2' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-play-fill'>On-going</i></button>" .
+                                                 "<button class='btn btn-success m-2' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
+                                                 "</td>";
+                                        } else {
+                                            echo "<td class='td'>" . 
+                                                 "<button class='btn btn-success m-2 openFormBtnEdit' data-id='" . htmlspecialchars($data['Id']) . "' name='AcceptDenied'><i class='bi bi-check-square-fill'>Accept</i></button>" . 
+                                                 "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-x-square-fill'>Denied</i></button>" . 
+                                                 "</td>";
+                                        }
+                                        echo "</tr>";
+                                          // Hidden row for requested item, purpose, and time details
+                                          echo "<tr class='hidden-row' style='display: none;'>";
+                                          echo "<td colspan='10'>";
+                                          echo "<strong>Time:</strong> " . htmlspecialchars($data['Time']) . "<br>";
+                                          echo "<strong>DueTime:</strong> " . htmlspecialchars($data['Due_Time']);
+                                          echo "</td>";
+                                          echo "</tr>";
+                                        // Increment the counter
+                                        $counter++;
+                                    }
                                 }
                             } else {
                                 echo "<tr><td colspan='11'>No service request found.</td></tr>";
@@ -246,7 +263,7 @@ require '../Database/connection.php';
                         }
                         ?>
                     </tbody>
-
+                </table>
 
             </div>
 
@@ -271,14 +288,53 @@ require '../Database/connection.php';
                         }
                     });
                 });
+
+                $(document).ready(function() {
+                    // AJAX request for 'On-going' status
+                    $('.openFormBtnEdit').click(function() {
+                        var id = $(this).data('id'); // Get the data-id attribute of the clicked button
+
+                        // Make an AJAX request to your server-side script
+                        $.ajax({
+                            url: './Action.php', // The server-side script that handles the database update
+                            type: 'POST',
+                            data: { id: id, status: 'On-going' }, // Send the ID and new status
+                            success: function(response) {
+                                // On success, update the Status cell of the corresponding row
+                                $('button[data-id="' + id + '"]').closest('tr').find('td:eq(7)').text('On-going');
+                                location.reload();
+                            },
+                            error: function() {
+                                alert('Error updating status. Please try again.');
+                            }
+                        });
+                    });
+
+                    // AJAX request for 'Done' status
+                    $(".btn-success").click(function() {
+                        var id = $(this).attr('data-id');
+                        $.ajax({
+                            url: "./Action.php",
+                            type: "POST",
+                            data: { id: id, status: "Done" },
+                            success: function(response) {
+                                // Reload the page after updating status
+                                location.reload();
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    });
+                });
             </script>
             <script>
-    function toggleRow(arrow) {
-        const row = arrow.closest('tr').nextElementSibling;
-        row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
-        arrow.textContent = arrow.textContent === '▼' ? '▲' : '▼';
-    }
-</script>
+                function toggleRow(arrow) {
+                    const row = arrow.closest('tr').nextElementSibling;
+                    row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
+                    arrow.textContent = arrow.textContent === '▼' ? '▲' : '▼';
+                }
+            </script>
 
 
 </body>
