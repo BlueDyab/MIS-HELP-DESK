@@ -296,7 +296,7 @@ require '../Database/connection.php';
 
                         // Make an AJAX request to your server-side script
                         $.ajax({
-                            url: './Action.php', // The server-side script that handles the database update
+                            url: '../Admin/Action.php', // The server-side script that handles the database update
                             type: 'POST',
                             data: { id: id, status: 'On-going' }, // Send the ID and new status
                             success: function(response) {
@@ -307,6 +307,28 @@ require '../Database/connection.php';
                             error: function() {
                                 alert('Error updating status. Please try again.');
                             }
+                        });
+                    });
+
+                    $(document).ready(function() {
+                        // AJAX request for updating status to "Pending"
+                        $('.btn-warning').click(function() {
+                            var id = $(this).data('id'); // Get the data-id attribute of the clicked button
+
+                            // Make an AJAX request to update the status
+                            $.ajax({
+                                url: 'update_status.php', // URL to the server-side script for updating status
+                                type: 'POST',
+                                data: { id: id, status: 'Pending' }, // Send the ID and new status
+                                success: function(response) {
+                                    // On success, update the UI or notify the user
+                                    alert(response); // For demonstration, you can replace this with updating the UI
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error(xhr.responseText);
+                                    // Handle errors here
+                                }
+                            });
                         });
                     });
 
