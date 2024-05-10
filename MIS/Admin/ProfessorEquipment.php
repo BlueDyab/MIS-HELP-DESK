@@ -1,5 +1,5 @@
 <?php
-    include '../Database/connection.php';
+include '../Database/connection.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,55 +9,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Equipment</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-YQp1wFdsy1Z3dCU5ym8nfcfJWIPSK1rYBprYO8r00ELIOknvRr4aRKeqWSS6I6Zh" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/admin.css">
 </head>
 
 <style>
-      .main {
-            max-height: 100vh;
-            width: 100%;
-            overflow: hidden;
-            transition: all 0.35s ease-in-out;
-            background-color: #e2e3dc;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: start;
-        }
+    .main {
+        max-height: 100vh;
+        width: 100%;
+        overflow: hidden;
+        transition: all 0.35s ease-in-out;
+        background-color: #e2e3dc;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: start;
+    }
+
     .header {
         background-color: #ff4d00;
-        }
+    }
 
-        tr {
-            border: 1px solid gray;
-        }
+    tr {
+        border: 1px solid gray;
+    }
 
-        .th {
-            text-align: center;
-        }
-        .table-responsive.m-2 {
+    .th {
+        text-align: center;
+    }
+
+    .table-responsive.m-2 {
         width: 99.3%;
-            height: 100vh;
+        height: 100vh;
 
-        }
+    }
 
-        .header {
-            position: sticky;
-            top: -2px;
-        }
-            
-
+    .header {
+        position: sticky;
+        top: -2px;
+    }
 </style>
+
 <body>
 
-<div class="wrapper">
-<aside id="sidebar">
+    <div class="wrapper">
+        <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
-                <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
+                    <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
                 </button>
                 <div class="sidebar-logo">
                     <a href="Profile.php">User Account<i class="fa-solid fa-pen-to-square"></i></a>
@@ -65,81 +66,81 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="Admin.php"  id="profile" class="sidebar-link">
-                    <i class="fa-solid fa-chart-line"></i>
+                    <a href="Admin.php" id="profile" class="sidebar-link">
+                        <i class="fa-solid fa-chart-line"></i>
                         <span>DashBoard</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                    <i class="fa-solid fa-code-pull-request"></i>
+                        <i class="fa-solid fa-code-pull-request"></i>
                         <span>Request</span>
                     </a>
                     <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
                             <a href="Service.php" id="service" class="sidebar-link"><i class="fa-solid fa-user"></i>Service</a>
                         </li>
-                        
-                        <li class="sidebar-item">
-                            <a href="Feedback.php"  id="feedback" class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
-                        </li>
-                        
-                        <li class="sidebar-item">
-    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#equipmentDropdown" aria-expanded="false" aria-controls="equipmentDropdown">
-        <i class="fa-solid fa-wrench"></i>
-        <span>Equipment</span>
-    </a>
-    <ul id="equipmentDropdown" class="sidebar-dropdown list-unstyled collapse">
-        <li class="sidebar-item">
-            <a href="ProfessorEquipment.php" id="equipment" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i>Professor</a>
-        </li>
-        <li class="sidebar-item">
-            <a href="StudentEquipment.php" id="room" class="sidebar-link"><i class="fa-solid fa-user"></i>Student</a>
-        </li>
-     
-    </ul>
-</li>
 
-<li class="sidebar-item">
-    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#roomDropdown" aria-expanded="false" aria-controls="roomDropdown">
-        <i class="fa-solid fa-desktop"></i>
-        <span>Room</span>
-    </a>
-    <ul id="roomDropdown" class="sidebar-dropdown list-unstyled collapse">
-        <li class="sidebar-item">
-            <a href="ProfessorRoom.php" id="room" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i>Professor</a>
-        </li>
-        <li class="sidebar-item">
-            <a href="StudentRoom.php" id="room" class="sidebar-link"><i class="fa-solid fa-user"></i>Student</a>
-        </li>
-      
-    </ul>
-</li>
+                        <li class="sidebar-item">
+                            <a href="Feedback.php" id="feedback" class="sidebar-link"><i class="fa-solid fa-comments"></i>Feedback</a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#equipmentDropdown" aria-expanded="false" aria-controls="equipmentDropdown">
+                                <i class="fa-solid fa-wrench"></i>
+                                <span>Equipment</span>
+                            </a>
+                            <ul id="equipmentDropdown" class="sidebar-dropdown list-unstyled collapse">
+                                <li class="sidebar-item">
+                                    <a href="ProfessorEquipment.php" id="equipment" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i>Professor</a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="StudentEquipment.php" id="room" class="sidebar-link"><i class="fa-solid fa-user"></i>Student</a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#roomDropdown" aria-expanded="false" aria-controls="roomDropdown">
+                                <i class="fa-solid fa-desktop"></i>
+                                <span>Room</span>
+                            </a>
+                            <ul id="roomDropdown" class="sidebar-dropdown list-unstyled collapse">
+                                <li class="sidebar-item">
+                                    <a href="ProfessorRoom.php" id="room" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i>Professor</a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="StudentRoom.php" id="room" class="sidebar-link"><i class="fa-solid fa-user"></i>Student</a>
+                                </li>
+
+                            </ul>
+                        </li>
                     </ul>
                 </li>
-           
+
                 <li class="sidebar-item">
                     <a href="Inquiry.php" id="inquiry" class="sidebar-link">
-                    <i class="fa-solid fa-message"></i>
+                        <i class="fa-solid fa-message"></i>
                         <span>Inquiry</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="Record.php" id="record" class="sidebar-link">
-                    <i class="fa-solid fa-folder"></i>
+                        <i class="fa-solid fa-folder"></i>
                         <span>Record</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="User.php" id="account" class="sidebar-link">
                         <i class="fa-solid fa-gear"></i>
-                        <span>User Account  </span>
+                        <span>User Account </span>
                     </a>
                 </li>
             </ul>
             <div class="sidebar-footer">
                 <a href="../login.html" id="logout" class="sidebar-link">
-                <i class="fa-solid fa-right-from-bracket"></i>
+                    <i class="fa-solid fa-right-from-bracket"></i>
                     <span>Logout</span>
                 </a>
             </div>
@@ -147,37 +148,37 @@
 
         <div class="main">
 
-        <div class="container-fluid">
-    <div class="row justify-content-end mt-2">
-        <div class="col-md-6 col-lg-4 col-xl-3">
-            <form action="" method="GET"> <!-- Added form tag -->
-                <div class="input-group">
-                    <input type="text" class="form-control" name="search" placeholder="Search..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
-                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button> <!-- Changed button type to submit -->
+            <div class="container-fluid">
+                <div class="row justify-content-end mt-2">
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <form action="" method="GET"> <!-- Added form tag -->
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="search" placeholder="Search..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button> <!-- Changed button type to submit -->
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </form>
-        </div>
-    </div>
-</div>
+            </div>
 
 
-<div class="table-responsive m-2">
-    <table class="table table-bordered table-striped text-center">
-        <!-- Table header -->
-                        <thead class="header fixed-top">
-                            <tr>
-                                <th class="th col-1" scope="col">No</th>
-                                <th class="col-2" scope="col"> Professor Name</th>
-                                <th class="th col-1" scope="col">Deparment</th>
-                                <th class="th col-2" scope="col">Date</th>
-                                <th class="th col-2" scope="col">Requested Item</th>
-                                <th class="th col-2" scope="col">Purpose</th>
-                                <th class="th col-1" scope="col">Remark</th>
-                <th class="th col-1" scope="col">Action</th>
+            <div class="table-responsive m-2">
+                <table class="table table-bordered table-striped text-center">
+                    <!-- Table header -->
+                    <thead class="header fixed-top">
+                        <tr>
+                            <th class="th col-1" scope="col">No</th>
+                            <th class="col-2" scope="col"> Professor Name</th>
+                            <th class="th col-1" scope="col">Deparment</th>
+                            <th class="th col-2" scope="col">Date</th>
+                            <th class="th col-2" scope="col">Requested Item</th>
+                            <th class="th col-2" scope="col">Purpose</th>
+                            <th class="th col-1" scope="col">Status</th>
+                            <th class="th col-1" scope="col">Action</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <?php
                         try {
                             // Set the PDO error mode to exception
@@ -199,23 +200,38 @@
                                 foreach ($client_count as $acc) {
                                     echo "<tr>";
                                     // Output each column value of the row
-                                    
+
                                     echo "<th scope='row'>" . htmlspecialchars($acc['Id']) . " <span class='arrow' onclick='toggleRow(this)'>▼</span></th>";
                                     echo "<td>" . htmlspecialchars($acc['Professor_Name']) . "</td>";
                                     echo "<td>" . htmlspecialchars($acc['Department']) . "</td>";
                                     echo "<td>" . htmlspecialchars($acc['Date']) . "</td>";
                                     echo "<td>" . htmlspecialchars($acc['Requested_Item']) . "</td>";
                                     echo "<td>" . htmlspecialchars($acc['Purpose']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($acc['Remark']) . "</td>";    
-                                    echo "<td>" . htmlspecialchars($acc['Action']) . "</td>"; 
+                                    echo "<td>" . htmlspecialchars($acc['Status']) . "</td>";
+                                    if ($acc['Status'] === "On-going") {
+                                        echo "<td class='td'>" .
+                                            "<button class='btn btn-warning pending m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-pause-fill'>Pending</i></button>" .
+                                            "<button class='btn btn-success done m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
+                                            "</td>";
+                                    } else if ($acc['Status'] === "Pending") {
+                                        echo "<td class='td'>" .
+                                            "<button class='btn btn-info on-going m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-play-fill'>On-going</i></button>" .
+                                            "<button class='btn btn-success done m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
+                                            "</td>";
+                                    } else {
+                                        echo "<td class='td'>" .
+                                            "<button class='btn btn-success m-2 accept' data-id='" . htmlspecialchars($acc['Id']) . "' name='AcceptDenied'><i class='bi bi-check-square-fill'>Accept</i></button>" .
+                                            "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-x-square-fill'>Denied</i></button>" .
+                                            "</td>";
+                                    }
                                     echo "</tr>";
-                                       // Hidden row for requested item, purpose, and time details
-                                       echo "<tr class='hidden-row' style='display: none;'>";
-                                       echo "<td colspan='10'>";
-                                       echo "<strong>Time:</strong> " . htmlspecialchars($acc['Time']) . "<br>";
-                                       echo "<strong>DueTime:</strong> " . htmlspecialchars($acc['Due_Time']);
-                                       echo "</td>";
-                                       echo "</tr>";
+                                    // Hidden row for requested item, purpose, and time details
+                                    echo "<tr class='hidden-row' style='display: none;'>";
+                                    echo "<td colspan='10'>";
+                                    echo "<strong>Time:</strong> " . htmlspecialchars($acc['Time']) . "<br>";
+                                    echo "<strong>DueTime:</strong> " . htmlspecialchars($acc['Due_Time']);
+                                    echo "</td>";
+                                    echo "</tr>";
                                 }
                             } else {
                                 echo "<tr><td colspan='8'>No data found</td></tr>";
@@ -223,39 +239,130 @@
                         } catch (PDOException $e) {
                             echo "Error: " . $e->getMessage();
                         }
-                    ?>
-                        </tbody>
-    </table>
-        </div>
-    
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-<script>
-    const hamBurger = document.querySelector(".toggle-btn");
+                        ?>
+                    </tbody>
+                </table>
+            </div>
 
-    hamBurger.addEventListener("click", function () {
-        document.querySelector("#sidebar").classList.toggle("expand");
-    });
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+            <script>
+                const hamBurger = document.querySelector(".toggle-btn");
 
-    // Add event listener to handle clicks on the sidebar links
-    document.querySelectorAll('.sidebar-link').forEach(link => {
-        link.addEventListener('click', function (e) {
-            // Check if the clicked element is the icon
-            if (e.target.classList.contains('fa-solid')) {
-                // Prevent the default behavior (expanding/collapsing the dropdown)
-                e.preventDefault();
-                // Toggle the expand class on the sidebar
-                document.querySelector("#sidebar").classList.toggle("expand");
-            }
-        });
-    });
-</script>
-<script>
-    function toggleRow(arrow) {
-        const row = arrow.closest('tr').nextElementSibling;
-        row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
-        arrow.textContent = arrow.textContent === '▼' ? '▲' : '▼';
-    }
-</script>
+                hamBurger.addEventListener("click", function() {
+                    document.querySelector("#sidebar").classList.toggle("expand");
+                });
+
+                // Add event listener to handle clicks on the sidebar links
+                document.querySelectorAll('.sidebar-link').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        // Check if the clicked element is the icon
+                        if (e.target.classList.contains('fa-solid')) {
+                            // Prevent the default behavior (expanding/collapsing the dropdown)
+                            e.preventDefault();
+                            // Toggle the expand class on the sidebar
+                            document.querySelector("#sidebar").classList.toggle("expand");
+                        }
+                    });
+                });
+
+                $(document).ready(function() {
+                    // AJAX request for 'On-going' status
+                    $('.accept, .on-going').click(function() {
+                        var id = $(this).data('id'); // Get the data-id attribute of the clicked button
+
+                        // Make an AJAX request to your server-side script
+                        $.ajax({
+                            url: '../Admin/Action.php', // The server-side script that handles the database update
+                            type: 'POST',
+                            data: {
+                                id: id,
+                                status: 'On-going'
+                            }, // Send the ID and new status
+                            success: function(response) {
+                                // On success, update the Status cell of the corresponding row
+                                $('button[data-id="' + id + '"]').closest('tr').find('td:eq(7)').text('On-going');
+                                location.reload();
+                            },
+                            error: function() {
+                                alert('Error updating status. Please try again.');
+                            }
+                        });
+                    });
+
+                    $(document).ready(function() {
+                        // AJAX request for updating status to "Pending"
+                        $('.pending').click(function() {
+                            var id = $(this).data('id'); // Get the data-id attribute of the clicked button
+
+                            // Make an AJAX request to update the status
+                            $.ajax({
+                                url: './Action.php', // URL to the server-side script for updating status
+                                type: 'POST',
+                                data: {
+                                    id: id,
+                                    status: 'Pending'
+                                }, // Send the ID and new status
+                                success: function(response) {
+                                    // On success, update the UI or notify the user
+                                    //alert(response); // For demonstration, you can replace this with updating the UI
+                                    location.reload();
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error(xhr.responseText);
+                                    // Handle errors here
+                                }
+                            });
+                        });
+                    });
+
+                    // AJAX request for 'Done' status
+                    $(".done").click(function() {
+                        var id = $(this).attr('data-id');
+                        $.ajax({
+                            url: "./Action.php",
+                            type: "POST",
+                            data: {
+                                id: id,
+                                status: "Done"
+                            },
+                            success: function(response) {
+                                // Reload the page after updating status
+                                location.reload();
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    });
+
+                    $(".denied").click(function() {
+                        var id = $(this).attr('data-id');
+                        $.ajax({
+                            url: "./Action.php",
+                            type: "POST",
+                            data: {
+                                id: id,
+                                status: "Denied"
+                            },
+                            success: function(response) {
+                                // Reload the page after updating status
+                                location.reload();
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    });
+                });
+            </script>
+            <script>
+                function toggleRow(arrow) {
+                    const row = arrow.closest('tr').nextElementSibling;
+                    row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
+                    arrow.textContent = arrow.textContent === '▼' ? '▲' : '▼';
+                }
+            </script>
 
 </body>
+
 </html>

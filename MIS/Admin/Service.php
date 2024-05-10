@@ -215,7 +215,7 @@ require '../Database/connection.php';
                                 $counter = 1;
                                 // Iterate over each row
                                 foreach ($client_count as $data) {
-                                    if ($data['Status'] !== "Done") {
+                                    if ($data['Status'] !== "Done" && $data['Status'] !== "Denied"){
                                         echo "<tr>";
                                         // Output each column value of the row
                                         echo "<th class='td' scope='col'>" . $counter ." <span class='arrow' onclick='toggleRow(this)'>▼</span></th>";// Display the counter
@@ -229,17 +229,17 @@ require '../Database/connection.php';
                                         echo "<td class='td'>" . $data['Status'] . "</td>";
                                         if ($data['Status'] === "On-going") {
                                             echo "<td class='td'>" . 
-                                                 "<button class='btn btn-warning m-2' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-pause-fill'>Pending</i></button>" .
-                                                 "<button class='btn btn-success m-2' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
+                                                 "<button class='btn btn-warning pending m-2' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-pause-fill'>Pending</i></button>" .
+                                                 "<button class='btn btn-success done m-2' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
                                                  "</td>";
                                         } else if ($data['Status'] === "Pending") {
                                             echo "<td class='td'>" . 
-                                                 "<button class='btn btn-info m-2' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-play-fill'>On-going</i></button>" .
-                                                 "<button class='btn btn-success m-2' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
+                                                 "<button class='btn btn-info on-going m-2' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-play-fill'>On-going</i></button>" .
+                                                 "<button class='btn btn-success done m-2' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
                                                  "</td>";
                                         } else {
                                             echo "<td class='td'>" . 
-                                                 "<button class='btn btn-success m-2 openFormBtnEdit' data-id='" . htmlspecialchars($data['Id']) . "' name='AcceptDenied'><i class='bi bi-check-square-fill'>Accept</i></button>" . 
+                                                 "<button class='btn btn-success m-2 accept' data-id='" . htmlspecialchars($data['Id']) . "' name='AcceptDenied'><i class='bi bi-check-square-fill'>Accept</i></button>" . 
                                                  "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-x-square-fill'>Denied</i></button>" . 
                                                  "</td>";
                                         }
@@ -291,7 +291,7 @@ require '../Database/connection.php';
 
                 $(document).ready(function() {
                     // AJAX request for 'On-going' status
-                    $('.openFormBtnEdit').click(function() {
+                    $('.accept, .on-going').click(function() {
                         var id = $(this).data('id'); // Get the data-id attribute of the clicked button
 
                         // Make an AJAX request to your server-side script
@@ -312,17 +312,18 @@ require '../Database/connection.php';
 
                     $(document).ready(function() {
                         // AJAX request for updating status to "Pending"
-                        $('.btn-warning').click(function() {
+                        $('.pending').click(function() {
                             var id = $(this).data('id'); // Get the data-id attribute of the clicked button
 
                             // Make an AJAX request to update the status
                             $.ajax({
-                                url: 'update_status.php', // URL to the server-side script for updating status
+                                url: './Action.php', // URL to the server-side script for updating status
                                 type: 'POST',
                                 data: { id: id, status: 'Pending' }, // Send the ID and new status
                                 success: function(response) {
                                     // On success, update the UI or notify the user
-                                    alert(response); // For demonstration, you can replace this with updating the UI
+                                    //alert(response); // For demonstration, you can replace this with updating the UI
+                                    location.reload();
                                 },
                                 error: function(xhr, status, error) {
                                     console.error(xhr.responseText);
@@ -333,12 +334,28 @@ require '../Database/connection.php';
                     });
 
                     // AJAX request for 'Done' status
-                    $(".btn-success").click(function() {
+                    $(".done").click(function() {
                         var id = $(this).attr('data-id');
                         $.ajax({
                             url: "./Action.php",
                             type: "POST",
                             data: { id: id, status: "Done" },
+                            success: function(response) {
+                                // Reload the page after updating status
+                                location.reload();
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    });
+
+                    $(".denied").click(function() {
+                        var id = $(this).attr('data-id');
+                        $.ajax({
+                            url: "./Action.php",
+                            type: "POST",
+                            data: { id: id, status: "Denied" },
                             success: function(response) {
                                 // Reload the page after updating status
                                 location.reload();
