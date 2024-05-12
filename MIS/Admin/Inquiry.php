@@ -1,3 +1,6 @@
+<?php
+    include '../Database/connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,11 +37,9 @@
     tr {
         font-size: 15px;
     }
-
     .th {
         text-align: center;
         color: black;
-
     }
 
     .table-responsive.m-2 {
@@ -159,10 +160,70 @@
 
                         </tr>
                     </thead>
-                    
+                    <tbody>
+                        <?php
+                        try {
+                            // Set the PDO error mode to exception
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                            // Initialize the search query
+                            $search = isset($_GET['search']) ? '%' . $_GET['search'] . '%' : '%';
+
+                            // Prepare the SQL SELECT statement with the search condition
+                            $stmt = $conn->prepare("SELECT * FROM `message_us_db` WHERE `Name` LIKE ?");
+                            $stmt->execute([$search]);
+
+                            // Fetch all the results
+                            $client_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                            $counter = 1;
+                            if ($client_count) {
+                                // Iterate over each row
+                                foreach ($client_count as $acc) {
+                                    if ($acc['Status'] !== "Done"){
+                                    echo "<tr>";
+                                    // Output each column value of the row
+
+                                    echo "<th scope='row'>" . $counter . "</th>";
+                                    echo "<td>" . htmlspecialchars($acc['Name']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($acc['Email']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($acc['Message']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($acc['Status']) . "</td>";
+                                    echo "<td class='td'>" .
+                                        "<button class='btn btn-success m-2 reply' data-id='" . htmlspecialchars($acc['ID']) . "' name='AcceptDenied'><i class='bi bi-check-square-fill'>Reply</i></button>" .
+                                        "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($acc['ID']) . "'><i class='bi bi-x-square-fill'>Done</i></button>" .
+                                        "</td>";
+                                    echo "</tr>";
+
+                                    $counter++;
+                                }
+                            }
+                            } else {
+                                echo "<tr><td colspan='8'>No data found</td></tr>";
+                            }
+                        } catch (PDOException $e) {
+                            echo "Error: " . $e->getMessage();
+                        }
+                        ?>
+                    </tbody>
                 </table>
             </div>
-
+            <div id="replyFormModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Reply to Message</h2>
+                <form id="replyForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" readonly>
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" readonly>
+                <label for="replyMessage">Your Reply:</label>
+                <textarea id="replyMessage" name="replyMessage"></textarea>
+                <button type="submit">Send Reply</button>
+                </form>
+            </div>
+            </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
             <script>
                 const hamBurger = document.querySelector(".toggle-btn");
@@ -171,18 +232,62 @@
                     document.querySelector("#sidebar").classList.toggle("expand");
                 });
 
-                // Add event listener to handle clicks on the sidebar links
-                document.querySelectorAll('.sidebar-link').forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        // Check if the clicked element is the icon
-                        if (e.target.classList.contains('fa-solid')) {
-                            // Prevent the default behavior (expanding/collapsing the dropdown)
-                            e.preventDefault();
-                            // Toggle the expand class on the sidebar
-                            document.querySelector("#sidebar").classList.toggle("expand");
-                        }
-                    });
+                // When the user clicks on the reply button
+                $(document).on('click', '.reply', function() {
+                // Get the name and email from the row
+                var name = $(this).closest('tr').find('td:eq(0)').text();
+                var email = $(this).closest('tr').find('td:eq(1)').text();
+
+                // Populate the form fields with the fetched name and email
+                $('#name').val(name);
+                $('#email').val(email);
+
+                // Display the popup form
+                $('#replyFormModal').show();
                 });
+
+                // When the user clicks on the close button or outside the modal, close it
+                $(document).on('click', '.close, .modal', function(event) {
+                if ($(event.target).hasClass('modal') || $(event.target).hasClass('close')) {
+                    $('#replyFormModal').hide();
+                }
+                });
+
+                // AJAX submit the form
+                $('#replyForm').submit(function(e) {
+                e.preventDefault(); // Prevent default form submission
+
+                // Get form data
+                var formData = $(this).serialize();
+
+                // AJAX request to submit form data
+                $.ajax({
+                    type: 'POST',
+                    url: 'your_php_script.php', // Replace with your PHP script URL
+                    data: formData,
+                    success: function(response) {
+                    // Handle success response
+                    console.log(response);
+                    // Optionally, close the modal or show a success message
+                    },
+                    error: function(xhr, status, error) {
+                    // Handle error
+                    console.error(xhr.responseText);
+                    }
+                });
+                });
+                // Add event listener to handle clicks on the sidebar links
+                // document.querySelectorAll('.sidebar-link').forEach(link => {
+                //     link.addEventListener('click', function(e) {
+                //         // Check if the clicked element is the icon
+                //         if (e.target.classList.contains('fa-solid')) {
+                //             // Prevent the default behavior (expanding/collapsing the dropdown)
+                //             e.preventDefault();
+                //             // Toggle the expand class on the sidebar
+                //             document.querySelector("#sidebar").classList.toggle("expand");
+                //         }
+                //     });
+                // });
             </script>
 
 </body>

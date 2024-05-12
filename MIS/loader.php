@@ -97,6 +97,6 @@
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         $_SESSION['username'] = $username;
-        $_SESSION['password'] = $hashed_password;
+        $_SESSION['password'] = $password;
     }
 ?>

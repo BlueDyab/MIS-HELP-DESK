@@ -25,7 +25,7 @@
         $hashpasswordfromDb = password_hash($acc['Password'], PASSWORD_DEFAULT);
         if($acc && password_verify($password, $hashpasswordfromDb)){
             // Redirect to the admin page
-            header("location: ../Admin/Admin.html");
+            header("location: ../Admin/Admin.php");
             exit();
         } else {
             // Redirect back to the login page with an error message
