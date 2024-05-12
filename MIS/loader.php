@@ -94,8 +94,6 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
     }
