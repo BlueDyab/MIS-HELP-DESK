@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2024 at 09:19 AM
+-- Generation Time: May 12, 2024 at 04:11 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,7 +36,6 @@ CREATE TABLE `equipment_request_prof` (
   `Due_Time` time NOT NULL,
   `Requested_Item` varchar(255) NOT NULL,
   `Purpose` varchar(255) NOT NULL,
-  `Action` varchar(20) NOT NULL,
   `Status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -44,11 +43,11 @@ CREATE TABLE `equipment_request_prof` (
 -- Dumping data for table `equipment_request_prof`
 --
 
-INSERT INTO `equipment_request_prof` (`Id`, `Professor_Name`, `Department`, `Date`, `Time`, `Due_Time`, `Requested_Item`, `Purpose`, `Action`, `Status`) VALUES
-(2, 'dasdasdas', 'BSIS', '2024-05-02', '07:42:00', '07:41:00', 'dasdasd', 'asdad', '', 'On-going'),
-(3, 'dsadasdas', 'BSEMC', '2024-05-02', '07:43:00', '07:43:00', 'dasdasd', 'asdasd', '', 'Pending'),
-(4, 'dasdasda', 'MATH', '2024-05-16', '07:50:00', '07:50:00', 'dasdasd', 'asdasd', '', 'Done'),
-(5, 'dasda', 'BSCS', '2024-05-02', '07:51:00', '09:49:00', 'dasdas', 'dasdas', '', '');
+INSERT INTO `equipment_request_prof` (`Id`, `Professor_Name`, `Department`, `Date`, `Time`, `Due_Time`, `Requested_Item`, `Purpose`, `Status`) VALUES
+(2, 'dasdasdas', 'BSIS', '2024-05-02', '07:42:00', '07:41:00', 'dasdasd', 'asdad', 'Denied'),
+(3, 'dsadasdas', 'BSEMC', '2024-05-02', '07:43:00', '07:43:00', 'dasdasd', 'asdasd', 'Done'),
+(4, 'dasdasda', 'MATH', '2024-05-16', '07:50:00', '07:50:00', 'dasdasd', 'asdasd', 'Denied'),
+(5, 'dasda', 'BSCS', '2024-05-02', '07:51:00', '09:49:00', 'dasdas', 'dasdas', '');
 
 -- --------------------------------------------------------
 
@@ -69,16 +68,16 @@ CREATE TABLE `equipment_request_stud` (
   `Date` date NOT NULL,
   `Time` time NOT NULL,
   `Due_Time` time NOT NULL,
-  `Status` varchar(11) NOT NULL,
-  `Action` varchar(11) NOT NULL
+  `Status` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `equipment_request_stud`
 --
 
-INSERT INTO `equipment_request_stud` (`ID`, `Name`, `Student_No`, `Course`, `Year`, `Section`, `Department`, `Request Item`, `Purpose`, `Date`, `Time`, `Due_Time`, `Status`, `Action`) VALUES
-(1, 'Ruen Malvar', '20210098-S', 'BSIS', '3rd', 'A', 'BSIS', 'projector', 'lecture\r\n', '2024-05-02', '10:18:00', '15:00:00', 'Done', '');
+INSERT INTO `equipment_request_stud` (`ID`, `Name`, `Student_No`, `Course`, `Year`, `Section`, `Department`, `Request Item`, `Purpose`, `Date`, `Time`, `Due_Time`, `Status`) VALUES
+(1, 'Ruen Malvar', '20210098-S', 'BSIS', '3rd', 'A', 'BSIS', 'projector', 'lecture\r\n', '2024-05-02', '10:18:00', '15:00:00', 'Done'),
+(2, 'Ruen', '20210098-S', 'BSIS', '1st', 'A', 'BSIS', 'projector', 'lesson', '2024-05-11', '09:16:00', '09:17:00', 'Denied');
 
 -- --------------------------------------------------------
 
@@ -150,7 +149,7 @@ CREATE TABLE `prof_room_request_form_db` (
 
 INSERT INTO `prof_room_request_form_db` (`Id`, `Name`, `Dept`, `Time_In`, `Time_Out`, `Date`, `Total_Students`, `Purpose`, `Status`, `Action`) VALUES
 (1, 'Ruen Malvar', 'BSEMC', '07:16:00', '10:16:00', '2024-05-07', '100', '424242', 'Done', ''),
-(2, 'dasda', 'BSEMC', '08:17:00', '08:20:00', '2024-05-06', '100', 'dsafgvhvj', '', '');
+(2, 'dasda', 'BSEMC', '08:17:00', '08:20:00', '2024-05-06', '100', 'dsafgvhvj', 'Denied', '');
 
 -- --------------------------------------------------------
 
@@ -178,7 +177,7 @@ CREATE TABLE `service_request_db` (
 INSERT INTO `service_request_db` (`Id`, `Staff_Name`, `Dept`, `Date`, `Details`, `Action_Taken`, `Recommendation`, `Time`, `Due_Time`, `Status`) VALUES
 (1, 'ruen malvar', 'registrar', '2024-04-21', 'dasdasda', 'urgent', 'dasdasd', '20:18:00', '13:24:00', 'Done'),
 (2, 'ruen malvar', 'registrar', '2024-04-21', 'sdasdas', 'urgent', 'asdasd', '20:49:00', '14:56:00', 'Denied'),
-(3, 'ruen malvar', 'registrar', '2024-04-21', 'sdasdas', 'urgent', 'asdasd', '20:49:00', '14:56:00', 'Denied'),
+(3, 'ruen malvar', 'registrar', '2024-04-21', 'sdasdas', 'urgent', 'asdasd', '20:49:00', '14:56:00', 'Done'),
 (4, 'ruen malvar', 'registrar', '2024-04-21', 'sdasdas', 'urgent', 'asdasd', '20:49:00', '14:56:00', 'Denied'),
 (5, 'aylah', 'registrar', '2024-05-01', 'sdasdsad', 'urgent', 'sdasda', '13:58:00', '14:58:00', 'Denied'),
 (6, 'admin', 'registrar', '2024-04-05', 'internet problem', 'urgent', 'bring your tools', '12:11:00', '12:15:00', 'Denied'),
@@ -202,7 +201,6 @@ CREATE TABLE `stud_room_request_form_db` (
   `Date` date NOT NULL,
   `Purpose` varchar(255) NOT NULL,
   `Status` varchar(10) NOT NULL,
-  `Action` varchar(10) NOT NULL,
   `Prof_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -210,8 +208,9 @@ CREATE TABLE `stud_room_request_form_db` (
 -- Dumping data for table `stud_room_request_form_db`
 --
 
-INSERT INTO `stud_room_request_form_db` (`Id`, `Student_Name`, `Student_Number`, `Year`, `Section`, `Course`, `Time_In`, `Time_Out`, `Date`, `Purpose`, `Status`, `Action`, `Prof_name`) VALUES
-(1, 'Ruen Malvar', '20210098-S', '2nd', 'A', 'BSIS', '08:17:00', '08:17:00', '2024-05-06', 'gnsngrcsbfns', 'Pending', '', 'dasdas');
+INSERT INTO `stud_room_request_form_db` (`Id`, `Student_Name`, `Student_Number`, `Year`, `Section`, `Course`, `Time_In`, `Time_Out`, `Date`, `Purpose`, `Status`, `Prof_name`) VALUES
+(1, 'Ruen Malvar', '20210098-S', '2nd', 'A', 'BSIS', '08:17:00', '08:17:00', '2024-05-06', 'gnsngrcsbfns', 'Done', 'dasdas'),
+(2, 'Ruen', '20210098-S', '1st', 'A', 'BSIS', '23:41:00', '11:43:00', '2024-05-11', 'dlsdfnsdv,m sdjv', '', 'hehe');
 
 -- --------------------------------------------------------
 
@@ -237,7 +236,7 @@ CREATE TABLE `user_account_db` (
 --
 
 INSERT INTO `user_account_db` (`ID`, `Name`, `Course`, `Year`, `Section`, `Username`, `Password`, `Position`, `Avatar`, `Editing`) VALUES
-(6, 'Ruen Malvar', 'BSIS', 3, 'A', 'admin', 'admion', 'owner', '', 0),
+(6, 'Ruen Malvar', 'BSIS', 3, 'A', 'admin', 'admin', 'owner', '', 0),
 (7, 'Al christoper S.J CO', 'BSIS', 3, 'A', 'admin2', 'admin2', 'owner', '', 0);
 
 --
@@ -306,7 +305,7 @@ ALTER TABLE `equipment_request_prof`
 -- AUTO_INCREMENT for table `equipment_request_stud`
 --
 ALTER TABLE `equipment_request_stud`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `feedback_form_db`
@@ -336,7 +335,7 @@ ALTER TABLE `service_request_db`
 -- AUTO_INCREMENT for table `stud_room_request_form_db`
 --
 ALTER TABLE `stud_room_request_form_db`
-  MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_account_db`

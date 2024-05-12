@@ -195,6 +195,7 @@
                                 $counter = 1;
                                 // Iterate over each row
                                 foreach ($client_count as $acc) {
+                                    if ($acc['Status'] !== "Done" && $acc['Status'] !== "Denied"){
                                     echo "<tr>";
                                     // Output each column value of the row, including the arrow icon
                                     
@@ -211,12 +212,29 @@
                                     echo "<tr class='hidden-row' style='display: none;'>";
                                     echo "<td colspan='10'>";
                                     echo "<strong>Status:</strong> " . htmlspecialchars($acc['Status']) . "<br>";
-                                    echo "<strong>Action:</strong> " . htmlspecialchars($acc['Action']);
+                                    echo "<strong>Action:</strong> ";
+                                        if ($acc['Status'] === "On-going") {
+                                            echo "<td class='td'>" .
+                                                "<button class='btn btn-warning pending m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-pause-fill'>Pending</i></button>" .
+                                                "<button class='btn btn-success done m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
+                                                "</td>";
+                                        } else if ($acc['Status'] === "Pending") {
+                                            echo "<td class='td'>" .
+                                                "<button class='btn btn-info on-going m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-play-fill'>On-going</i></button>" .
+                                                "<button class='btn btn-success done m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
+                                                "</td>";
+                                        } else {
+                                            echo "<td class='td'>" .
+                                                "<button class='btn btn-success m-2 accept' data-id='" . htmlspecialchars($acc['Id']) . "' name='AcceptDenied'><i class='bi bi-check-square-fill'>Accept</i></button>" .
+                                                "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-x-square-fill'>Denied</i></button>" .
+                                                "</td>";
+                                        };
                                     echo "</td>";
                                     echo "</tr>";
                     
                                     $counter++;
                                 }
+                            }
                             } else {
                                 echo "<tr><td colspan='10'>No data found</td></tr>";
                             }
@@ -228,7 +246,7 @@
     </table>
         </div>
     
-    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script>
     const hamBurger = document.querySelector(".toggle-btn");
@@ -249,6 +267,96 @@
             }
         });
     });
+
+    $(document).ready(function() {
+                    // AJAX request for 'On-going' status
+                    $('.accept, .on-going').click(function() {
+                        var id = $(this).data('id'); // Get the data-id attribute of the clicked button
+
+                        // Make an AJAX request to your server-side script
+                        $.ajax({
+                            url: './Action.php', // The server-side script that handles the database update
+                            type: 'POST',
+                            data: {
+                                id: id,
+                                status: 'On-going'
+                            }, // Send the ID and new status
+                            success: function(response) {
+                                // On success, update the Status cell of the corresponding row
+                                $('button[data-id="' + id + '"]').closest('tr').find('td:eq(7)').text('On-going');
+                                location.reload();
+                            },
+                            error: function() {
+                                alert('Error updating status. Please try again.');
+                            }
+                        });
+                    });
+
+                    $(document).ready(function() {
+                        // AJAX request for updating status to "Pending"
+                        $('.pending').click(function() {
+                            var id = $(this).data('id'); // Get the data-id attribute of the clicked button
+
+                            // Make an AJAX request to update the status
+                            $.ajax({
+                                url: './Action.php', // URL to the server-side script for updating status
+                                type: 'POST',
+                                data: {
+                                    id: id,
+                                    status: 'Pending'
+                                }, // Send the ID and new status
+                                success: function(response) {
+                                    // On success, update the UI or notify the user
+                                    //alert(response); // For demonstration, you can replace this with updating the UI
+                                    location.reload();
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error(xhr.responseText);
+                                    // Handle errors here
+                                }
+                            });
+                        });
+                    });
+
+                    // AJAX request for 'Done' status
+                    $(".done").click(function() {
+                        var id = $(this).attr('data-id');
+                        $.ajax({
+                            url: "./Action.php",
+                            type: "POST",
+                            data: {
+                                id: id,
+                                status: "Done"
+                            },
+                            success: function(response) {
+                                // Reload the page after updating status
+                                location.reload();
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    });
+
+                    $(".denied").click(function() {
+                        var id = $(this).attr('data-id');
+                        $.ajax({
+                            url: "./Action.php",
+                            type: "POST",
+                            data: {
+                                id: id,
+                                status: "Denied"
+                            },
+                            success: function(response) {
+                                // Reload the page after updating status
+                                location.reload();
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    });
+                });
 </script>
 <script>
     function toggleRow(arrow) {

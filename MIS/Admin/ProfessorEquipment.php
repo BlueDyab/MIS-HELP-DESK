@@ -198,10 +198,11 @@ include '../Database/connection.php';
                             if ($client_count) {
                                 // Iterate over each row
                                 foreach ($client_count as $acc) {
+                                    if ($acc['Status'] !== "Done" && $acc['Status'] !== "Denied"){
                                     echo "<tr>";
                                     // Output each column value of the row
 
-                                    echo "<th scope='row'>" . htmlspecialchars($acc['Id']) . " <span class='arrow' onclick='toggleRow(this)'>▼</span></th>";
+                                    echo "<th scope='row'>" . $counter . " <span class='arrow' onclick='toggleRow(this)'>▼</span></th>";
                                     echo "<td>" . htmlspecialchars($acc['Professor_Name']) . "</td>";
                                     echo "<td>" . htmlspecialchars($acc['Department']) . "</td>";
                                     echo "<td>" . htmlspecialchars($acc['Date']) . "</td>";
@@ -232,7 +233,10 @@ include '../Database/connection.php';
                                     echo "<strong>DueTime:</strong> " . htmlspecialchars($acc['Due_Time']);
                                     echo "</td>";
                                     echo "</tr>";
+
+                                    $counter++;
                                 }
+                            }
                             } else {
                                 echo "<tr><td colspan='8'>No data found</td></tr>";
                             }
@@ -243,7 +247,7 @@ include '../Database/connection.php';
                     </tbody>
                 </table>
             </div>
-
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
             <script>
                 const hamBurger = document.querySelector(".toggle-btn");
@@ -272,7 +276,7 @@ include '../Database/connection.php';
 
                         // Make an AJAX request to your server-side script
                         $.ajax({
-                            url: '../Admin/Action.php', // The server-side script that handles the database update
+                            url: './Action.php', // The server-side script that handles the database update
                             type: 'POST',
                             data: {
                                 id: id,
