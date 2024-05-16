@@ -10,7 +10,6 @@ include '../Database/connection.php';
             $password = $_POST['password'];
             $position = $_POST['position'];
 
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             try {
                 // Set the PDO error mode to exception
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -20,7 +19,6 @@ include '../Database/connection.php';
                 $data->bindParam(':names', $name);
                 $data->execute();
                 $existingData = $data->fetch(PDO::FETCH_ASSOC);
-
 
                 if ($existingData) {
                     // Name already exists, do not add
@@ -35,21 +33,10 @@ include '../Database/connection.php';
                     $stmt->bindParam(':year', $year);
                     $stmt->bindParam(':section', $section);
                     $stmt->bindParam(':username', $username);
-                    $stmt->bindParam(':password', $hashedPassword);
+                    $stmt->bindParam(':password', $password);
                     $stmt->bindParam(':position', $position);
                     $stmt->execute();
-                    if($stmt)
-                    {
-                        echo "<script>
-                        window.location.href='loader.html';
-                        </script>";
-                    }
-                    else
-                    {
-                        echo "<script>
-                        window.location.href='loaderX.html';
-                        </script>";
-                    }
+                
                 }
             } catch (PDOException $e) {
                 echo "Error: " . $e->getMessage();

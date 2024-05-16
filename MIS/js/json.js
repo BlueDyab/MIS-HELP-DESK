@@ -106,6 +106,48 @@ document.getElementById('openFormBtnFeedback').addEventListener('click', functio
     e.stopPropagation();
     });
     
+    //ajax
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('feedback_btn').addEventListener('click', function(event) {
+            // Prevent the default form submission
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData();
+            formData.append('name', document.getElementById('name').value);
+            formData.append('date', document.getElementById('date').value);
+            formData.append('time', document.getElementById('time').value);
+            formData.append('department', document.getElementById('department').value);
+            formData.append('Feedback', document.getElementById('Feedback').value);
+            formData.append('recomm', document.getElementById('recomm').value);
+    
+            // Create a new XMLHttpRequest object
+            const xhr = new XMLHttpRequest();
+    
+            // Configure the request
+            xhr.open('POST', 'submit_feedback.php');
+    
+            // Set up the callback function for when the request completes
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // Redirect to the success page
+                    window.location.href = './Load.html';
+                } else {
+                    // Redirect to the error page
+                    window.location.href = './LoadX.html';
+                }
+            };
+    
+            // Handle network errors
+            xhr.onerror = function() {
+                console.error('Request failed');
+            };
+    
+            // Send the request with the form data
+            xhr.send(formData);
+        });
+    });
+    
 
     // room
 

@@ -16,13 +16,13 @@ if (!isset($_SESSION['editButtonClickedId'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Account</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-YQp1wFdsy1Z3dCU5ym8nfcfJWIPSK1rYBprYO8r00ELIOknvRr4aRKeqWSS6I6Zh" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/admin.css">
     <link rel="stylesheet" href="./css/overlayAdmin.css">
 </head>
 
 <style>
+    
     .main {
         max-height: 100vh;
         width: 100%;
@@ -115,6 +115,11 @@ if (!isset($_SESSION['editButtonClickedId'])) {
         height: 35px;
         padding: 0;
     }
+    /* Custom toast styling */
+.custom-toast {
+    background-color: #a5dc86 !important;
+}
+ 
 </style>
 
 <body>
@@ -348,50 +353,12 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" id="openFormBtnEdit" name="Edit_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">update</button>
+                        <button type="submit" class="btn btn-primary" id="openFormBtnEdit" name="Edit_btn" >update</button>
                     </form>
                 </div>
             </div>
 
-            <!-- Modal Confirmation -->
-            <div class="modal fade" id="exampleModal" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Are you sure want to change?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="confirmUpdateBtn">Save</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Modal Confirmation detelet -->
-            <div class="modal fade" id="exampleModal1" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation Delete </h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Are you sure want to Delete?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="confirmUpdateDeleteBtn">Okay</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+          
             <!-- Add form -->
 
             <div class="overlay-form" id="overlayFormAdd">
@@ -461,7 +428,7 @@ if (!isset($_SESSION['editButtonClickedId'])) {
         </div>
 
 
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
         <script>
@@ -494,99 +461,190 @@ if (!isset($_SESSION['editButtonClickedId'])) {
 
 
             document.addEventListener("DOMContentLoaded", function() {
-                const editButtons = document.querySelectorAll(".openFormBtnEdit");
-                const editOverlay = document.getElementById("overlayFormuser");
-                const editForm = editOverlay.querySelector("form");
+    const editButtons = document.querySelectorAll(".openFormBtnEdit");
+    const editOverlay = document.getElementById("overlayFormuser");
+    const editForm = editOverlay.querySelector("form");
 
-                editButtons.forEach(function(button) {
-                    button.addEventListener("click", function() {
-                        // Get the row values
-                        const row = button.closest("tr");
-                        const id = row.querySelector(".td").textContent.trim();
-                        const name = row.querySelectorAll("td")[0].textContent.trim();
-                        const course = row.querySelectorAll("td")[1].textContent.trim();
-                        const year = row.querySelectorAll("td")[2].textContent.trim();
-                        const section = row.querySelectorAll("td")[3].textContent.trim();
-                        const username = row.querySelectorAll("td")[4].textContent.trim();
-                        const password = row.querySelectorAll("td")[5].textContent.trim();
-                        const position = row.querySelectorAll("td")[6].textContent.trim();
+    editButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            // Get the row values
+            const row = button.closest("tr");
+            const id = row.querySelector(".td").textContent.trim();
+            const name = row.querySelectorAll("td")[0].textContent.trim();
+            const course = row.querySelectorAll("td")[1].textContent.trim();
+            const year = row.querySelectorAll("td")[2].textContent.trim();
+            const section = row.querySelectorAll("td")[3].textContent.trim();
+            const username = row.querySelectorAll("td")[4].textContent.trim();
+            const password = row.querySelectorAll("td")[5].textContent.trim();
+            const position = row.querySelectorAll("td")[6].textContent.trim();
 
-                        // Populate the edit form with the fetched values
-                        editForm.querySelector("#name").value = name;
-                        editForm.querySelector("#course").value = course;
-                        editForm.querySelector("#year").value = year;
-                        editForm.querySelector("#section").value = section;
-                        editForm.querySelector("#username").value = username;
-                        editForm.querySelector("#password").value = password;
-                        editForm.querySelector("#position1").value = position;
+            // Populate the edit form with the fetched values
+           
+            editForm.querySelector("#name").value = name;
+            editForm.querySelector("#course").value = course;
+            editForm.querySelector("#year").value = year;
+            editForm.querySelector("#section").value = section;
+            editForm.querySelector("#username").value = username;
+            editForm.querySelector("#password").value = password;
+            editForm.querySelector("#position1").value = position;
 
-                        // Show the edit overlay
-                        editOverlay.style.display = "flex";
+            // Show the edit overlay
+            editOverlay.style.display = "flex";
 
-                        // When update button is clicked
-                        editForm.addEventListener("submit", function(event) {
-                            event.preventDefault();
-                            // Show the confirmation modal
-                            const exampleModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-                            exampleModal.show();
+            // When update button is clicked
+            editForm.addEventListener("submit", function(event) {
+                event.preventDefault();
 
-                            // Handle confirm update button click
-                            const confirmUpdateBtn = document.getElementById("confirmUpdateBtn");
-                            confirmUpdateBtn.addEventListener("click", function() {
-                                // Get the modified values
-                                const newName = editForm.querySelector("#name").value;
-                                const newCourse = editForm.querySelector("#course").value;
-                                const newYear = editForm.querySelector("#year").value;
-                                const newSection = editForm.querySelector("#section").value;
-                                const newUsername = editForm.querySelector("#username").value;
-                                const newPassword = editForm.querySelector("#password").value;
-                                const newPosition = editForm.querySelector("#position1").value;
+                // Show confirmation dialog using SweetAlert2
+                Swal.fire({
+                    title: "Do you want to save the changes?",
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: "Save",
+                    denyButtonText: `Don't save`
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Get the modified values
+                        const newName = editForm.querySelector("#name").value;
+                        const newCourse = editForm.querySelector("#course").value;
+                        const newYear = editForm.querySelector("#year").value;
+                        const newSection = editForm.querySelector("#section").value;
+                        const newUsername = editForm.querySelector("#username").value;
+                        const newPassword = editForm.querySelector("#password").value;
+                        const newPosition = editForm.querySelector("#position1").value;
 
-                                // Send an AJAX request to update the database
-                                const xhr = new XMLHttpRequest();
-                                xhr.open("POST", "update_data.php");
-                                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                                xhr.onload = function() {
-                                    if (xhr.status === 200) {
-                                        // Database updated successfully
-                                        console.log("Data updated successfully");
-                                        // Close the edit overlay
-                                        editOverlay.style.display = "none";
-                                        // Close the modal
-                                        exampleModal.hide();
-                                        // Refresh the page
-                                        location.reload();
-                                    } else {
-                                        // Error handling
-                                        console.error("Error updating data");
-                                    }
-                                };
-                                xhr.send(`id=${id}&name=${newName}&course=${newCourse}&year=${newYear}&section=${newSection}&username=${newUsername}&password=${newPassword}&position=${newPosition}`);
-                            });
-                        });
-                    });
+                        // Send an AJAX request to update the database
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("POST", "update_data.php");
+                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        xhr.onload = function() {
+                            if (xhr.status === 200) {
+                               // Show success toast
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true,
+    iconColor: 'white', // Icon color
+    customClass: {
+        popup: 'custom-toast',
+
+    },
+    didClose: () => {
+        // Reload the page or update the UI as needed
+        
+    }
+});
+Toast.fire({
+    icon: "success",
+    title: "Deleted successfully"
+});
+
+                            } else {
+                                // Error handling
+                                console.error("Error updating data");
+                            }
+                        };
+                        xhr.send(`id=${id}&name=${newName}&course=${newCourse}&year=${newYear}&section=${newSection}&username=${newUsername}&password=${newPassword}&position=${newPosition}`);
+                    } else if (result.isDenied) {
+                        // Handle case where changes are not saved
+                        console.log("Changes are not saved");
+                    }
                 });
             });
+        });
+    });
+});
+
 
 
             closeFormBtnEdit.addEventListener("click", function() {
-                overlayFormEdit.style.display = "none";
+    overlayFormEdit.style.display = "none";
 
-                // Send an AJAX request to clear the session variable
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', './clear_session.php'); // Assuming the PHP script is named clear_session.php
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        // Session variable cleared successfully
-                        console.log('Session variable cleared');
-                    } else {
-                        // Error handling
-                        console.error('Error clearing session variable');
-                    }
-                };
-                xhr.send(); // Send the request without any data
+    // Send an AJAX request to clear the session variable
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', './clear_session.php'); // Assuming the PHP script is named clear_session.php
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            // Session variable cleared successfully
+            console.log('Session variable cleared');
+        } else {
+            // Error handling
+            console.error('Error clearing session variable');
+        }
+    };
+    xhr.send(); // Send the request without any data
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const deleteButtons = document.querySelectorAll(".deleteButton");
+
+    deleteButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            const id = this.getAttribute('data-id');
+
+            // Show the confirmation modal using SweetAlert
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Send an AJAX request to delete_data.php
+                    const xhr = new XMLHttpRequest();
+                    xhr.open("POST", "delete_data.php");
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            // Row deleted successfully
+
+                          // Show success toast
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true,
+    iconColor: 'white', // Icon color
+    customClass: {
+        popup: 'custom-toast',
+
+    },
+    didClose: () => {
+        // Reload the page or update the UI as needed
+        location.reload(); // Reload the page to reflect the changes
+    }
+});
+Toast.fire({
+    icon: "success",
+    title: "Deleted successfully"
+});
+
+                        } else {
+                            // Error handling
+                            console.error("Error deleting row");
+                        }
+                    };
+                    xhr.send(`id=${id}`);
+                }
             });
+        });
+    });
+});
+
+
+
+
+
+
+
+
 
             openFormBtnAdd.addEventListener("click", function() {
                 overlayFormAdd.style.display = "flex";
@@ -596,43 +654,6 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                 overlayFormAdd.style.display = "none";
             });
 
-            document.addEventListener("DOMContentLoaded", function() {
-                const deleteButtons = document.querySelectorAll(".deleteButton");
-
-                deleteButtons.forEach(function(button) {
-                    button.addEventListener("click", function() {
-                        const id = this.getAttribute('data-id');
-
-                        // Show the confirmation modal
-                        const exampleModal1 = new bootstrap.Modal(document.getElementById('exampleModal1'));
-                        exampleModal1.show();
-
-                        // Handle confirm delete button click
-                        const confirmDeleteBtn = document.getElementById("confirmUpdateDeleteBtn");
-                        confirmDeleteBtn.addEventListener("click", function() {
-                            // Send an AJAX request to delete_data.php
-                            const xhr = new XMLHttpRequest();
-                            xhr.open("POST", "delete_data.php");
-                            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                            xhr.onload = function() {
-                                if (xhr.status === 200) {
-                                    // Row deleted successfully
-                                    console.log("Row deleted successfully");
-                                    // Reload the page or update the UI as needed
-                                    location.reload(); // Reload the page to reflect the changes
-                                } else {
-                                    // Error handling
-                                    console.error("Error deleting row");
-                                }
-                            };
-                            xhr.send(`id=${id}`);
-
-                            // Close the modal after deletion
-                            exampleModal1.hide();
-                        });
-                    });
-                });
-            });
         </script>
 </body>
 

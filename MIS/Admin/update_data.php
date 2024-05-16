@@ -3,6 +3,9 @@ session_start();
 require '../Database/connection.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Debug: Output received POST data
+    // var_dump($_POST);
+
     // Get the POST parameters
     $id = $_POST['id'];
     $name = $_POST['name'];
@@ -29,7 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Optionally, you can return a success message
         echo "Data updated successfully";
     } catch (PDOException $e) {
-        
         // Handle database errors
         echo "Error updating data: " . $e->getMessage();
     }
