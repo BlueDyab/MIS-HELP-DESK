@@ -23,60 +23,83 @@
             background-color: #e2e3dc;
         }
 
-        /* dashboard*/
-
-        .dashboard .box {
-            background-color: white;
-            border: 1px solid #dee2e6;
-            padding: 30px;
-            margin-bottom: 30px;
-            border-radius: 5px;
-            height: 200px;
-        }
-
-        .main-box {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            padding: 30px;
-            margin-bottom: 40px;
-            border-radius: 5px;
-            height: auto;
-        }
-
-
-        .main-box h3 {
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
 
         h2 {
             font-size: 50px;
             font-weight: 700;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 50px;
             margin-top: 20px;
         }
 
-        .small-box {
-            display: inline-block;
-            margin-inline: 10px;
-            margin-top: 5px;
-            background-color: #17a2b8;
+
+
+        .card {
+            height: 130px;
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 30px;
+        }
+
+        .p1 {
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .num {
+            font-size: 30px;
+            font-weight: 600;
+            margin-left: 6px;
+
+        }
+
+        h3 {
+            font-size: 50px;
             color: white;
-            border-radius: 5px;
-            font-size: 15px;
-            width: 100px;
+            margin-right: 33px;
 
         }
 
-        .small-box span {
-            font-weight: bold;
-            font-size: 15px;
+        .custom-bg-done {
+            background-color: #00ac6a;
+
         }
 
-        .main-box h3 i {
-            font-size: 35px;
-            margin-right: 10px;
+        .custom-bg-on-going {
+            background-color: #f4a000;
+        }
+
+        .custom-bg-pending {
+            background-color: #e81500;
+        }
+
+        .custom-bg-feedback {
+            background-color: #025feb;
+        }
+
+        .custom-bg-inquiry {
+            background-color: #025feb;
+        }
+
+        .custom-bg-user {
+            background-color: #ea6a47;
+        }
+
+
+        .col-md-6.mt-5 {
+            background-color: white;
+            padding: 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+            
+        }
+
+        .progress-group {
+            margin-top: 16px;
+        }
+
+        span.float-right {
+            float: right;
         }
     </style>
 
@@ -180,249 +203,356 @@
                     <div class="container">
                         <h2>Dashboard</h2>
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="main-box text-center ">
-                                    <h3><i class="fa-solid fa-user"></i></i>Service</h3>
-                                    <div class="small-box">Pending<br>
-                                        <span id="pendingCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM service_request_db WHERE Status = 'Pending'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
-                                    </div>
-                                    <div class="small-box">On-going<br>
-                                        <span id="ongoingCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM service_request_db WHERE Status = 'On-going'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
-                                    </div>
-                                    <div class="small-box">Done<br>
-                                        <span id="doneCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM service_request_db WHERE Status = 'Done'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
+                            <div class=" col-lg-4">
+                                <div class="card custom-bg-done">
+                                    <div class="card-body d-flex justify-content-between align-items-center ">
+                                        <div>
+                                            <p class="p1">DONE REQUEST</p>
+                                            <span class="num" id="doneCount">
+                                                <?php
+                                                // Counting ongoing requests from multiple tables
+                                                // Each SELECT statement counts ongoing requests from a specific table
+
+                                                // Start the SQL query
+                                                $sql = "SELECT SUM(total) AS total FROM (";
+
+                                                // First SELECT statement for prof_room_request_form_db
+                                                $sql .= "SELECT COUNT(*) AS total FROM prof_room_request_form_db WHERE Status = 'Done'";
+                                                $sql .= " UNION ALL "; // Combine results with the next SELECT statement
+
+                                                // Second SELECT statement for service_request_db
+                                                $sql .= "SELECT COUNT(*) AS total FROM service_request_db WHERE Status = 'Done'";
+                                                $sql .= " UNION ALL "; // Combine results with the next SELECT statement
+
+                                                // Third SELECT statement for stud_room_request_form_db
+                                                $sql .= "SELECT COUNT(*) AS total FROM stud_room_request_form_db WHERE Status = 'Done'";
+                                                $sql .= " UNION ALL "; // Combine results with the next SELECT statement
+
+                                                // Fourth SELECT statement for equipment_request_prof
+                                                $sql .= "SELECT COUNT(*) AS total FROM equipment_request_prof WHERE Status = 'Done'";
+                                                $sql .= " UNION ALL "; // Combine results with the next SELECT statement
+
+                                                // Fifth SELECT statement for equipment_request_stud
+                                                $sql .= "SELECT COUNT(*) AS total FROM equipment_request_stud WHERE Status = 'Done'";
+
+                                                // End the SQL query
+                                                $sql .= ") AS combined";
+
+                                                // Execute the SQL query
+                                                $result = $conn->query($sql);
+
+                                                // Fetch the result
+                                                $row = $result->fetch();
+
+                                                echo $row['total']; // Accessing the count using the alias 'total'
+                                                // Output the total count
+                                                $totalDoneCount = $row['total']; // Assigning the total count to a variable
+
+                                                // Function to calculate the percentage
+                                                function calculatePercentage($count, $goal)
+                                                {
+                                                    return ($count / $goal) * 100;
+                                                }
+                                                ?>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <h3><i class="fa-regular fa-square-check"></i></h3>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="main-box text-center ">
-                                    <h3><i class="fa-solid fa-user"></i></i>User</h3>
-                                    <div class="small-box">Owner<br>
-                                        <span id="pendingCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM user_account_db WHERE Position = 'Owner'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
-                                    </div>
-                                    <div class="small-box">Senior<br>
-                                        <span id="ongoingCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM user_account_db WHERE Position = 'Senior'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
-                                    </div>
-                                    <div class="small-box">Member<br>
-                                        <span id="doneCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM user_account_db WHERE Position = 'Member'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
+
+                            <div class=" col-lg-4">
+                                <div class="card custom-bg-on-going">
+                                    <div class="card-body d-flex justify-content-between align-items-center ">
+                                        <div>
+                                            <p class="p1">ON-GOING REQUEST</p>
+                                            <span class="num" id="ongoingCount">
+                                                <?php
+                                                // Counting ongoing requests from multiple tables
+                                                // Each SELECT statement counts ongoing requests from a specific table
+
+                                                // Start the SQL query
+                                                $sql = "SELECT SUM(total) AS total FROM (";
+
+                                                // First SELECT statement for prof_room_request_form_db
+                                                $sql .= "SELECT COUNT(*) AS total FROM prof_room_request_form_db WHERE Status = 'On-going'";
+                                                $sql .= " UNION ALL "; // Combine results with the next SELECT statement
+
+                                                // Second SELECT statement for service_request_db
+                                                $sql .= "SELECT COUNT(*) AS total FROM service_request_db WHERE Status = 'On-going'";
+                                                $sql .= " UNION ALL "; // Combine results with the next SELECT statement
+
+                                                // Third SELECT statement for stud_room_request_form_db
+                                                $sql .= "SELECT COUNT(*) AS total FROM stud_room_request_form_db WHERE Status = 'On-going'";
+                                                $sql .= " UNION ALL "; // Combine results with the next SELECT statement
+
+                                                // Fourth SELECT statement for equipment_request_prof
+                                                $sql .= "SELECT COUNT(*) AS total FROM equipment_request_prof WHERE Status = 'On-going'";
+                                                $sql .= " UNION ALL "; // Combine results with the next SELECT statement
+
+                                                // Fifth SELECT statement for equipment_request_stud
+                                                $sql .= "SELECT COUNT(*) AS total FROM equipment_request_stud WHERE Status = 'On-going'";
+
+                                                // End the SQL query
+                                                $sql .= ") AS combined";
+
+                                                // Execute the SQL query
+                                                $result = $conn->query($sql);
+
+                                                // Fetch the result
+                                                $row = $result->fetch();
+
+                                                echo $row['total']; // Accessing the count using the alias 'total'
+
+                                                // Output the total count
+                                                $onGoingCount = $row['total']; // Assigning the total count to a variable
+
+                                                // Function to calculate the percentage
+                                                function calculatePercentage1($count, $goal)
+                                                {
+                                                    return ($count / $goal) * 100;
+                                                }
+                                                ?>
+
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <h3><i class="fas fa-tasks"></i></h3>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="main-box text-center ">
-                                    <h3><i class="fa-solid fa-user"></i></i>Room</h3>
-                                    <div class="small-box">Owner<br>
-                                        <span id="pendingCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM prof_room_request_form_db WHERE Status = 'Pending'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
-                                    </div>
-                                    <div class="small-box">Senior<br>
-                                        <span id="ongoingCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM prof_room_request_form_db WHERE Status = 'On-going'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
-                                    </div>
-                                    <div class="small-box">Member<br>
-                                        <span id="doneCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM prof_room_request_form_db WHERE Status = 'Done'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
-                                    </div>
+                            <div class=" col-lg-4">
+                                <div class="card custom-bg-pending">
+                                    <div class="card-body d-flex justify-content-between align-items-center ">
+                                        <div>
+                                            <p class="p1">PENDING REQUEST</p>
+                                            <span class="num" id="pendingCount">
+                                                <?php
+                                                // Counting ongoing requests from multiple tables
+                                                // Each SELECT statement counts ongoing requests from a specific table
 
-                                    <br>
+                                                // Start the SQL query
+                                                $sql = "SELECT SUM(total) AS total FROM (";
 
-                                    <div class="small-box">Owner<br>
-                                        <span id="pendingCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM stud_room_request_form_db WHERE Status = 'Pending'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
-                                    </div>
-                                    <div class="small-box">Senior<br>
-                                        <span id="ongoingCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM stud_room_request_form_db WHERE Status = 'On-going'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
-                                    </div>
-                                    <div class="small-box">Member<br>
-                                        <span id="doneCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM stud_room_request_form_db WHERE Status = 'Done'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
+                                                // First SELECT statement for prof_room_request_form_db
+                                                $sql .= "SELECT COUNT(*) AS total FROM prof_room_request_form_db WHERE Status = 'Pending'";
+                                                $sql .= " UNION ALL "; // Combine results with the next SELECT statement
+
+                                                // Second SELECT statement for service_request_db
+                                                $sql .= "SELECT COUNT(*) AS total FROM service_request_db WHERE Status = 'Pending'";
+                                                $sql .= " UNION ALL "; // Combine results with the next SELECT statement
+
+                                                // Third SELECT statement for stud_room_request_form_db
+                                                $sql .= "SELECT COUNT(*) AS total FROM stud_room_request_form_db WHERE Status = 'Pending'";
+                                                $sql .= " UNION ALL "; // Combine results with the next SELECT statement
+
+                                                // Fourth SELECT statement for equipment_request_prof
+                                                $sql .= "SELECT COUNT(*) AS total FROM equipment_request_prof WHERE Status = 'Pending'";
+                                                $sql .= " UNION ALL "; // Combine results with the next SELECT statement
+
+                                                // Fifth SELECT statement for equipment_request_stud
+                                                $sql .= "SELECT COUNT(*) AS total FROM equipment_request_stud WHERE Status = 'Pending'";
+
+                                                // End the SQL query
+                                                $sql .= ") AS combined";
+
+                                                // Execute the SQL query
+                                                $result = $conn->query($sql);
+
+                                                // Fetch the result
+                                                $row = $result->fetch();
+                                                echo $row['total']; // Accessing the count using the alias 'total'
+                                                // Output the total count
+                                                $pendingCount = $row['total']; // Assigning the total count to a variable
+
+                                                // Function to calculate the percentage
+                                                function calculatePercentage2($count, $goal)
+                                                {
+                                                    return ($count / $goal) * 100;
+                                                }
+                                                ?>
+
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <h3><i class="fa-regular fa-comment"></i></h3>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="main-box text-center ">
-                                    <h3><i class="fa-solid fa-wrench"></i>Equipment</h3>
-                                    <div class="small-box">Pending<br>
-                                        <span id="pendingCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM equipment_request_prof WHERE Status = 'Pending'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
-                                    </div>
-                                    <div class="small-box">On-going<br>
-                                        <span id="ongoingCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM equipment_request_prof WHERE Status = 'On-going'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
-                                    </div>
-                                    <div class="small-box">Done<br><span id="doneCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM equipment_request_prof WHERE Status = 'Done'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
-                                    </div>
 
-                                    <br>
 
-                                    <div class="small-box">Pending<br>
-                                        <span id="pendingCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM equipment_request_stud WHERE Status = 'Pending'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
-                                    </div>
-                                    <div class="small-box">On-going<br>
-                                        <span id="ongoingCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM equipment_request_stud WHERE Status = 'On-going'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
-                                    </div>
-                                    <div class="small-box">Done<br>
-                                        <span id="doneCount">
-                                            <?php
-                                            $sql = "SELECT COUNT(*) FROM equipment_request_stud WHERE Status = 'Done'";
-                                            $result = $conn->query($sql);
-                                            $row = $result->fetch();
-                                            echo $row[0];
-                                            ?>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="main-box text-center ">
-                                    <h3><i class="fa-solid fa-comments"></i>Feedback</h3>
-                                    <div class="small-box"></i>Messsages<br>
-                                        <span id="pendingCount">
-                                            <?php
-                                                $sql = "SELECT COUNT(*) FROM feedback_form_db WHERE 1";
+                            <div class=" col-lg-4 mt-5">
+                                <div class="card custom-bg-feedback">
+                                    <div class="card-body d-flex justify-content-between align-items-center ">
+                                        <div>
+                                            <p class="p1">FEEDBACK</p>
+                                            <span class="num" id="pendingCount">
+                                                <?php
+                                                // Execute the SQL query to count the total number of records in the feedback_form_db table
+                                                $sql = "SELECT COUNT(*) AS total FROM feedback_form_db";
                                                 $result = $conn->query($sql);
                                                 $row = $result->fetch();
-                                                echo $row[0];
-                                            ?>
-                                        </span>
+
+                                                // Output the total count
+                                                echo $row['total']; // Accessing the count using the alias 'total'
+
+                                                // Extract the total count from the result
+                                                $feedbackCount = $row['total'];
+                                                // Function to calculate the percentage
+                                                function calculatePercentage3($count, $goal)
+                                                {
+                                                    return ($count / $goal) * 100;
+                                                }
+                                                ?>
+
+
+
+
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <h3><i class="fa-solid fa-message"></i></h3>
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- <div class="small-box">On-going<br><span id="ongoingCount">0</span></div>
-                                    <div class="small-box">Done<br><span id="doneCount">0</span></div> -->
                             </div>
-                            <div class="col-lg-6">
-                                <div class="main-box text-center ">
-                                    <h3><i class="fa-solid fa-comments"></i>Inquiry</h3>
-                                    <div class="small-box"></i>Messsages<br>
-                                        <span id="pendingCount">
-                                            <?php
-                                                $sql = "SELECT COUNT(*) FROM message_us_db WHERE 1";
+
+                            <div class=" col-lg-4 mt-5">
+                                <div class="card custom-bg-inquiry">
+                                    <div class="card-body d-flex justify-content-between align-items-center ">
+                                        <div>
+                                            <p class="p1">INQUIRY</p>
+                                            <span class="num" id="pendingCount">
+                                                <?php
+                                                // Execute the SQL query to count the total number of records in the feedback_form_db table
+                                                $sql = "SELECT COUNT(*) AS total FROM message_us_db";
                                                 $result = $conn->query($sql);
                                                 $row = $result->fetch();
-                                                echo $row[0];
-                                            ?>
-                                        </span>
+
+                                                // Output the total count
+                                                echo $row['total']; // Accessing the count using the alias 'total'
+
+                                                // Extract the total count from the result
+                                                $inquiryCount = $row['total'];
+                                                // Function to calculate the percentage
+                                                function calculatePercentage4($count, $goal)
+                                                {
+                                                    return ($count / $goal) * 100;
+                                                }
+                                                ?>
+
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <h3><i class="fa-solid fa-message"></i></h3>
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- <div class="small-box">On-going<br><span id="ongoingCount">0</span></div>
-                                    <div class="small-box">Done<br><span id="doneCount">0</span></div> -->
+                            </div>
+                            <div class=" col-lg-4 mt-5">
+                                <div class="card custom-bg-user">
+                                    <div class="card-body d-flex justify-content-between align-items-center ">
+                                        <div>
+                                            <p class="p1">Student Assistance</p>
+                                            <span class="num" id="pendingCount">
+                                                <?php
+                                                // Execute the SQL query to count the total number of records in the user_account_db table
+                                                $sql = "SELECT COUNT(*) AS total FROM user_account_db WHERE Position = 'Owner' AND Status = 'Active'";
+                                                $result = $conn->query($sql);
+                                                $row = $result->fetch();
+
+                                                // Check if the result is valid before accessing the 'total' key
+                                                if ($row && isset($row['total'])) {
+                                                    // Output the total count
+                                                    echo $row['total'];
+
+                                                    // Extract the total count from the result
+                                                    $userCount = $row['total'];
+                                                } else {
+                                                    echo "No records found"; // or handle the case when no records are found
+                                                }
+
+                                                // Function to calculate the percentage
+                                                function calculatePercentage5($count, $goal)
+                                                {
+                                                    return ($count / $goal) * 100;
+                                                }
+                                                ?>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <h3><i class="fa-solid fa-users"></i></h3>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <!-- HTML code to display progress bars -->
+                        <div class="col-md-6 mt-5 mx-auto ">
+    <p class=" text-center fa-2x">
+                                <strong>Request Tracker</strong>
+                            </p>
+
+                            <div class="progress-group">
+                                Done REQUEST
+                                <span class="float-right"><b><?php echo $totalDoneCount; ?></b>/100</span>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-primary" style="width: <?php echo calculatePercentage($totalDoneCount, 100); ?>%"></div>
+                                </div>
+                            </div>
+
+                            <div class="progress-group">
+                                ON-GOING REQUEST
+                                <span class="float-right"><b><?php echo $onGoingCount; ?></b>/100</span>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-danger" style="width: <?php echo calculatePercentage1($onGoingCount, 100); ?>%"></div>
+                                </div>
+                            </div>
+
+                            <div class="progress-group">
+                                PENDING REQUEST
+                                <span class="float-right"><b><?php echo $pendingCount; ?></b>/100</span>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-success" style="width: <?php echo calculatePercentage2($pendingCount, 100); ?>%"></div>
+                                </div>
+                            </div>
+
+                            <div class="progress-group">
+                                FEEDBACK
+                                <span class="float-right"><b><?php echo $feedbackCount; ?></b>/100</span>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-warning" style="width: <?php echo calculatePercentage3($feedbackCount, 100); ?>%"></div>
+                                </div>
+                            </div>
+
+                            <div class="progress-group">
+                                INQUIRY
+                                <span class="float-right"><b><?php echo $inquiryCount; ?></b>/100</span>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-warning" style="width: <?php echo calculatePercentage4($inquiryCount, 100); ?>%"></div>
+                                </div>
+                            </div>
+
+                            <div class="progress-group">
+                                Student Assistance
+                                <span class="float-right"><b><?php echo $userCount; ?></b>/100</span>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-warning" style="width: <?php echo calculatePercentage5($userCount, 100); ?>%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
+
                 </div>
             </div>
+        </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
         <script>
@@ -444,7 +574,28 @@
                     }
                 });
             });
+
+            // Function to fetch counts from the database using AJAX
+            function fetchCountsFromDatabase() {
+                return new Promise((resolve, reject) => {
+                    fetch('http://localhost:3000/api/counts') // Update the URL with your actual API endpoint
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            resolve(data);
+                        })
+                        .catch(error => {
+                            reject(error);
+                        });
+                });
+            }
         </script>
+
+
 
     </body>
 
