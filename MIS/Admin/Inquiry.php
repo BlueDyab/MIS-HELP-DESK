@@ -276,18 +276,6 @@
                     }
                 });
                 });
-                // Add event listener to handle clicks on the sidebar links
-                // document.querySelectorAll('.sidebar-link').forEach(link => {
-                //     link.addEventListener('click', function(e) {
-                //         // Check if the clicked element is the icon
-                //         if (e.target.classList.contains('fa-solid')) {
-                //             // Prevent the default behavior (expanding/collapsing the dropdown)
-                //             e.preventDefault();
-                //             // Toggle the expand class on the sidebar
-                //             document.querySelector("#sidebar").classList.toggle("expand");
-                //         }
-                //     });
-                // });
             </script>
 
 </body>

@@ -6,7 +6,7 @@
         $Time_out = $_POST['timeOut'];
         $Total_Students = $_POST['total'];
         $Dept = $_POST['department'];
-        $Name = $_POST['name'];
+        $Name = $_POST['Professors'];
         $purpose = $_POST['purpose'];
         try{
             $stmt = $conn->prepare("INSERT INTO prof_room_request_form_db(`Date`,`Time_In`,`Time_Out`,`Total_Students`,`Dept`,`Name`,`Purpose`) VALUES (:date, :time_in, :time_out, :total_students, :department, :name, :purpose)");
@@ -49,9 +49,9 @@
         $Course = $_POST['course'];
         $Year = $_POST['year'];
         $Section = $_POST['section'];
-        $Name = $_POST['name'];
+        $Name = $_POST['Student1'];
         $Student_Number = $_POST['studentID'];
-        $Prof_Name = $_POST['Professor'];
+        $Prof_Name = $_POST['Professor1'];
         $Purpose = $_POST['purpose'];
 
         try{

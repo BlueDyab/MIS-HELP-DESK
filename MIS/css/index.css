@@ -3,18 +3,61 @@
 *{font-family: 'Alegreya Sans', sans-serif;}
 
 
-     /* Custom styles */
-     .hero-section {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
+ /* CSS styles for the hero section */
+ .hero-section {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  background-color: #f4f4f4;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  max-width: 50%;
+  margin-left: 20px;
+}
+
+.image {
+  position: relative;
+  z-index: 3;
+  flex: 1;
+  max-width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.wave-svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 1;
+}
+@media (max-width: 768px) {
+  .hero-section {
+      flex-direction: row;
       align-items: center;
-      background-color: #f8f9fa; /* Change this to your desired background color */
+      text-align: center;
+      height: 100vh;
   }
-  .carousel-caption h5,
-  .carousel-caption p {
-      color: #fff; /* Text color for captions */
+
+  .image {
+      margin-top:20;
+      width: 100%;
   }
+}
+
 .section-header{
     margin-bottom: 40px;
 }
@@ -58,43 +101,68 @@
     font-size: 18px;
     line-height: 0.3;
 }
+@media (max-width: 768px) {
+  img.logo-img {
+   
+    width: 60px;
+}
+
+button.navbar-toggler {
+    margin-top: -10px;
+}
+a.navbar-brand {
+  margin-top:-10px;
+}
+}
+
 
 /* ---------------------------------------------------------------------------------- CAROUSEL -----------------------------------------------------------------------------------*/
-.carousel{
-   background-image: url(../image/csddsds.png);
-    background-size: cover;
-    background-position: center;  
+
+.carousel-item {
+  position: relative;
 }
-.carousel-item{
-    height: 100vh;
-    min-height: 300px;
-    background-color: rgba(0, 0, 0, 0.3); /* Darken the background */
-    padding: 20px;
-    border-radius: 10px;
+
+.carousel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2); /* Semi-transparent black overlay */
+  z-index: 1; /* Ensure the overlay is behind the text */
 }
-.carousel-caption{
-  margin-bottom: 20px;
-  
-  
+
+
+.carousel-caption {
+  position: absolute;
+  right: 15%;
+  bottom: 1.25rem;
+  left: 50%;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  color: #fff;
+  text-align: center;
+  z-index: 2; /* Ensure the text is on top of the overlay */
 }
-.carousel-caption h5{
-    font-size: 45px;
-    margin-top: 25px;
-    color: #fff;
-    font-weight: 700;
-    text-align: left;
+/* Additional styling for caption */
+.carousel-caption h5 {
+  font-size: 40px; /* Adjust font size */
+  font-weight: bold; /* Bold font */
 }
-.carousel-caption h5 span{
-    color:  white;
-    font-size: 45px;
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);
 }
-.carousel-caption p{
-    width: 60%;
-    font-style: 18px;
-    line-height: 1.8;
-    color: white;
-    text-align: left;
-} 
+
+@media (max-width: 768px) {
+  .carousel-caption h5 {
+      font-size: 1.75rem;
+  }
+  .carousel-caption p {
+      font-size: 1rem;
+  }
+}
 
 /* ----------------------------------------------------------------------------------- logo --------------------------------------------------------------------------------------*/
 .navbar-brand {
@@ -102,10 +170,13 @@
   align-items: center; /* Align items vertically */
 }
 
+.container-fluid {
+  height: 50px;
+}
 .logo-img {
-  width: 30px; /* Adjust the width of the logo */
+  width: 70px; /* Adjust the width of the logo */
   height: auto; /* Maintain aspect ratio */
-  margin-right: 10px; /* Adjust the margin between the logo and text */
+
 }
 
 /* ----------------------------------------------------------------------------------- about -------------------------------------------------------------------------------------*/

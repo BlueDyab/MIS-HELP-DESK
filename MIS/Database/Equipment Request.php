@@ -2,7 +2,7 @@
     require 'connection.php';
     //for prof or coors
     if(isset($_POST['prof_btn'])){       
-        $Prof_Name = $_POST['name'];
+        $Prof_Name = $_POST['Professor'];
         $Date = $_POST['date'];
         $Time = $_POST['time'];
         $Due_time = $_POST['duetime'];
@@ -56,8 +56,8 @@
         $Course = $_POST['course'];
         $Year = $_POST['year'];
         $Section = $_POST['section'];
-        $Student_Name = $_POST['name'];
-        $Student_No = $_POST['studentID'];
+        $Student_Name = $_POST['Student'];
+        $Student_No = $_POST['studentId'];
         $Dept = $_POST['department'];
         $Request = $_POST['requestedItem'];
         $Purpose = $_POST['purpose'];

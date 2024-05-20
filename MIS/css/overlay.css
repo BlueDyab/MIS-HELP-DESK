@@ -26,59 +26,9 @@
   }
   
   
-  .form-container {
-    background-color: #ff7601;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 60%; /* Adjust the maximum width as needed */
-    width: 100%;
-   
-  }
-  
-  .form-container h2 {
-    margin-top: 15px;
-    font-size: 30px;
-    font-weight: 700;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    font-weight: bold;
-  }
-  
-  .form-control {
-    width: 50%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .btn {
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .btn-primary {
-    position: center;
-    background-color: #007bff;
-    color: white;
-    border: none;
-  }
-  
-  .btn-secondary {
-    background-color: #6c757d;
-    color: white;
-    border: none;
-  }
-  h2{
-    text-align: center;
 
-  }
+  
+ 
   
   .close-icon{
     float: right;
@@ -95,42 +45,8 @@
     gap: 3px;
     margin-top: 20px;
 }
-input#duetime {
-  width: 97.5%;
-}
-select#action2{
-  width: 99%;
-}
-select#department1 {
-  width: 98%;
-}
-input#total {
-  width: 94.3%;
-}
-select#section {
-  width: 97.3%;
-}
-input#timeOut {
-  width: 97.3%;
-}
-input#Professor {
-  width: 97.3%;
-}
-
   .overlay-form .form-container button[type="submit"] {
     display: block;
     margin: 0 auto;
 }
 
-.form-logo{
-    display: flex;
-    align-items: center; /* Align items vertically */
-    justify-content: center;
-  }
-  
-  .logo-imig {
-    width: 30px; /* Adjust the width of the logo */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 10px; /* Adjust the margin between the logo and text */
-    margin-top: 10px;
-  }

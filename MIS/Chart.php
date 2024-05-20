@@ -17,14 +17,16 @@
 </head>
 
 <body>
-    <header>
+<header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ff7601;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <img src="./image/uccLogo.png" alt="Company Logo" class="logo-img">
+                    <img src="./image/MIS__LOGO_-removebg-preview (Large).png" alt="Company Logo" class="logo-img">
                     M<span>IS</span>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -36,9 +38,11 @@
                             <a class="nav-link" href="./index.html#service">Our Service</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
                             <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
                                 <li><a class="dropdown-item" href="./index.html#about">MIS</a></li>
+                                <li><a class="dropdown-item" href="./index.html#carouselExampleCaptions">Announcement</a></li>
                                 <li><a class="dropdown-item" href="./Chart.php">Chart</a></li>
                             </ul>
                         </li>
@@ -50,6 +54,7 @@
             </div>
         </nav>
     </header>
+  
 
     
     <div class="service section-padding" id="service ">
