@@ -465,7 +465,7 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                     button.addEventListener("click", function() {
                         // Get the row values
                         const row = button.closest("tr");
-                        currentId = row.querySelector(".td").textContent.trim();
+                        currentId = button.getAttribute('data-id');
                         const name = row.querySelectorAll("td")[0].textContent.trim();
                         const course = row.querySelectorAll("td")[1].textContent.trim();
                         const year = row.querySelectorAll("td")[2].textContent.trim();
@@ -502,6 +502,7 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Get the modified values
+                            const newid = currentId;
                             const newName = editForm.querySelector("#name").value;
                             const newCourse = editForm.querySelector("#course").value;
                             const newYear = editForm.querySelector("#year").value;
@@ -529,7 +530,8 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                                         },
                                         didClose: () => {
                                             // Reload the page or update the UI as needed
-                                            location.reload();
+                                            // location.reload();
+                                            editOverlay.style.display = "none";
                                         }
                                     });
                                     Toast.fire({
@@ -545,7 +547,7 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                             xhr.onerror = function() {
                                 console.error("Request failed");
                             };
-                            xhr.send(`ID=${encodeURIComponent(currentId)}&Name=${encodeURIComponent(newName)}&Course=${encodeURIComponent(newCourse)}&Year=${encodeURIComponent(newYear)}&Section=${encodeURIComponent(newSection)}&Username=${encodeURIComponent(newUsername)}&Password=${encodeURIComponent(newPassword)}&Position=${encodeURIComponent(newPosition)}`);
+                            xhr.send(`id=${newid}&name=${newName}&course=${newCourse}&year=${newYear}&section=${newSection}&username=${newUsername}&password=${newPassword}&position=${newPosition}`);
                         } else if (result.isDenied) {
                             // Handle case where changes are not saved
                             console.log("Changes are not saved");
