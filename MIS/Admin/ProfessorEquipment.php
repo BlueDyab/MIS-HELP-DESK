@@ -196,7 +196,7 @@ include '../Database/connection.php';
                                     echo "<tr>";
                                     // Output each column value of the row
 
-                                    echo "<th scope='row'>" . $counter . " <span class='arrow' onclick='toggleRow(this)'>▼</span></th>";
+                                    echo "<th scope='row'>" . $counter ." </th>";
                                     echo "<td>" . htmlspecialchars($acc['Professor_Name']) . "</td>";
                                     echo "<td>" . htmlspecialchars($acc['Department']) . "</td>";
                                     echo "<td>" . htmlspecialchars($acc['Date']) . "</td>";
@@ -349,13 +349,7 @@ include '../Database/connection.php';
                     });
                 });
             </script>
-            <script>
-                function toggleRow(arrow) {
-                    const row = arrow.closest('tr').nextElementSibling;
-                    row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
-                    arrow.textContent = arrow.textContent === '▼' ? '▲' : '▼';
-                }
-            </script>
+         
 
 </body>
 

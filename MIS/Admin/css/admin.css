@@ -27,6 +27,7 @@
 
     .wrapper {
         display: flex;
+        overflow: auto;
     }
 
 

@@ -1,5 +1,5 @@
 <?php
-    include '../Database/connection.php';
+include '../Database/connection.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-YQp1wFdsy1Z3dCU5ym8nfcfJWIPSK1rYBprYO8r00ELIOknvRr4aRKeqWSS6I6Zh" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="./css/admin.css">
 </head>
 
@@ -34,18 +35,54 @@
         top: -2px;
     }
 
-    tr {
-        font-size: 15px;
-    }
-    .th {
-        text-align: center;
-        color: black;
-    }
-
     .table-responsive.m-2 {
-        width: 99.3%;
+        width: 99%;
         height: 100vh;
 
+    }
+
+    /* Adjust font size for table and columns */
+    .table,
+    .table th,
+    .table td {
+        font-size: 14px;
+        /* Adjust the font size as needed */
+        text-align: center;
+    }
+
+    /* Hide status and action columns when sidebar is expanded */
+    .sidebar-expand .status-column,
+    .sidebar-expand .action-column {
+        display: none;
+    }
+
+    .dataTables_filter {
+        margin-bottom: 20px;
+    }
+
+    .table {
+        background-color: #ff4d00;
+    }
+
+    .modal-content {
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .modal-header {
+        border-bottom: none;
+    }
+
+    .modal-footer {
+        border-top: none;
+    }
+
+    .modal-title {
+        margin: auto;
+    }
+
+    .form-label {
+        font-weight: bold;
     }
 </style>
 
@@ -144,34 +181,30 @@
         </aside>
 
         <div class="main">
+    <div class="table-responsive m-2">
+            <table id="example" class="table table-striped table-bordered">
+                <thead class="table">
+                    <tr>    <th>No.</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Message</th>
+                            <th>Status</th>
+                            <th>Action</th>
 
-
-
-            <div class="table-responsive m-2">
-                <table class="table table-bordered">
-                    <thead class="header fixed-top">
-                        <tr>
-                            <th class="th col-1" scope="col">No.</th>
-                            <th class="th col-2" scope="col">Name</th>
-                            <th class="th col-2" scope="col">Email</th>
-                            <th class="th col-4" scope="col">Message</th>
-                            <th class="th col-1" scope="col">Status</th>
-                            <th class="th col-2" scope="col">Action</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
+			</tr>
+                </thead>
+                <tbody>
+                    <?php
                         try {
                             // Set the PDO error mode to exception
                             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                            // Initialize the search query
-                            $search = isset($_GET['search']) ? '%' . $_GET['search'] . '%' : '%';
+                            // Prepare the SQL SELECT statement
+                            $stmt = $conn->prepare("SELECT * FROM `message_us_db`");
 
-                            // Prepare the SQL SELECT statement with the search condition
-                            $stmt = $conn->prepare("SELECT * FROM `message_us_db` WHERE `Name` LIKE ?");
-                            $stmt->execute([$search]);
+                            // Execute the statement
+                            $stmt->execute();
+
 
                             // Fetch all the results
                             $client_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -180,24 +213,24 @@
                             if ($client_count) {
                                 // Iterate over each row
                                 foreach ($client_count as $acc) {
-                                    if ($acc['Status'] !== "Done"){
-                                    echo "<tr>";
-                                    // Output each column value of the row
+                                    if ($acc['Status'] !== "Done") {
+                                        echo "<tr>";
+                                        // Output each column value of the row
 
-                                    echo "<th scope='row'>" . $counter . "</th>";
-                                    echo "<td>" . htmlspecialchars($acc['Name']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($acc['Email']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($acc['Message']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($acc['Status']) . "</td>";
-                                    echo "<td class='td'>" .
-                                        "<button class='btn btn-success m-2 reply' data-id='" . htmlspecialchars($acc['ID']) . "' name='AcceptDenied'><i class='bi bi-check-square-fill'>Reply</i></button>" .
-                                        "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($acc['ID']) . "'><i class='bi bi-x-square-fill'>Done</i></button>" .
-                                        "</td>";
-                                    echo "</tr>";
+                                        echo "<th scope='row'>" . $counter . "</th>";
+                                        echo "<td>" . htmlspecialchars($acc['Name']) . "</td>";
+                                        echo "<td>" . htmlspecialchars($acc['Email']) . "</td>";
+                                        echo "<td>" . htmlspecialchars($acc['Message']) . "</td>";
+                                        echo "<td>" . htmlspecialchars($acc['Status']) . "</td>";
+                                        echo "<td class='td'>" .
+                                            "<button class='btn btn-success m-2 reply' data-id='" . htmlspecialchars($acc['ID']) . "' name='AcceptDenied'><i class='bi bi-check-square-fill'>Reply</i></button>" .
+                                            "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($acc['ID']) . "'><i class='bi bi-x-square-fill'>Done</i></button>" .
+                                            "</td>";
+                                        echo "</tr>";
 
-                                    $counter++;
+                                        $counter++;
+                                    }
                                 }
-                            }
                             } else {
                                 echo "<tr><td colspan='8'>No data found</td></tr>";
                             }
@@ -205,78 +238,111 @@
                             echo "Error: " . $e->getMessage();
                         }
                         ?>
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+ <div id="replyFormModal" class="modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="replyFormModalLabel">Reply to Message</h5>
+                            <span class="close"></span>
+                        </div>
+                        <div class="modal-body">
+                            <form id="replyForm">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name:</label>
+                                    <input type="text" class="form-control" id="name" name="name" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email:</label>
+                                    <input type="text" class="form-control" id="email" name="email" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="replyMessage" class="form-label">Your Reply:</label>
+                                    <textarea class="form-control" id="replyMessage" name="replyMessage" rows="4"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" form="replyForm">Send Reply</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="replyFormModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Reply to Message</h2>
-                <form id="replyForm">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" readonly>
-                <label for="email">Email:</label>
-                <input type="text" id="email" name="email" readonly>
-                <label for="replyMessage">Your Reply:</label>
-                <textarea id="replyMessage" name="replyMessage"></textarea>
-                <button type="submit">Send Reply</button>
-                </form>
-            </div>
-            </div>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-            <script>
-                const hamBurger = document.querySelector(".toggle-btn");
 
-                hamBurger.addEventListener("click", function() {
-                    document.querySelector("#sidebar").classList.toggle("expand");
-                });
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<script>
+       $(document).ready(function() {
+        $('#example').DataTable({
+            "lengthChange": false, // Hide the "Show [n] entries" dropdown
+        });
+    });
 
-                // When the user clicks on the reply button
-                $(document).on('click', '.reply', function() {
-                // Get the name and email from the row
-                var name = $(this).closest('tr').find('td:eq(0)').text();
-                var email = $(this).closest('tr').find('td:eq(1)').text();
+    const hamBurger = document.querySelector(".toggle-btn");
 
-                // Populate the form fields with the fetched name and email
-                $('#name').val(name);
-                $('#email').val(email);
+    hamBurger.addEventListener("click", function () {
+        document.querySelector("#sidebar").classList.toggle("expand");
+    });
 
-                // Display the popup form
-                $('#replyFormModal').show();
-                });
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+            if (e.target.classList.contains('fa-solid')) {
+                e.preventDefault();
+                document.querySelector("#sidebar").classList.toggle("expand");
+            }
+        });
+    });
+                    // When the user clicks on the reply button
+                    $(document).on('click', '.reply', function() {
+                        // Get the name and email from the row
+                        var name = $(this).closest('tr').find('td:eq(0)').text();
+                        var email = $(this).closest('tr').find('td:eq(1)').text();
 
-                // When the user clicks on the close button or outside the modal, close it
-                $(document).on('click', '.close, .modal', function(event) {
-                if ($(event.target).hasClass('modal') || $(event.target).hasClass('close')) {
-                    $('#replyFormModal').hide();
-                }
-                });
+                        // Populate the form fields with the fetched name and email
+                        $('#name').val(name);
+                        $('#email').val(email);
 
-                // AJAX submit the form
-                $('#replyForm').submit(function(e) {
-                e.preventDefault(); // Prevent default form submission
+                        // Display the popup form
+                        $('#replyFormModal').show();
+                    });
 
-                // Get form data
-                var formData = $(this).serialize();
+                    // When the user clicks on the close button or outside the modal, close it
+                    $(document).on('click', '.close, .modal', function(event) {
+                        if ($(event.target).hasClass('modal') || $(event.target).hasClass('close')) {
+                            $('#replyFormModal').hide();
+                        }
+                    });
 
-                // AJAX request to submit form data
-                $.ajax({
-                    type: 'POST',
-                    url: 'your_php_script.php', // Replace with your PHP script URL
-                    data: formData,
-                    success: function(response) {
-                    // Handle success response
-                    console.log(response);
-                    // Optionally, close the modal or show a success message
-                    },
-                    error: function(xhr, status, error) {
-                    // Handle error
-                    console.error(xhr.responseText);
-                    }
-                });
-                });
-            </script>
+                    // AJAX submit the form
+                    $('#replyForm').submit(function(e) {
+                        e.preventDefault(); // Prevent default form submission
+
+                        // Get form data
+                        var formData = $(this).serialize();
+
+                        // AJAX request to submit form data
+                        $.ajax({
+                            type: 'POST',
+                            url: 'your_php_script.php', // Replace with your PHP script URL
+                            data: formData,
+                            success: function(response) {
+                                // Handle success response
+                                console.log(response);
+                                // Optionally, close the modal or show a success message
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle error
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    });
+                </script>
 
 </body>
 

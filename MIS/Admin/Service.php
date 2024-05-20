@@ -261,7 +261,6 @@ hamBurger.addEventListener("click", function() {
     document.querySelector("#sidebar").classList.toggle("expand");
     document.querySelector(".main").classList.toggle("sidebar-expand");
 
-    $(document).ready(function() {
     // Toggle visibility of action buttons and columns
     function toggleColumns() {
         $('.status-column, .action-column').toggleClass('hidden');
@@ -269,13 +268,29 @@ hamBurger.addEventListener("click", function() {
         table.columns.adjust().draw(false);
     }
 
-    // Click event for toggling columns
-    $('.toggle-status-action').click(function() {
+    // If sidebar is expanded, show the status and action elements
+    if (document.querySelector("#sidebar").classList.contains("expand")) {
         toggleColumns();
-    });
+    }
+});
 
+// Add event listener to handle clicks on the sidebar links
+document.querySelectorAll('.sidebar-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        // Check if the clicked element is the icon
+        if (e.target.classList.contains('fa-solid')) {
+            // Prevent the default behavior (expanding/collapsing the dropdown)
+            e.preventDefault();
+            // Toggle the expand class on the sidebar
+            document.querySelector("#sidebar").classList.toggle("expand");
+            // Toggle the sidebar-expand class on the main element
+            document.querySelector(".main").classList.toggle("sidebar-expand");
+            // Toggle visibility of status and action elements
+            toggleColumns();
+        }
+    });
 });
-});
+
 
 
        $(document).ready(function() {

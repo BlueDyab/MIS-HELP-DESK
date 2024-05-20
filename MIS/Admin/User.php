@@ -348,7 +348,7 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" id="openFormBtnEdit" name="Edit_btn">update</button>
+                        <button type="submit" class="btn btn-primary btn-block" id="openFormBtnEdit" name="Edit_btn">update</button>
                     </form>
                 </div>
             </div>
@@ -415,8 +415,9 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                             <label for="password">Password:</label>
                             <input type="password" class="form-control" id="passwordA" name="password" required>
                         </div>
-
-                        <button type="button " class="btn btn-primary" id="openFormBtnAdd" name="Add_btn">Add</button>
+                        <div class="d-flex justify-content-center align-items-center">
+                        <button type="button" class="btn btn-primary btn-block" id="openFormBtnAdd" name="Add_btn">Add</button>
+</div>
                     </form>
                 </div>
             </div>

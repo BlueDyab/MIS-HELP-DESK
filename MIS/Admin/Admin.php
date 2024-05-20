@@ -16,13 +16,17 @@
     </head>
     <style>
         .main {
-            min-height: 100vh;
+            max-height: 100vh;
             width: 100%;
             overflow: hidden;
             transition: all 0.35s ease-in-out;
             background-color: #e2e3dc;
         }
 
+        .dashboard {
+           overflow-y: scroll;  
+            height: 100vh;
+        }
 
         h2 {
             font-size: 50px;
@@ -157,9 +161,6 @@
                                     <span>Room</span>
                                 </a>
                                 <ul id="roomDropdown" class="sidebar-dropdown list-unstyled collapse">
-                                    <li class="sidebar-item">
-                                        <a href="calendar.php" class="sidebar-link"><i class="fa-solid fa-user"></i>Calendar</a>
-                                    </li>
                                     <li class="sidebar-item">
                                         <a href="ProfessorRoom.php" id="room" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i>Professor</a>
                                     </li>
