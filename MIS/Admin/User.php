@@ -22,7 +22,6 @@ if (!isset($_SESSION['editButtonClickedId'])) {
 </head>
 
 <style>
-    
     .main {
         max-height: 100vh;
         width: 100%;
@@ -115,11 +114,11 @@ if (!isset($_SESSION['editButtonClickedId'])) {
         height: 35px;
         padding: 0;
     }
+
     /* Custom toast styling */
-.custom-toast {
-    background-color: #a5dc86 !important;
-}
- 
+    .custom-toast {
+        background-color: #a5dc86 !important;
+    }
 </style>
 
 <body>
@@ -289,10 +288,6 @@ if (!isset($_SESSION['editButtonClickedId'])) {
             <!-- Edit form-->
             <div class="overlay-form" id="overlayFormuser">
                 <div class="form-container">
-                    <?php
-                    $editButtonClickedId = $_SESSION['editButtonClickedId'];
-                    echo $editButtonClickedId;
-                    ?>
                     <button class="close-icon" id="closeFormBtnEdit"><span>&#10006;</span>
                     </button><!-- Close icon -->
 
@@ -353,12 +348,12 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" id="openFormBtnEdit" name="Edit_btn" >update</button>
+                        <button type="submit" class="btn btn-primary" id="openFormBtnEdit" name="Edit_btn">update</button>
                     </form>
                 </div>
             </div>
 
-          
+
             <!-- Add form -->
 
             <div class="overlay-form" id="overlayFormAdd">
@@ -461,182 +456,185 @@ if (!isset($_SESSION['editButtonClickedId'])) {
 
 
             document.addEventListener("DOMContentLoaded", function() {
-    const editButtons = document.querySelectorAll(".openFormBtnEdit");
-    const editOverlay = document.getElementById("overlayFormuser");
-    const editForm = editOverlay.querySelector("form");
+                const editButtons = document.querySelectorAll(".openFormBtnEdit");
+                const editOverlay = document.getElementById("overlayFormuser");
+                const editForm = editOverlay.querySelector("form");
+                let currentId; // Variable to store the current ID
 
-    editButtons.forEach(function(button) {
-        button.addEventListener("click", function() {
-            // Get the row values
-            const row = button.closest("tr");
-            const id = row.querySelector(".td").textContent.trim();
-            const name = row.querySelectorAll("td")[0].textContent.trim();
-            const course = row.querySelectorAll("td")[1].textContent.trim();
-            const year = row.querySelectorAll("td")[2].textContent.trim();
-            const section = row.querySelectorAll("td")[3].textContent.trim();
-            const username = row.querySelectorAll("td")[4].textContent.trim();
-            const password = row.querySelectorAll("td")[5].textContent.trim();
-            const position = row.querySelectorAll("td")[6].textContent.trim();
+                editButtons.forEach(function(button) {
+                    button.addEventListener("click", function() {
+                        // Get the row values
+                        const row = button.closest("tr");
+                        currentId = row.querySelector(".td").textContent.trim();
+                        const name = row.querySelectorAll("td")[0].textContent.trim();
+                        const course = row.querySelectorAll("td")[1].textContent.trim();
+                        const year = row.querySelectorAll("td")[2].textContent.trim();
+                        const section = row.querySelectorAll("td")[3].textContent.trim();
+                        const username = row.querySelectorAll("td")[4].textContent.trim();
+                        const password = row.querySelectorAll("td")[5].textContent.trim();
+                        const position = row.querySelectorAll("td")[6].textContent.trim();
 
-            // Populate the edit form with the fetched values
-           
-            editForm.querySelector("#name").value = name;
-            editForm.querySelector("#course").value = course;
-            editForm.querySelector("#year").value = year;
-            editForm.querySelector("#section").value = section;
-            editForm.querySelector("#username").value = username;
-            editForm.querySelector("#password").value = password;
-            editForm.querySelector("#position1").value = position;
+                        // Populate the edit form with the fetched values
+                        editForm.querySelector("#name").value = name;
+                        editForm.querySelector("#course").value = course;
+                        editForm.querySelector("#year").value = year;
+                        editForm.querySelector("#section").value = section;
+                        editForm.querySelector("#username").value = username;
+                        editForm.querySelector("#password").value = password;
+                        editForm.querySelector("#position1").value = position;
 
-            // Show the edit overlay
-            editOverlay.style.display = "flex";
+                        // Show the edit overlay
+                        editOverlay.style.display = "flex";
+                    });
+                });
 
-            // When update button is clicked
-            editForm.addEventListener("submit", function(event) {
-                event.preventDefault();
+                // When update button is clicked
+                editForm.addEventListener("submit", function(event) {
+                    event.preventDefault();
 
-                // Show confirmation dialog using SweetAlert2
-                Swal.fire({
-                    title: "Do you want to save the changes?",
-                    showDenyButton: true,
-                    showCancelButton: true,
-                    confirmButtonText: "Save",
-                    denyButtonText: `Don't save`
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Get the modified values
-                        const newName = editForm.querySelector("#name").value;
-                        const newCourse = editForm.querySelector("#course").value;
-                        const newYear = editForm.querySelector("#year").value;
-                        const newSection = editForm.querySelector("#section").value;
-                        const newUsername = editForm.querySelector("#username").value;
-                        const newPassword = editForm.querySelector("#password").value;
-                        const newPosition = editForm.querySelector("#position1").value;
+                    // Show confirmation dialog using SweetAlert2
+                    Swal.fire({
+                        title: "Do you want to save the changes?",
+                        showDenyButton: true,
+                        showCancelButton: true,
+                        confirmButtonText: "Save",
+                        denyButtonText: `Don't save`
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Get the modified values
+                            const newName = editForm.querySelector("#name").value;
+                            const newCourse = editForm.querySelector("#course").value;
+                            const newYear = editForm.querySelector("#year").value;
+                            const newSection = editForm.querySelector("#section").value;
+                            const newUsername = editForm.querySelector("#username").value;
+                            const newPassword = editForm.querySelector("#password").value;
+                            const newPosition = editForm.querySelector("#position1").value;
 
-                        // Send an AJAX request to update the database
-                        const xhr = new XMLHttpRequest();
-                        xhr.open("POST", "update_data.php");
-                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                        xhr.onload = function() {
-                            if (xhr.status === 200) {
-                               // Show success toast
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 1500,
-    timerProgressBar: true,
-    iconColor: 'white', // Icon color
-    customClass: {
-        popup: 'custom-toast',
+                            // Send an AJAX request to update the database
+                            const xhr = new XMLHttpRequest();
+                            xhr.open("POST", "update_data.php");
+                            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                            xhr.onload = function() {
+                                if (xhr.status === 200) {
+                                    // Show success toast
+                                    const Toast = Swal.mixin({
+                                        toast: true,
+                                        position: 'top-end',
+                                        showConfirmButton: false,
+                                        timer: 1500,
+                                        timerProgressBar: true,
+                                        iconColor: 'white', // Icon color
+                                        customClass: {
+                                            popup: 'custom-toast',
+                                        },
+                                        didClose: () => {
+                                            // Reload the page or update the UI as needed
+                                            location.reload();
+                                        }
+                                    });
+                                    Toast.fire({
+                                        icon: "success",
+                                        title: "Updated successfully"
 
-    },
-    didClose: () => {
-        // Reload the page or update the UI as needed
-        
-    }
-});
-Toast.fire({
-    icon: "success",
-    title: "Deleted successfully"
-});
-
-                            } else {
-                                // Error handling
-                                console.error("Error updating data");
-                            }
-                        };
-                        xhr.send(`id=${id}&name=${newName}&course=${newCourse}&year=${newYear}&section=${newSection}&username=${newUsername}&password=${newPassword}&position=${newPosition}`);
-                    } else if (result.isDenied) {
-                        // Handle case where changes are not saved
-                        console.log("Changes are not saved");
-                    }
+                                    });
+                                } else {
+                                    // Error handling
+                                    console.error("Error updating data: " + xhr.statusText);
+                                }
+                            };
+                            xhr.onerror = function() {
+                                console.error("Request failed");
+                            };
+                            xhr.send(`ID=${encodeURIComponent(currentId)}&Name=${encodeURIComponent(newName)}&Course=${encodeURIComponent(newCourse)}&Year=${encodeURIComponent(newYear)}&Section=${encodeURIComponent(newSection)}&Username=${encodeURIComponent(newUsername)}&Password=${encodeURIComponent(newPassword)}&Position=${encodeURIComponent(newPosition)}`);
+                        } else if (result.isDenied) {
+                            // Handle case where changes are not saved
+                            console.log("Changes are not saved");
+                        }
+                    });
                 });
             });
-        });
-    });
-});
+
 
 
 
             closeFormBtnEdit.addEventListener("click", function() {
-    overlayFormEdit.style.display = "none";
+                overlayFormEdit.style.display = "none";
 
-    // Send an AJAX request to clear the session variable
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', './clear_session.php'); // Assuming the PHP script is named clear_session.php
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            // Session variable cleared successfully
-            console.log('Session variable cleared');
-        } else {
-            // Error handling
-            console.error('Error clearing session variable');
-        }
-    };
-    xhr.send(); // Send the request without any data
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    const deleteButtons = document.querySelectorAll(".deleteButton");
-
-    deleteButtons.forEach(function(button) {
-        button.addEventListener("click", function() {
-            const id = this.getAttribute('data-id');
-
-            // Show the confirmation modal using SweetAlert
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Send an AJAX request to delete_data.php
-                    const xhr = new XMLHttpRequest();
-                    xhr.open("POST", "delete_data.php");
-                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    xhr.onload = function() {
-                        if (xhr.status === 200) {
-                            // Row deleted successfully
-
-                          // Show success toast
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 1500,
-    timerProgressBar: true,
-    iconColor: 'white', // Icon color
-    customClass: {
-        popup: 'custom-toast',
-
-    },
-    didClose: () => {
-        // Reload the page or update the UI as needed
-        location.reload(); // Reload the page to reflect the changes
-    }
-});
-Toast.fire({
-    icon: "success",
-    title: "Deleted successfully"
-});
-
-                        } else {
-                            // Error handling
-                            console.error("Error deleting row");
-                        }
-                    };
-                    xhr.send(`id=${id}`);
-                }
+                // Send an AJAX request to clear the session variable
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', './clear_session.php'); // Assuming the PHP script is named clear_session.php
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        // Session variable cleared successfully
+                        console.log('Session variable cleared');
+                    } else {
+                        // Error handling
+                        console.error('Error clearing session variable');
+                    }
+                };
+                xhr.send(); // Send the request without any data
             });
-        });
-    });
-});
+
+            document.addEventListener("DOMContentLoaded", function() {
+                const deleteButtons = document.querySelectorAll(".deleteButton");
+
+                deleteButtons.forEach(function(button) {
+                    button.addEventListener("click", function() {
+                        const id = this.getAttribute('data-id');
+
+                        // Show the confirmation modal using SweetAlert
+                        Swal.fire({
+                            title: "Are you sure?",
+                            text: "You won't be able to revert this!",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Yes, delete it!"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Send an AJAX request to delete_data.php
+                                const xhr = new XMLHttpRequest();
+                                xhr.open("POST", "delete_data.php");
+                                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                xhr.onload = function() {
+                                    if (xhr.status === 200) {
+                                        // Row deleted successfully
+
+                                        // Show success toast
+                                        const Toast = Swal.mixin({
+                                            toast: true,
+                                            position: 'top-end',
+                                            showConfirmButton: false,
+                                            timer: 1500,
+                                            timerProgressBar: true,
+                                            iconColor: 'white', // Icon color
+                                            customClass: {
+                                                popup: 'custom-toast',
+
+                                            },
+                                            didClose: () => {
+                                                // Reload the page or update the UI as needed
+                                                location.reload(); // Reload the page to reflect the changes
+                                            }
+                                        });
+                                        Toast.fire({
+                                            icon: "success",
+                                            title: "Deleted successfully"
+                                        });
+
+                                    } else {
+                                        // Error handling
+                                        console.error("Error deleting row");
+                                    }
+                                };
+                                xhr.send(`id=${id}`);
+                            }
+                        });
+                    });
+                });
+            });
 
 
 
@@ -653,7 +651,6 @@ Toast.fire({
             closeFormBtnAdd.addEventListener("click", function() {
                 overlayFormAdd.style.display = "none";
             });
-
         </script>
 </body>
 
