@@ -1,5 +1,6 @@
 <?php
     require '../Database/connection.php';
+    session_start();
     if (isset($_POST['id']) && isset($_POST['status'])) {
         $id = $_POST['id'];
         $status = $_POST['status'];
@@ -157,5 +158,12 @@
         $stmt->bindParam(':status', $status);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logoutbtn'])) {
+        session_unset();
+        session_destroy();
+        header('Location: ../login.html');
+        exit;
     }
 ?>

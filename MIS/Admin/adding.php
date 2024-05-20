@@ -34,9 +34,14 @@ if(isset($_POST['Add_btn'])) {
             $stmt->bindParam(':position', $position);
             $stmt->execute();
             echo "<script>alert('New user added successfully.');</script>";
+            // Redirect to another page
+            header("Location: ./loader.html");
+            exit; // Make sure to exit after the redirection
         }
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
+        header("Location: ./loaderX.html");
+            exit; // Make sure to exit after the redirection
     }
 }
 ?>
