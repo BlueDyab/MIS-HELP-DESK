@@ -36,7 +36,6 @@ if (!isset($_SESSION['editButtonClickedId'])) {
     }
 
     .header {
-        background-color: #ff4d00;
         position: sticky;
         top: -2px;
     }
@@ -71,11 +70,6 @@ if (!isset($_SESSION['editButtonClickedId'])) {
         margin-right: 30px;
 
     }
-
-    .table {
-        background-color: #ff4d00;
-    }
-
     strong.mx-auto {
         margin-top: 20px;
     font-size: 50px;
@@ -97,10 +91,7 @@ if (!isset($_SESSION['editButtonClickedId'])) {
 }
 
 
-    .header {
-        position: sticky;
-    }
-
+   
  
 
     /* Custom toast styling */

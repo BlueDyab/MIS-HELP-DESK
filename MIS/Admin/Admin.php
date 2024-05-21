@@ -23,7 +23,6 @@
     $stmt->bindParam(':id', $USER_ID_PROFILE);
     $stmt->execute();
     $USER = $stmt->fetch();
-
     ?>
     <!DOCTYPE html>
     <html lang="en">

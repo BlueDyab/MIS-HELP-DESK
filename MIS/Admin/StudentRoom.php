@@ -30,7 +30,7 @@ include '../Database/connection.php';
     }
 
     .header {
-        background-color: #ff4d00;
+       
         position: sticky;
         top: -2px;
     }
@@ -61,10 +61,7 @@ div#example_wrapper {
         margin-bottom: 20px;
         margin-right: 30px;
        
-    }
-    .table{
-        background-color: #ff4d00;
-    }
+ 
     strong.mx-auto {
         margin-top: 20px;
     font-size: 50px;

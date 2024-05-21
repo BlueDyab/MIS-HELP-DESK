@@ -30,7 +30,7 @@ include '../Database/connection.php';
     }
 
     .header {
-        background-color: #ff4d00;
+ 
         position: sticky;
         top: -2px;
     }
@@ -66,9 +66,6 @@ include '../Database/connection.php';
 
     }
 
-    .table {
-        background-color: #ff4d00;
-    }
 
     strong.mx-auto {
         margin-top: 20px;
