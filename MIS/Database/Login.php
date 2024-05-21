@@ -11,29 +11,18 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Prepare the SQL SELECT statement
-    $stmt = $conn->prepare("SELECT `ID`, `Name`, `Username`, `Password` FROM `user_account_db` WHERE `Username` = :username");
-
-    // Bind parameters to placeholders
+    $stmt = $conn->prepare("SELECT `ID`, `Password` FROM `user_account_db` WHERE `Username` = :username");
     $stmt->bindParam(':username', $username);
-
-    // Execute the query
     $stmt->execute();
-
-    // Fetch the result
     $acc = $stmt->fetch();
 
     // Check if a matching user account is found
     if ($acc) {
-        $hashpassword = $acc['Password']; // Fetch hashed password from the database
-
-        if (password_verify($password, $hashpassword)) {
-            // Passwords match, authentication successful
-            // Redirect to the admin page
+        if ($acc['Password'] === $password) {
+            $_SESSION['Admin_ID'] = $acc["ID"];
             header("location: ../Admin/Admin.php");
             exit();
         } else {
-            // Passwords do not match, authentication failed
-            // Redirect back to the login page with an error message
             echo "Invalid username or password";
             echo $password;
         }
