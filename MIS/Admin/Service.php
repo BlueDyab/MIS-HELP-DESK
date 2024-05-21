@@ -1,6 +1,29 @@
 <?php
-session_start();
 require '../Database/connection.php';
+session_start();
+if (!isset($_SESSION['Admin_ID'])) {
+    $USER_ID = $_SESSION['Admin_ID'];
+
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Prepare the SQL SELECT statement
+    $stmt = $conn->prepare("SELECT `ID`, `Name` FROM `user_account_db` WHERE `ID` = :id");
+    $stmt->bindParam(':id', $USER_ID);
+    $stmt->execute();
+    $acc = $stmt->fetch();
+
+    if (!$acc['ID']) {
+        header('location: ../login.html');
+        exit;
+    }
+}
+$USER_ID_PROFILE = $_SESSION['Admin_ID'];
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// Prepare the SQL SELECT statement
+$stmt = $conn->prepare("SELECT `Name`, `Avatar` FROM `user_account_db` WHERE `ID` = :id");
+$stmt->bindParam(':id', $USER_ID_PROFILE);
+$stmt->execute();
+$USER = $stmt->fetch();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,59 +51,62 @@ require '../Database/connection.php';
         justify-content: space-between;
         align-items: start;
     }
+
     .header {
         background-color: #ff4d00;
         position: sticky;
         top: -2px;
     }
-  
+
     .table-responsive.m-2 {
-    width: 99%;
-    height: 100vh;
-    margin-top: 20px;
+        width: 99%;
+        height: 100vh;
+        margin-top: 20px;
 
-}
-div#example_wrapper {
-    background-color: white;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    border: 2px solid black;
-}
+    }
 
-/* Adjust font size for table and columns */
-.table,
-.table th,
-.table td {
-    font-size: 14px; /* Adjust the font size as needed */
-    text-align: center;
-}
+    div#example_wrapper {
+        background-color: white;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+        border: 2px solid black;
+    }
 
-.dataTables_filter {
+    /* Adjust font size for table and columns */
+    .table,
+    .table th,
+    .table td {
+        font-size: 14px;
+        /* Adjust the font size as needed */
+        text-align: center;
+    }
+
+    .dataTables_filter {
         margin-bottom: 20px;
         margin-right: 30px;
-       
+
     }
-    .table{
+
+    .table {
         background-color: #ff4d00;
     }
+
     strong.mx-auto {
         margin-top: 20px;
-    font-size: 50px;
-    font-weight: 800;
-}
+        font-size: 50px;
+        font-weight: 800;
+    }
 
- /* Hide status and action columns when sidebar is expanded */
- .sidebar-expand .status-column,
-        .sidebar-expand .action-column {
-            display: none;
-        }
-
-
-
-/* Style the buttons inside the table cells */
+    /* Hide status and action columns when sidebar is expanded */
+    .sidebar-expand .status-column,
+    .sidebar-expand .action-column {
+        display: none;
+    }
 
 
+
+    /* Style the buttons inside the table cells */
 </style>
 
 <body>
@@ -89,10 +115,10 @@ div#example_wrapper {
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
-                    <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
+                    <img src="getImage.php" alt="User Avatar" class="logo-img">
                 </button>
                 <div class="sidebar-logo">
-                    <a href="Profile.php">User Account<i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="Profile.php"><?php echo $USER['Name']; ?><i class="fa-solid fa-pen-to-square"></i></a>
                 </div>
             </div>
             <ul class="sidebar-nav">
@@ -177,12 +203,12 @@ div#example_wrapper {
             </div>
         </aside>
 
-          
+
         <div class="main">
-        <strong class="mx-auto">SERVICE</strong>
-      <div class="table-responsive m-2">
-             <table id="example" class="table table-striped table-bordered">
-                <thead class="table-dark">
+            <strong class="mx-auto">SERVICE</strong>
+            <div class="table-responsive m-2">
+                <table id="example" class="table table-striped table-bordered">
+                    <thead class="table-dark">
                         <tr>
                             <th>No </th>
                             <th>Staff Name</th>
@@ -198,16 +224,16 @@ div#example_wrapper {
                         </tr>
                     </thead>
                     <tbody>
-                    <?php
+                        <?php
                         try {
                             // Set the PDO error mode to exception
                             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                         // Prepare the SQL SELECT statement
-    $stmt = $conn->prepare("SELECT * FROM `service_request_db`");
+                            // Prepare the SQL SELECT statement
+                            $stmt = $conn->prepare("SELECT * FROM `service_request_db`");
 
-    // Execute the statement
-    $stmt->execute();
+                            // Execute the statement
+                            $stmt->execute();
 
                             // Fetch all the results
                             $client_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -217,7 +243,7 @@ div#example_wrapper {
                                 $counter = 1;
                                 // Iterate over each row
                                 foreach ($client_count as $data) {
-                                    if ($data['Status'] !== "Done" && $data['Status'] !== "Denied"){
+                                    if ($data['Status'] !== "Done" && $data['Status'] !== "Denied") {
                                         echo "<tr>";
                                         // Output each column value of the row
                                         echo "<th class='td' scope='col'>" . $counter . "</th>";
@@ -231,23 +257,23 @@ div#example_wrapper {
                                         echo "<td class='td'>" . $data['Recommendation'] . "</td>";
                                         echo "<td class='status-column'>" . $data['Status'] . "</td>";
                                         if ($data['Status'] === "On-going") {
-                                            echo "<td class='action-column'>" . 
-                                                 "<button class='btn btn-warning pending  m-2 mx-auto' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-pause-fill'>Pending</i></button>" .
-                                                 "<button class='btn btn-success done ' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
-                                                 "</td>";
+                                            echo "<td class='action-column'>" .
+                                                "<button class='btn btn-warning pending  m-2 mx-auto' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-pause-fill'>Pending</i></button>" .
+                                                "<button class='btn btn-success done ' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
+                                                "</td>";
                                         } else if ($data['Status'] === "Pending") {
-                                            echo "<td class='action-column'>" . 
-                                                 "<button class='btn btn-info on-going m-2 mx-auto' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-play-fill'>On-going</i></button>" .
-                                                 "<button class='btn btn-success done' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
-                                                 "</td>";
+                                            echo "<td class='action-column'>" .
+                                                "<button class='btn btn-info on-going m-2 mx-auto' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-play-fill'>On-going</i></button>" .
+                                                "<button class='btn btn-success done' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
+                                                "</td>";
                                         } else {
-                                            echo "<td class='action-column'>" . 
-                                                 "<button class='btn btn-success m-2 mx-auto accept' data-id='" . htmlspecialchars($data['Id']) . "' name='AcceptDenied'><i class='bi bi-check-square-fill'>Accept</i></button>" . 
-                                                 "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-x-square-fill'>Denied</i></button>" . 
-                                                 "</td>";
+                                            echo "<td class='action-column'>" .
+                                                "<button class='btn btn-success m-2 mx-auto accept' data-id='" . htmlspecialchars($data['Id']) . "' name='AcceptDenied'><i class='bi bi-check-square-fill'>Accept</i></button>" .
+                                                "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-x-square-fill'>Denied</i></button>" .
+                                                "</td>";
                                         }
                                         echo "</tr>";
-                                        
+
                                         // Increment the counter
                                         $counter++;
                                     }
@@ -255,146 +281,194 @@ div#example_wrapper {
                             } else {
                                 echo "<tr><td colspan='11'>No service request found.</td></tr>";
                             }
-                            
                         } catch (PDOException $e) {
                             echo "Error: " . $e->getMessage();
                         }
                         ?>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-<script>
-       $(document).ready(function() {
-        $('#example').DataTable({
-            "lengthChange": false, // Hide the "Show [n] entries" dropdown
-            "pageLength": 7 // Set the default length to 7 entries per page
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "lengthChange": false, // Hide the "Show [n] entries" dropdown
+                "pageLength": 7 // Set the default length to 7 entries per page
+            });
         });
-    });
-    const hamBurger = document.querySelector(".toggle-btn");
+        const hamBurger = document.querySelector(".toggle-btn");
 
-hamBurger.addEventListener("click", function() {
-    document.querySelector("#sidebar").classList.toggle("expand");
-    document.querySelector(".main").classList.toggle("sidebar-expand");
-
-    // Toggle visibility of action buttons and columns
-    function toggleColumns() {
-        $('.status-column, .action-column').toggleClass('hidden');
-        table.columns([9, 10]).visible(!$('.status-column').hasClass('hidden'));
-        table.columns.adjust().draw(false);
-    }
-
-    // If sidebar is expanded, show the status and action elements
-    if (document.querySelector("#sidebar").classList.contains("expand")) {
-        toggleColumns();
-    }
-});
-
-// Add event listener to handle clicks on the sidebar links
-document.querySelectorAll('.sidebar-link').forEach(link => {
-    link.addEventListener('click', function(e) {
-        // Check if the clicked element is the icon
-        if (e.target.classList.contains('fa-solid')) {
-            // Prevent the default behavior (expanding/collapsing the dropdown)
-            e.preventDefault();
-            // Toggle the expand class on the sidebar
+        hamBurger.addEventListener("click", function() {
             document.querySelector("#sidebar").classList.toggle("expand");
-            // Toggle the sidebar-expand class on the main element
             document.querySelector(".main").classList.toggle("sidebar-expand");
-            // Toggle visibility of status and action elements
-            toggleColumns();
-        }
-    });
-});
+
+            // Toggle visibility of action buttons and columns
+            function toggleColumns() {
+                $('.status-column, .action-column').toggleClass('hidden');
+                table.columns([9, 10]).visible(!$('.status-column').hasClass('hidden'));
+                table.columns.adjust().draw(false);
+            }
+
+            // If sidebar is expanded, show the status and action elements
+            if (document.querySelector("#sidebar").classList.contains("expand")) {
+                toggleColumns();
+            }
+        });
+
+        // Add event listener to handle clicks on the sidebar links
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Check if the clicked element is the icon
+                if (e.target.classList.contains('fa-solid')) {
+                    // Prevent the default behavior (expanding/collapsing the dropdown)
+                    e.preventDefault();
+                    // Toggle the expand class on the sidebar
+                    document.querySelector("#sidebar").classList.toggle("expand");
+                    // Toggle the sidebar-expand class on the main element
+                    document.querySelector(".main").classList.toggle("sidebar-expand");
+                    // Toggle visibility of status and action elements
+                    toggleColumns();
+                }
+            });
+        });
 
 
 
-       $(document).ready(function() {
-                    // AJAX request for 'On-going' status
-                    $('.accept, .on-going').click(function() {
-                        var id = $(this).data('id'); // Get the data-id attribute of the clicked button
+        $(document).ready(function() {
+            // AJAX request for 'On-going' status
+            $('.accept, .on-going').click(function() {
+                var id = $(this).data('id'); // Get the data-id attribute of the clicked button
 
-                        // Make an AJAX request to your server-side script
-                        $.ajax({
-                            url: '../Admin/Action.php', // The server-side script that handles the database update
-                            type: 'POST',
-                            data: { id: id, status: 'On-going' }, // Send the ID and new status
-                            success: function(response) {
-                                // On success, update the Status cell of the corresponding row
-                                $('button[data-id="' + id + '"]').closest('tr').find('td:eq(7)').text('On-going');
-                                location.reload();
-                            },
-                            error: function() {
-                                alert('Error updating status. Please try again.');
-                            }
-                        });
-                    });
+                // Make an AJAX request to your server-side script
+                $.ajax({
+                    url: '../Admin/Action.php', // The server-side script that handles the database update
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        status: 'On-going'
+                    }, // Send the ID and new status
+                    success: function(response) {
+                        // On success, update the Status cell of the corresponding row
+                        $('button[data-id="' + id + '"]').closest('tr').find('td:eq(7)').text('On-going');
+                        location.reload();
+                    },
+                    error: function() {
+                        alert('Error updating status. Please try again.');
+                    }
+                });
+            });
 
-                    $(document).ready(function() {
-                        // AJAX request for updating status to "Pending"
-                        $('.pending').click(function() {
-                            var id = $(this).data('id'); // Get the data-id attribute of the clicked button
+            $(document).ready(function() {
+                // AJAX request for updating status to "Pending"
+                $('.pending').click(function() {
+                    var id = $(this).data('id'); // Get the data-id attribute of the clicked button
 
-                            // Make an AJAX request to update the status
-                            $.ajax({
-                                url: './Action.php', // URL to the server-side script for updating status
-                                type: 'POST',
-                                data: { id: id, status: 'Pending' }, // Send the ID and new status
-                                success: function(response) {
-                                    // On success, update the UI or notify the user
-                                    //alert(response); // For demonstration, you can replace this with updating the UI
-                                    location.reload();
-                                },
-                                error: function(xhr, status, error) {
-                                    console.error(xhr.responseText);
-                                    // Handle errors here
-                                }
-                            });
-                        });
-                    });
-
-                    // AJAX request for 'Done' status
-                    $(".done").click(function() {
-                        var id = $(this).attr('data-id');
-                        $.ajax({
-                            url: "./Action.php",
-                            type: "POST",
-                            data: { id: id, status: "Done" },
-                            success: function(response) {
-                                // Reload the page after updating status
-                                location.reload();
-                            },
-                            error: function(xhr, status, error) {
-                                console.error(xhr.responseText);
-                            }
-                        });
-                    });
-
-                    $(".denied").click(function() {
-                        var id = $(this).attr('data-id');
-                        $.ajax({
-                            url: "./Action.php",
-                            type: "POST",
-                            data: { id: id, status: "Denied" },
-                            success: function(response) {
-                                // Reload the page after updating status
-                                location.reload();
-                            },
-                            error: function(xhr, status, error) {
-                                console.error(xhr.responseText);
-                            }
-                        });
+                    // Make an AJAX request to update the status
+                    $.ajax({
+                        url: './Action.php', // URL to the server-side script for updating status
+                        type: 'POST',
+                        data: {
+                            id: id,
+                            status: 'Pending'
+                        }, // Send the ID and new status
+                        success: function(response) {
+                            // On success, update the UI or notify the user
+                            //alert(response); // For demonstration, you can replace this with updating the UI
+                            location.reload();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                            // Handle errors here
+                        }
                     });
                 });
-            </script>
-       
+            });
+
+            // AJAX request for 'Done' status
+            $(".done").click(function() {
+                var id = $(this).attr('data-id');
+                $.ajax({
+                    url: "./Action.php",
+                    type: "POST",
+                    data: {
+                        id: id,
+                        status: "Done"
+                    },
+                    success: function(response) {
+                        // Reload the page after updating status
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+
+            $(".denied").click(function() {
+                var id = $(this).attr('data-id');
+                $.ajax({
+                    url: "./Action.php",
+                    type: "POST",
+                    data: {
+                        id: id,
+                        status: "Denied"
+                    },
+                    success: function(response) {
+                        // Reload the page after updating status
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+
+        document.getElementById('logout').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+
+            // Create a form and append it to the body
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = './Action.php'; // The target PHP script for logout
+
+            var hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = 'logoutbtn';
+            hiddenField.value = 'true';
+            form.appendChild(hiddenField);
+
+            document.body.appendChild(form);
+            form.submit(); // Submit the form
+        });
+
+        $(document).ready(function() {
+            $.ajax({
+                url: 'getImage.php', // URL of the PHP script
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // Set the src of img and display it
+                        $('.logo-imig').attr('src', response.imagePath).show();
+                    } else {
+                        console.error('Failed to load image: ' + response.error);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX error:', error);
+                }
+            });
+        });
     </script>
-           
+
+    </script>
+
 
 </body>
 

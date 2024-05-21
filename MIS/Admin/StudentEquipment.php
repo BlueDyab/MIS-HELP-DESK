@@ -1,7 +1,31 @@
 <?php
-session_start();
 require '../Database/connection.php';
+session_start();
+if (!isset($_SESSION['Admin_ID'])) {
+    $USER_ID = $_SESSION['Admin_ID'];
+
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Prepare the SQL SELECT statement
+    $stmt = $conn->prepare("SELECT `ID`, `Name` FROM `user_account_db` WHERE `ID` = :id");
+    $stmt->bindParam(':id', $USER_ID);
+    $stmt->execute();
+    $acc = $stmt->fetch();
+
+    if (!$acc['ID']) {
+        header('location: ../login.html');
+        exit;
+    }
+}
+$USER_ID_PROFILE = $_SESSION['Admin_ID'];
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// Prepare the SQL SELECT statement
+$stmt = $conn->prepare("SELECT `Name`, `Avatar` FROM `user_account_db` WHERE `ID` = :id");
+$stmt->bindParam(':id', $USER_ID_PROFILE);
+$stmt->execute();
+$USER = $stmt->fetch();
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,47 +62,50 @@ require '../Database/connection.php';
     }
 
     .table-responsive.m-2 {
-    width: 99%;
-    height: 100vh;
-    margin-top: 20px;
+        width: 99%;
+        height: 100vh;
+        margin-top: 20px;
 
-}
-div#example_wrapper {
-    background-color: white;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    border: 2px solid black;
-}
+    }
 
-/* Adjust font size for table and columns */
-.table,
-.table th,
-.table td {
-    font-size: 14px; /* Adjust the font size as needed */
-    text-align: center;
-}
+    div#example_wrapper {
+        background-color: white;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+        border: 2px solid black;
+    }
 
-.dataTables_filter {
+    /* Adjust font size for table and columns */
+    .table,
+    .table th,
+    .table td {
+        font-size: 14px;
+        /* Adjust the font size as needed */
+        text-align: center;
+    }
+
+    .dataTables_filter {
         margin-bottom: 20px;
         margin-right: 30px;
-       
+
     }
-    .table{
+
+    .table {
         background-color: #ff4d00;
     }
+
     strong.mx-auto {
         margin-top: 20px;
-    font-size: 50px;
-    font-weight: 800;
-}
+        font-size: 50px;
+        font-weight: 800;
+    }
 
- /* Hide status and action columns when sidebar is expanded */
+    /* Hide status and action columns when sidebar is expanded */
     .sidebar-expand .status-column,
     .sidebar-expand .action-column {
         display: none;
     }
-
 </style>
 
 <body>
@@ -87,10 +114,10 @@ div#example_wrapper {
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
-                    <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
+                    <img src="getImage.php" alt="User Avatar" class="logo-img">
                 </button>
                 <div class="sidebar-logo">
-                    <a href="Profile.php">User Account<i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="Profile.php"><?php echo $USER['Name']; ?><i class="fa-solid fa-pen-to-square"></i></a>
                 </div>
             </div>
             <ul class="sidebar-nav">
@@ -177,7 +204,7 @@ div#example_wrapper {
 
 
         <div class="main">
-        <strong class="mx-auto">STUDENT EQUIPMENT</strong>
+            <strong class="mx-auto">STUDENT EQUIPMENT</strong>
             <div class="table-responsive m-2">
                 <table id="example" class="table table-striped table-bordered">
                     <thead class="table-dark">
@@ -273,39 +300,39 @@ div#example_wrapper {
         });
         const hamBurger = document.querySelector(".toggle-btn");
 
-hamBurger.addEventListener("click", function() {
-    document.querySelector("#sidebar").classList.toggle("expand");
-    document.querySelector(".main").classList.toggle("sidebar-expand");
-
-    // Toggle visibility of action buttons and columns
-    function toggleColumns() {
-        $('.status-column, .action-column').toggleClass('hidden');
-        table.columns([9, 10]).visible(!$('.status-column').hasClass('hidden'));
-        table.columns.adjust().draw(false);
-    }
-
-    // If sidebar is expanded, show the status and action elements
-    if (document.querySelector("#sidebar").classList.contains("expand")) {
-        toggleColumns();
-    }
-});
-
-// Add event listener to handle clicks on the sidebar links
-document.querySelectorAll('.sidebar-link').forEach(link => {
-    link.addEventListener('click', function(e) {
-        // Check if the clicked element is the icon
-        if (e.target.classList.contains('fa-solid')) {
-            // Prevent the default behavior (expanding/collapsing the dropdown)
-            e.preventDefault();
-            // Toggle the expand class on the sidebar
+        hamBurger.addEventListener("click", function() {
             document.querySelector("#sidebar").classList.toggle("expand");
-            // Toggle the sidebar-expand class on the main element
             document.querySelector(".main").classList.toggle("sidebar-expand");
-            // Toggle visibility of status and action elements
-            toggleColumns();
-        }
-    });
-});
+
+            // Toggle visibility of action buttons and columns
+            function toggleColumns() {
+                $('.status-column, .action-column').toggleClass('hidden');
+                table.columns([9, 10]).visible(!$('.status-column').hasClass('hidden'));
+                table.columns.adjust().draw(false);
+            }
+
+            // If sidebar is expanded, show the status and action elements
+            if (document.querySelector("#sidebar").classList.contains("expand")) {
+                toggleColumns();
+            }
+        });
+
+        // Add event listener to handle clicks on the sidebar links
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Check if the clicked element is the icon
+                if (e.target.classList.contains('fa-solid')) {
+                    // Prevent the default behavior (expanding/collapsing the dropdown)
+                    e.preventDefault();
+                    // Toggle the expand class on the sidebar
+                    document.querySelector("#sidebar").classList.toggle("expand");
+                    // Toggle the sidebar-expand class on the main element
+                    document.querySelector(".main").classList.toggle("sidebar-expand");
+                    // Toggle visibility of status and action elements
+                    toggleColumns();
+                }
+            });
+        });
 
 
 
@@ -398,8 +425,46 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
                 });
             });
         });
+
+        document.getElementById('logout').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+
+            // Create a form and append it to the body
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = './Action.php'; // The target PHP script for logout
+
+            var hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = 'logoutbtn';
+            hiddenField.value = 'true';
+            form.appendChild(hiddenField);
+
+            document.body.appendChild(form);
+            form.submit(); // Submit the form
+        });
+
+        $(document).ready(function() {
+            $.ajax({
+                url: 'getImage.php', // URL of the PHP script
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // Set the src of img and display it
+                        $('.logo-imig').attr('src', response.imagePath).show();
+                    } else {
+                        console.error('Failed to load image: ' + response.error);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX error:', error);
+                }
+            });
+        });
     </script>
 
 
 </body>
+
 </html>

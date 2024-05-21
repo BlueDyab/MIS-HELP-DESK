@@ -1,11 +1,29 @@
 <?php
-session_start();
 require '../Database/connection.php';
-//include './set_session.php';
-// Check if the session variable is set, otherwise initialize it
-if (!isset($_SESSION['editButtonClickedId'])) {
-    $_SESSION['editButtonClickedId'] = ''; // You can set it to a default value, for example, an empty string
+session_start();
+if (!isset($_SESSION['Admin_ID'])) {
+    $USER_ID = $_SESSION['Admin_ID'];
+
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Prepare the SQL SELECT statement
+    $stmt = $conn->prepare("SELECT `ID`, `Name` FROM `user_account_db` WHERE `ID` = :id");
+    $stmt->bindParam(':id', $USER_ID);
+    $stmt->execute();
+    $acc = $stmt->fetch();
+
+    if (!$acc['ID']) {
+        header('location: ../login.html');
+        exit;
+    }
 }
+$USER_ID_PROFILE = $_SESSION['Admin_ID'];
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// Prepare the SQL SELECT statement
+$stmt = $conn->prepare("SELECT `Name`, `Avatar` FROM `user_account_db` WHERE `ID` = :id");
+$stmt->bindParam(':id', $USER_ID_PROFILE);
+$stmt->execute();
+$USER = $stmt->fetch();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +41,7 @@ if (!isset($_SESSION['editButtonClickedId'])) {
 </head>
 
 <style>
-  .main {
+    .main {
         max-height: 100vh;
         width: 100%;
         overflow: hidden;
@@ -47,15 +65,16 @@ if (!isset($_SESSION['editButtonClickedId'])) {
         margin-top: 20px;
 
     }
-    div#example_wrapper {
-    background-color: white;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    border: 2px solid black;
-}
 
-  
+    div#example_wrapper {
+        background-color: white;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+        border: 2px solid black;
+    }
+
+
 
     /* Adjust font size for table and columns */
     .table,
@@ -78,11 +97,11 @@ if (!isset($_SESSION['editButtonClickedId'])) {
 
     strong.mx-auto {
         margin-top: 20px;
-    font-size: 50px;
-    font-weight: 800;
-}
+        font-size: 50px;
+        font-weight: 800;
+    }
 
-.btn-primary {
+    .btn-primary {
         margin-right: 30px;
         width: 100px;
         height: 40px;
@@ -92,27 +111,27 @@ if (!isset($_SESSION['editButtonClickedId'])) {
     }
 
 
-.row{
-    width: 100%;
-}
+    .row {
+        width: 100%;
+    }
 
 
     .header {
         position: sticky;
     }
 
- 
+
 
     /* Custom toast styling */
     .custom-toast {
         background-color: #a5dc86 !important;
     }
-    strong {
-    font-size: 50px;
-    font-weight: 800;
-    margin-left: 20px;
-}
 
+    strong {
+        font-size: 50px;
+        font-weight: 800;
+        margin-left: 20px;
+    }
 </style>
 
 <body>
@@ -121,12 +140,13 @@ if (!isset($_SESSION['editButtonClickedId'])) {
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
-                    <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
+                    <img src="getImage.php" alt="User Avatar" class="logo-img">
                 </button>
                 <div class="sidebar-logo">
-                    <a href="Profile.php">User Account<i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="Profile.php"><?php echo $USER['Name']; ?><i class="fa-solid fa-pen-to-square"></i></a>
                 </div>
             </div>
+
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
                     <a href="Admin.php" id="profile" class="sidebar-link">
@@ -202,7 +222,7 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                 </li>
             </ul>
             <div class="sidebar-footer">
-                <a href="../login.html" id="logout" class="sidebar-link">
+                <a href="./Action.php" id="logout" class="sidebar-link">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span>Logout</span>
                 </a>
@@ -210,18 +230,19 @@ if (!isset($_SESSION['editButtonClickedId'])) {
         </aside>
 
         <div class="main">
-     
-        <div class="row">
-        <div class="d-flex justify-content-between align-items-center">
-            <strong>ACCOUNT</strong>
-            <button class="btn btn-primary" id="openFormBtnAdd">ADD</button>
-        </div>
-    </div>
-  
-    <div class="table-responsive m-2">
-            <table id="example" class="table table-striped table-bordered">
-                <thead class="table">
-                    <tr>     <th>No</th>
+
+            <div class="row">
+                <div class="d-flex justify-content-between align-items-center">
+                    <strong>ACCOUNT</strong>
+                    <button class="btn btn-primary" id="openFormBtnAdd">ADD</button>
+                </div>
+            </div>
+
+            <div class="table-responsive m-2">
+                <table id="example" class="table table-striped table-bordered">
+                    <thead class="table">
+                        <tr>
+                            <th>No</th>
                             <th>Name</th>
                             <th>Course</th>
                             <th>Year</th>
@@ -231,9 +252,9 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                             <th>Position</th>
                             <th>Action</th>
 
-			</tr>
-                </thead>
-                <tbody>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <?php
                         try {
                             // Set the PDO error mode to exception
@@ -275,155 +296,155 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                             echo "Error: " . $e->getMessage();
                         }
                         ?>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
 
 
 
-            <!-- Edit form-->
-            <div class="overlay-form" id="overlayFormuser">
-                <div class="form-container">
-                    <button class="close-icon" id="closeFormBtnEdit"><span>&#10006;</span>
-                    </button><!-- Close icon -->
+    <!-- Edit form-->
+    <div class="overlay-form" id="overlayFormuser">
+        <div class="form-container">
+            <button class="close-icon" id="closeFormBtnEdit"><span>&#10006;</span>
+            </button><!-- Close icon -->
 
-                    <div class="form-logo">
-                        <h2> Account Form</h2>
-                    </div>
-
-                    <form action="" method="post">
-                        <div class=" mb-1 form-group">
-                            <label for="name">Name:</label>
-                            <input type="name" class="form-control" id="name" name="name" required>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-3 mb-1 form-group">
-                                <label for="course">Course:</label>
-                                <select class="form-select" id="course" name="course" required>
-                                    <option value="">Select Year</option>
-                                    <option value="BSIS">BSIS</option>
-                                    <option value="BSEMC">BSEMC</option>
-                                    <option value="BSIT">BSIT</option>
-                                    <option value="BSCS">BSCS</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3 mb-1 form-group">
-                                <label for="year">Year:</label>
-                                <select class="form-select" id="year" name="year" required>
-                                    <option value="">Select Year</option>
-                                    <option value="1st">1st</option>
-                                    <option value="2nd">2nd</option>
-                                    <option value="3rd">3rd</option>
-                                    <option value="4th">4th</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3  mb-1 form-group">
-                                <label for="section">Section:</label>
-                                <select class="form-select" id="section" name="section" required>
-                                    <option value="">Select Section</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3 mb-1 form-group">
-                                <label for="position">Position:</label>
-                                <select class="form-select" id="position1" name="position" required>
-                                    <option value="">Select Position</option>
-                                    <option value="owner">Owner</option>
-                                    <option value="senior">Senior</option>
-                                    <option value="member">Member</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class=" mb-1 form-group">
-                            <label for="username">Username</label>
-                            <input type="username" class="form-control" id="username" name="username" required>
-                        </div>
-                        <div class=" mb-1 form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-block" id="openFormBtnEdit" name="Edit_btn">update</button>
-                    </form>
-                </div>
+            <div class="form-logo">
+                <h2> Account Form</h2>
             </div>
 
-
-            <!-- Add form -->
-
-            <div class="overlay-form" id="overlayFormAdd">
-                <div class="form-container">
-                    <button class="close-icon" id="closeFormBtnAdd"><span>&#10006;</span>
-                    </button><!-- Close icon -->
-                    <div class="form-logo">
-                        <h2> Add Form</h2>
-                    </div>
-                    <form action="adding.php" method="post">
-                        <div class=" mb-1 form-group">
-                            <label for="name">Name:</label>
-                            <input type="name" class="form-control" id="name" name="name" required>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-3 mb-1 form-group">
-                                <label for="ccourse">Course:</label>
-                                <select class="form-select" id="course" name="course" required>
-                                    <option value="">Select Year</option>
-                                    <option value="BSIS">BSIS</option>
-                                    <option value="BSEMC">BSEMC</option>
-                                    <option value="BSIT">BSIT</option>
-                                    <option value="BSCS">BSCS</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3 mb-1 form-group">
-                                <label for="year">Year:</label>
-                                <select class="form-select" id="year" name="year" required>
-                                    <option value="">Select Year</option>
-                                    <option value="1st">1st</option>
-                                    <option value="2nd">2nd</option>
-                                    <option value="3rd">3rd</option>
-                                    <option value="4th">4th</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3  mb-1 form-group">
-                                <label for="section">Section:</label>
-                                <select class="form-select" id="section" name="section" required>
-                                    <option value="">Select Section</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3 mb-1 form-group">
-                                <label for="position">Position:</label>
-                                <select class="form-select" id="position1" name="position" required>
-                                    <option value="">Select Position</option>
-                                    <option value="owner">Owner</option>
-                                    <option value="senior">Senior</option>
-                                    <option value="member">Member</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class=" mb-1 form-group">
-                            <label for="username">Username</label>
-                            <input type="username" class="form-control" id="usernameA" name="username" required>
-                        </div>
-                        <div class=" mb-1 form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" class="form-control" id="passwordA" name="password" required>
-                        </div>
-                        <div class="d-flex justify-content-center align-items-center">
-                        <button type="button" class="btn btn-primary btn-block" id="openFormBtnAdd" name="Add_btn">Add</button>
-</div>
-                    </form>
+            <form action="" method="post">
+                <div class=" mb-1 form-group">
+                    <label for="name">Name:</label>
+                    <input type="name" class="form-control" id="name" name="name" required>
                 </div>
-            </div>
+                <div class="form-row">
+                    <div class="col-md-3 mb-1 form-group">
+                        <label for="course">Course:</label>
+                        <select class="form-select" id="course" name="course" required>
+                            <option value="">Select Year</option>
+                            <option value="BSIS">BSIS</option>
+                            <option value="BSEMC">BSEMC</option>
+                            <option value="BSIT">BSIT</option>
+                            <option value="BSCS">BSCS</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-1 form-group">
+                        <label for="year">Year:</label>
+                        <select class="form-select" id="year" name="year" required>
+                            <option value="">Select Year</option>
+                            <option value="1st">1st</option>
+                            <option value="2nd">2nd</option>
+                            <option value="3rd">3rd</option>
+                            <option value="4th">4th</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3  mb-1 form-group">
+                        <label for="section">Section:</label>
+                        <select class="form-select" id="section" name="section" required>
+                            <option value="">Select Section</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-1 form-group">
+                        <label for="position">Position:</label>
+                        <select class="form-select" id="position1" name="position" required>
+                            <option value="">Select Position</option>
+                            <option value="owner">Owner</option>
+                            <option value="senior">Senior</option>
+                            <option value="member">Member</option>
+                        </select>
+                    </div>
+                </div>
+                <div class=" mb-1 form-group">
+                    <label for="username">Username</label>
+                    <input type="username" class="form-control" id="username" name="username" required>
+                </div>
+                <div class=" mb-1 form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" id="openFormBtnEdit" name="Edit_btn">update</button>
+            </form>
         </div>
+    </div>
 
 
-     
+    <!-- Add form -->
+
+    <div class="overlay-form" id="overlayFormAdd">
+        <div class="form-container">
+            <button class="close-icon" id="closeFormBtnAdd"><span>&#10006;</span>
+            </button><!-- Close icon -->
+            <div class="form-logo">
+                <h2> Add Form</h2>
+            </div>
+            <form action="adding.php" method="post">
+                <div class=" mb-1 form-group">
+                    <label for="name">Name:</label>
+                    <input type="name" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3 mb-1 form-group">
+                        <label for="ccourse">Course:</label>
+                        <select class="form-select" id="course" name="course" required>
+                            <option value="">Select Year</option>
+                            <option value="BSIS">BSIS</option>
+                            <option value="BSEMC">BSEMC</option>
+                            <option value="BSIT">BSIT</option>
+                            <option value="BSCS">BSCS</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-1 form-group">
+                        <label for="year">Year:</label>
+                        <select class="form-select" id="year" name="year" required>
+                            <option value="">Select Year</option>
+                            <option value="1st">1st</option>
+                            <option value="2nd">2nd</option>
+                            <option value="3rd">3rd</option>
+                            <option value="4th">4th</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3  mb-1 form-group">
+                        <label for="section">Section:</label>
+                        <select class="form-select" id="section" name="section" required>
+                            <option value="">Select Section</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-1 form-group">
+                        <label for="position">Position:</label>
+                        <select class="form-select" id="position1" name="position" required>
+                            <option value="">Select Position</option>
+                            <option value="owner">Owner</option>
+                            <option value="senior">Senior</option>
+                            <option value="member">Member</option>
+                        </select>
+                    </div>
+                </div>
+                <div class=" mb-1 form-group">
+                    <label for="username">Username</label>
+                    <input type="username" class="form-control" id="usernameA" name="username" required>
+                </div>
+                <div class=" mb-1 form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="passwordA" name="password" required>
+                </div>
+                <div class="d-flex justify-content-center align-items-center">
+                    <button type="button" class="btn btn-primary btn-block" id="openFormBtnAdd" name="Add_btn">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+
+
+
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
@@ -431,99 +452,188 @@ if (!isset($_SESSION['editButtonClickedId'])) {
         $(document).ready(function() {
             $('#example').DataTable({
                 "lengthChange": false, // Hide the "Show [n] entries" dropdown
-                "pageLength": 4// Set the default length to 7 entries per page
+                "pageLength": 4 // Set the default length to 7 entries per page
             });
         });
-            const hamBurger = document.querySelector(".toggle-btn");
-            const overlayFormEdit = document.getElementById("overlayFormuser");
-            const closeFormBtnEdit = document.getElementById("closeFormBtnEdit");
-            const openFormBtnEdit = document.querySelectorAll(".openFormBtnEdit");
-            const overlayFormAdd = document.getElementById("overlayFormAdd");
-            const closeFormBtnAdd = document.getElementById("closeFormBtnAdd");
-            const openFormBtnAdd = document.getElementById("openFormBtnAdd");
+        const hamBurger = document.querySelector(".toggle-btn");
+        const overlayFormEdit = document.getElementById("overlayFormuser");
+        const closeFormBtnEdit = document.getElementById("closeFormBtnEdit");
+        const openFormBtnEdit = document.querySelectorAll(".openFormBtnEdit");
+        const overlayFormAdd = document.getElementById("overlayFormAdd");
+        const closeFormBtnAdd = document.getElementById("closeFormBtnAdd");
+        const openFormBtnAdd = document.getElementById("openFormBtnAdd");
 
 
-            hamBurger.addEventListener("click", function() {
-                document.querySelector("#sidebar").classList.toggle("expand");
+        hamBurger.addEventListener("click", function() {
+            document.querySelector("#sidebar").classList.toggle("expand");
+        });
+
+        // Add event listener to handle clicks on the sidebar links
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Check if the clicked element is the icon
+                if (e.target.classList.contains('fa-solid')) {
+                    // Prevent the default behavior (expanding/collapsing the dropdown)
+                    e.preventDefault();
+                    // Toggle the expand class on the sidebar
+                    document.querySelector("#sidebar").classList.toggle("expand");
+                }
+            });
+        });
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const editButtons = document.querySelectorAll(".openFormBtnEdit");
+            const editOverlay = document.getElementById("overlayFormuser");
+            const editForm = editOverlay.querySelector("form");
+            let currentId; // Variable to store the current ID
+
+            editButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    // Get the row values
+                    const row = button.closest("tr");
+                    currentId = button.getAttribute('data-id');
+                    const name = row.querySelectorAll("td")[0].textContent.trim();
+                    const course = row.querySelectorAll("td")[1].textContent.trim();
+                    const year = row.querySelectorAll("td")[2].textContent.trim();
+                    const section = row.querySelectorAll("td")[3].textContent.trim();
+                    const username = row.querySelectorAll("td")[4].textContent.trim();
+                    const password = row.querySelectorAll("td")[5].textContent.trim();
+                    const position = row.querySelectorAll("td")[6].textContent.trim();
+
+                    // Populate the edit form with the fetched values
+                    editForm.querySelector("#name").value = name;
+                    editForm.querySelector("#course").value = course;
+                    editForm.querySelector("#year").value = year;
+                    editForm.querySelector("#section").value = section;
+                    editForm.querySelector("#username").value = username;
+                    editForm.querySelector("#password").value = password;
+                    editForm.querySelector("#position1").value = position;
+
+                    // Show the edit overlay
+                    editOverlay.style.display = "flex";
+                });
             });
 
-            // Add event listener to handle clicks on the sidebar links
-            document.querySelectorAll('.sidebar-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    // Check if the clicked element is the icon
-                    if (e.target.classList.contains('fa-solid')) {
-                        // Prevent the default behavior (expanding/collapsing the dropdown)
-                        e.preventDefault();
-                        // Toggle the expand class on the sidebar
-                        document.querySelector("#sidebar").classList.toggle("expand");
+            // When update button is clicked
+            editForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                // Show confirmation dialog using SweetAlert2
+                Swal.fire({
+                    title: "Do you want to save the changes?",
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: "Save",
+                    denyButtonText: `Don't save`
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Get the modified values
+                        const newid = currentId;
+                        const newName = editForm.querySelector("#name").value;
+                        const newCourse = editForm.querySelector("#course").value;
+                        const newYear = editForm.querySelector("#year").value;
+                        const newSection = editForm.querySelector("#section").value;
+                        const newUsername = editForm.querySelector("#username").value;
+                        const newPassword = editForm.querySelector("#password").value;
+                        const newPosition = editForm.querySelector("#position1").value;
+
+                        // Send an AJAX request to update the database
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("POST", "update_data.php");
+                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        xhr.onload = function() {
+                            if (xhr.status === 200) {
+                                // Show success toast
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    timerProgressBar: true,
+                                    iconColor: 'white', // Icon color
+                                    customClass: {
+                                        popup: 'custom-toast',
+                                    },
+                                    didClose: () => {
+                                        // Reload the page or update the UI as needed
+
+                                        // editOverlay.style.display = "none";
+                                        location.reload(); // Reload the page to reflect the changes
+
+                                    }
+                                });
+                                Toast.fire({
+                                    icon: "success",
+                                    title: "Updated successfully"
+
+                                });
+                            } else {
+                                // Error handling
+                                console.error("Error updating data: " + xhr.statusText);
+                            }
+                        };
+                        xhr.onerror = function() {
+                            console.error("Request failed");
+                        };
+                        xhr.send(`id=${newid}&name=${newName}&course=${newCourse}&year=${newYear}&section=${newSection}&username=${newUsername}&password=${newPassword}&position=${newPosition}`);
+                    } else if (result.isDenied) {
+                        // Handle case where changes are not saved
+                        console.log("Changes are not saved");
                     }
                 });
             });
+        });
 
 
 
-            document.addEventListener("DOMContentLoaded", function() {
-                const editButtons = document.querySelectorAll(".openFormBtnEdit");
-                const editOverlay = document.getElementById("overlayFormuser");
-                const editForm = editOverlay.querySelector("form");
-                let currentId; // Variable to store the current ID
 
-                editButtons.forEach(function(button) {
-                    button.addEventListener("click", function() {
-                        // Get the row values
-                        const row = button.closest("tr");
-                        currentId = button.getAttribute('data-id');
-                        const name = row.querySelectorAll("td")[0].textContent.trim();
-                        const course = row.querySelectorAll("td")[1].textContent.trim();
-                        const year = row.querySelectorAll("td")[2].textContent.trim();
-                        const section = row.querySelectorAll("td")[3].textContent.trim();
-                        const username = row.querySelectorAll("td")[4].textContent.trim();
-                        const password = row.querySelectorAll("td")[5].textContent.trim();
-                        const position = row.querySelectorAll("td")[6].textContent.trim();
+        closeFormBtnEdit.addEventListener("click", function() {
+            overlayFormEdit.style.display = "none";
 
-                        // Populate the edit form with the fetched values
-                        editForm.querySelector("#name").value = name;
-                        editForm.querySelector("#course").value = course;
-                        editForm.querySelector("#year").value = year;
-                        editForm.querySelector("#section").value = section;
-                        editForm.querySelector("#username").value = username;
-                        editForm.querySelector("#password").value = password;
-                        editForm.querySelector("#position1").value = position;
+            // Send an AJAX request to clear the session variable
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', './clear_session.php'); // Assuming the PHP script is named clear_session.php
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Session variable cleared successfully
+                    console.log('Session variable cleared');
+                } else {
+                    // Error handling
+                    console.error('Error clearing session variable');
+                }
+            };
+            xhr.send(); // Send the request without any data
+        });
 
-                        // Show the edit overlay
-                        editOverlay.style.display = "flex";
-                    });
-                });
+        document.addEventListener("DOMContentLoaded", function() {
+            const deleteButtons = document.querySelectorAll(".deleteButton");
 
-                // When update button is clicked
-                editForm.addEventListener("submit", function(event) {
-                    event.preventDefault();
+            deleteButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    const id = this.getAttribute('data-id');
 
-                    // Show confirmation dialog using SweetAlert2
+                    // Show the confirmation modal using SweetAlert
                     Swal.fire({
-                        title: "Do you want to save the changes?",
-                        showDenyButton: true,
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
                         showCancelButton: true,
-                        confirmButtonText: "Save",
-                        denyButtonText: `Don't save`
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // Get the modified values
-                            const newid = currentId;
-                            const newName = editForm.querySelector("#name").value;
-                            const newCourse = editForm.querySelector("#course").value;
-                            const newYear = editForm.querySelector("#year").value;
-                            const newSection = editForm.querySelector("#section").value;
-                            const newUsername = editForm.querySelector("#username").value;
-                            const newPassword = editForm.querySelector("#password").value;
-                            const newPosition = editForm.querySelector("#position1").value;
-
-                            // Send an AJAX request to update the database
+                            // Send an AJAX request to delete_data.php
                             const xhr = new XMLHttpRequest();
-                            xhr.open("POST", "update_data.php");
+                            xhr.open("POST", "delete_data.php");
                             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                             xhr.onload = function() {
                                 if (xhr.status === 200) {
+                                    // Row deleted successfully
+
                                     // Show success toast
                                     const Toast = Swal.mixin({
                                         toast: true,
@@ -534,135 +644,75 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                                         iconColor: 'white', // Icon color
                                         customClass: {
                                             popup: 'custom-toast',
+
                                         },
                                         didClose: () => {
                                             // Reload the page or update the UI as needed
-                                        
-                                            // editOverlay.style.display = "none";
                                             location.reload(); // Reload the page to reflect the changes
-                                        
                                         }
                                     });
                                     Toast.fire({
                                         icon: "success",
-                                        title: "Updated successfully"
-
+                                        title: "Deleted successfully"
                                     });
+
                                 } else {
                                     // Error handling
-                                    console.error("Error updating data: " + xhr.statusText);
+                                    console.error("Error deleting row");
                                 }
                             };
-                            xhr.onerror = function() {
-                                console.error("Request failed");
-                            };
-                            xhr.send(`id=${newid}&name=${newName}&course=${newCourse}&year=${newYear}&section=${newSection}&username=${newUsername}&password=${newPassword}&position=${newPosition}`);
-                        } else if (result.isDenied) {
-                            // Handle case where changes are not saved
-                            console.log("Changes are not saved");
+                            xhr.send(`id=${id}`);
                         }
                     });
                 });
             });
+        });
 
+        document.getElementById('logout').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior
 
+            // Create a form and append it to the body
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = './Action.php'; // The target PHP script for logout
 
+            var hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = 'logoutbtn';
+            hiddenField.value = 'true';
+            form.appendChild(hiddenField);
 
-            closeFormBtnEdit.addEventListener("click", function() {
-                overlayFormEdit.style.display = "none";
+            document.body.appendChild(form);
+            form.submit(); // Submit the form
+        });
 
-                // Send an AJAX request to clear the session variable
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', './clear_session.php'); // Assuming the PHP script is named clear_session.php
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        // Session variable cleared successfully
-                        console.log('Session variable cleared');
+        $(document).ready(function() {
+            $.ajax({
+                url: 'getImage.php', // URL of the PHP script
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // Set the src of img and display it
+                        $('.logo-imig').attr('src', response.imagePath).show();
                     } else {
-                        // Error handling
-                        console.error('Error clearing session variable');
+                        console.error('Failed to load image: ' + response.error);
                     }
-                };
-                xhr.send(); // Send the request without any data
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX error:', error);
+                }
             });
+        });
 
-            document.addEventListener("DOMContentLoaded", function() {
-                const deleteButtons = document.querySelectorAll(".deleteButton");
+        openFormBtnAdd.addEventListener("click", function() {
+            overlayFormAdd.style.display = "flex";
+        });
 
-                deleteButtons.forEach(function(button) {
-                    button.addEventListener("click", function() {
-                        const id = this.getAttribute('data-id');
-
-                        // Show the confirmation modal using SweetAlert
-                        Swal.fire({
-                            title: "Are you sure?",
-                            text: "You won't be able to revert this!",
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Yes, delete it!"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // Send an AJAX request to delete_data.php
-                                const xhr = new XMLHttpRequest();
-                                xhr.open("POST", "delete_data.php");
-                                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                                xhr.onload = function() {
-                                    if (xhr.status === 200) {
-                                        // Row deleted successfully
-
-                                        // Show success toast
-                                        const Toast = Swal.mixin({
-                                            toast: true,
-                                            position: 'top-end',
-                                            showConfirmButton: false,
-                                            timer: 1500,
-                                            timerProgressBar: true,
-                                            iconColor: 'white', // Icon color
-                                            customClass: {
-                                                popup: 'custom-toast',
-
-                                            },
-                                            didClose: () => {
-                                                // Reload the page or update the UI as needed
-                                                location.reload(); // Reload the page to reflect the changes
-                                            }
-                                        });
-                                        Toast.fire({
-                                            icon: "success",
-                                            title: "Deleted successfully"
-                                        });
-
-                                    } else {
-                                        // Error handling
-                                        console.error("Error deleting row");
-                                    }
-                                };
-                                xhr.send(`id=${id}`);
-                            }
-                        });
-                    });
-                });
-            });
-
-
-
-
-
-
-
-
-
-            openFormBtnAdd.addEventListener("click", function() {
-                overlayFormAdd.style.display = "flex";
-            });
-
-            closeFormBtnAdd.addEventListener("click", function() {
-                overlayFormAdd.style.display = "none";
-            });
-        </script>
+        closeFormBtnAdd.addEventListener("click", function() {
+            overlayFormAdd.style.display = "none";
+        });
+    </script>
 </body>
 
 </html>

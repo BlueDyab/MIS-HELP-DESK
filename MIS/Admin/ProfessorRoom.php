@@ -1,5 +1,29 @@
 <?php
-include '../Database/connection.php';
+require '../Database/connection.php';
+session_start();
+if (!isset($_SESSION['Admin_ID'])) {
+    $USER_ID = $_SESSION['Admin_ID'];
+
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Prepare the SQL SELECT statement
+    $stmt = $conn->prepare("SELECT `ID`, `Name` FROM `user_account_db` WHERE `ID` = :id");
+    $stmt->bindParam(':id', $USER_ID);
+    $stmt->execute();
+    $acc = $stmt->fetch();
+
+    if (!$acc['ID']) {
+        header('location: ../login.html');
+        exit;
+    }
+}
+$USER_ID_PROFILE = $_SESSION['Admin_ID'];
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// Prepare the SQL SELECT statement
+$stmt = $conn->prepare("SELECT `Name`, `Avatar` FROM `user_account_db` WHERE `ID` = :id");
+$stmt->bindParam(':id', $USER_ID_PROFILE);
+$stmt->execute();
+$USER = $stmt->fetch();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,13 +66,14 @@ include '../Database/connection.php';
         margin-top: 20px;
 
     }
+
     div#example_wrapper {
-    background-color: white;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    border: 2px solid black;
-}
+        background-color: white;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+        border: 2px solid black;
+    }
 
     /* Adjust font size for table and columns */
     .table,
@@ -71,9 +96,9 @@ include '../Database/connection.php';
 
     strong.mx-auto {
         margin-top: 20px;
-    font-size: 50px;
-    font-weight: 800;
-}
+        font-size: 50px;
+        font-weight: 800;
+    }
 
 
     /* Hide status and action columns when sidebar is expanded */
@@ -89,10 +114,10 @@ include '../Database/connection.php';
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
-                    <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
+                    <img src="getImage.php" alt="User Avatar" class="logo-img">
                 </button>
                 <div class="sidebar-logo">
-                    <a href="Profile.php">User Account<i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="Profile.php"><?php echo $USER['Name']; ?><i class="fa-solid fa-pen-to-square"></i></a>
                 </div>
             </div>
             <ul class="sidebar-nav">
@@ -380,6 +405,43 @@ include '../Database/connection.php';
                         console.error(xhr.responseText);
                     }
                 });
+            });
+        });
+
+        document.getElementById('logout').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+
+            // Create a form and append it to the body
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = './Action.php'; // The target PHP script for logout
+
+            var hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = 'logoutbtn';
+            hiddenField.value = 'true';
+            form.appendChild(hiddenField);
+
+            document.body.appendChild(form);
+            form.submit(); // Submit the form
+        });
+
+        $(document).ready(function() {
+            $.ajax({
+                url: 'getImage.php', // URL of the PHP script
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // Set the src of img and display it
+                        $('.logo-imig').attr('src', response.imagePath).show();
+                    } else {
+                        console.error('Failed to load image: ' + response.error);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX error:', error);
+                }
             });
         });
     </script>
