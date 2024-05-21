@@ -17,42 +17,63 @@ include '../Database/connection.php';
 </head>
 
 <style>
-          .main {
+    .main {
         max-height: 100vh;
         width: 100%;
         overflow: hidden;
         transition: all 0.35s ease-in-out;
-        background-color: #e2e3dc;
+        background-color: #ffe5b5;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: start;
     }
+
     .header {
         background-color: #ff4d00;
         position: sticky;
         top: -2px;
     }
-  
+
     .table-responsive.m-2 {
-    width: 99%;
-    height: 100vh;
+        width: 99%;
+        height: 100vh;
+        margin-top: 20px;
 
-}
-
-/* Adjust font size for table and columns */
-.table,
-.table th,
-.table td {
-    font-size: 14px; /* Adjust the font size as needed */
-    text-align: center;
-}
-.dataTables_filter {
-        margin-bottom: 20px;
     }
-    .table{
+    div#example_wrapper {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    border: 2px solid black;
+}
+
+
+    /* Adjust font size for table and columns */
+    .table,
+    .table th,
+    .table td {
+        font-size: 14px;
+        /* Adjust the font size as needed */
+        text-align: center;
+    }
+
+    .dataTables_filter {
+        margin-bottom: 20px;
+        margin-right: 30px;
+
+    }
+
+    .table {
         background-color: #ff4d00;
     }
+
+    strong.mx-auto {
+        margin-top: 20px;
+    font-size: 50px;
+    font-weight: 800;
+}
 
 </style>
 
@@ -150,17 +171,14 @@ include '../Database/connection.php';
             </div>
         </aside>
 
+
         <div class="main">
-
-    
-
-
-            <div class="main">
-    <div class="table-responsive m-2">
-            <table id="example" class="table table-striped table-bordered">
-                <thead class="table">
-                    <tr>    
-			    <th>No</th>
+            <strong class="mx-auto">PROFESSOR EQUIPMENT</strong>
+            <div class="table-responsive m-2">
+                <table id="example" class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>No</th>
                             <th>Professor Name</th>
                             <th>Deparment</th>
                             <th>Date</th>
@@ -169,8 +187,8 @@ include '../Database/connection.php';
                             <th>Status</th>
                             <th>Action</th>
 
-			</tr>
-                </thead>
+                        </tr>
+                    </thead>
 
                     <tbody>
                         <?php
@@ -178,11 +196,11 @@ include '../Database/connection.php';
                             // Set the PDO error mode to exception
                             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                                   // Prepare the SQL SELECT statement
-    $stmt = $conn->prepare("SELECT * FROM `equipment_request_prof`");
+                            // Prepare the SQL SELECT statement
+                            $stmt = $conn->prepare("SELECT * FROM `equipment_request_prof`");
 
-    // Execute the statement
-    $stmt->execute();
+                            // Execute the statement
+                            $stmt->execute();
 
 
                             // Fetch all the results
@@ -192,38 +210,38 @@ include '../Database/connection.php';
                             if ($client_count) {
                                 // Iterate over each row
                                 foreach ($client_count as $acc) {
-                                    if ($acc['Status'] !== "Done" && $acc['Status'] !== "Denied"){
-                                    echo "<tr>";
-                                    // Output each column value of the row
+                                    if ($acc['Status'] !== "Done" && $acc['Status'] !== "Denied") {
+                                        echo "<tr>";
+                                        // Output each column value of the row
 
-                                    echo "<th scope='row'>" . $counter ." </th>";
-                                    echo "<td>" . htmlspecialchars($acc['Professor_Name']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($acc['Department']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($acc['Date']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($acc['Requested_Item']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($acc['Purpose']) . "</td>";
-                                    echo "<td>" . htmlspecialchars($acc['Status']) . "</td>";
-                                    if ($acc['Status'] === "On-going") {
-                                        echo "<td class='td'>" .
-                                            "<button class='btn btn-warning pending m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-pause-fill'>Pending</i></button>" .
-                                            "<button class='btn btn-success done m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
-                                            "</td>";
-                                    } else if ($acc['Status'] === "Pending") {
-                                        echo "<td class='td'>" .
-                                            "<button class='btn btn-info on-going m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-play-fill'>On-going</i></button>" .
-                                            "<button class='btn btn-success done m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
-                                            "</td>";
-                                    } else {
-                                        echo "<td class='td'>" .
-                                            "<button class='btn btn-success m-2 accept' data-id='" . htmlspecialchars($acc['Id']) . "' name='AcceptDenied'><i class='bi bi-check-square-fill'>Accept</i></button>" .
-                                            "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-x-square-fill'>Denied</i></button>" .
-                                            "</td>";
+                                        echo "<th scope='row'>" . $counter . " </th>";
+                                        echo "<td>" . htmlspecialchars($acc['Professor_Name']) . "</td>";
+                                        echo "<td>" . htmlspecialchars($acc['Department']) . "</td>";
+                                        echo "<td>" . htmlspecialchars($acc['Date']) . "</td>";
+                                        echo "<td>" . htmlspecialchars($acc['Requested_Item']) . "</td>";
+                                        echo "<td>" . htmlspecialchars($acc['Purpose']) . "</td>";
+                                        echo "<td>" . htmlspecialchars($acc['Status']) . "</td>";
+                                        if ($acc['Status'] === "On-going") {
+                                            echo "<td class='td'>" .
+                                                "<button class='btn btn-warning pending m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-pause-fill'>Pending</i></button>" .
+                                                "<button class='btn btn-success done m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
+                                                "</td>";
+                                        } else if ($acc['Status'] === "Pending") {
+                                            echo "<td class='td'>" .
+                                                "<button class='btn btn-info on-going m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-play-fill'>On-going</i></button>" .
+                                                "<button class='btn btn-success done m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
+                                                "</td>";
+                                        } else {
+                                            echo "<td class='td'>" .
+                                                "<button class='btn btn-success m-2 accept' data-id='" . htmlspecialchars($acc['Id']) . "' name='AcceptDenied'><i class='bi bi-check-square-fill'>Accept</i></button>" .
+                                                "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-x-square-fill'>Denied</i></button>" .
+                                                "</td>";
+                                        }
+                                        echo "</tr>";
+
+                                        $counter++;
                                     }
-                                    echo "</tr>";
-
-                                    $counter++;
                                 }
-                            }
                             } else {
                                 echo "<tr><td colspan='8'>No data found</td></tr>";
                             }
@@ -235,29 +253,30 @@ include '../Database/connection.php';
                 </table>
             </div>
             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-<script>
-     $(document).ready(function() {
-        $('#example').DataTable({
-            "lengthChange": false, // Hide the "Show [n] entries" dropdown
-        });
-    });
+            <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#example').DataTable({
+                        "lengthChange": false, // Hide the "Show [n] entries" dropdown
+                        "pageLength": 7 // Set the default length to 7 entries per page
+                    });
+                });
 
-    const hamBurger = document.querySelector(".toggle-btn");
+                const hamBurger = document.querySelector(".toggle-btn");
 
-    hamBurger.addEventListener("click", function () {
-        document.querySelector("#sidebar").classList.toggle("expand");
-    });
+                hamBurger.addEventListener("click", function() {
+                    document.querySelector("#sidebar").classList.toggle("expand");
+                });
 
-    document.querySelectorAll('.sidebar-link').forEach(link => {
-        link.addEventListener('click', function (e) {
-            if (e.target.classList.contains('fa-solid')) {
-                e.preventDefault();
-                document.querySelector("#sidebar").classList.toggle("expand");
-            }
-        });
-    });
+                document.querySelectorAll('.sidebar-link').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        if (e.target.classList.contains('fa-solid')) {
+                            e.preventDefault();
+                            document.querySelector("#sidebar").classList.toggle("expand");
+                        }
+                    });
+                });
 
                 $(document).ready(function() {
                     // AJAX request for 'On-going' status
@@ -349,7 +368,7 @@ include '../Database/connection.php';
                     });
                 });
             </script>
-         
+
 
 </body>
 

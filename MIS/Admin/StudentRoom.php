@@ -22,7 +22,7 @@ include '../Database/connection.php';
         width: 100%;
         overflow: hidden;
         transition: all 0.35s ease-in-out;
-        background-color: #e2e3dc;
+        background-color: #ffe5b5;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -36,16 +36,39 @@ include '../Database/connection.php';
     }
 
     .table-responsive.m-2 {
-        width: 99%;
-        height: 100vh;
+    width: 99%;
+    height: 100vh;
+    margin-top: 20px;
 
-    }
-    /* Adjust font size for table and columns */
+}
+div#example_wrapper {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    border: 2px solid black;
+}
+
+/* Adjust font size for table and columns */
 .table,
 .table th,
 .table td {
     font-size: 14px; /* Adjust the font size as needed */
     text-align: center;
+}
+
+.dataTables_filter {
+        margin-bottom: 20px;
+        margin-right: 30px;
+       
+    }
+    .table{
+        background-color: #ff4d00;
+    }
+    strong.mx-auto {
+        margin-top: 20px;
+    font-size: 50px;
+    font-weight: 800;
 }
 
     /* Hide status and action columns when sidebar is expanded */
@@ -54,13 +77,6 @@ include '../Database/connection.php';
         display: none;
     }
 
-    .dataTables_filter {
-        margin-bottom: 20px;
-    }
-
-    .table {
-        background-color: #ff4d00;
-    }
 </style>
 
 <body>
@@ -155,10 +171,13 @@ include '../Database/connection.php';
                 </a>
             </div>
         </aside>
+
+
         <div class="main">
+        <strong class="mx-auto">STUDENT ROOM</strong>
             <div class="table-responsive m-2">
                 <table id="example" class="table table-striped table-bordered">
-                    <thead class="table">
+                    <thead class="table-dark">
                         <tr>
                             <th>No</th>
                             <th>Student Name</th>
@@ -246,6 +265,7 @@ include '../Database/connection.php';
         $(document).ready(function() {
             $('#example').DataTable({
                 "lengthChange": false, // Hide the "Show [n] entries" dropdown
+                "pageLength": 7 // Set the default length to 7 entries per page
             });
         });
         const hamBurger = document.querySelector(".toggle-btn");

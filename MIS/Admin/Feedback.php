@@ -10,6 +10,7 @@ require '../Database/connection.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-YQp1wFdsy1Z3dCU5ym8nfcfJWIPSK1rYBprYO8r00ELIOknvRr4aRKeqWSS6I6Zh" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -18,12 +19,13 @@ require '../Database/connection.php';
 </head>
 
 <style>
+    
     .main {
         max-height: 100vh;
         width: 100%;
         overflow: hidden;
         transition: all 0.35s ease-in-out;
-        background-color: #e2e3dc;
+        background-color: #ffe5b5;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -38,7 +40,16 @@ require '../Database/connection.php';
     .table-responsive.m-2 {
     width: 99%;
     height: 100vh;
+    margin-top: 20px;
+    font-family: 'Merriweather', serif;
 
+}
+div#example_wrapper {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    border: 2px solid black;
 }
 /* Adjust font size for table and columns */
 .table,
@@ -50,10 +61,18 @@ require '../Database/connection.php';
 
 .dataTables_filter {
         margin-bottom: 20px;
+        margin-right: 30px;
+       
     }
     .table{
         background-color: #ff4d00;
     }
+    strong.mx-auto {
+        margin-top: 20px;
+    font-size: 50px;
+    font-weight: 800;
+}
+
 </style>
 
 <body>
@@ -144,9 +163,10 @@ require '../Database/connection.php';
         </div>
     </aside>
     <div class="main">
+        <strong class="mx-auto">FEEDBACK</strong>
     <div class="table-responsive m-2 mx-auto">
-            <table id="example" class="table table-striped table-bordered">
-                <thead class="table">
+            <table id="example" class="table table-striped table-bordered ">
+                <thead class="table-dark">
                     <tr>
                         <th>No</th>
                         <th>Name</th>
@@ -213,6 +233,7 @@ try {
      $(document).ready(function() {
         $('#example').DataTable({
             "lengthChange": false, // Hide the "Show [n] entries" dropdown
+            "pageLength": 7 // Set the default length to 7 entries per page
         });
     });
 

@@ -531,8 +531,10 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                                         },
                                         didClose: () => {
                                             // Reload the page or update the UI as needed
-                                            // location.reload();
-                                            editOverlay.style.display = "none";
+                                        
+                                            // editOverlay.style.display = "none";
+                                            location.reload(); // Reload the page to reflect the changes
+                                        
                                         }
                                     });
                                     Toast.fire({

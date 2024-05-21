@@ -24,7 +24,7 @@ require '../Database/connection.php';
         width: 100%;
         overflow: hidden;
         transition: all 0.35s ease-in-out;
-        background-color: #e2e3dc;
+        background-color: #ffe5b5;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -38,11 +38,20 @@ require '../Database/connection.php';
     }
 
     .table-responsive.m-2 {
-        width: 99%;
-        height: 100vh;
+    width: 99%;
+    height: 100vh;
+    margin-top: 20px;
 
-    }
-    /* Adjust font size for table and columns */
+}
+div#example_wrapper {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    border: 2px solid black;
+}
+
+/* Adjust font size for table and columns */
 .table,
 .table th,
 .table td {
@@ -50,19 +59,26 @@ require '../Database/connection.php';
     text-align: center;
 }
 
-    /* Hide status and action columns when sidebar is expanded */
+.dataTables_filter {
+        margin-bottom: 20px;
+        margin-right: 30px;
+       
+    }
+    .table{
+        background-color: #ff4d00;
+    }
+    strong.mx-auto {
+        margin-top: 20px;
+    font-size: 50px;
+    font-weight: 800;
+}
+
+ /* Hide status and action columns when sidebar is expanded */
     .sidebar-expand .status-column,
     .sidebar-expand .action-column {
         display: none;
     }
 
-    .dataTables_filter {
-        margin-bottom: 20px;
-    }
-
-    .table {
-        background-color: #ff4d00;
-    }
 </style>
 
 <body>
@@ -161,9 +177,10 @@ require '../Database/connection.php';
 
 
         <div class="main">
+        <strong class="mx-auto">STUDENT EQUIPMENT</strong>
             <div class="table-responsive m-2">
                 <table id="example" class="table table-striped table-bordered">
-                    <thead class="table">
+                    <thead class="table-dark">
 
                         <tr>
                             <th>No</th>
@@ -251,6 +268,7 @@ require '../Database/connection.php';
         $(document).ready(function() {
             $('#example').DataTable({
                 "lengthChange": false, // Hide the "Show [n] entries" dropdown
+                "pageLength": 7 // Set the default length to 7 entries per page
             });
         });
         const hamBurger = document.querySelector(".toggle-btn");
