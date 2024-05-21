@@ -135,8 +135,8 @@
     }
 
     .toggle-btn img {
-        width: 45px; /* Adjust the width of the logo */
-        height: auto; /* Maintain aspect ratio */
+        width: 50px; /* Adjust the width of the logo */
+        height: 45px; /* Maintain aspect ratio */
         margin-left: -15px;
         background-color: white;
         border-radius: 50%;
