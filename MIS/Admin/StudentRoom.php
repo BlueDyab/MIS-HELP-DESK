@@ -27,7 +27,6 @@ $USER = $stmt->fetch();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -86,7 +85,7 @@ $USER = $stmt->fetch();
     .dataTables_filter {
         margin-bottom: 20px;
         margin-right: 30px;
-       
+    }
  
     strong.mx-auto {
         margin-top: 20px;
@@ -457,5 +456,4 @@ $USER = $stmt->fetch();
 
 
 </body>
-
 </html>
