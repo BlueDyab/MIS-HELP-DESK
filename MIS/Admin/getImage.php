@@ -1,41 +1,59 @@
-<!-- <?php
-// header('Content-Type: application/json');
-// require './connection.php';
-// session_start();
+<?php
+// Include your database connection file
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "mis_help_desk";
 
-// if (isset($_SESSION['Admin_ID'])) {
-//     $USER_ID = $_SESSION['Admin_ID'];
-//     try {
-//         // Create a PDO instance
-//         $pdo = new PDO($dsn, $user, $password);
-//         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// Create connection
+$conn = new mysqli($servername, $username, $password, $database);
 
-//         // Prepare and execute query
-//         $stmt = $pdo->prepare("SELECT Avatar FROM user_account_db WHERE ID = :id");
-//         $stmt->bindParam(':id', $USER_ID);  // Ensure $userId is defined or fetched appropriately
-//         $stmt->execute();
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-//         // Fetch the result
-//         $result = $stmt->fetch(PDO::FETCH_ASSOC);
+session_start();
 
-//         if ($result && !empty($result['Avatar'])) {
-//             // Send back the image path
-//             echo json_encode([
-//                 'status' => 'success',
-//                 'imagePath' => $result['Avatar']
-//             ]);
-//         } else {
-//             // Image path not found
-//             echo json_encode([
-//                 'status' => 'error',
-//                 'message' => 'No image found for the specified user.'
-//             ]);
-//         }
-//     } catch (PDOException $e) {
-//         // Handle any errors
-//         echo json_encode([
-//             'status' => 'error',
-//             'message' => $e->getMessage()
-//         ]);
-//     }
-} -->
+// Ensure the user is logged in and the session variable is set
+if (!isset($_SESSION['Admin_ID'])) {
+    header('HTTP/1.0 403 Forbidden');
+    exit('Forbidden: User is not authenticated.');
+}
+
+$userId = $_SESSION['Admin_ID'];
+
+// Prepare the query to fetch the image data
+$query = $conn->prepare("SELECT Avatar FROM user_account_db WHERE ID = ?");
+if (!$query) {
+    die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+}
+
+$query->bind_param("i", $userId);
+
+if (!$query->execute()) {
+    die("Execute failed: (" . $query->errno . ") " . $query->error);
+}
+
+$query->store_result();
+if ($query->num_rows === 0) {
+    die("No image found for the user.");
+}
+
+$query->bind_result($avatar);
+$query->fetch();
+
+// Set the content type header to serve the image
+header("Content-type: image/jpeg");
+
+// Clear the output buffer to avoid any previous output issues
+if (ob_get_length()) {
+    ob_clean();
+}
+
+// Output the image data
+echo $avatar;
+
+$query->close();
+$conn->close();
+?>

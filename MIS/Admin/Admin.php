@@ -19,7 +19,7 @@
     $USER_ID_PROFILE = $_SESSION['Admin_ID'];
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // Prepare the SQL SELECT statement
-    $stmt = $conn->prepare("SELECT `Name` FROM `user_account_db` WHERE `ID` = :id");
+    $stmt = $conn->prepare("SELECT `Name`, `Avatar` FROM `user_account_db` WHERE `ID` = :id");
     $stmt->bindParam(':id', $USER_ID_PROFILE);
     $stmt->execute();
     $USER = $stmt->fetch();
@@ -130,13 +130,13 @@
             float: right;
         }
     </style>
-
+    <!-- ../image/macaraeg.png -->
     <body>
         <div class="wrapper">
             <aside id="sidebar">
                 <div class="d-flex">
                     <button class="toggle-btn" type="button">
-                        <img src="../image/macaraeg.png" alt="Company Logo" class="logo-imig">
+                        <img src="getImage.php" alt="User Avatar" class="logo-img">
                     </button>
                     <div class="sidebar-logo">
                         <a href="Profile.php"><?php echo $USER['Name']; ?><i class="fa-solid fa-pen-to-square"></i></a>
