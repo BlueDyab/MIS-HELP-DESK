@@ -18,16 +18,17 @@ if (!isset($_SESSION['editButtonClickedId'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/admin.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="./css/overlayAdmin.css">
 </head>
 
 <style>
-    .main {
+  .main {
         max-height: 100vh;
         width: 100%;
         overflow: hidden;
         transition: all 0.35s ease-in-out;
-        background-color: #e2e3dc;
+        background-color: #ffe5b5;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -36,31 +37,52 @@ if (!isset($_SESSION['editButtonClickedId'])) {
 
     .header {
         background-color: #ff4d00;
+        position: sticky;
+        top: -2px;
     }
 
-    tr {
-        border: 1px solid black;
-    }
+    .table-responsive.m-2 {
+        width: 99%;
+        height: 100vh;
+        margin-top: 20px;
 
-    .th {
+    }
+    div#example_wrapper {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    border: 2px solid black;
+}
+
+  
+
+    /* Adjust font size for table and columns */
+    .table,
+    .table th,
+    .table td {
+        font-size: 14px;
+        /* Adjust the font size as needed */
         text-align: center;
     }
 
-    .password {
-        background: transparent;
-        border: none;
-        outline: none;
+    .dataTables_filter {
+        margin-bottom: 20px;
+        margin-right: 30px;
+
     }
 
-    .Adding {
-        width: 99.3%;
-        height: 50px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
+    .table {
+        background-color: #ff4d00;
     }
 
-    .btn-primary {
+    strong.mx-auto {
+        margin-top: 20px;
+    font-size: 50px;
+    font-weight: 800;
+}
+
+.btn-primary {
         margin-right: 30px;
         width: 100px;
         height: 40px;
@@ -69,56 +91,28 @@ if (!isset($_SESSION['editButtonClickedId'])) {
         font-weight: 800;
     }
 
-    .btn-danger {
-        border-radius: 10px;
-        width: 100px;
-    }
 
-    .data {
-        min-height: 500px;
-        width: 100%;
-    }
+.row{
+    width: 100%;
+}
 
-    .td {
-        text-align: center;
-    }
-
-    td.text-center {
-        padding: 0;
-    }
-
-    td.td {
-        padding: 11px;
-    }
-
-    th.td {
-        padding: 11px;
-    }
-
-    td.tf {
-        padding: 11px;
-    }
-
-    .table-responsive.m-2 {
-        width: 99%;
-        height: 100vh;
-
-    }
 
     .header {
         position: sticky;
     }
 
-    .btn-danger {
-        width: 60px;
-        height: 35px;
-        padding: 0;
-    }
+ 
 
     /* Custom toast styling */
     .custom-toast {
         background-color: #a5dc86 !important;
     }
+    strong {
+    font-size: 50px;
+    font-weight: 800;
+    margin-left: 20px;
+}
+
 </style>
 
 <body>
@@ -216,28 +210,30 @@ if (!isset($_SESSION['editButtonClickedId'])) {
         </aside>
 
         <div class="main">
+     
+        <div class="row">
+        <div class="d-flex justify-content-between align-items-center">
+            <strong>ACCOUNT</strong>
+            <button class="btn btn-primary" id="openFormBtnAdd">ADD</button>
+        </div>
+    </div>
+  
+    <div class="table-responsive m-2">
+            <table id="example" class="table table-striped table-bordered">
+                <thead class="table">
+                    <tr>     <th>No</th>
+                            <th>Name</th>
+                            <th>Course</th>
+                            <th>Year</th>
+                            <th>Section</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Position</th>
+                            <th>Action</th>
 
-            <div class="Adding m-2">
-                <button class="btn btn-primary " id="openFormBtnAdd">ADD</button>
-            </div>
-
-            <div class="table-responsive m-2">
-                <table class="table table-striped">
-                    <thead class="header fixed-top">
-                        <tr>
-                            <th class="th" scope="col">No</th>
-                            <th class="col-2" scope="col">Name</th>
-                            <th class="th col-1" scope="col">Course</th>
-                            <th class="th col-1" scope="col">Year</th>
-                            <th class="th col-1" scope="col">Section</th>
-                            <th class="th col-2" scope="col">Username</th>
-                            <th class="th col-2" scope="col">Password</th>
-                            <th class="th col-1" scope="col">Position</th>
-                            <th class="th col-2" scope="col">Action</th>
-
-                        </tr>
-                    </thead>
-                    <tbody class="data table-group-divider">
+			</tr>
+                </thead>
+                <tbody>
                         <?php
                         try {
                             // Set the PDO error mode to exception
@@ -258,16 +254,17 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                                 foreach ($accounts as $acc) {
                                     echo "<tr>";
                                     // Output each column value of the row
-                                    echo "<th class='td' scope='col'>" . $counter . "</th>"; // Display the counter
-                                    echo "<td class='tf'>" . htmlspecialchars($acc['Name']) . "</td>";
-                                    echo "<td class='td'>" . htmlspecialchars($acc['Course']) . "</td>";
-                                    echo "<td class='td'>" . htmlspecialchars($acc['Year']) . "</td>";
-                                    echo "<td class='td'>" . htmlspecialchars($acc['Section']) . "</td>";
-                                    echo "<td class='td'>" . htmlspecialchars($acc['Username']) . "</td>";
+                                    echo "<th>" . $counter . "</th>"; // Display the counter
+                                    echo "<td>" . htmlspecialchars($acc['Name']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($acc['Course']) . "</td>";
+                                    echo "<th>" . htmlspecialchars($acc['Year']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($acc['Section']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($acc['Username']) . "</td>";
                                     // Be careful displaying passwords, even if hashed. Generally, this should not be done.
-                                    echo "<td class='td password'>" . htmlspecialchars($acc['Password']) . "</td>";
-                                    echo "<td class='td'>" . htmlspecialchars($acc['Position']) . "</td>";
-                                    echo "<td class='text-center'><button class='btn btn-danger m-2 openFormBtnEdit' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'><i class='fas fa-edit'></i></button><button class='btn btn-danger deleteButton' data-id='" . htmlspecialchars($acc['ID']) . "'><i class='fas fa-trash'></button></td>";
+                                    echo "<td>" . htmlspecialchars($acc['Password']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($acc['Position']) . "</td>";
+                                    echo "<td><button class='btn btn-danger m-2 openFormBtnEdit' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'><i class='fas fa-edit'></i></button>
+                                    <button class='btn btn-danger deleteButton' data-id='" . htmlspecialchars($acc['ID']) . "'><i class='fas fa-trash'></button></td>";
                                     echo "</tr>";
 
                                     // Increment the counter
@@ -278,9 +275,11 @@ if (!isset($_SESSION['editButtonClickedId'])) {
                             echo "Error: " . $e->getMessage();
                         }
                         ?>
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 
 
@@ -424,10 +423,17 @@ if (!isset($_SESSION['editButtonClickedId'])) {
         </div>
 
 
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-        <script>
+     
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "lengthChange": false, // Hide the "Show [n] entries" dropdown
+                "pageLength": 4// Set the default length to 7 entries per page
+            });
+        });
             const hamBurger = document.querySelector(".toggle-btn");
             const overlayFormEdit = document.getElementById("overlayFormuser");
             const closeFormBtnEdit = document.getElementById("closeFormBtnEdit");

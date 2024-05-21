@@ -22,7 +22,7 @@ include '../Database/connection.php';
         width: 100%;
         overflow: hidden;
         transition: all 0.35s ease-in-out;
-        background-color: #e2e3dc;
+        background-color: #ffe5b5;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
