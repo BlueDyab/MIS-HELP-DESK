@@ -55,7 +55,7 @@ $USER = $stmt->fetch();
     }
 
     .header {
-        background-color: #ff4d00;
+      
         position: sticky;
         top: -2px;
     }
@@ -90,9 +90,7 @@ $USER = $stmt->fetch();
 
     }
 
-    .table {
-        background-color: #ff4d00;
-    }
+
 
     strong.mx-auto {
         margin-top: 20px;

@@ -54,7 +54,7 @@ $USER = $stmt->fetch();
     }
 
     .header {
-        background-color: #ff4d00;
+       
         position: sticky;
         top: -2px;
     }
@@ -86,13 +86,8 @@ $USER = $stmt->fetch();
     .dataTables_filter {
         margin-bottom: 20px;
         margin-right: 30px;
-
-    }
-
-    .table {
-        background-color: #ff4d00;
-    }
-
+       
+ 
     strong.mx-auto {
         margin-top: 20px;
         font-size: 50px;
