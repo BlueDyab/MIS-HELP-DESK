@@ -225,7 +225,7 @@ $USER = $stmt->fetch();
 
             <div class="table-responsive m-2">
                 <table id="example" class="table table-striped table-bordered">
-                    <thead class="table">
+                    <thead class="table-dark">
                         <tr>
                             <th>No</th>
                             <th>Name</th>

@@ -526,7 +526,7 @@
 
                             <div class="progress-group">
                                 Done REQUEST
-                                <span class="float-right"><b><?php echo $totalDoneCount; ?></b>/100</span>
+                                <span class="float-right"><b><?php echo $totalDoneCount; ?></b></span>
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-primary" style="width: <?php echo calculatePercentage($totalDoneCount, 100); ?>%"></div>
                                 </div>
@@ -534,7 +534,7 @@
 
                             <div class="progress-group">
                                 ON-GOING REQUEST
-                                <span class="float-right"><b><?php echo $onGoingCount; ?></b>/100</span>
+                                <span class="float-right"><b><?php echo $onGoingCount; ?></b></span>
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-danger" style="width: <?php echo calculatePercentage1($onGoingCount, 100); ?>%"></div>
                                 </div>
@@ -542,7 +542,7 @@
 
                             <div class="progress-group">
                                 PENDING REQUEST
-                                <span class="float-right"><b><?php echo $pendingCount; ?></b>/100</span>
+                                <span class="float-right"><b><?php echo $pendingCount; ?></b></span>
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-success" style="width: <?php echo calculatePercentage2($pendingCount, 100); ?>%"></div>
                                 </div>
@@ -550,7 +550,7 @@
 
                             <div class="progress-group">
                                 FEEDBACK
-                                <span class="float-right"><b><?php echo $feedbackCount; ?></b>/100</span>
+                                <span class="float-right"><b><?php echo $feedbackCount; ?></b></span>
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-warning" style="width: <?php echo calculatePercentage3($feedbackCount, 100); ?>%"></div>
                                 </div>
@@ -558,7 +558,7 @@
 
                             <div class="progress-group">
                                 INQUIRY
-                                <span class="float-right"><b><?php echo $inquiryCount; ?></b>/100</span>
+                                <span class="float-right"><b><?php echo $inquiryCount; ?></b></span>
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-warning" style="width: <?php echo calculatePercentage4($inquiryCount, 100); ?>%"></div>
                                 </div>
@@ -566,7 +566,7 @@
 
                             <div class="progress-group">
                                 Student Assistance
-                                <span class="float-right"><b><?php echo $userCount; ?></b>/100</span>
+                                <span class="float-right"><b><?php echo $userCount; ?></b></span>
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-warning" style="width: <?php echo calculatePercentage5($userCount, 100); ?>%"></div>
                                 </div>
