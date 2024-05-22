@@ -74,8 +74,6 @@ $USER = $stmt->fetch();
         border: 2px solid black;
     }
 
-
-
     /* Adjust font size for table and columns */
     .table,
     .table th,
@@ -105,14 +103,9 @@ $USER = $stmt->fetch();
         font-weight: 800;
     }
 
-
     .row {
         width: 100%;
     }
-
-
-   
- 
 
     /* Custom toast styling */
     .custom-toast {
