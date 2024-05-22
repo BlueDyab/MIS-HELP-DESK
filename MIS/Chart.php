@@ -106,7 +106,7 @@
         </div>
         <div class="col-sm-3 animate-on-scroll">
             <div class="card">
-                <img src="./image/csddsds.png" class="card-img-top" alt="">
+                <img src="./image/jc alamil.jpg" class="card-img-top" alt="">
                 <div class="card-body">
                     <h6 class="card-text">Prof, Jessie C. Alamil</h6>
                     <span>Coordinator, BS Computer Science<br>South Campus</span>
@@ -115,10 +115,10 @@
         </div> 
         <div class="col-sm-3 animate-on-scroll">
             <div class="card">
-                <img src="./image/von.jpg" class="card-img-top" alt="">
+                <img src="./image/vo1.jpg" class="card-img-top" alt="">
                 <div class="card-body">
                     <h6 class="card-text">Prof, Von Erick M. Magbitang</h6>
-                    <span>Coodinator, BS Entertainment & Multimedia Computing<br>South Campus</span>
+                    <span>Coodinator,BS Entertainment & Multimedia Computing<br>South Campus</span>
                 </div>
             </div>
         </div>
