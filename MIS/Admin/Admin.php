@@ -128,6 +128,10 @@
         span.float-right {
             float: right;
         }
+            /* Custom toast styling */
+       .custom-toast {
+        background-color: #a5dc86 !important;
+    }
     </style>
     <!-- ../image/macaraeg.png -->
     <body>
@@ -582,6 +586,8 @@
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
         <script>
             const hamBurger = document.querySelector(".toggle-btn");
@@ -661,61 +667,73 @@
         </script>
 
 <script>
-
-            // validation for the PIN
+// validation for the PIN
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('account').addEventListener('click', function () {
-        Swal.fire({
-            title: 'Enter PIN',
-            input: 'password',
-            inputAttributes: {
-                autocapitalize: 'off'
-            },
-            showCancelButton: true,
-            confirmButtonText: 'Submit',
-            showLoaderOnConfirm: true,
-            preConfirm: (pin) => {
-                return new Promise((resolve, reject) => {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('POST', '../Database/validation_pin.php');
-                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                    xhr.onload = function () {
-                        if (xhr.status === 200) {
-                            var response = JSON.parse(xhr.responseText);
-                            console.log('Server response:', response);
-                            if (response.valid) {
-                                resolve(); // Resolve the promise if the PIN is valid
-                            } else {
-                                reject('Invalid PIN! Please try again.'); // Reject with an error message if the PIN is invalid
-                            }
-                        }
-                    };
-                    xhr.onerror = function () {
-                        console.error('Request error occurred');
-                        reject('Error occurred while validating PIN. Please try again.'); // Reject with an error message if there's an error
-                    };
-                    xhr.send('pin=' + encodeURIComponent(pin));
-                });
+document.getElementById('account').addEventListener('click', function () {
+Swal.fire({
+title: 'Enter PIN',
+input: 'password',
+inputAttributes: {
+    autocapitalize: 'off'
+},
+showCancelButton: true,
+confirmButtonText: 'Submit',
+showLoaderOnConfirm: true,
+preConfirm: (pin) => {
+    return new Promise((resolve, reject) => {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../Database/validation_pin.php');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                console.log('Server response:', response);
+                if (response.valid) {
+                    resolve(); // Resolve the promise if the PIN is valid
+                } else {
+                    reject('Invalid PIN! Please try again.'); // Reject with an error message if the PIN is invalid
+                }
             }
-        }).then((result) => {
+        };
+        xhr.onerror = function () {
+            console.error('Request error occurred');
+            reject('Error occurred while validating PIN. Please try again.'); // Reject with an error message if there's an error
+        };
+        xhr.send('pin=' + encodeURIComponent(pin));
+    });
+}
+}).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'PIN Submitted Successfully!',
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-                window.location.href = "User.php"; // Redirect immediately after PIN is confirmed
+                  // Show success toast
+                  const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 1000,
+                                    timerProgressBar: true,
+                                    iconColor: 'white', // Icon color
+                                    customClass: {
+                                        popup: 'custom-toast',
+                                    },
+                                    didClose: () => {
+                                        // Reload the page or update the UI as needed
+
+                                        // editOverlay.style.display = "none";
+                                        window.location.href = "User.php"; // Redirect after closing the toast
+
+                                    }
+                                });
+                                Toast.fire({
+                                    icon: "success",
+                                    title: "PIN Submitted Successfully!"
+
+                                });
             }
         }).catch((error) => {
             Swal.showValidationMessage(error); // Show the validation error message
         });
     });
 });
-
-
 </script>
 
 

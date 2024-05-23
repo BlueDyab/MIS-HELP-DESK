@@ -202,7 +202,7 @@ $USER = $stmt->fetch();
                             <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                             <!-- Profile picture upload button -->
 
-                            <form action="Profile.php" method="post" enctype="multipart/form-data">
+                            <form action="upload_image.php" method="post" enctype="multipart/form-data">
                                 <input type="file" name="profile_picture" id="profile-picture-input" style="display: none;">
                                 <label for="profile-picture-input" class="btn btn-primary">Upload New image</label>
                                 <button type="submit" name="submit" class="btn btn-success">Save</button>
