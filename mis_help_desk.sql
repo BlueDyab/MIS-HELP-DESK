@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2024 at 08:30 AM
+-- Generation Time: May 23, 2024 at 07:42 AM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -120,15 +120,16 @@ CREATE TABLE `message_us_db` (
   `ID` int(255) NOT NULL,
   `Name` varchar(50) NOT NULL,
   `Email` varchar(100) NOT NULL,
-  `Message` varchar(255) NOT NULL
+  `Message` varchar(255) NOT NULL,
+  `status` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `message_us_db`
 --
 
-INSERT INTO `message_us_db` (`ID`, `Name`, `Email`, `Message`) VALUES
-(1, 'ruen', 'malvarruenm213@gmail.com', 'hahhahahahahahha');
+INSERT INTO `message_us_db` (`ID`, `Name`, `Email`, `Message`, `status`) VALUES
+(1, 'ruen', 'patriciapascual031@gmail.com', 'hahhahahahahahha', 1);
 
 -- --------------------------------------------------------
 
