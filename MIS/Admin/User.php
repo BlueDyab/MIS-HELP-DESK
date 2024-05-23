@@ -421,7 +421,7 @@ $USER = $stmt->fetch();
                     <input type="password" class="form-control" id="passwordA" name="password" required>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
-                    <button type="button" class="btn btn-primary btn-block" id="openFormBtnAdd" name="Add_btn">Add</button>
+                    <button type="submit" class="btn btn-primary btn-block" id="openFormBtnAdd" name="Add_btn">Add</button>
                 </div>
             </form>
         </div>
