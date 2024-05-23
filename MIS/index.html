@@ -949,7 +949,7 @@
                             <form action="./Database/Message Us.php" method="post">
                                 <div class="mb-3">
                                     <label for="name" class="form-label" required>Your Name</label>
-                                    <input type="text" class="form-control" id="name" name="name"
+                                    <input type="text" class="form-control" id="Messagename" name="Messagename"
                                         placeholder="Enter your name" required>
                                 </div>
                                 <div class="mb-3">
@@ -1106,6 +1106,12 @@
             const nameInput = event.target;
             nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '');
         });
+            // Optional: Prevent number input dynamically
+            document.getElementById('Messagename').addEventListener('input', function (event) {
+            const nameInput = event.target;
+            nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '');
+        });
+        
         
 
          // Optional: Prevent number input dynamically
@@ -1136,6 +1142,20 @@
             inputValue = inputValue.slice(0, 2);
         });
 
+        document.getElementById('email').addEventListener('input', function () {
+        var email = this.value;
+        var emailError = document.getElementById('emailError');
+        if (!validateEmail(email)) {
+            emailError.textContent = 'Please enter a valid email ending with .com or @gmail.com';
+        } else {
+            emailError.textContent = '';
+        }
+    });
+
+    function validateEmail(email) {
+        var re = /\b[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,}\b/;
+        return re.test(email) && (email.endsWith('.com') || email.endsWith('@gmail.com'));
+    }
 
     </script>
 

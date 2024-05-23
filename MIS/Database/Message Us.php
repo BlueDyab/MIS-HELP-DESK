@@ -2,7 +2,7 @@
 require 'connection.php'; // Make sure this line correctly includes your database connection file.
 
 if(isset($_POST["Send_btn"])) {
-    $Name = $_POST['name'];
+    $Name = $_POST['Messagename'];
     $Email = $_POST['email'];
     $Message = $_POST['message'];
 
