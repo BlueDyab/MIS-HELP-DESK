@@ -8,7 +8,7 @@
             $time = htmlspecialchars($_POST['time']);
             $duetime = htmlspecialchars($_POST['duetime']);
             $department = htmlspecialchars($_POST['department']);
-            $action = htmlspecialchars($_POST['action2']);
+            $action = htmlspecialchars($_POST['action']);
             $name = htmlspecialchars($_POST['name']);
             $details = htmlspecialchars($_POST['details']);
             $recomm = htmlspecialchars($_POST['recomm']);

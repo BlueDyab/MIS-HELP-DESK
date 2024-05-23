@@ -225,7 +225,7 @@ $USER = $stmt->fetch();
 
             <div class="table-responsive m-2">
                 <table id="example" class="table table-striped table-bordered">
-                    <thead class="table">
+                    <thead class="table-dark">
                         <tr>
                             <th>No</th>
                             <th>Name</th>
@@ -421,7 +421,7 @@ $USER = $stmt->fetch();
                     <input type="password" class="form-control" id="passwordA" name="password" required>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
-                    <button type="button" class="btn btn-primary btn-block" id="openFormBtnAdd" name="Add_btn">Add</button>
+                    <button type="submit" class="btn btn-primary btn-block" id="openFormBtnAdd" name="Add_btn">Add</button>
                 </div>
             </form>
         </div>

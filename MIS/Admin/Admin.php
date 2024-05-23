@@ -112,9 +112,9 @@
         }
 
 
-        .col-md-6.mt-5 {
+        .col-md-12.mt-5 {
             background-color: white;
-            padding: 20px;
+            padding:30px;
             border-radius: 20px;
             font-weight: 700;
             box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
@@ -209,11 +209,11 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="User.php" id="account" class="sidebar-link">
-                            <i class="fa-solid fa-gear"></i>
-                            <span>User Account </span>
-                        </a>
-                    </li>
+                    <a href="" id="account" class="sidebar-link">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>User Account </span>
+                    </a>
+                </li>
                 </ul>
                 <div class="sidebar-footer">
                     <a href="./Action.php" id="logout" class="sidebar-link">
@@ -519,14 +519,14 @@
                         </div>
 
                         <!-- HTML code to display progress bars -->
-                        <div class="col-md-6 mt-5 mx-auto ">
+                        <div class="col-md-12 mt-5 mx-auto ">
                             <p class=" text-center fa-2x">
                                 <strong>Request Tracker</strong>
                             </p>
 
                             <div class="progress-group">
                                 Done REQUEST
-                                <span class="float-right"><b><?php echo $totalDoneCount; ?></b>/100</span>
+                                <span class="float-right"><b><?php echo $totalDoneCount; ?></b></span>
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-primary" style="width: <?php echo calculatePercentage($totalDoneCount, 100); ?>%"></div>
                                 </div>
@@ -534,7 +534,7 @@
 
                             <div class="progress-group">
                                 ON-GOING REQUEST
-                                <span class="float-right"><b><?php echo $onGoingCount; ?></b>/100</span>
+                                <span class="float-right"><b><?php echo $onGoingCount; ?></b></span>
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-danger" style="width: <?php echo calculatePercentage1($onGoingCount, 100); ?>%"></div>
                                 </div>
@@ -542,7 +542,7 @@
 
                             <div class="progress-group">
                                 PENDING REQUEST
-                                <span class="float-right"><b><?php echo $pendingCount; ?></b>/100</span>
+                                <span class="float-right"><b><?php echo $pendingCount; ?></b></span>
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-success" style="width: <?php echo calculatePercentage2($pendingCount, 100); ?>%"></div>
                                 </div>
@@ -550,7 +550,7 @@
 
                             <div class="progress-group">
                                 FEEDBACK
-                                <span class="float-right"><b><?php echo $feedbackCount; ?></b>/100</span>
+                                <span class="float-right"><b><?php echo $feedbackCount; ?></b></span>
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-warning" style="width: <?php echo calculatePercentage3($feedbackCount, 100); ?>%"></div>
                                 </div>
@@ -558,7 +558,7 @@
 
                             <div class="progress-group">
                                 INQUIRY
-                                <span class="float-right"><b><?php echo $inquiryCount; ?></b>/100</span>
+                                <span class="float-right"><b><?php echo $inquiryCount; ?></b></span>
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-warning" style="width: <?php echo calculatePercentage4($inquiryCount, 100); ?>%"></div>
                                 </div>
@@ -566,7 +566,7 @@
 
                             <div class="progress-group">
                                 Student Assistance
-                                <span class="float-right"><b><?php echo $userCount; ?></b>/100</span>
+                                <span class="float-right"><b><?php echo $userCount; ?></b></span>
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-warning" style="width: <?php echo calculatePercentage5($userCount, 100); ?>%"></div>
                                 </div>
@@ -580,6 +580,8 @@
             </div>
         </div>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
         <script>
             const hamBurger = document.querySelector(".toggle-btn");
@@ -658,6 +660,63 @@
             });
         </script>
 
+<script>
+
+            // validation for the PIN
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('account').addEventListener('click', function () {
+        Swal.fire({
+            title: 'Enter PIN',
+            input: 'password',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Submit',
+            showLoaderOnConfirm: true,
+            preConfirm: (pin) => {
+                return new Promise((resolve, reject) => {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', '../Database/validation_pin.php');
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            var response = JSON.parse(xhr.responseText);
+                            console.log('Server response:', response);
+                            if (response.valid) {
+                                resolve(); // Resolve the promise if the PIN is valid
+                            } else {
+                                reject('Invalid PIN! Please try again.'); // Reject with an error message if the PIN is invalid
+                            }
+                        }
+                    };
+                    xhr.onerror = function () {
+                        console.error('Request error occurred');
+                        reject('Error occurred while validating PIN. Please try again.'); // Reject with an error message if there's an error
+                    };
+                    xhr.send('pin=' + encodeURIComponent(pin));
+                });
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'PIN Submitted Successfully!',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                window.location.href = "User.php"; // Redirect immediately after PIN is confirmed
+            }
+        }).catch((error) => {
+            Swal.showValidationMessage(error); // Show the validation error message
+        });
+    });
+});
+
+
+</script>
 
 
     </body>

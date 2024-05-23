@@ -16,23 +16,34 @@ try {
     $stmt->execute();
     $acc = $stmt->fetch();
 
-    // Check if a matching user account is found
-    if ($acc) {
-        if ($acc['Password'] === $password) {
-            $_SESSION['Admin_ID'] = $acc["ID"];
-            header("location: ../Admin/Admin.php");
-            exit();
-        } else {
-            echo "Invalid username or password";
-            echo $password;
-        }
+   // Check if a matching user account is found
+   if ($acc) {
+    if ($acc['Password'] === $password) {
+        $_SESSION['Admin_ID'] = $acc["ID"];
+        header("location: ../Admin/Admin.php");
+        exit();
     } else {
-        // No matching user account found
-        echo "Invalid username or password";
+        echo "<script>
+                alert('Invalid username or password');
+                window.location.href = '../login.html';
+              </script>";
+        exit();
     }
+} else {
+    // No matching user account found
+    echo "<script>
+            alert('Invalid username or password');
+            window.location.href = '../login.html';
+          </script>";
+    exit();
+}
 } catch (PDOException $e) {
-    // Handle any database errors
-    echo "Error: " . $e->getMessage();
+// Handle any database errors
+echo "<script>
+        alert('Error: " . $e->getMessage() . "');
+        window.location.href = '../login.html';
+      </script>";
+exit();
 }
 
 // Close the database connection
