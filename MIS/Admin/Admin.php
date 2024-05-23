@@ -112,9 +112,9 @@
         }
 
 
-        .col-md-6.mt-5 {
+        .col-md-12.mt-5 {
             background-color: white;
-            padding: 20px;
+            padding:30px;
             border-radius: 20px;
             font-weight: 700;
             box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
@@ -519,7 +519,7 @@
                         </div>
 
                         <!-- HTML code to display progress bars -->
-                        <div class="col-md-6 mt-5 mx-auto ">
+                        <div class="col-md-12 mt-5 mx-auto ">
                             <p class=" text-center fa-2x">
                                 <strong>Request Tracker</strong>
                             </p>
