@@ -19,7 +19,7 @@ if (!isset($_SESSION['Admin_ID'])) {
 $USER_ID_PROFILE = $_SESSION['Admin_ID'];
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 // Prepare the SQL SELECT statement
-$stmt = $conn->prepare("SELECT `Name`, `Avatar` FROM `user_account_db` WHERE `ID` = :id");
+$stmt = $conn->prepare("SELECT `Name` FROM `user_account_db` WHERE `ID` = :id");
 $stmt->bindParam(':id', $USER_ID_PROFILE);
 $stmt->execute();
 $USER = $stmt->fetch();
