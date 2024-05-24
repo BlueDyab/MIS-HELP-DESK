@@ -62,7 +62,7 @@ $USER = $stmt->fetch();
     .img-account-profile {
         width: 45%;
         height: 280px;
-        
+
     }
 
     .btn-primary {
@@ -218,7 +218,7 @@ $USER = $stmt->fetch();
                             Account Details
                         </div>
                         <div class="card-body">
-                            <form>
+                            <form action="" method="POST">
                                 <div class="mb-3">
                                     <label for="User" class="form-label">Username</label>
                                     <div class="input-group">
@@ -255,7 +255,7 @@ $USER = $stmt->fetch();
                                         </button>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Update</button>
+                                <button type="submit" class="btn btn-primary" name="update_user">Update</button>
                             </form>
                         </div>
                     </div>
@@ -319,6 +319,27 @@ $USER = $stmt->fetch();
                         error: function(xhr, status, error) {
                             console.error('AJAX error:', error);
                         }
+                    });
+                });
+
+                $(document).ready(function() {
+                    $("form").submit(function(event) {
+                        event.preventDefault(); // Prevent the default form submission
+
+                        var formData = {
+                            'currentPassword': $('input[name=currentPassword]').val(),
+                            'newPassword': $('input[name=newPassword]').val(),
+                            'confirmPassword': $('input[name=confirmPassword]').val()
+                        };
+
+                        $.ajax({
+                            type: 'POST',
+                            url: 'update_user.php', // Your PHP script
+                            data: formData,
+                            success: function(response) {
+                                alert(response); // Alerts the response from the PHP script
+                            }
+                        });
                     });
                 });
             </script>
