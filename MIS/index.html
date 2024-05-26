@@ -19,14 +19,14 @@
 <style>
     /* CSS Styling */
     .form-container {
-        width: 100%;
-        max-width: 1000px;
-        margin: auto;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        background-color: #ff7601;
-    }
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #ff7601;
+}
 
     .form-card {
         background-color: #fff;
@@ -153,11 +153,12 @@
         border-color: #41fb3a;
         color: #007BFF;
     }
+    
 </style>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ff7601;">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top "style="background-color: #ff7601;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     <img src="./image/MIS logo.png" alt="Company Logo" class="logo-img">
@@ -193,8 +194,6 @@
             </div>
         </nav>
     </header>
-
-
 
     <!-- Hero Section -->
 
@@ -334,12 +333,8 @@
     <!--  Request for Admin Staff-->
     <div class="overlay-form" id="overlayFormService">
         <div class="form-container">
-            <button class="close-icon" id="closeFormBtnService">&#10006;</button>
-            <div class="form-logo">
-                <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
-                <h2 class="MIS text-center">MIS Service Request Form</h2>
-            </div>
-            <form id="msform" action="./Database/Service Request.php" method="post">
+            <form id="serviceform" action="" method="post">
+                <button class="close-icon" id="closeFormBtnService">&#10006;</button>
                 <!-- progressbar -->
                 <ul id="progressbar">
                     <li class="active" id="account"><strong>Step 1</strong></li>
@@ -354,13 +349,17 @@
                             <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
                         </div>
                         <div class="mb-1 form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Example@gmail.com" required>
+                        </div>
+                        <div class="mb-1 form-group">
                             <label for="details">Details:</label>
                             <textarea class="form-control" id="details" name="details" rows="2"
                                 placeholder="What is the problem?" required></textarea>
                         </div>
-                        <div class="mb-2 form-group">
+                        <div class="mb-1 form-group">
                             <label for="recomm">Recommendation:</label>
-                            <textarea class="form-control" id="recomm" name="recomm" rows="3"></textarea>
+                            <textarea class="form-control" id="recomm" name="recomm" rows="2"></textarea>
                         </div>
                     </div>
                     <input type="button" name="next" class="next btn float-lg-end mt-3" value="Next Step" />
@@ -412,7 +411,7 @@
                 <fieldset class="step">
                     <div class="form-card">
                         <h2 class="fs-title text-center">Thank you Have a nice day!!</h2>
-                       
+
                     </div>
                     <input type="submit" class="btn float-end mt-3" name="service-btn" value="Submit" />
                 </fieldset>
@@ -422,21 +421,13 @@
     <!--   End Request for Admin Staff-->
 
 
-
-
-
-
     <!-- Overlay for Equipment Request -->
 
     <!-- Overlay form MIS Equiment  for Professor-->
     <div class="overlay-form" id="overlayFormProfessor">
         <div class="form-container">
             <button class="close-icon" id="closeFormBtnProfessor">&#10006;</button>
-            <div class="form-logo">
-                <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
-                <h2 class="MIS text-center">MIS Equiment Request Form</h2>
-            </div>
-            <form id="msform" action="./Database/Equipment Request.php" method="post">
+            <form id="EquipmentFormProf" action="" method="post">
                 <!-- progressbar -->
                 <ul id="progressbar">
                     <li class="active" id="account"><strong>Step 1</strong></li>
@@ -448,8 +439,12 @@
                     <div class="form-card">
                         <div class="mb-1 form-group">
                             <label for="name">Professor Name:</label>
-                            <input type="text" class="form-control" id="Professor" name="Professor" placeholder="Professor Name"
-                                required>
+                            <input type="text" class="form-control" id="Professor" name="Professor"
+                                placeholder="Professor Name" required>
+                        </div>
+                        <div class="mb-1 form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Example@gmail.com" required>
                         </div>
                         <div class="mb-1 form-group">
                             <label for="requestedItem">Requested Item:</label>
@@ -496,13 +491,13 @@
                                 </select>
                             </div>
                         </div>
-                    <input type="button" name="previous" class="previous btn mt-3" value="Previous" />
-                    <input type="button" name="next" class="next btn float-end mt-3" value="Next Step" />
+                        <input type="button" name="previous" class="previous btn mt-3" value="Previous" />
+                        <input type="button" name="next" class="next btn float-end mt-3" value="Next Step" />
                 </fieldset>
                 <fieldset class="step">
                     <div class="form-card">
                         <h2 class="fs-title text-center">Thank you Have a nice day!!</h2>
-                      
+
                     </div>
                     <input type="submit" class="btn float-end mt-3" name="prof_btn" value="Submit" />
                 </fieldset>
@@ -517,11 +512,7 @@
     <div class="overlay-form" id="overlayFormStudent">
         <div class="form-container">
             <button class="close-icon" id="closeFormBtnStudent">&#10006;</button>
-            <div class="form-logo">
-                <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
-                <h2 class="MIS text-center">MIS Equiment Request Form</h2>
-            </div>
-            <form id="msform" action="./Database/Equipment Request.php" method="post">
+            <form id="EquipmentFormStud" action="" method="post">
                 <!-- progressbar -->
                 <ul id="progressbar">
                     <li class="active" id="account"><strong>Step 1</strong></li>
@@ -534,11 +525,15 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Student Name:</label>
-                                <input type="text" class="form-control" id="Student" name="Student" placeholder="StudentName"
-                                    required>
+                                <input type="text" class="form-control" id="Student" name="Student"
+                                    placeholder="StudentName" required>
+                            </div>
+                            <div class="mb-1 form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Example@gmail.com" required>
                             </div>
                             <div class="form-group">
-                                <label for="studentID">Student Number:</label>
+                                <label for="studentId">Student Number:</label>
                                 <input type="text" class="form-control" id="studentId" name="studentId"
                                     placeholder="StudentNumber" required>
                             </div>
@@ -625,7 +620,7 @@
                 <fieldset class="step">
                     <div class="form-card">
                         <h2 class="fs-title text-center">Thank you Have a nice day!!</h2>
-                        
+
                     </div>
                     <input type="submit" class="btn float-end mt-3" name="stud_btn" value="Submit" />
                 </fieldset>
@@ -643,11 +638,7 @@
     <div class="overlay-form" id="overlayFormFeedback">
         <div class="form-container">
             <button class="close-icon" id="closeFormBtnFeedback">&#10006;</button>
-            <div class="form-logo">
-                <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
-                <h2 class="MIS text-center"> MIS Feedback Form</h2>
-            </div>
-            <form id="msform" action="./Database/Feedback_Form.php" method="post">
+            <form id="feedbackform" action="" method="post">
                 <!-- progressbar -->
                 <ul id="progressbar">
                     <li class="active" id="account"><strong>Step 1</strong></li>
@@ -660,8 +651,11 @@
                         <div class="mb-1 form-group">
                             <div class="mb-1 form-group">
                                 <label for="name">Name:</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Optional"
-                                    >
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Optional">
+                            </div>
+                            <div class="mb-1 form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Example@gmail.com" required>
                             </div>
                             <div class="mb-1 form-group">
                                 <label for="Feedback"> FeedBack Details:</label>
@@ -684,7 +678,7 @@
                             </div>
                             <div class="col-md-4 mb-1 form-group">
                                 <label for="time">Time:</label>
-                                <input type="time" class="form-control" id="time" name="time" required>
+                                <input type="time" class="form-control" id="time1" name="time" required>
                             </div>
                         </div>
                         <div class="form-row">
@@ -711,7 +705,7 @@
                 <fieldset class="step">
                     <div class="form-card">
                         <h2 class="fs-title text-center">Thank you Have a nice day!!</h2>
-                 
+
                     </div>
                     <input type="submit" class="btn float-end mt-3" name="feedback_btn" value="Submit" />
                 </fieldset>
@@ -726,11 +720,7 @@
     <div class="overlay-form" id="overlayFormStudentRoom">
         <div class="form-container">
             <button class="close-icon" id="closeFormBtnStudentRoom">&#10006;</button>
-            <div class="form-logo">
-                <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
-                <h2 class="MIS text-center"> MIS Student Request Room Form</h2>
-            </div>
-            <form id="msform" action="./Database/Room_Request_Form.php" method="post">
+            <form id="RoomStud" action="" method="post">
                 <!-- progressbar -->
                 <ul id="progressbar">
                     <li class="active" id="account"><strong>Step 1</strong></li>
@@ -742,27 +732,31 @@
                     <div class="form-card">
                         <div class="form-row">
                             <div class="form-group">
-                                  <label for="name">Student Name:</label>
-                                <input type="text" class="form-control" id="Student1" name="Student1" placeholder="StudentName"
-                                    required>
+                                <label for="name">Student Name:</label>
+                                <input type="text" class="form-control" id="Student1" name="Student1"
+                                    placeholder="StudentName" required>
+                            </div>
+                            <div class="mb-1 form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Example@gmail.com" required>
                             </div>
                             <div class="form-group">
                                 <label for="studentID">Student Number:</label>
                                 <input type="text" class="form-control" id="studentID" name="studentID"
                                     placeholder="StudentNumber" required>
                             </div>
-                            </div>  
+                        </div>
                         <div class="form-group">
                             <label for="Professor">Professor Name:</label>
                             <input type="text" class="form-control" id="Professor1" name="Professor1"
                                 placeholder="Professor Incharge" required>
-                                </div>
-                            <div class="form-group">
-                                <label for="purpose">Purpose:</label>
-                                <textarea class="form-control" id="purpose" name="purpose" rows="5" required></textarea>
-                            </div>
                         </div>
-                        <input type="button" name="next" class="next btn float-lg-end mt-3" value="Next Step" />
+                        <div class="form-group">
+                            <label for="purpose">Purpose:</label>
+                            <textarea class="form-control" id="purpose" name="purpose" rows="5" required></textarea>
+                        </div>
+                    </div>
+                    <input type="button" name="next" class="next btn float-lg-end mt-3" value="Next Step" />
                 </fieldset>
                 <fieldset class="step">
                     <div class="form-card">
@@ -818,7 +812,7 @@
                 <fieldset class="step">
                     <div class="form-card">
                         <h2 class="fs-title text-center">Thank you Have a nice day!!</h2>
-                       
+
                     </div>
                     <input type="submit" class="btn float-end mt-3" name="room_btn_stud" value="Submit" />
                 </fieldset>
@@ -827,85 +821,86 @@
     </div>
 
     <!-- Overlay form Roomfor Professor-->
-    
-<div class="overlay-form" id="overlayFormProfessorRoom">
-    <div class="form-container">
-        <button class="close-icon" id="closeFormBtnProfessorRoom">&#10006;</button>
-        <div class="form-logo">
-            <img src="./image/uccLogo.png" alt="Company Logo" class="logo-imig">
-            <h2 class="MIS text-center">MIS Professor Request Room Form</h2>
-        </div>
-        <form id="msform" action="./Database/Room_Request_Form.php" method="post">
-            <!-- progressbar -->
-            <ul id="progressbar">
-                <li class="active" id="account"><strong>Step 1</strong></li>
-                <li id="personal"><strong>Step 2</strong></li>
-                <li id="confirm"><strong>Finish</strong></li>
-            </ul>
-            <!-- fieldsets -->
-            <fieldset class="step active">
-                <div class="form-card">
-     <div class="form-group">
-                <label for="name">Professor Name:</label>
-                <input type="text" class="form-control" id="Professors" name="Professors" placeholder="Professor Name" required>
-            </div>
-                <div class="form-group">
-                <label for="department">Department:</label>
-                <select class="form-select" id="department" name="department" required>
-                    <option value="">Select Department</option>
-                    <option value="BSIS">Information System (BSIS)</option>
-                    <option value="BSIS">Information Technology (BSIT)</option>
-                    <option value="BSEMC">Entertainment & Multimedia Computing (BSEMC)</option>
-                    <option value="BSCS">Computer Science (BSCS)</option>
-                    <option value="BSOAD">Office of Administration (BSOAD)</option>
-                    <option value="MATH">BS Mathermatics (BSMATH)</option>
-                    <option value="MATH">BS Psychology (BSPsyc)</option>
-                    <option value="COMM">BA Communication (BACOMM)</option>
-                    <option value="PolSci">Political Science (BAPOLSCIE)</option>
-                </select>
-            </div>
-<div class="form-group">
-                <label for="purpose">Purpose:</label>
-                <textarea class="form-control" id="purpose" name="purpose" rows="5" required></textarea>
-            </div>
-                </div>
-                <input type="button" name="next" class="next btn float-lg-end mt-3" value="Next Step" />
-            </fieldset>
-            <fieldset class="step">
-                <div class="form-card">
-                   <div class="form-row">
-                        <div class="col-md-4 form-group">
-                            <label for="date">Date:</label>
-                            <input type="date" class="form-control" id="date" name="date" required>
+
+    <div class="overlay-form" id="overlayFormProfessorRoom">
+        <div class="form-container">
+            <button class="close-icon" id="closeFormBtnProfessorRoom">&#10006;</button>
+            <form id="RoomProf" action="" method="post">
+                <!-- progressbar -->
+                <ul id="progressbar">
+                    <li class="active" id="account"><strong>Step 1</strong></li>
+                    <li id="personal"><strong>Step 2</strong></li>
+                    <li id="confirm"><strong>Finish</strong></li>
+                </ul>
+                <!-- fieldsets -->
+                <fieldset class="step active">
+                    <div class="form-card">
+                        <div class="form-group">
+                            <label for="name">Professor Name:</label>
+                            <input type="text" class="form-control" id="Professors" name="Professors"
+                                placeholder="Professor Name" required>
                         </div>
-                        <div class="col-md-4 form-group">
-                            <label for="time">Time:</label>
-                            <input type="time" class="form-control" id="timeIn" name="timeIn" required>
+                        <div class="mb-1 form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Example@gmail.com" required>
                         </div>
-                        <div class="col-md-4 form-group">
-                            <label for="duetime">Time Out:</label>
-                            <input type="time" class="form-control" id="timeOut" name="timeOut" required>
+                        <div class="form-group">
+                            <label for="department">Department:</label>
+                            <select class="form-select" id="department" name="department" required>
+                                <option value="">Select Department</option>
+                                <option value="BSIS">Information System (BSIS)</option>
+                                <option value="BSIS">Information Technology (BSIT)</option>
+                                <option value="BSEMC">Entertainment & Multimedia Computing (BSEMC)</option>
+                                <option value="BSCS">Computer Science (BSCS)</option>
+                                <option value="BSOAD">Office of Administration (BSOAD)</option>
+                                <option value="MATH">BS Mathermatics (BSMATH)</option>
+                                <option value="MATH">BS Psychology (BSPsyc)</option>
+                                <option value="COMM">BA Communication (BACOMM)</option>
+                                <option value="PolSci">Political Science (BAPOLSCIE)</option>
+                            </select>
                         </div>
-            <div class="col-md-4 form-group">
-                              <label for="total">Total Student:</label>
-                    <input type="text" class="form-control" id="total" name="total" placeholder="Total Student"
-                        required>
+                        <div class="form-group">
+                            <label for="purpose">Purpose:</label>
+                            <textarea class="form-control" id="purpose" name="purpose" rows="5" required></textarea>
                         </div>
                     </div>
-                </div>
-                <input type="button" name="previous" class="previous btn mt-3" value="Previous" />
-                <input type="button" name="next" class="next btn float-end mt-3" value="Next Step" />
-            </fieldset>
-            <fieldset class="step">
-                <div class="form-card">
-                    <h2 class="fs-title text-center">Thank you Have a nice day!!</h2>
-                   
-                </div>
-                <input type="submit" class="btn float-end mt-3" name="Room_btn_prof" value="Submit" />
-            </fieldset>
-        </form>
+                    <input type="button" name="next" class="next btn float-lg-end mt-3" value="Next Step" />
+                </fieldset>
+                <fieldset class="step">
+                    <div class="form-card">
+                        <div class="form-row">
+                            <div class="col-md-4 form-group">
+                                <label for="date">Date:</label>
+                                <input type="date" class="form-control" id="date" name="date" required>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="time">Time:</label>
+                                <input type="time" class="form-control" id="timeIn" name="timeIn" required>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="duetime">Time Out:</label>
+                                <input type="time" class="form-control" id="timeOut" name="timeOut" required>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="total">Total Student:</label>
+                                <input type="text" class="form-control" id="total" name="total"
+                                    placeholder="Total Student" required>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="button" name="previous" class="previous btn mt-3" value="Previous" />
+                    <input type="button" name="next" class="next btn float-end mt-3" value="Next Step" />
+                </fieldset>
+                <fieldset class="step">
+                    <div class="form-card">
+                        <h2 class="fs-title text-center">Thank you Have a nice day!!</h2>
+
+                    </div>
+                    <input type="submit" class="btn float-end mt-3" name="Room_btn_prof" value="Submit" />
+                </fieldset>
+            </form>
+        </div>
     </div>
-</div> 
 
 
     <!-- about Us-->
@@ -940,8 +935,11 @@
     <div class="contact-area section-padding" id="contact">
         <div class="container1">
             <div class="d-flex   justify-content-between align-items-center">
-                <iframe class="m-5" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3251.5238575891226!2d120.9922665289866!3d14.653656468928459!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b686dd24e859%3A0xe442b57504cbf05f!2sUniversity%20of%20Caloocan%20City%20-%20South%20Campus!5e0!3m2!1sen!2sph!4v1716281302228!5m2!1sen!2sph" 
-                width="400" height="300" style="border:1px solid black; border-radius: 20px;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); " allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe class="m-5"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3251.5238575891226!2d120.9922665289866!3d14.653656468928459!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b686dd24e859%3A0xe442b57504cbf05f!2sUniversity%20of%20Caloocan%20City%20-%20South%20Campus!5e0!3m2!1sen!2sph!4v1716281302228!5m2!1sen!2sph"
+                    width="400" height="300"
+                    style="border:1px solid black; border-radius: 20px;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); "
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 <div class="col-md-6 mx-auto">
                     <div class="card">
                         <div class="card-body">
@@ -949,7 +947,7 @@
                             <form action="./Database/Message Us.php" method="post">
                                 <div class="mb-3">
                                     <label for="name" class="form-label" required>Your Name</label>
-                                    <input type="text" class="form-control" id="Messagename" name="Messagename"
+                                    <input type="text" class="form-control" id="name" name="name"
                                         placeholder="Enter your name" required>
                                 </div>
                                 <div class="mb-3">
@@ -998,6 +996,7 @@
         </div>
     </footer>
     <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
@@ -1048,48 +1047,48 @@
             });
 
 
-            
-    function validateForm(step) {
-        let valid = true;
-        const inputs = step.querySelectorAll("input, textarea, select");
-        inputs.forEach(input => {
-            if (!input.checkValidity()) {
-                input.reportValidity();
-                valid = false;
+
+            function validateForm(step) {
+                let valid = true;
+                const inputs = step.querySelectorAll("input, textarea, select");
+                inputs.forEach(input => {
+                    if (!input.checkValidity()) {
+                        input.reportValidity();
+                        valid = false;
+                    }
+                });
+                return valid;
             }
         });
-        return valid;
-    }
-});
 
 
-    // Validation for student ID
-    document.getElementById('studentID').addEventListener('input', function (event) {
-        let inputValue = event.target.value;
-        // Remove non-numeric characters
-        inputValue = inputValue.replace(/\D/g, '');
-        // Limit to 8 digits
-        inputValue = inputValue.slice(0, 8);
-        // Check if the length is 8 and if the value is a valid student number
-        if (inputValue.length === 8 && /^[0-9]{8}$/.test(inputValue)) {
-            inputValue += '-S';
-        }
-        event.target.value = inputValue;
-    });
+        // Validation for student ID
+        document.getElementById('studentID').addEventListener('input', function (event) {
+            let inputValue = event.target.value;
+            // Remove non-numeric characters
+            inputValue = inputValue.replace(/\D/g, '');
+            // Limit to 8 digits
+            inputValue = inputValue.slice(0, 8);
+            // Check if the length is 8 and if the value is a valid student number
+            if (inputValue.length === 8 && /^[0-9]{8}$/.test(inputValue)) {
+                inputValue += '-S';
+            }
+            event.target.value = inputValue;
+        });
 
         // Validation for student ID
         document.getElementById('studentId').addEventListener('input', function (event) {
-        let inputValue = event.target.value;
-        // Remove non-numeric characters
-        inputValue = inputValue.replace(/\D/g, '');
-        // Limit to 8 digits
-        inputValue = inputValue.slice(0, 8);
-        // Check if the length is 8 and if the value is a valid student number
-        if (inputValue.length === 8 && /^[0-9]{8}$/.test(inputValue)) {
-            inputValue += '-S';
-        }
-        event.target.value = inputValue;
-    });
+            let inputValue = event.target.value;
+            // Remove non-numeric characters
+            inputValue = inputValue.replace(/\D/g, '');
+            // Limit to 8 digits
+            inputValue = inputValue.slice(0, 8);
+            // Check if the length is 8 and if the value is a valid student number
+            if (inputValue.length === 8 && /^[0-9]{8}$/.test(inputValue)) {
+                inputValue += '-S';
+            }
+            event.target.value = inputValue;
+        });
 
 
         // Optional: Prevent number input dynamically
@@ -1101,38 +1100,29 @@
             const nameInput = event.target;
             nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '');
         });
-            // Optional: Prevent number input dynamically
-            document.getElementById('Professor').addEventListener('input', function (event) {
+        // Optional: Prevent number input dynamically
+        document.getElementById('Professor').addEventListener('input', function (event) {
             const nameInput = event.target;
             nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '');
         });
-            // Optional: Prevent number input dynamically
-            document.getElementById('Messagename').addEventListener('input', function (event) {
-            const nameInput = event.target;
-            nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '');
-        });
-        
-        
-
-         // Optional: Prevent number input dynamically
-         document.getElementById('Student1').addEventListener('input', function (event) {
-            const nameInput = event.target;
-            nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '');
-        });
-            // Optional: Prevent number input dynamically
-            document.getElementById('Professor1').addEventListener('input', function (event) {
-            const nameInput = event.target;
-            nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '');
-        });
-              // Optional: Prevent number input dynamically
-              document.getElementById('Professors').addEventListener('input', function (event) {
-            const nameInput = event.target;
-            nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '');
-        });
-        
 
 
-  
+        // Optional: Prevent number input dynamically
+        document.getElementById('Student1').addEventListener('input', function (event) {
+            const nameInput = event.target;
+            nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '');
+        });
+        // Optional: Prevent number input dynamically
+        document.getElementById('Professor1').addEventListener('input', function (event) {
+            const nameInput = event.target;
+            nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '');
+        });
+        // Optional: Prevent number input dynamically
+        document.getElementById('Professors').addEventListener('input', function (event) {
+            const nameInput = event.target;
+            nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '');
+        });
+
 
         // Optional: Prevent Name input dynamically
         document.getElementById('total').addEventListener('input', function (event) {
@@ -1142,22 +1132,351 @@
             inputValue = inputValue.slice(0, 2);
         });
 
-        document.getElementById('email').addEventListener('input', function () {
-        var email = this.value;
-        var emailError = document.getElementById('emailError');
-        if (!validateEmail(email)) {
-            emailError.textContent = 'Please enter a valid email ending with .com or @gmail.com';
-        } else {
-            emailError.textContent = '';
-        }
+    
+        document.addEventListener("DOMContentLoaded", function() {
+            var emailInput = document.getElementById('email');
+            emailInput.addEventListener('input', function(event) {
+                if (emailInput.validity.typeMismatch) {
+                    emailInput.setCustomValidity('Please enter a valid email address.');
+                } else {
+                    emailInput.setCustomValidity('');
+                }
+            });
+        });
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const timeInput = document.getElementById('time');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            timeInput.value = `${hours}:${minutes}`;
+        });
+   
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const timeInput = document.getElementById('time1');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            timeInput.value = `${hours}:${minutes}`;
+        });
+
+        $(document).ready(function () {
+    $('#serviceform').submit(function (e) {
+        e.preventDefault(); // Prevent the form from submitting normally
+
+        // Serialize the form data
+        var formData = $(this).serialize();
+
+        // Send the AJAX request
+        $.ajax({
+            type: 'POST',
+            url: './Database/Service Request.php', // Adjust the URL as needed
+            data: formData,
+            dataType: 'json', // Expect a JSON response
+            success: function (response) {
+                // Log the response for debugging
+                console.log("Response: ", response);
+
+                // Check if the response contains a success message
+                if (response.status === 'success') {
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Form submitted successfully!',
+                    }).then((result) => {
+                        // Redirect to the Our Service section of index.html
+                        if (result.isConfirmed) {
+                            location.reload(); // Reload the page to reflect the changes
+                        }
+                    });
+                } else {
+                    // Show error message with detailed response
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.message || 'Failed to submit the form. Please try again later.',
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                // Handle errors here
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Failed to submit the form. Please try again later.',
+                });
+                console.error("Error: " + error);
+                console.error("Status: " + status);
+                console.error("Response: " + xhr.responseText);
+            }
+        });
     });
+});
 
-    function validateEmail(email) {
-        var re = /\b[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,}\b/;
-        return re.test(email) && (email.endsWith('.com') || email.endsWith('@gmail.com'));
-    }
+        $(document).ready(function() {
+    $('#EquipmentFormStud').submit(function(e) {
+        e.preventDefault(); // Prevent the form from submitting normally
 
+        // Serialize the form data
+        var formData = $(this).serialize();
+
+        // Send the AJAX request
+        $.ajax({
+            type: 'POST',
+            url: './Database/Equipment RequestStud.php', // Adjust the URL as needed
+            data: formData,
+            dataType: 'json', // Expect a JSON response
+            success: function(response) {
+                // Log the response for debugging
+                console.log("Response: ", response);
+
+                // Check if the response contains a success message
+                if (response.status === 'success') {
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Form submitted successfully!',
+                    }).then((result) => {
+                        // Redirect user after showing the success message
+                        location.reload(); // Reload the page to reflect the changes
+                    });
+                } else {
+                    // Show error message with detailed response
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.message || 'Failed to submit the form. Please try again later.',
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle errors here
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Failed to submit the form. Please try again later.',
+                });
+                console.error("Error: " + error);
+                console.error("Status: " + status);
+                console.error("Response: " + xhr.responseText);
+            }
+        });
+    });
+});
+
+
+        $(document).ready(function() {
+    $('#EquipmentFormProf').submit(function(e) {
+        e.preventDefault(); // Prevent the form from submitting normally
+
+        // Serialize the form data
+        var formData = $(this).serialize();
+
+        // Send the AJAX request
+        $.ajax({
+            type: 'POST',
+            url: './Database/Equipment RequestProf.php', // Adjust the URL as needed
+            data: formData,
+            dataType: 'json', // Expect a JSON response
+            success: function(response) {
+                // Log the response for debugging
+                console.log("Response: ", response);
+
+                // Check if the response contains a success message
+                if (response.status === 'success') {
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Form submitted successfully!',
+                    }).then((result) => {
+                        // Redirect user after showing the success message
+                        location.reload(); // Reload the page to reflect the changes
+                    });
+                } else {
+                    // Show error message with detailed response
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.message || 'Failed to submit the form. Please try again later.',
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle errors here
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Failed to submit the form. Please try again later.',
+                });
+                console.error("Error: " + error);
+                console.error("Status: " + status);
+                console.error("Response: " + xhr.responseText);
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    $('#feedbackform').submit(function(e) {
+        e.preventDefault(); // Prevent the form from submitting normally
+
+        // Serialize the form data
+        var formData = $(this).serialize();
+
+        // Send the AJAX request
+        $.ajax({
+            type: 'POST',
+            url: './Database/Feedback_Form.php', // Adjust the URL as needed
+            data: formData,
+            dataType: 'json', // Expect a JSON response
+            success: function(response) {
+                // Log the response for debugging
+                console.log("Response: ", response);
+
+                // Check if the response contains a success message
+                if (response.status === 'success') {
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Form submitted successfully!',
+                    }).then((result) => {
+                        // Redirect user after showing the success message
+                        location.reload(); // Reload the page to reflect the changes
+                    });
+                } else {
+                    // Show error message with detailed response
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.message || 'Failed to submit the form. Please try again later.',
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle errors here
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Failed to submit the form. Please try again later.',
+                });
+                console.error("Error: " + error);
+                console.error("Status: " + status);
+                console.error("Response: " + xhr.responseText);
+            }
+        });
+    });
+});
+
+
+$(document).ready(function() {
+    $('#RoomStud').submit(function(e) {
+        e.preventDefault(); // Prevent the form from submitting normally
+
+        // Serialize the form data
+        var formData = $(this).serialize();
+
+        // Send the AJAX request
+        $.ajax({
+            type: 'POST',
+            url: './Database/Room_RequestStud_Form.php', // Adjust the URL as needed
+            data: formData,
+            dataType: 'json', // Expect a JSON response
+            success: function(response) {
+                // Log the response for debugging
+                console.log("Response: ", response);
+
+                // Check if the response contains a success message
+                if (response.status === 'success') {
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Form submitted successfully!',
+                    }).then((result) => {
+                        // Redirect user after showing the success message
+                        location.reload(); // Reload the page to reflect the changes
+                    });
+                } else {
+                    // Show error message with detailed response
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.message || 'Failed to submit the form. Please try again later.',
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle errors here
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Failed to submit the form. Please try again later.',
+                });
+                console.error("Error: " + error);
+                console.error("Status: " + status);
+                console.error("Response: " + xhr.responseText);
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    $('#RoomProf').submit(function(e) {
+        e.preventDefault(); // Prevent the form from submitting normally
+
+        // Serialize the form data
+        var formData = $(this).serialize();
+
+        // Send the AJAX request
+        $.ajax({
+            type: 'POST',
+            url: './Database/Room_RequestProf_Form.php', // Adjust the URL as needed
+            data: formData,
+            dataType: 'json', // Expect a JSON response
+            success: function(response) {
+                // Log the response for debugging
+                console.log("Response: ", response);
+
+                // Check if the response contains a success message
+                if (response.status === 'success') {
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Form submitted successfully!',
+                    }).then((result) => {
+
+                        // Redirect user after showing the success message
+                        location.reload(); // Reload the page to reflect the changes
+                    });
+                } else {
+                    // Show error message with detailed response
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.message || 'Failed to submit the form. Please try again later.',
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle errors here
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Failed to submit the form. Please try again later.',
+                });
+                console.error("Error: " + error);
+                console.error("Status: " + status);
+                console.error("Response: " + xhr.responseText);
+            }
+        });
+    });
+});
     </script>
+
 
 </body>
 

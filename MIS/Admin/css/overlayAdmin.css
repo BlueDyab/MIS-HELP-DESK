@@ -27,16 +27,17 @@
   
   
   .form-container {
-    background-color: #ff7601;
+    background-color: white;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 60%; /* Adjust the maximum width as needed */
+    max-width:40%; /* Adjust the maximum width as needed */
     width: 100%;
+height: 80%;
    
   }
   
-  .form-container h2 {
+  .text-center h2 {
     margin-top: 15px;
     font-size: 30px;
     font-weight: 700;
@@ -97,8 +98,11 @@
 }
 
 
-select#position1 {
-  width: 92%;
+select#position1{
+  width: 98%;
+}
+select#year {
+  width: 98%;
 }
   .overlay-form .form-container button[type="submit"] {
     display: block;

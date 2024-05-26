@@ -377,7 +377,7 @@ preConfirm: (pin) => {
                                 });
                                 Toast.fire({
                                     icon: "success",
-                                    title: "Updated successfully"
+                                    title: "PIN Submitted Successfully!"
 
                                 });
             }

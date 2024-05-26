@@ -11,7 +11,6 @@
    .overlay-open {
     overflow: hidden;
   }
-    
   .overlay-form {
     display: none;
     position: fixed;
@@ -22,14 +21,9 @@
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
-    z-index: 9999;
-  }
-  
-  
+    z-index: 1030; /* Set a lower z-index value */
+}
 
-  
- 
-  
   .close-icon{
     float: right;
     color: black;

@@ -117,6 +117,7 @@ $USER = $stmt->fetch();
         font-weight: 800;
         margin-left: 20px;
     }
+    
 </style>
 
 <body>
@@ -269,9 +270,12 @@ $USER = $stmt->fetch();
                                     // Be careful displaying passwords, even if hashed. Generally, this should not be done.
                                     echo "<td>" . htmlspecialchars($acc['Password']) . "</td>";
                                     echo "<td>" . htmlspecialchars($acc['Position']) . "</td>";
-                                    echo "<td><button class='btn btn-danger m-2 openFormBtnEdit' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'><i class='fas fa-edit'></i></button>
-                                    <button class='btn btn-danger deleteButton' data-id='" . htmlspecialchars($acc['ID']) . "'><i class='fas fa-trash'></button></td>";
-                                    echo "</tr>";
+                                    echo "<td style='text-align: center; vertical-align: middle;'>
+                                    <button class='btn btn-danger m-2 openFormBtnEdit' style='width: 30px; height: 30px; padding: 4px; font-size: 15px' data-id='" . htmlspecialchars($acc['ID']) . "' name='editing'><i class='fas fa-edit'></i></button>
+                                    <button class='btn btn-danger deleteButton' style='width: 30px; height: 30px; padding: 5px; font-size:15px;' data-id='" . htmlspecialchars($acc['ID']) . "'><i class='fas fa-trash'></i></button>
+                                  </td>";
+                            echo "</tr>";
+                            
 
                                     // Increment the counter
                                     $counter++;
@@ -293,20 +297,18 @@ $USER = $stmt->fetch();
     <!-- Edit form-->
     <div class="overlay-form" id="overlayFormuser">
         <div class="form-container">
-            <button class="close-icon" id="closeFormBtnEdit"><span>&#10006;</span>
-            </button><!-- Close icon -->
-
-            <div class="form-logo">
-                <h2> Account Form</h2>
-            </div>
+        <div class="card-header mt-2">
+            <button class="close-icon" id="closeFormBtnEdit"><span>&#10006;</span></button><!-- Close icon -->
+                <h2 class="text-center"> Account Form</h2>
+        </div>
 
             <form action="" method="post">
-                <div class=" mb-1 form-group">
+                <div class=" mt-4 form-group">
                     <label for="name">Name:</label>
                     <input type="name" class="form-control" id="name" name="name" required>
                 </div>
                 <div class="form-row">
-                    <div class="col-md-3 mb-1 form-group">
+                    <div class="col-md-6 mb-1 form-group">
                         <label for="course">Course:</label>
                         <select class="form-select" id="course" name="course" required>
                             <option value="">Select Year</option>
@@ -316,7 +318,7 @@ $USER = $stmt->fetch();
                             <option value="BSCS">BSCS</option>
                         </select>
                     </div>
-                    <div class="col-md-3 mb-1 form-group">
+                    <div class="col-md-6 mb-1 form-group">
                         <label for="year">Year:</label>
                         <select class="form-select" id="year" name="year" required>
                             <option value="">Select Year</option>
@@ -326,7 +328,9 @@ $USER = $stmt->fetch();
                             <option value="4th">4th</option>
                         </select>
                     </div>
-                    <div class="col-md-3  mb-1 form-group">
+                </div>
+                    <div class="form-row">
+                    <div class="col-md-6  mb-1 form-group">
                         <label for="section">Section:</label>
                         <select class="form-select" id="section" name="section" required>
                             <option value="">Select Section</option>
@@ -334,7 +338,7 @@ $USER = $stmt->fetch();
                             <option value="B">B</option>
                         </select>
                     </div>
-                    <div class="col-md-3 mb-1 form-group">
+                    <div class="col-md-6 mb-1 form-group">
                         <label for="position">Position:</label>
                         <select class="form-select" id="position1" name="position" required>
                             <option value="">Select Position</option>
@@ -343,12 +347,13 @@ $USER = $stmt->fetch();
                             <option value="member">Member</option>
                         </select>
                     </div>
-                </div>
-                <div class=" mb-1 form-group">
+                    </div>
+                
+                <div class="mt-3 form-group">
                     <label for="username">Username</label>
                     <input type="username" class="form-control" id="username" name="username" required>
                 </div>
-                <div class=" mb-1 form-group">
+                <div class=" mb-3 form-group">
                     <label for="password">Password:</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
@@ -362,69 +367,76 @@ $USER = $stmt->fetch();
     <!-- Add form -->
 
     <div class="overlay-form" id="overlayFormAdd">
-        <div class="form-container">
-            <button class="close-icon" id="closeFormBtnAdd"><span>&#10006;</span>
-            </button><!-- Close icon -->
-            <div class="form-logo">
-                <h2> Add Form</h2>
+    <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <button class="close close-icon" id="closeFormBtnAdd"><span>&#10006;</span></button>
+                    <h2 class="text-center">New Account</h2>
+                </div>
+                <div class="card-body">
+                    <form action="adding.php" method="post">
+                        <div class="mb-1">
+                            <label for="name" class="form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-md-6">
+                                <label for="course" class="form-label">Course:</label>
+                                <select class="form-select" id="course" name="course" required>
+                                    <option value="">Select Course</option>
+                                    <option value="BSIS">BSIS</option>
+                                    <option value="BSEMC">BSEMC</option>
+                                    <option value="BSIT">BSIT</option>
+                                    <option value="BSCS">BSCS</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="year" class="form-label">Year:</label>
+                                <select class="form-select" id="year" name="year" required>
+                                    <option value="">Select Year</option>
+                                    <option value="1st">1st</option>
+                                    <option value="2nd">2nd</option>
+                                    <option value="3rd">3rd</option>
+                                    <option value="4th">4th</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-1">
+                            <label for="section" class="form-label">Section:</label>
+                            <select class="form-select" id="section" name="section" required>
+                                <option value="">Select Section</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                            </select>
+                        </div>
+                        <div class="mb-1">
+                            <label for="position" class="form-label">Position:</label>
+                            <select class="form-select" id="position" name="position" required>
+                                <option value="">Select Position</option>
+                                <option value="senior">Senior SA</option>
+                                <option value="member">SA Student</option>
+                            </select>
+                        </div>
+                        <div class="mb-1">
+                            <label for="username" class="form-label">Username:</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="mb-1">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="d-grid justify-content-center align-items-center">
+                            <button type="submit" class="btn btn-primary" id="openFormBtnAdd" name="Add_btn">Add</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <form action="adding.php" method="post">
-                <div class=" mb-1 form-group">
-                    <label for="name">Name:</label>
-                    <input type="name" class="form-control" id="name" name="name" required>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-3 mb-1 form-group">
-                        <label for="ccourse">Course:</label>
-                        <select class="form-select" id="course" name="course" required>
-                            <option value="">Select Year</option>
-                            <option value="BSIS">BSIS</option>
-                            <option value="BSEMC">BSEMC</option>
-                            <option value="BSIT">BSIT</option>
-                            <option value="BSCS">BSCS</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3 mb-1 form-group">
-                        <label for="year">Year:</label>
-                        <select class="form-select" id="year" name="year" required>
-                            <option value="">Select Year</option>
-                            <option value="1st">1st</option>
-                            <option value="2nd">2nd</option>
-                            <option value="3rd">3rd</option>
-                            <option value="4th">4th</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3  mb-1 form-group">
-                        <label for="section">Section:</label>
-                        <select class="form-select" id="section" name="section" required>
-                            <option value="">Select Section</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3 mb-1 form-group">
-                        <label for="position">Position:</label>
-                        <select class="form-select" id="position1" name="position" required>
-                            <option value="">Select Position</option>
-                            <option value="owner">Owner</option>
-                            <option value="senior">Senior</option>
-                            <option value="member">Member</option>
-                        </select>
-                    </div>
-                </div>
-                <div class=" mb-1 form-group">
-                    <label for="username">Username</label>
-                    <input type="username" class="form-control" id="usernameA" name="username" required>
-                </div>
-                <div class=" mb-1 form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" class="form-control" id="passwordA" name="password" required>
-                </div>
-                <div class="d-flex justify-content-center align-items-center">
-                    <button type="submit" class="btn btn-primary btn-block" id="openFormBtnAdd" name="Add_btn">Add</button>
-                </div>
-            </form>
         </div>
+    </div>
+</div>
+
     </div>
     </div>
 

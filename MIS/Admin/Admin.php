@@ -220,7 +220,7 @@
                 </li>
                 </ul>
                 <div class="sidebar-footer">
-                    <a href="./Action.php" id="logout" class="sidebar-link">
+                    <a href="../login.html" id="logout" class="sidebar-link">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span>Logout</span>
                     </a>

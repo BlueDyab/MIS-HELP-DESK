@@ -480,7 +480,7 @@ preConfirm: (pin) => {
                                     toast: true,
                                     position: 'top-end',
                                     showConfirmButton: false,
-                                    timer: 100,
+                                    timer: 1000,
                                     timerProgressBar: true,
                                     iconColor: 'white', // Icon color
                                     customClass: {
@@ -496,7 +496,7 @@ preConfirm: (pin) => {
                                 });
                                 Toast.fire({
                                     icon: "success",
-                                    title: "Updated successfully"
+                                    title: "PIN Submitted Successfully!"
 
                                 });
             }
