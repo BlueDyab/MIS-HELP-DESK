@@ -1,5 +1,18 @@
 <?php
-require '../Database/connection.php';
+ $servername = "localhost";
+ $username = "root";
+ $password = "";
+ $database = "mis_help_desk";
+ 
+ try {
+     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+     // set the PDO error mode to exception
+     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+     //echo "Connected successfully"; 
+ } catch(PDOException $e) {
+     echo "Connection failed: " . $e->getMessage();
+ }
+ 
 session_start();
 if (!isset($_SESSION['Admin_ID'])) {
     $USER_ID = $_SESSION['Admin_ID'];
@@ -14,6 +27,37 @@ if (!isset($_SESSION['Admin_ID'])) {
     if (!$acc['ID']) {
         header('location: ../login.html');
         exit;
+    }
+}
+if(isset($_POST['update_user'])){
+    $USER_ID = $_SESSION['Admin_ID'];
+    $newUsername = $_POST['user'];
+    $currentPassword = $_POST['currentPassword'];
+    $newPassword = $_POST['newPassword'];
+    $confirmPassword = $_POST['confirmPassword'];
+
+    // Check if the current password is correct
+    $sql = "SELECT Password FROM user_account_db WHERE ID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $USER_ID);
+    $stmt->execute();
+    $storedPassword = $stmt->fetchColumn();
+    
+
+    if ($currentPassword === $storedPassword) {
+        // Update username and password
+        $sql = "UPDATE user_account_db SET Username = ?, Password = ? WHERE ID = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(1, $newUsername);
+        $stmt->bindParam(2, $newPassword);
+        $stmt->bindParam(3, $USER_ID);
+        if ($stmt->execute()) {
+            echo "Username and password updated successfully!";
+        } else {
+            echo "Error updating username and password!";
+        }
+    } else {
+        echo "Current password is incorrect!";
     }
 }
 $USER_ID_PROFILE = $_SESSION['Admin_ID'];
@@ -218,7 +262,7 @@ $USER = $stmt->fetch();
                             Account Details
                         </div>
                         <div class="card-body">
-                            <form id="updateForm" method="POST">
+                            <form action="" method="POST">
                                 <div class="mb-3">
                                     <label for="user" class="form-label">Username</label>
                                     <div class="input-group">
@@ -255,7 +299,7 @@ $USER = $stmt->fetch();
                                         </button>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary" name="update_user">Update</button>
+                                <button type="button" class="btn btn-primary" name="update_user">Update</button>
                             </form>
                         </div>
                     </div>
@@ -323,52 +367,7 @@ $USER = $stmt->fetch();
                     });
                 });
 
-                $(document).ready(function() {
-                    $('#updateForm').on('submit', function(event) {
-                        event.preventDefault();
-
-                        let user = $('#user').val();
-                        let currentPassword = $('#currentPassword').val();
-                        let newPassword = $('#newPassword').val();
-                        let confirmPassword = $('#confirmPassword').val();
-
-                        if (newPassword !== confirmPassword) {
-                            alert("New password and confirm password do not match!");
-                            return;
-                        }
-
-                        $.ajax({
-                            url: 'update_user.php',
-                            type: 'POST',
-                            data: {
-                                user: user,
-                                currentPassword: currentPassword,
-                                newPassword: newPassword
-                            },
-                            success: function(response) {
-                                alert(response);
-                            }
-                        });
-                    });
-
-                    // $('#toggleCurrentPassword').click(function() {
-                    //     let type = $('#currentPassword').attr('type') === 'password' ? 'text' : 'password';
-                    //     $('#currentPassword').attr('type', type);
-                    //     $(this).find('i').toggleClass('fa-eye fa-eye-slash');
-                    // });
-
-                    // $('#toggleNewPassword').click(function() {
-                    //     let type = $('#newPassword').attr('type') === 'password' ? 'text' : 'password';
-                    //     $('#newPassword').attr('type', type);
-                    //     $(this).find('i').toggleClass('fa-eye fa-eye-slash');
-                    // });
-
-                    // $('#toggleConfirmPassword').click(function() {
-                    //     let type = $('#confirmPassword').attr('type') === 'password' ? 'text' : 'password';
-                    //     $('#confirmPassword').attr('type', type);
-                    //     $(this).find('i').toggleClass('fa-eye fa-eye-slash');
-                    // });
-                });
+                
             </script>
 
 </body>
