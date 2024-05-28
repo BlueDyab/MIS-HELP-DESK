@@ -218,11 +218,11 @@ $USER = $stmt->fetch();
                             Account Details
                         </div>
                         <div class="card-body">
-                            <form action="" method="POST">
+                            <form id="updateForm" method="POST">
                                 <div class="mb-3">
-                                    <label for="User" class="form-label">Username</label>
+                                    <label for="user" class="form-label">Username</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="user">
+                                        <input type="text" class="form-control" id="user" name="user">
                                         <button class="btn btn-outline-secondary" type="button">
                                             <i class="fa-solid fa-user"></i>
                                         </button>
@@ -231,7 +231,7 @@ $USER = $stmt->fetch();
                                 <div class="mb-3">
                                     <label for="currentPassword" class="form-label">Current Password</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="currentPassword">
+                                        <input type="password" class="form-control" id="currentPassword" name="currentPassword">
                                         <button class="btn btn-outline-secondary" type="button" id="toggleCurrentPassword">
                                             <i class="fa-solid fa-eye-slash"></i>
                                         </button>
@@ -240,7 +240,7 @@ $USER = $stmt->fetch();
                                 <div class="mb-3">
                                     <label for="newPassword" class="form-label">New Password</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="newPassword">
+                                        <input type="password" class="form-control" id="newPassword" name="newPassword">
                                         <button class="btn btn-outline-secondary" type="button" id="toggleNewPassword">
                                             <i class="fa-solid fa-eye-slash"></i>
                                         </button>
@@ -249,7 +249,7 @@ $USER = $stmt->fetch();
                                 <div class="mb-3">
                                     <label for="confirmPassword" class="form-label">Confirm New Password</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="confirmPassword">
+                                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
                                         <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
                                             <i class="fa-solid fa-eye-slash"></i>
                                         </button>
@@ -263,8 +263,9 @@ $USER = $stmt->fetch();
             </div>
             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-            <script src="./js/all.js"></script>
+            <script src = "./js/all.js" ></script>
             <script>
                 const hamBurger = document.querySelector(".toggle-btn");
 
@@ -323,24 +324,50 @@ $USER = $stmt->fetch();
                 });
 
                 $(document).ready(function() {
-                    $("form").submit(function(event) {
-                        event.preventDefault(); // Prevent the default form submission
+                    $('#updateForm').on('submit', function(event) {
+                        event.preventDefault();
 
-                        var formData = {
-                            'currentPassword': $('input[name=currentPassword]').val(),
-                            'newPassword': $('input[name=newPassword]').val(),
-                            'confirmPassword': $('input[name=confirmPassword]').val()
-                        };
+                        let user = $('#user').val();
+                        let currentPassword = $('#currentPassword').val();
+                        let newPassword = $('#newPassword').val();
+                        let confirmPassword = $('#confirmPassword').val();
+
+                        if (newPassword !== confirmPassword) {
+                            alert("New password and confirm password do not match!");
+                            return;
+                        }
 
                         $.ajax({
+                            url: 'update_user.php',
                             type: 'POST',
-                            url: 'update_user.php', // Your PHP script
-                            data: formData,
+                            data: {
+                                user: user,
+                                currentPassword: currentPassword,
+                                newPassword: newPassword
+                            },
                             success: function(response) {
-                                alert(response); // Alerts the response from the PHP script
+                                alert(response);
                             }
                         });
                     });
+
+                    // $('#toggleCurrentPassword').click(function() {
+                    //     let type = $('#currentPassword').attr('type') === 'password' ? 'text' : 'password';
+                    //     $('#currentPassword').attr('type', type);
+                    //     $(this).find('i').toggleClass('fa-eye fa-eye-slash');
+                    // });
+
+                    // $('#toggleNewPassword').click(function() {
+                    //     let type = $('#newPassword').attr('type') === 'password' ? 'text' : 'password';
+                    //     $('#newPassword').attr('type', type);
+                    //     $(this).find('i').toggleClass('fa-eye fa-eye-slash');
+                    // });
+
+                    // $('#toggleConfirmPassword').click(function() {
+                    //     let type = $('#confirmPassword').attr('type') === 'password' ? 'text' : 'password';
+                    //     $('#confirmPassword').attr('type', type);
+                    //     $(this).find('i').toggleClass('fa-eye fa-eye-slash');
+                    // });
                 });
             </script>
 

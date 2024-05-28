@@ -1,56 +1,42 @@
 <?php
 session_start();
-// Check for a valid session and user authentication.
-if (!isset($_SESSION['Admin_ID'])) {
-    die("Access denied: Please login.");
-}
 
-include '../Database/connection.php'; // Include your database configuration file
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $userID = $_SESSION['Admin_ID']; // Assume user ID is stored in the session
+    $newUsername = $_POST['user'];
+    $currentPassword = $_POST['currentPassword'];
+    $newPassword = $_POST['newPassword'];
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+    // Database connection
+    $conn = new mysqli('localhost', 'root', '', 'mis_help_desk');
 
-$adminID = $_SESSION['Admin_ID']; // Fetching the Admin_ID from session
-
-// Fetch user input directly
-$currentPassword = $_POST['currentPassword'];
-$newPassword = $_POST['newPassword'];
-$confirmPassword = $_POST['confirmPassword'];
-
-// Check if new passwords match
-if ($newPassword !== $confirmPassword) {
-    die("Error: New passwords do not match.");
-}
-
-// Fetch the current password from the database
-$sql = "SELECT Password FROM user_account_db WHERE ID = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $adminID);
-$stmt->execute();
-$result = $stmt->get_result();
-if ($result->num_rows === 0) {
-    die("No user found with the provided ID.");
-}
-$user = $result->fetch_assoc();
-
-// Verify current password with the stored plain text password
-if ($currentPassword === $user['Password']) {
-    $updateSql = "UPDATE user_account_db SET Password = ? WHERE ID = ?";
-    $updateStmt = $conn->prepare($updateSql);
-    $updateStmt->bind_param("si", $newPassword, $adminID);
-    $updateStmt->execute();
-
-    if ($updateStmt->affected_rows > 0) {
-        echo "Password updated successfully.";
-    } else {
-        echo "Failed to update password.";
+    if ($conn->connect_error) {
+        die('Connection failed: ' . $conn->connect_error);
     }
-    $updateStmt->close();
-} else {
-    echo "Invalid current password.";
-}
 
-$conn->close();
-?>
+    // Check if the current password is correct
+    $sql = "SELECT Password FROM user_account_db WHERE ID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $userID);
+    $stmt->execute();
+    $stmt->bind_result($storedPassword);
+    $stmt->fetch();
+    $stmt->close();
+
+    if ($currentPassword === $storedPassword) {
+        // Update username and password
+        $sql = "UPDATE user_account_db SET Username = ?, Password = ? WHERE ID = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ssi', $newUsername, $newPassword, $userID);
+        if ($stmt->execute()) {
+            echo "Username and password updated successfully!";
+        } else {
+            echo "Error updating username and password!";
+        }
+        $stmt->close();
+    } else {
+        echo "Current password is incorrect!";
+    }
+
+    $conn->close();
+}
