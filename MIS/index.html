@@ -467,7 +467,7 @@
                             </div>
                             <div class="col-md-4  form-group">
                                 <label for="time">Time:</label>
-                                <input type="time" class="form-control" id="time" name="time" required>
+                                <input type="time" class="form-control" id="time3" name="time" required>
                             </div>
                             <div class="col-md-4 form-group">
                                 <label for="duetime">Due Time:</label>
@@ -559,7 +559,7 @@
                             </div>
                             <div class="col-md-4 form-group">
                                 <label for="time">Time:</label>
-                                <input type="time" class="form-control" id="time" name="time" required>
+                                <input type="time" class="form-control" id="time2" name="time" required>
                             </div>
                             <div class="col-md-4 form-group">
                                 <label for="duetime">Due Time:</label>
@@ -1153,6 +1153,20 @@
    
         document.addEventListener('DOMContentLoaded', (event) => {
             const timeInput = document.getElementById('time1');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            timeInput.value = `${hours}:${minutes}`;
+        });
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const timeInput = document.getElementById('time3');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            timeInput.value = `${hours}:${minutes}`;
+        });
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const timeInput = document.getElementById('time2');
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
