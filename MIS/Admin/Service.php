@@ -255,7 +255,11 @@ $USER = $stmt->fetch();
                                         echo "<td class='td'>" . $data['Time'] . "</td>";
                                         echo "<td class='td'>" . $data['Due_Time'] . "</td>";
                                         echo "<td class='td'>" . $data['Recommendation'] . "</td>";
-                                        echo "<td class='status-column'>" . $data['Status'] . "</td>";
+                                        echo "<td class='status-column'>" . $data['Status'] . "<br> (" . 
+                                            if($data['Status'] === "On-going") {
+                                                echo $Name_author;
+                                            } . ") </td>";
+
                                         if ($data['Status'] === "On-going") {
                                             echo "<td class='action-column'>" ."<button class='btn btn-success done ' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
                                                 "</td>";
