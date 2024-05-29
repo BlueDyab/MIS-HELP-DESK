@@ -19,7 +19,7 @@
      try { 
        
          // Prepare the SQL INSERT statement
-         $stmt = $conn->prepare("INSERT INTO equipment_request_prof (`Professor_Name`,`Department`,`Date`,`Time`,`Due_Time`,`Requested_Item`,`Purpose`, `Email`) VALUES (:name, :department, :data, :time, :duetime, :request, :purpose, :email)");
+         $stmt = $conn->prepare("INSERT INTO equipment_request_prof (`Professor_Name`,`Department`,`Date`,`Time`,`Due_Time`,`Requested_Item`,`Purpose`, `Email`, `Status`) VALUES (:name, :department, :data, :time, :duetime, :request, :purpose, :email, 'Pending')");
          
          // Bind parameters to placeholders
          $stmt->bindParam(':name', $Prof_Name);

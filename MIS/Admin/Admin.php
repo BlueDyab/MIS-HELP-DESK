@@ -206,12 +206,12 @@
                             <span>Inquiry</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
+                    <!-- <li class="sidebar-item">
                         <a href="Record.php" id="record" class="sidebar-link">
                             <i class="fa-solid fa-folder"></i>
                             <span>Record</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="sidebar-item">
                     <a href="" id="account" class="sidebar-link">
                         <i class="fa-solid fa-gear"></i>

@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
         // Prepare SQL query
-        $stmt = $conn->prepare("INSERT INTO service_request_db (Staff_Name, Dept, Date, Details, Action_Taken, Recommendation, Time, Due_Time, Email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO service_request_db (Staff_Name, Dept, Date, Details, Action_Taken, Recommendation, Time, Due_Time, Email, Status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Pending')");
         $stmt->bindParam(1, $name);
         $stmt->bindParam(2, $department);
         $stmt->bindParam(3, $date);
@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(7, $time);
         $stmt->bindParam(8, $duetime);
         $stmt->bindParam(9, $email);
+
 
         // Execute the statement
         if ($stmt->execute()) {

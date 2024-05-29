@@ -1,18 +1,18 @@
 <?php
- $servername = "localhost";
- $username = "root";
- $password = "";
- $database = "mis_help_desk";
- 
- try {
-     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-     // set the PDO error mode to exception
-     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-     //echo "Connected successfully"; 
- } catch(PDOException $e) {
-     echo "Connection failed: " . $e->getMessage();
- }
- 
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "mis_help_desk";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //echo "Connected successfully"; 
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
+
 session_start();
 if (!isset($_SESSION['Admin_ID'])) {
     $USER_ID = $_SESSION['Admin_ID'];
@@ -29,7 +29,7 @@ if (!isset($_SESSION['Admin_ID'])) {
         exit;
     }
 }
-if(isset($_POST['update_user'])){
+if (isset($_POST['update_user'])) {
     $USER_ID = $_SESSION['Admin_ID'];
     $newUsername = $_POST['user'];
     $currentPassword = $_POST['currentPassword'];
@@ -42,22 +42,22 @@ if(isset($_POST['update_user'])){
     $stmt->bindParam(1, $USER_ID);
     $stmt->execute();
     $storedPassword = $stmt->fetchColumn();
-    
+
 
     if ($currentPassword === $storedPassword) {
         // Update username and password
-        $sql = "UPDATE user_account_db SET Username = ?, Password = ? WHERE ID = ?";
+        $sql = "UPDATE user_account_db SET Name = ?, Password = ? WHERE ID = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(1, $newUsername);
         $stmt->bindParam(2, $newPassword);
         $stmt->bindParam(3, $USER_ID);
         if ($stmt->execute()) {
-            echo "Username and password updated successfully!";
+            echo "<script>alert('Username and password updated successfully!');</script>";
         } else {
-            echo "Error updating username and password!";
+            echo "<script>alert('Error updating username and password!');</script>";
         }
     } else {
-        echo "Current password is incorrect!";
+        echo "<script>alert('Current password is incorrect!');</script>";
     }
 }
 $USER_ID_PROFILE = $_SESSION['Admin_ID'];
@@ -210,12 +210,12 @@ $USER = $stmt->fetch();
                         <span>Inquiry</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                <!-- <li class="sidebar-item">
                     <a href="Record.php" id="record" class="sidebar-link">
                         <i class="fa-solid fa-folder"></i>
                         <span>Record</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="sidebar-item">
                     <a href="User.php" id="account" class="sidebar-link">
                         <i class="fa-solid fa-gear"></i>
@@ -262,7 +262,7 @@ $USER = $stmt->fetch();
                             Account Details
                         </div>
                         <div class="card-body">
-                            <form action="" method="POST">
+                            <form action="./Profile.php" method="POST">
                                 <div class="mb-3">
                                     <label for="user" class="form-label">Username</label>
                                     <div class="input-group">
@@ -299,7 +299,7 @@ $USER = $stmt->fetch();
                                         </button>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-primary" name="update_user">Update</button>
+                                <button type="submit" class="btn btn-primary" name="update_user">Update</button>
                             </form>
                         </div>
                     </div>
@@ -309,7 +309,7 @@ $USER = $stmt->fetch();
             <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-            <script src = "./js/all.js" ></script>
+            <script src="./js/all.js"></script>
             <script>
                 const hamBurger = document.querySelector(".toggle-btn");
 
@@ -366,8 +366,6 @@ $USER = $stmt->fetch();
                         }
                     });
                 });
-
-                
             </script>
 
 </body>

@@ -194,12 +194,12 @@ $USER = $stmt->fetch();
                         <span>Inquiry</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                <!-- <li class="sidebar-item">
                     <a href="Record.php" id="record" class="sidebar-link">
                         <i class="fa-solid fa-folder"></i>
                         <span>Record</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="sidebar-item">
                     <a href="User.php" id="account" class="sidebar-link">
                         <i class="fa-solid fa-gear"></i>
@@ -415,8 +415,9 @@ $USER = $stmt->fetch();
                             <label for="position" class="form-label">Position:</label>
                             <select class="form-select" id="position" name="position" required>
                                 <option value="">Select Position</option>
-                                <option value="senior">Senior SA</option>
-                                <option value="member">SA Student</option>
+                                <option value="Coodinator">Coordinator</option>
+                                <option value="senior SA">Senior SA</option>
+                                <option value="Trainee SA">trainee SA</option>
                             </select>
                         </div>
                         <div class="mb-1">

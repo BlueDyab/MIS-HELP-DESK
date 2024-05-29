@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         $purpose = $_POST['purpose'];
         $Email = $_POST['email'];
         try{
-            $stmt = $conn->prepare("INSERT INTO prof_room_request_form_db(`Date`,`Time_In`,`Time_Out`,`Total_Students`,`Dept`,`Name`,`Purpose`,`Email`) VALUES (:date, :time_in, :time_out, :total_students, :department, :name, :purpose, :email)");
+            $stmt = $conn->prepare("INSERT INTO prof_room_request_form_db(`Date`,`Time_In`,`Time_Out`,`Total_Students`,`Dept`,`Name`,`Purpose`,`Email`, `Status`) VALUES (:date, :time_in, :time_out, :total_students, :department, :name, :purpose, :email, 'Pending')");
             $stmt->bindParam(':date', $Date);
             $stmt->bindParam(':time_in', $Time_in);
             $stmt->bindParam(':time_out', $Time_out);

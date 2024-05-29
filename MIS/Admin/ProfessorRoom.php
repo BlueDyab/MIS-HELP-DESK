@@ -183,12 +183,12 @@ $USER = $stmt->fetch();
                         <span>Inquiry</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                <!-- <li class="sidebar-item">
                     <a href="Record.php" id="record" class="sidebar-link">
                         <i class="fa-solid fa-folder"></i>
                         <span>Record</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="sidebar-item">
                     <a href="" id="account" class="sidebar-link">
                         <i class="fa-solid fa-gear"></i>
@@ -224,66 +224,63 @@ $USER = $stmt->fetch();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        try {
-                            // Set the PDO error mode to exception
-                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    <?php
+try {
+    // Set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                            // Prepare the SQL SELECT statement
-                            $stmt = $conn->prepare("SELECT * FROM `prof_room_request_form_db`");
+    // Prepare the SQL SELECT statement
+    $stmt = $conn->prepare("SELECT * FROM `prof_room_request_form_db`");
 
-                            // Execute the statement
-                            $stmt->execute();
+    // Execute the statement
+    $stmt->execute();
 
-                            // Fetch all the results
-                            $client_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Fetch all the results
+    $client_count = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                            if ($client_count) {
-                                $counter = 1;
-                                // Iterate over each row
-                                foreach ($client_count as $acc) {
-                                    if ($acc['Status'] !== "Done" && $acc['Status'] !== "Denied") {
-                                        echo "<tr>";
-                                        // Output each column value of the row, including the arrow icon
+    if ($client_count) {
+        $counter = 1;
+        // Iterate over each row
+        foreach ($client_count as $acc) {
+            if ($acc['Status'] !== "Done" && $acc['Status'] !== "Denied") {
+                echo "<tr>";
+                // Output each column value of the row, including the arrow icon
 
-                                        echo "<th scope='row'>" . htmlspecialchars($acc['Id']) . "</th>";
-                                        echo "<td>" . htmlspecialchars($acc['Name']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($acc['Dept']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($acc['Date']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($acc['Time_In']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($acc['Time_Out']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($acc['Total_Students']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($acc['Purpose']) . "</td>";
-                                        echo "<td class='status-column'>" . htmlspecialchars($acc['Status']) . "</td>";
-                                        if ($acc['Status'] === "On-going") {
-                                            echo "<td class='action-column'>" .
-                                                "<button class='btn btn-warning pending m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-pause-fill'>Pending</i></button>" .
-                                                "<button class='btn btn-success done m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
-                                                "</td>";
-                                        } else if ($acc['Status'] === "Pending") {
-                                            echo "<td class='action-column'>" .
-                                                "<button class='btn btn-info on-going m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-play-fill'>On-going</i></button>" .
-                                                "<button class='btn btn-success done m-2' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
-                                                "</td>";
-                                        } else {
-                                            echo "<td class='action-column'>" .
-                                                "<button class='btn btn-success m-2 accept' data-id='" . htmlspecialchars($acc['Id']) . "' name='AcceptDenied'><i class='bi bi-check-square-fill'>Accept</i></button>" .
-                                                "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-x-square-fill'>Denied</i></button>" .
-                                                "</td>";
-                                        };
-                                        echo "</td>";
-                                        echo "</tr>";
+                echo "<th scope='row'>" . htmlspecialchars($acc['Id']) . "</th>";
+                echo "<td>" . htmlspecialchars($acc['Name']) . "</td>";
+                echo "<td>" . htmlspecialchars($acc['Dept']) . "</td>";
+                echo "<td>" . htmlspecialchars($acc['Date']) . "</td>";
+                echo "<td>" . htmlspecialchars($acc['Time_In']) . "</td>";
+                echo "<td>" . htmlspecialchars($acc['Time_Out']) . "</td>";
+                echo "<td>" . htmlspecialchars($acc['Total_Students']) . "</td>";
+                echo "<td>" . htmlspecialchars($acc['Purpose']) . "</td>";
+                echo "<td class='status-column'>" . htmlspecialchars($acc['Status']) . "</td>";
 
-                                        $counter++;
-                                    }
-                                }
-                            } else {
-                                echo "<tr><td colspan='10'>No data found</td></tr>";
-                            }
-                        } catch (PDOException $e) {
-                            echo "Error: " . $e->getMessage();
-                        }
-                        ?>
+                // Button logic based on status
+                if ($acc['Status'] === "On-going") {
+                    echo "<td class='action-column'>" .
+                        "<button class='btn btn-success done ' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
+                        "</td>";
+                } else if ($acc['Status'] === "Pending") {
+                    echo "<td class='action-column'>" .
+                        "<button class='btn btn-info on-going m-2 mx-auto' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-play-fill'>On-going</i></button>" .
+                        "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($acc['Id']) . "'><i class='bi bi-x-square-fill'>Denied</i></button>".
+                        "</td>";
+                } else {
+                    echo "<script> alert('Error updating status. Please try again.'); </script>";
+                }
+                echo "</tr>";
+                $counter++;
+            }
+        }
+    } else {
+        echo "<tr><td colspan='10'>No data found</td></tr>";
+    }
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+?>
+
                     </tbody>
                 </table>
             </div>
@@ -321,96 +318,94 @@ $USER = $stmt->fetch();
             });
         });
 
-
         $(document).ready(function() {
-            // AJAX request for 'On-going' status
-            $('.accept, .on-going').click(function() {
-                var id = $(this).data('id'); // Get the data-id attribute of the clicked button
+    // AJAX request for 'On-going' status
+    $('.on-going').click(function() {
+        var id = $(this).data('id'); // Get the data-id attribute of the clicked button
 
-                // Make an AJAX request to your server-side script
-                $.ajax({
-                    url: './Action.php', // The server-side script that handles the database update
-                    type: 'POST',
-                    data: {
-                        id: id,
-                        status: 'On-going'
-                    }, // Send the ID and new status
-                    success: function(response) {
-                        // On success, update the Status cell of the corresponding row
-                        $('button[data-id="' + id + '"]').closest('tr').find('td:eq(7)').text('On-going');
-                        location.reload();
-                    },
-                    error: function() {
-                        alert('Error updating status. Please try again.');
-                    }
-                });
-            });
-
-            $(document).ready(function() {
-                // AJAX request for updating status to "Pending"
-                $('.pending').click(function() {
-                    var id = $(this).data('id'); // Get the data-id attribute of the clicked button
-
-                    // Make an AJAX request to update the status
-                    $.ajax({
-                        url: './Action.php', // URL to the server-side script for updating status
-                        type: 'POST',
-                        data: {
-                            id: id,
-                            status: 'Pending'
-                        }, // Send the ID and new status
-                        success: function(response) {
-                            // On success, update the UI or notify the user
-                            //alert(response); // For demonstration, you can replace this with updating the UI
-                            location.reload();
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(xhr.responseText);
-                            // Handle errors here
-                        }
-                    });
-                });
-            });
-
-            // AJAX request for 'Done' status
-            $(".done").click(function() {
-                var id = $(this).attr('data-id');
-                $.ajax({
-                    url: "./Action.php",
-                    type: "POST",
-                    data: {
-                        id: id,
-                        status: "Done"
-                    },
-                    success: function(response) {
-                        // Reload the page after updating status
-                        location.reload();
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            });
-
-            $(".denied").click(function() {
-                var id = $(this).attr('data-id');
-                $.ajax({
-                    url: "./Action.php",
-                    type: "POST",
-                    data: {
-                        id: id,
-                        status: "Denied"
-                    },
-                    success: function(response) {
-                        // Reload the page after updating status
-                        location.reload();
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            });
+        // Make an AJAX request to your server-side script
+        $.ajax({
+            url: './Action.php', // The server-side script that handles the database update
+            type: 'POST',
+            data: {
+                id: id,
+                status: 'On-going'
+            }, // Send the ID and new status
+            success: function(response) {
+                // On success, update the Status cell of the corresponding row and change the button
+                $('button[data-id="' + id + '"]').closest('tr').find('td.status-column').text('On-going');
+                $('button[data-id="' + id + '"]').replaceWith('<button class="btn btn-success done m-2" data-id="' + id + '"><i class="bi bi-check-square-fill">Done</i></button>');
+                location.reload(); // Optional: reload the page to reflect changes
+            },
+            error: function() {
+                alert('Error updating status. Please try again.');
+            }
         });
+    });
+
+    // AJAX request for updating status to "Pending"
+    $('.pending').click(function() {
+        var id = $(this).data('id'); // Get the data-id attribute of the clicked button
+
+        // Make an AJAX request to update the status
+        $.ajax({
+            url: './Action.php', // URL to the server-side script for updating status
+            type: 'POST',
+            data: {
+                id: id,
+                status: 'Pending'
+            }, // Send the ID and new status
+            success: function(response) {
+                // On success, update the UI or notify the user
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+                // Handle errors here
+            }
+        });
+    });
+
+    // AJAX request for 'Done' status
+    $(".done").click(function() {
+        var id = $(this).attr('data-id');
+        $.ajax({
+            url: "./Action.php",
+            type: "POST",
+            data: {
+                id: id,
+                status: "Done"
+            },
+            success: function(response) {
+                // Reload the page after updating status
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    $(".denied").click(function() {
+        var id = $(this).attr('data-id');
+        $.ajax({
+            url: "./Action.php",
+            type: "POST",
+            data: {
+                id: id,
+                status: "Denied"
+            },
+            success: function(response) {
+                // Reload the page after updating status
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
+
 
         document.getElementById('logout').addEventListener('click', function(event) {
             event.preventDefault(); // Prevent the default link behavior

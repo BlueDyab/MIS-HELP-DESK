@@ -22,7 +22,7 @@
             $Email = $_POST['email'];
     
             // Prepare the SQL INSERT statement
-            $stmt = $conn->prepare("INSERT INTO equipment_request_stud (Name, Student_No, Course, Year, Section, Department, `Request Item`, Purpose, Date, Time, Due_Time, Email) VALUES (:name, :stud_no, :course, :year, :section, :department, :request, :purpose, :date, :time, :duetime, :email)");
+            $stmt = $conn->prepare("INSERT INTO equipment_request_stud (Name, Student_No, Course, Year, Section, Department, `Request Item`, Purpose, Date, Time, Due_Time, Email, Status) VALUES (:name, :stud_no, :course, :year, :section, :department, :request, :purpose, :date, :time, :duetime, :email, 'Pending')");
     
             // Bind parameters to placeholders
             $stmt->bindParam(':name', $Student_Name);

@@ -181,11 +181,12 @@ $USER = $stmt->fetch();
                         <span>Inquiry</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                <!-- <li class="sidebar-item">
                     <a href="Record.php" id="record" class="sidebar-link">
                         <i class="fa-solid fa-folder"></i>
                         <span>Record</span>
                     </a>
+                </li> -->
           
    <li class="sidebar-item">
                     <a href="" id="account" class="sidebar-link">
@@ -256,20 +257,15 @@ $USER = $stmt->fetch();
                                         echo "<td class='td'>" . $data['Recommendation'] . "</td>";
                                         echo "<td class='status-column'>" . $data['Status'] . "</td>";
                                         if ($data['Status'] === "On-going") {
-                                            echo "<td class='action-column'>" .
-                                                "<button class='btn btn-warning pending  m-2 mx-auto' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-pause-fill'>Pending</i></button>" .
-                                                "<button class='btn btn-success done ' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
+                                            echo "<td class='action-column'>" ."<button class='btn btn-success done ' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
                                                 "</td>";
                                         } else if ($data['Status'] === "Pending") {
                                             echo "<td class='action-column'>" .
                                                 "<button class='btn btn-info on-going m-2 mx-auto' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-play-fill'>On-going</i></button>" .
-                                                "<button class='btn btn-success done' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-check-square-fill'>Done</i></button>" .
+                                                "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-x-square-fill'>Denied</i></button>".
                                                 "</td>";
                                         } else {
-                                            echo "<td class='action-column'>" .
-                                                "<button class='btn btn-success m-2 mx-auto accept' data-id='" . htmlspecialchars($data['Id']) . "' name='AcceptDenied'><i class='bi bi-check-square-fill'>Accept</i></button>" .
-                                                "<button class='btn btn-danger denied' data-id='" . htmlspecialchars($data['Id']) . "'><i class='bi bi-x-square-fill'>Denied</i></button>" .
-                                                "</td>";
+                                            echo "<script> alert('Error updating status. Please try again.'); </script>";
                                         }
                                         echo "</tr>";
 

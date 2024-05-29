@@ -173,7 +173,7 @@ $mail->Body = "
             <h1>Reply to Message</h1>
             <p><strong>Name:</strong> $name</p>
             <p><strong>Email:</strong> $email</p>
-            <p><strong>Your Reply:</strong></p>
+            <p><strong>Reply:</strong></p>
             <p>$replyMessage</p>
             <p>Thank you for contacting us. We will get back to you as soon as possible.</p>
         </div>

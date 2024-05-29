@@ -19,7 +19,7 @@
 
         try{
             // Prepare the SQL statement
-            $stmt = $conn->prepare("INSERT INTO `stud_room_request_form_db`(`Student_Name`, `Student_Number`, `Year`, `Section`, `Course`, `Time_In`, `Time_Out`, `Date`, `Purpose`,`Prof_name`, `Email`) VALUES (:name, :student_number, :year, :section, :course, :time, :timeout, :date, :purpose ,:prof_name, :email)");
+            $stmt = $conn->prepare("INSERT INTO `stud_room_request_form_db`(`Student_Name`, `Student_Number`, `Year`, `Section`, `Course`, `Time_In`, `Time_Out`, `Date`, `Purpose`,`Prof_name`, `Email`, `Status`) VALUES (:name, :student_number, :year, :section, :course, :time, :timeout, :date, :purpose ,:prof_name, :email, 'Pending')");
 
             // Bind parameters
             $stmt->bindParam(':date', $Date);
